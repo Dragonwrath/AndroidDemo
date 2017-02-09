@@ -1,0 +1,1 @@
+include ':app', ':greendaogenerator', ':rxjavatest', ':dagger2test', ':encryptedfilelib', ':android-enctryptedfile', ':android-ftpserverdemo', ':android-tftp', ':tftp', ':android-frescodemo', ':android-progressdemo'

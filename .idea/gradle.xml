@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="distributionType" value="LOCAL" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleHome" value="D:\DevEnviroment\Android\AndroidStudio\gradle\gradle-2.14.1" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/android-enctryptedfile" />
+            <option value="$PROJECT_DIR$/android-frescodemo" />
+            <option value="$PROJECT_DIR$/android-ftpserverdemo" />
+            <option value="$PROJECT_DIR$/android-progressdemo" />
+            <option value="$PROJECT_DIR$/android-tftp" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/dagger2test" />
+            <option value="$PROJECT_DIR$/encryptedfilelib" />
+            <option value="$PROJECT_DIR$/greendaogenerator" />
+            <option value="$PROJECT_DIR$/rxjavatest" />
+            <option value="$PROJECT_DIR$/tftp" />
+          </set>
+        </option>
+        <option name="resolveModulePerSourceSet" value="false" />
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

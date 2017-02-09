@@ -1,0 +1,36 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+
+    defaultConfig {
+        applicationId "com.joke.enctryptedfile"
+        minSdkVersion 15
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        debug {
+            buildConfigField "String", "KERNEL_KEY", "\"MIICeAIBADANBgkqhkiG9w0BAQEFAASCAmIwggJeAgEAAoGBAJRex8swJ4fmK/4tCrcrogVYWAtPTzqhgX3uyn5ri3S+Gvjd1W4EEbg1FNMw5TpwVCibF2Ibfc/NOcD93Wn86B4GsYl76cJo8SlYrHa7Gmmnb0uu8kd29NMoNIAGAV/Xk0Lb8lGbpt9jfpJ+x9X5MaSFIEqM60ASVUkUR0gGTOL1AgMBAAECgYEAjFqMzd2jx58phqy9MkGIZ14HC8veuywE/0hhLe42Yh1kDoBrYk\""
+        }
+        release {
+            buildConfigField "String", "KERNEL_KEY", "\"MIICeAIBADANBgkqhkiG9w0BAQEFAASCAmIwggJeAgEAAoGBAJRex8swJ4fmK/4tCrcrogVYWAtPTzqhgX3uyn5ri3S+Gvjd1W4EEbg1FNMw5TpwVCibF2Ibfc/NOcD93Wn86B4GsYl76cJo8SlYrHa7Gmmnb0uu8kd29NMoNIAGAV/Xk0Lb8lGbpt9jfpJ+x9X5MaSFIEqM60ASVUkUR0gGTOL1AgMBAAECgYEAjFqMzd2jx58phqy9MkGIZ14HC8veuywE/0hhLe42Yh1kDoBrYk\""
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:25.1.0'
+    testCompile 'junit:junit:4.12'
+}
