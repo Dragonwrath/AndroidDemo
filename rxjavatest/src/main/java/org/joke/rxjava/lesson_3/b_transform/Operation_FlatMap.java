@@ -84,7 +84,9 @@ import rx.functions.Func2;
  ********************************************************************************
  * 注意：
  * flatMapXxx方法的输出并没有相应的次序，因为它会将所有的输出结果合并起来
- * concatMap 方法的
+ * concatMap 方法的会根据输入的次数，进行相应的输出，并不会产生次序的错乱
+ * switchMap 方法当新的数据进来的时候，如果前一个数据的转换并没有执行完，
+ *              那么就会中断之前的操作
  ********************************************************************************
  */
 
@@ -187,7 +189,6 @@ public class Operation_FlatMap {
         });
     }
 
-
     //concatMap
     private static void step_4() {
         Observable.from(list).concatMap(new Func1<Integer, Observable<Integer>>() {
@@ -202,10 +203,30 @@ public class Operation_FlatMap {
             }
         });
     }
+
+    //switchMap
+    //与flatMap类似，唯一的区别就是，当新数据过来之后，如果前一个数据的变换还没完成，
+    //那么就只输出新的输出
+    //也就是说并不会像flatMap一样合并相应的输出，不会丢失数据
     private static void step_5() {
-
+        Observable.from(list).switchMap(new Func1<Integer, Observable<Integer>>() {
+            @Override
+            public Observable<Integer> call(Integer integer) {
+                return Observable.just(integer);
+            }
+        }).subscribe(new Action1<Integer>() {
+            @Override
+            public void call(Integer integer) {
+                System.out.println("integer = " + integer);
+            }
+        });
     }
-    private static void step_6() {
 
+    //split
+    //在特殊的 StringObservable 类（默认没有包含在RxJava中）中还有一个 split 操作符。它将
+    //一个发射字符串的Observable转换为另一个发射字符串的Observable，只不过，后者将原始
+    //的数据序列当做一个数据流，使用一个正则表达式边界分割它们，然后合并发射分割的结
+    //果。
+    private static void step_6() {
     }
 }
