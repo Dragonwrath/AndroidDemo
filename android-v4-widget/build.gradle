@@ -1,0 +1,65 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+
+    defaultConfig {
+        applicationId "com.yang.v4demo"
+        minSdkVersion 14
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+
+        // Enabling MultiDex support.
+        multiDexEnabled true
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            tasks.whenTaskAdded { task ->
+                if (task.name.startsWith('proguard') && (task.name.endsWith('Debug') || task.name.endsWith('Release'))) {
+                    task.doLast {
+                        makeDexFileAfterProguardJar();
+                    }
+                    task.doFirst {
+                        delete "${project.buildDir}/intermediates/classes-proguard";
+
+                        String flavor = task.name.substring('proguard'.length(), task.name.lastIndexOf(task.name.endsWith('Debug') ? "Debug" : "Release"));
+                        generateMainIndexKeepList(flavor.toLowerCase());
+                    }
+                } else if (task.name.startsWith('zipalign') && (task.name.endsWith('Debug') || task.name.endsWith('Release'))) {
+                    task.doFirst {
+                        ensureMultiDexInApk();
+                    }
+                }
+            }
+            minifyEnabled false
+        }
+    }
+
+
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile "com.android.support:appcompat-v7:${android_support_library_version}"
+    compile "com.android.support:support-v4:${android_support_library_version}"
+    compile "com.android.support:recyclerview-v7:${android_support_library_version}"
+    compile "com.android.support:design:${android_support_library_version}"
+    compile 'com.jakewharton:butterknife:8.5.1'
+    compile 'com.google.android.gms:play-services:10.2.1'
+    compile 'com.android.support:multidex:1.0.1'
+    testCompile 'junit:junit:4.12'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+}

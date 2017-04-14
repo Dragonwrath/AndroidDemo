@@ -16,7 +16,7 @@ import java.security.spec.PKCS8EncodedKeySpec;
 
 import javax.crypto.Cipher;
 
-import file.Base64Utils;
+import rsa.Base64Utils;
 
 public class RSAUtils {
     private final static String RSA = "RSA";

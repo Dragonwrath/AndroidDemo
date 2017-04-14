@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">AppRootDemo</string>
+    <string name="open">打开</string>
+    <string name="input">请输入你的内容</string>
+</resources>

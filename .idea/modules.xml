@@ -3,16 +3,37 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Rxjava.iml" filepath="$PROJECT_DIR$/Rxjava.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android-app-root/android-app-root.iml" filepath="$PROJECT_DIR$/android-app-root/android-app-root.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android-bind-service/android-bind-service.iml" filepath="$PROJECT_DIR$/android-bind-service/android-bind-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android-coordinate/android-coordinate.iml" filepath="$PROJECT_DIR$/android-coordinate/android-coordinate.iml" />
       <module fileurl="file://$PROJECT_DIR$/android-enctryptedfile/android-enctryptedfile.iml" filepath="$PROJECT_DIR$/android-enctryptedfile/android-enctryptedfile.iml" />
       <module fileurl="file://$PROJECT_DIR$/android-frescodemo/android-frescodemo.iml" filepath="$PROJECT_DIR$/android-frescodemo/android-frescodemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/android-ftpserverdemo/android-ftpserverdemo.iml" filepath="$PROJECT_DIR$/android-ftpserverdemo/android-ftpserverdemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android-glide/android-glide.iml" filepath="$PROJECT_DIR$/android-glide/android-glide.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android-greendao/android-greendao.iml" filepath="$PROJECT_DIR$/android-greendao/android-greendao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android-https/android-https.iml" filepath="$PROJECT_DIR$/android-https/android-https.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android-mvp/android-mvp.iml" filepath="$PROJECT_DIR$/android-mvp/android-mvp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android-mvp-nucleus/android-mvp-nucleus.iml" filepath="$PROJECT_DIR$/android-mvp-nucleus/android-mvp-nucleus.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android-picasso/android-picasso.iml" filepath="$PROJECT_DIR$/android-picasso/android-picasso.iml" />
       <module fileurl="file://$PROJECT_DIR$/android-progressdemo/android-progressdemo.iml" filepath="$PROJECT_DIR$/android-progressdemo/android-progressdemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android-receiver/android-receiver.iml" filepath="$PROJECT_DIR$/android-receiver/android-receiver.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android-retrofit/android-retrofit.iml" filepath="$PROJECT_DIR$/android-retrofit/android-retrofit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android-rxjava/android-rxjava.iml" filepath="$PROJECT_DIR$/android-rxjava/android-rxjava.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android-share_sdk_sms/android-share_sdk_sms.iml" filepath="$PROJECT_DIR$/android-share_sdk_sms/android-share_sdk_sms.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android-sina/android-sina.iml" filepath="$PROJECT_DIR$/android-sina/android-sina.iml" />
       <module fileurl="file://$PROJECT_DIR$/android-tftp/android-tftp.iml" filepath="$PROJECT_DIR$/android-tftp/android-tftp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android-v4-widget/android-v4-widget.iml" filepath="$PROJECT_DIR$/android-v4-widget/android-v4-widget.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android-v7-widget/android-v7-widget.iml" filepath="$PROJECT_DIR$/android-v7-widget/android-v7-widget.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/dagger2test/dagger2test.iml" filepath="$PROJECT_DIR$/dagger2test/dagger2test.iml" />
       <module fileurl="file://$PROJECT_DIR$/encryptedfilelib/encryptedfilelib.iml" filepath="$PROJECT_DIR$/encryptedfilelib/encryptedfilelib.iml" />
       <module fileurl="file://$PROJECT_DIR$/greendaogenerator/greendaogenerator.iml" filepath="$PROJECT_DIR$/greendaogenerator/greendaogenerator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gson/gson.iml" filepath="$PROJECT_DIR$/gson/gson.iml" />
+      <module fileurl="file://$PROJECT_DIR$/https/https.iml" filepath="$PROJECT_DIR$/https/https.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java8/java8.iml" filepath="$PROJECT_DIR$/java8/java8.iml" />
+      <module fileurl="file://$PROJECT_DIR$/okhttp/okhttp.iml" filepath="$PROJECT_DIR$/okhttp/okhttp.iml" />
       <module fileurl="file://$PROJECT_DIR$/rxjavatest/rxjavatest.iml" filepath="$PROJECT_DIR$/rxjavatest/rxjavatest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/synchronized/synchronized.iml" filepath="$PROJECT_DIR$/synchronized/synchronized.iml" />
       <module fileurl="file://$PROJECT_DIR$/tftp/tftp.iml" filepath="$PROJECT_DIR$/tftp/tftp.iml" />
     </modules>
   </component>

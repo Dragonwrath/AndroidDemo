@@ -13,10 +13,15 @@ import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
+import android.view.View;
 import android.view.Window;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.widget.Toolbar;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
     private static final int PROGRESS = 0x1;
@@ -30,8 +35,8 @@ public class MainActivity extends AppCompatActivity {
 //        //确定进度的标题栏进度条
 //        requestWindowFeature(Window.FEATURE_PROGRESS);
 //        //不确定进度的标题栏进度条
-//        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-//        setContentView(R.layout.activity_main);
+        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+        setContentView(R.layout.activity_main);
 //        mProgress = (ProgressBar) findViewById(R.id.progress_bar);
 //        // Start lengthy operation in a background thread
 //        new Thread(new Runnable() {
@@ -50,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
 //        }).start();
     }
     private int detectNetwork() {
-
         Context ctx = this;
         ConnectivityManager manager = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = manager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
@@ -101,5 +105,9 @@ public class MainActivity extends AppCompatActivity {
                 requestPermissions(new String[]{Manifest.permission.ACCESS_NETWORK_STATE},100);
             }
         }
+    }
+
+    public void start(View view) {
+
     }
 }

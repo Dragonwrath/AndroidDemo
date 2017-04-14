@@ -10,7 +10,6 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
-import android.icu.text.TimeZoneFormat.ParseOption;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -150,9 +149,6 @@ public class CustomView extends View{
 
         //圆球矩阵初始化
         circleSrcRect = new Rect(0,0,circleBitmap.getWidth(),circleBitmap.getHeight());
-
         circleDstRect = new Rect(0,0,viewWidth,viewHeight);
-
-
     }
 }

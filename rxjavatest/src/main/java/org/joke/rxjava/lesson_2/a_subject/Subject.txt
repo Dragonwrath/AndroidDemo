@@ -1,0 +1,18 @@
+
+Subject 概述
+Subject可以看成是一个桥梁或者代理，在某些ReactiveX实现中（如RxJava），它同时充当
+了Observer和Observable的角色。因为它是一个Observer，它可以订阅一个或多个
+Observable；又因为它是一个Observable，它可以转发它收到(Observe)的数据，也可以发射
+新的数据。
+由于一个Subject订阅一个Observable，它可以触发这个Observable开始发射数据（如果那个
+Observable是"冷"的--就是说，它等待有订阅才开始发射数据）。因此有这样的效果，Subject
+可以把原来那个"冷"的Observable变成"热"的。
+
+Subject共同点点
+当错误发生时，AsyncSubject、BehaviorSubject、PublishSubject将会丢弃所有的数据
+
+如果你把 Subject 当作一个 Subscriber 使用，注意不要从多个线程中调用它的onNext方法
+（包括其它的on系列方法），这可能导致同时（非顺序）调用，这会违反Observable协议，
+给Subject的结果增加了不确定性。
+要避免此类问题，你可以将 Subject 转换为一个 SerializedSubject ，类似于这样：
+mySafeSubject = new SerializedSubject( myUnsafeSubject );

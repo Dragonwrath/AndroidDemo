@@ -5,20 +5,41 @@
       <GradleProjectSettings>
         <option name="distributionType" value="LOCAL" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleHome" value="D:\DevEnviroment\Android\AndroidStudio\gradle\gradle-2.14.1" />
+        <option name="gradleHome" value="$APPLICATION_HOME_DIR$/gradle/gradle-2.14.1" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/android-app-root" />
+            <option value="$PROJECT_DIR$/android-bind-service" />
+            <option value="$PROJECT_DIR$/android-coordinate" />
             <option value="$PROJECT_DIR$/android-enctryptedfile" />
             <option value="$PROJECT_DIR$/android-frescodemo" />
             <option value="$PROJECT_DIR$/android-ftpserverdemo" />
+            <option value="$PROJECT_DIR$/android-glide" />
+            <option value="$PROJECT_DIR$/android-greendao" />
+            <option value="$PROJECT_DIR$/android-https" />
+            <option value="$PROJECT_DIR$/android-mvp" />
+            <option value="$PROJECT_DIR$/android-mvp-nucleus" />
+            <option value="$PROJECT_DIR$/android-picasso" />
             <option value="$PROJECT_DIR$/android-progressdemo" />
+            <option value="$PROJECT_DIR$/android-receiver" />
+            <option value="$PROJECT_DIR$/android-retrofit" />
+            <option value="$PROJECT_DIR$/android-rxjava" />
+            <option value="$PROJECT_DIR$/android-share_sdk_sms" />
+            <option value="$PROJECT_DIR$/android-sina" />
             <option value="$PROJECT_DIR$/android-tftp" />
+            <option value="$PROJECT_DIR$/android-v4-widget" />
+            <option value="$PROJECT_DIR$/android-v7-widget" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/dagger2test" />
             <option value="$PROJECT_DIR$/encryptedfilelib" />
             <option value="$PROJECT_DIR$/greendaogenerator" />
+            <option value="$PROJECT_DIR$/gson" />
+            <option value="$PROJECT_DIR$/https" />
+            <option value="$PROJECT_DIR$/java8" />
+            <option value="$PROJECT_DIR$/okhttp" />
             <option value="$PROJECT_DIR$/rxjavatest" />
+            <option value="$PROJECT_DIR$/synchronized" />
             <option value="$PROJECT_DIR$/tftp" />
           </set>
         </option>

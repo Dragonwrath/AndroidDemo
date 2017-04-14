@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_second"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:onClick="start"
+    android:clickable="true"
+    android:gravity="center"
+    android:background="@color/colorPrimary"
+    tools:context="com.joke.progressdemo.SecondActivity">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="点我变大"
+        android:onClick="scale"/>
+    <!--<ImageView-->
+        <!--android:onClick="start"-->
+        <!--android:clickable="true"-->
+        <!--android:id="@+id/view"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:src="@drawable/source"-->
+        <!--android:background="@drawable/source"-->
+        <!--android:contentDescription=""/>-->
+
+    <!--<ProgressBar-->
+        <!--android:id="@android:id/progress"-->
+        <!--android:layout_width="27dp"-->
+        <!--android:layout_height="150dp"-->
+        <!--android:layout_margin="20dp"-->
+        <!--android:indeterminateOnly="false"-->
+        <!--android:max="100"-->
+        <!--android:progress="70"-->
+        <!--android:indeterminateDrawable="@drawable/progress_vertical_gradient_simple_drawable"/>-->
+    <!--<RatingBar-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:max="5"/>-->
+    <!--<ProgressBar-->
+        <!--android:id="@android:id/progress"-->
+        <!--android:layout_width="20dp"-->
+        <!--android:layout_height="150dp"-->
+        <!--android:layout_margin="20dp"-->
+        <!--android:indeterminateOnly="false"-->
+        <!--android:max="100"-->
+        <!--android:progress="70"-->
+        <!--android:secondaryProgress="80"-->
+        <!--android:progressDrawable="@drawable/progress_vertical_gradient_simple_drawable"/>-->
+</LinearLayout>
