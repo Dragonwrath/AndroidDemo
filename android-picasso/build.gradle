@@ -29,5 +29,5 @@ dependencies {
     })
     compile "com.android.support:appcompat-v7:${android_support_library_version}"
     testCompile 'junit:junit:4.12'
-    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile "com.squareup.picasso:picasso:${picasso_library_version}"
 }

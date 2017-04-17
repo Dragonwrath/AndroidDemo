@@ -3,8 +3,8 @@ apply plugin: 'java'
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile "io.reactivex:rxjava:${rxjava_library_version}"
-    compile "io.reactivex:rxjava-computation-expressions:${rxjava_computation_expressions}"
-    compile 'io.reactivex:rxjava-async-util:0.21.0'
+//    compile "io.reactivex:rxjava-computation-expressions:${rxjava_computation_expressions}"
+ //   compile 'io.reactivex:rxjava-async-util:0.21.0'
 }
 
 sourceCompatibility = "1.7"

@@ -29,6 +29,6 @@ dependencies {
     })
     compile "com.android.support:appcompat-v7:${android_support_library_version}"
     testCompile 'junit:junit:4.12'
-    compile 'de.greenrobot:greendao:2.1.0'
+    compile "de.greenrobot:greendao:${greendao_library_version}"
 
 }

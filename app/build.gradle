@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 22
-    buildToolsVersion "24.0.3"
+    buildToolsVersion '25.0.0'
     defaultConfig {
         applicationId "com.yang.rxjava"
         minSdkVersion 15
@@ -33,11 +33,11 @@ dependencies {
     compile "com.android.support:support-v4:${android_support_library_version}"
     compile "io.reactivex:rxjava:${rxjava_library_version}"
     compile "com.android.support:recyclerview-v7:${android_support_library_version}"
-    compile 'io.reactivex:rxandroid:1.2.1'
-    compile 'de.greenrobot:greendao:2.1.0'
-    compile 'io.reactivex:rxandroid:1.2.1'
+    compile "de.greenrobot:greendao:${greendao_library_version}"
+    compile "io.reactivex:rxandroid:${rxandroid_library_version}"
+    compile "com.facebook.fresco:fresco:${fresco_library_version}"
+
     compile 'com.ogaclejapan:rxbinding:1.2.0'
     compile 'com.google.dagger:dagger:2.8'
     compile 'com.google.dagger:dagger-compiler:2.8'
-    compile 'com.facebook.fresco:fresco:1.0.1'
 }

@@ -33,7 +33,7 @@ dependencies {
     })
     testCompile 'junit:junit:4.12'
     compile "io.reactivex:rxjava:${rxjava_library_version}"
-    compile 'io.reactivex:rxandroid:1.2.1'
+    compile "io.reactivex:rxandroid:${rxandroid_library_version}"
     compile 'com.google.guava:guava:20.0'
 
     //官方兼容库
