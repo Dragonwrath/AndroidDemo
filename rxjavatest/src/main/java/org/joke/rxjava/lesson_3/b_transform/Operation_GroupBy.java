@@ -37,7 +37,9 @@ public class Operation_GroupBy {
 
     public static void main(String[] args) {
         init();
-        step_6();
+        step_2();
+
+        System.out.println();
     }
 
 
@@ -47,28 +49,52 @@ public class Operation_GroupBy {
         }
     }
 
-    private static void step_6() {
-        Observable.from(list).groupBy(new Func1<Integer, List<Integer>>() {
+
+    private static void step_1() {
+        Observable.from(list).groupBy(new Func1<Integer, Integer>() {
             @Override
-            public List<Integer> call(Integer integer) {
-                if (integer % 3 == 0)
-                    list.remove(integer);
-                return list;
+            public Integer call(Integer integer) {
+                return integer % 3;
             }
-        }).subscribe(new Action1<GroupedObservable<List<Integer>, Integer>>() {
+        }).subscribe(new Action1<GroupedObservable<Integer, Integer>>() {
             @Override
-            public void call(GroupedObservable<List<Integer>, Integer> listIntegerGroupedObservable) {
-                listIntegerGroupedObservable.subscribe(new Action1<Integer>() {
+            public void call(final GroupedObservable<Integer, Integer> integerIntegerGroupedObservable) {
+                integerIntegerGroupedObservable.subscribe(new Action1<Integer>() {
                     @Override
                     public void call(Integer integer) {
-                        System.out.println("integer = " + integer);
+                        System.out.println(integerIntegerGroupedObservable.getKey()+ "---->" + integer);
                     }
                 });
             }
-        }, new Action1<Throwable>() {
-            @Override
-            public void call(Throwable throwable) {
+        });
+    }
 
+
+    //groupby 方法主要的作用就是为了进行相应的分类，并且生成相应的key用来操作
+    //func1的作用主要就是用来生成key
+    //func2的作用主要就是用来将相应的数据源进行变化
+    private static void step_2() {
+        Observable.from(list).groupBy(new Func1<Integer, Integer>() {
+            @Override
+            public Integer call(Integer integer) {
+//                System.out.println("generate key + " + integer);
+                integer += 100;
+                return integer % 3;
+            }
+        }, new Func1<Integer, Integer>() {
+            @Override
+            public Integer call(Integer integer) {
+                return integer += 100;
+            }
+        }).subscribe(new Action1<GroupedObservable<Integer, Integer>>() {
+            @Override
+            public void call(final GroupedObservable<Integer, Integer> integerIntegerGroupedObservable) {
+                integerIntegerGroupedObservable.subscribe(new Action1<Integer>() {
+                    @Override
+                    public void call(Integer integer) {
+                        System.out.println(integerIntegerGroupedObservable.getKey()+ "---->" + integer);
+                    }
+                });
             }
         });
     }

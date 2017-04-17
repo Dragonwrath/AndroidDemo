@@ -1,0 +1,61 @@
+这个页面展示的操作符可用于过滤和选择Observable发射的数据序列。
+filter( ) 
+过滤数据
+
+takeLast( ) 
+只发射最后的N项数据
+
+last( ) 
+只发射最后的一项数据
+
+lastOrDefault( ) 
+只发射最后的一项数据，如果Observable为空就发射默认值
+
+takeLastBuffer( ) 
+将最后的N项数据当做单个数据发射
+
+skip( ) 
+跳过开始的N项数据
+
+skipLast( ) 
+跳过最后的N项数据
+
+take( ) 
+只发射开始的N项数据
+
+first( ) and takeFirst( ) 
+只发射第一项数据，或者满足某种条件的第一项数据
+
+firstOrDefault( ) 
+只发射第一项数据，如果Observable为空就发射默认值
+
+elementAt( ) 
+发射第N项数据
+
+elementAtOrDefault( ) 
+发射第N项数据，如果Observable数据少于N项就发射默认值
+
+sample( ) or throttleLast( ) 
+定期发射Observable最近的数据
+
+throttleFirst( ) 
+定期发射Observable发射的第一项数据
+
+throttleWithTimeout( ) or debounce( ) 
+只有当Observable在指定的时间后还没有发射数据时，才发射一个数据
+
+timeout( ) 
+如果在一个指定的时间段后还没发射数据，就发射一个异常
+
+distinct( ) 
+过滤掉重复数据
+
+distinctUntilChanged( ) 
+过滤掉连续重复的数据
+
+ofType( ) 
+只发射指定类型的数据
+
+ignoreElements( ) 
+丢弃所有的正常数据，只发射错误或完成通知
+

@@ -3,6 +3,7 @@ package org.joke.rxjava.lesson_3.b_transform;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import rx.Emitter;
 import rx.Observable;
@@ -119,7 +120,6 @@ public class Operation_Buffer {
     public static void main(String[] args) {
         init();
         step_2();
-        System.out.println("args = " + args);
     }
 
     private static void init() {
@@ -152,7 +152,22 @@ public class Operation_Buffer {
     //buffer(bufferClosingSelector)
     @SuppressWarnings("unchecked")
     private static void step_2() {
+        Observable.from(list).buffer(Observable.interval(2,0, TimeUnit.SECONDS))
+                .subscribe(new Subscriber<List<Integer>>() {
+                    @Override
+                    public void onCompleted() {
+                        System.out.println("onCompleted ");
+                    }
 
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+
+                    @Override
+                    public void onNext(List<Integer> integers) {
+                        System.out.println(integers.getClass().getSimpleName()+"integers.toString() = " + integers.toString());
+                    }
+                });
     }
 
 
