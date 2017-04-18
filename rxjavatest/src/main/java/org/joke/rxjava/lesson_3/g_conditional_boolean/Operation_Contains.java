@@ -93,7 +93,7 @@ public class Operation_Contains {
 
     public static void main(String[] args) {
         init();
-        step_4();
+        step_9();
     }
 
     //contains
@@ -148,8 +148,74 @@ public class Operation_Contains {
     }
 
     //SequenceEqual
-    //
+    //判定两个Observables是否发射相同的数据序列。
     private static void step_5() {
+        Observable.sequenceEqual(Observable.from(list),Observable.from(list))
+        .subscribe(new Action1<Boolean>() {
+            @Override
+            public void call(Boolean aBoolean) {
+                System.out.println("aBoolean = " + aBoolean);
+            }
+        });
 
+    }
+
+    //SkipUntil
+    //丢失原始数据，知道第二个Observable开始发射数据
+    private static void step_6() {
+        Observable.from(list).skipUntil(Observable.just(1)).subscribe(new Action1<Integer>() {
+            @Override
+            public void call(Integer integer) {
+                System.out.println("integer = " + integer);
+            }
+        });
+    }
+
+    //SkipWhile
+    //直到Observable的某个条件不满足的时候，再发送数据，否则就丢弃数据
+    private static void step_7() {
+        Observable.from(list).skipWhile(new Func1<Integer, Boolean>() {
+            @Override
+            public Boolean call(Integer integer) {
+                return false;
+            }
+        }).subscribe(new Action1<Integer>() {
+            @Override
+            public void call(Integer integer) {
+                System.out.println("integer = " + integer);
+            }
+        });
+    }
+
+    //TakeUntil
+    //直到Observable的某个条件满足的时候，Observable停止发送数据
+    private static void step_8() {
+        Observable.from(list).takeUntil(new Func1<Integer, Boolean>() {
+            @Override
+            public Boolean call(Integer integer) {
+                return false;
+            }
+        }).subscribe(new Action1<Integer>() {
+            @Override
+            public void call(Integer integer) {
+                System.out.println("integer = " + integer);
+            }
+        });
+    }
+
+    //TakeWhile
+    //直到Observable的某个条件不满足的时候，Observable停止发送数据
+    private static void step_9() {
+        Observable.from(list).takeWhile(new Func1<Integer, Boolean>() {
+            @Override
+            public Boolean call(Integer integer) {
+                return true;
+            }
+        }).subscribe(new Action1<Integer>() {
+            @Override
+            public void call(Integer integer) {
+                System.out.println("integer = " + integer);
+            }
+        });
     }
 }

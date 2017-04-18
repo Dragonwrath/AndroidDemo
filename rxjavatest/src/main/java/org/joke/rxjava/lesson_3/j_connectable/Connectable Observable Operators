@@ -1,0 +1,13 @@
+这一节解释 ConnectableObservable 和它的子类以及它们的操作符：
+
+ConnectableObservable.connect( ) 
+指示一个可连接的Observable开始发射数据
+
+Observable.publish( ) 
+将一个Observable转换为一个可连接的Observable
+
+Observable.replay( ) 
+确保所有的订阅者看到相同的数据序列，即使它们在Observable开始发射数据之后才订阅
+
+ConnectableObservable.refCount( ) 
+让一个可连接的Observable表现得像一个普通的Observable
