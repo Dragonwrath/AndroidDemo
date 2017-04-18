@@ -3,11 +3,13 @@ package org.joke.rxjava.lesson_3.c_filter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.security.auth.Subject;
 
 import rx.Observable;
 import rx.Subscriber;
+import rx.functions.Action1;
 
 /**
  * Sample
@@ -52,6 +54,12 @@ public class Operation_Sample {
     }
 
     private static void step_1() {
-
+        Observable.from(list).sample(1, TimeUnit.MILLISECONDS)
+                .subscribe(new Action1<Integer>() {
+                    @Override
+                    public void call(Integer integer) {
+                        System.out.println("integer = " + integer);
+                    }
+                });
     }
 }

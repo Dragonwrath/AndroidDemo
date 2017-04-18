@@ -104,6 +104,12 @@ public class Operation_BlockingObservable {
     public static void main(String[] args) {
         init();
         step_11();
+        Observable.just(1).compose(new Observable.Transformer<Integer, String>() {
+            @Override
+            public Observable<String> call(Observable<Integer> integerObservable) {
+                return null;
+            }
+        });
         System.out.println();
     }
 
