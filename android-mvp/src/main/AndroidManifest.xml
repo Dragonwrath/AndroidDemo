@@ -15,20 +15,16 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <!--Lesson1-->
+        <!-- Lesson1 -->
         <activity android:name=".lesson1.view.Lession1Activity">
         </activity>
-        <!--
-            /*
-            *Lesson 2
-            *
-            *
-        -->
-        <activity android:name=".lesson2.task.TasksActivity">
-
+        <activity android:name=".officalsamples.task.TasksActivity">
+        </activity>
+        <activity android:name=".officalsamples.addedittask.AddEditTaskActivity">
         </activity>
     </application>
 

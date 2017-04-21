@@ -4,7 +4,7 @@ package com.joke.rxjavademo.module.cache_6.data;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 
-import com.joke.rxjavademo.App;
+import com.joke.rxjavademo.BaseApplication;
 import com.joke.rxjavademo.R;
 import com.joke.rxjavademo.model.Item;
 import com.joke.rxjavademo.network.Network;
@@ -58,7 +58,7 @@ public class Data {
             default:
                 dataSourceTextRes = R.string.data_source_network;
         }
-        return App.getInstance().getString(dataSourceTextRes);
+        return BaseApplication.getInstance().getString(dataSourceTextRes);
     }
 
     public void loadFromNetwork(){

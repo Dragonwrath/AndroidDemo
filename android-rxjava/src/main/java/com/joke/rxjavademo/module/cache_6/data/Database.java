@@ -3,7 +3,7 @@ package com.joke.rxjavademo.module.cache_6.data;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.joke.rxjavademo.App;
+import com.joke.rxjavademo.BaseApplication;
 import com.joke.rxjavademo.model.Item;
 
 import java.io.File;
@@ -16,7 +16,7 @@ import java.util.List;
 public class Database {
     private static String DATA_FILE_NAME = "data.db";
     private static Database INSTANCE;
-    File dataFile = new File(App.getInstance().getFilesDir(), DATA_FILE_NAME);
+    File dataFile = new File(BaseApplication.getInstance().getFilesDir(), DATA_FILE_NAME);
     Gson gson = new Gson();
 
 

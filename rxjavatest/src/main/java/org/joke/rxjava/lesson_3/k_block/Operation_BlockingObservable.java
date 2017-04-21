@@ -103,11 +103,34 @@ public class Operation_BlockingObservable {
 
     public static void main(String[] args) {
         init();
-        step_11();
+//        step_11();
+        Observable.just(1).map(new Func1<Integer, String>() {
+            @Override
+            public String call(Integer integer) {
+                return "hahaha";
+            }
+        }).subscribe(new Action1<String>() {
+            @Override
+            public void call(String s) {
+                System.out.println("s = " + s);
+            }
+        });
+
         Observable.just(1).compose(new Observable.Transformer<Integer, String>() {
             @Override
             public Observable<String> call(Observable<Integer> integerObservable) {
-                return null;
+
+                return integerObservable.map(new Func1<Integer, String>() {
+                    @Override
+                    public String call(Integer integer) {
+                        return "what's the fuck";
+                    }
+                });
+            }
+        }).subscribe(new Action1<String>() {
+            @Override
+            public void call(String s) {
+                System.out.println("s = " + s);
             }
         });
         System.out.println();

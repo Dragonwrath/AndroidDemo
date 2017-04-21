@@ -1,0 +1,25 @@
+这个操作的的主要是为了应对当Observable 产生数据的速度比他们的observer消费的速度更快时而制定的规则
+在ReactiveX中，很容易就会产生这样的一种情况，那就是一个Observable发射数据的速度比一个operator或者
+    observer的可消费速度要快的多。这将会导致一个严重的问题，那就是大量的未被消费的数据将不断的增长，累计下来
+举个例子来说，图片使用Zip操作符去压缩两个不停发送数据的Observable，其中一个的发射速度是另一个的2倍。一种幼稚的
+operator实现方式可能是提供一个永远可扩展的buffer用来存储发射更快的哪个Observable发射出来的数据，用以最终将这些
+数据与哪个较慢的的一个来进行合并。这可能导致ReactiveX占用了庞大的系统资源。
+在ReactiveX中，有大量的规则，你可以用来练习流控以及后台压力管理，用来缓解当一个更快的生产Observable
+碰到一个相对较慢的observer，在有些在ReactiveX实现中，reactive提供了backpressure 和一些特殊的后台压力操作符
+
+一个cold Observable 发射一个特殊序列的数据，但是当Observable的observer发现在自己方便的时候，Observable将会
+开始发送这个序列，并且无论观察者想要什么样的速度，都不会破坏序列的完整性。举个例子来说，如果你转换一个静态的可迭代
+的对象到一个Observable，Observable将发送相同的序列的数据，即使他会被延迟观察或者这些数据多么频繁的被观察。常见的
+从cold的Observable发射的数据将包含database查询，文件校验或者web请求
+
+一个hot Observable开始产生数据用来立即发送数据，当它被创建的时候。Subscriber 通常开始观察一个 hot Observable
+发送的一系列数据，从序列中间的某处可以观察到，从建立订阅之后的Observable发出的第一个项目开始。比如一个Observable
+按照自己的速率发送数据，并且它提醒他的observers保持up状态。一些常见的从hot Observable发射出来的数据可以包括
+鼠标或者键盘事件，或者系统事件，或者股票价格
+
+当一个cold Observable是多个的（当他们转换到一个可连接的Observable中，并且它的Connect方法被调用的时候），它将
+变成hot并且为了后台压力和流量控制的目的，它应该被视为一个热观察
+Cold Observable应该被设计为那些响应pull 数据的backpressure实现在一些ReactiveX显示。
+Hot Observable 应该被设置为那些不适用于Cold Observable，并且应该是实现flow 控制策略的时候。
+
+常见的Hot Observable 有 buffer sample debounce window
