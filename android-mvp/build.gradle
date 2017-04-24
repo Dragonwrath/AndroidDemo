@@ -28,13 +28,8 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    testCompile 'junit:junit:4.12'
     compile "io.reactivex:rxjava:${rxjava_library_version}"
     compile "io.reactivex:rxandroid:${rxandroid_library_version}"
-    compile 'com.google.guava:guava:20.0'
 
     //官方兼容库
     compile "com.android.support:appcompat-v7:${android_support_library_version}"
@@ -46,4 +41,19 @@ dependencies {
     compile "com.jakewharton:butterknife:${butterknife_library_version}"
     annotationProcessor  "com.jakewharton:butterknife-compiler:${butterknife_library_version}"
 
+    compile ("com.android.support.test.espresso:espresso-idling-resource:${espresso_library_version}"
+            , {exclude group: 'com.android.support', module: 'support-annotations' })
+
+
+    androidTestCompile ("com.android.support.test.espresso:espresso-core:${espresso_library_version}"
+            , {exclude group: "com.android.support", module: "support-annotations" })
+//    androidTestCompile ("com.android.support.test.espresso:espresso-contrib:${espresso_library_version}"
+//            , {exclude group: "com.android.support', module: 'support-annotations" })
+    androidTestCompile ("com.android.support.test.espresso:espresso-intents:${espresso_library_version}"
+            , {exclude group: "com.android.support', module: 'support-annotations" })
+
+    compile 'com.google.guava:guava:20.0'
+    testCompile 'junit:junit:4.12'
+
+    testCompile "org.mockito:mockito-all:${mockito_all_version}"
 }

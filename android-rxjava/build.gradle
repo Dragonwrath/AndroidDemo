@@ -38,12 +38,13 @@ dependencies {
     compile "com.squareup.okhttp3:okhttp:${okhttp3_library_version}"
     compile "io.reactivex:rxandroid:${rxandroid_library_version}"
 
-    compile 'com.squareup.retrofit2:retrofit:2.2.0'
-    compile 'com.squareup.retrofit2:retrofit-converters:2.2.0'
-    compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile 'com.jakewharton.rxbinding:rxbinding:1.0.1'
-    compile 'com.squareup.retrofit2:converter-gson:2.2.0'
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.2.0'
+    compile "com.squareup.retrofit2:retrofit:${rxjava2_library_version}"
+    compile "com.squareup.retrofit2:retrofit-converters:${rxjava2_library_version}"
+    compile "com.squareup.retrofit2:converter-gson:${rxjava2_library_version}"
+    compile "com.squareup.retrofit2:adapter-rxjava:${rxjava2_library_version}"
+
+    compile "com.github.bumptech.glide:glide:${glide_library_version}"
+    compile "com.jakewharton.rxbinding:rxbinding:${rxbinding_library_version}"
 
 
     compile "com.jakewharton:butterknife:${butterknife_library_version}"
