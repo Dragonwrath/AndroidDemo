@@ -114,6 +114,9 @@ public class OfficalTest_Part_1 {
 
     /*
      * 默认情况下，time(1)是默认被使用的，相应的方法是隐藏的，因此无需调用
+     * 如果使用atLeast方法，可以校验至少执行了多少次
+     * 如果使用atMost 方法，可以校验至多运行了多少次
+     * never()代表，依次都没有运行
      */
     /**
      * {@see Verifying exact number of invocations / at least x / never
@@ -152,6 +155,10 @@ public class OfficalTest_Part_1 {
         verify(mockedList, atMost(5)).add("three times");
     }
 
+    /*
+     * 可以通过doThrow方法抛出相应的异常。
+     * 下面的语句就表示 党执行mockedList执行clear()方法的时候，将抛出一个异常
+     */
     /**
      * {@see Stubbing void methods with exceptions
      * https://static.javadoc.io/org.mockito/mockito-core/2.7.22/org/mockito/Mockito.html#5
@@ -169,7 +176,6 @@ public class OfficalTest_Part_1 {
      * 使用inOrder可以帮助你来校验是否是顺序执行了需要测试的内容
      * 同时，你也可以通过InOrder对象，只传递与按顺序验证相关的mocks
      */
-
     /**
      * {@see Mockito
      * https://static.javadoc.io/org.mockito/mockito-core/2.7.22/org/mockito/Mockito.html#6
@@ -196,15 +202,15 @@ public class OfficalTest_Part_1 {
         List<String> secondMock = mock(List.class);
 
         //using mocks
-        secondMock.add("was called second");
         firstMock.add("was called first");
+        secondMock.add("was called second");
 
         //create inOrder object passing any mocks that need to be verified in order
         InOrder anotherOrder = inOrder(secondMock,firstMock);
 
         //following will make sure that firstMock was called before secondMock
-        anotherOrder.verify(secondMock).add("was called second");
         anotherOrder.verify(firstMock).add("was called first");
+        anotherOrder.verify(secondMock).add("was called second");
 
         // Oh, and A + B can be mixed together at will
     }
@@ -259,6 +265,8 @@ public class OfficalTest_Part_1 {
         mockedList.add("two");
 
         verify(mockedList).add("one");
+        verify(mockedList).add("two");
+
         //following verification will fail
         verifyNoMoreInteractions(mockedList);
 

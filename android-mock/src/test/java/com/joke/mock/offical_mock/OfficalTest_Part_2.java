@@ -1,16 +1,9 @@
 package com.joke.mock.offical_mock;
 
-
-
-import android.util.Log;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
-import org.mockito.ArgumentMatcher;
-import org.mockito.ArgumentMatchers;
 import org.mockito.BDDMockito;
-import org.mockito.InOrder;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
@@ -19,10 +12,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
 
 import static org.mockito.Mockito.*;
-import static org.junit.Assert.*;
 
 
 
@@ -33,7 +24,6 @@ public class OfficalTest_Part_2 {
      * 可以使用Answer来进行修改相应的,比如在下面的例子中,我们修改相应的返回值,
      * 调用相应的add方法时，就会返回我们自定义的结果
      * 最好 thenReturn() or thenThrow()等方法，来进行相应的测试。
-     *
      */
     /**
      * {@see Mockito
@@ -55,8 +45,6 @@ public class OfficalTest_Part_2 {
         System.out.println(mockedLinkList.remove(999));
 
     }
-
-
 
     /*
      * doReturn()|doThrow()| doAnswer()|doNothing()|doCallRealMethod() family of methods
@@ -90,8 +78,8 @@ public class OfficalTest_Part_2 {
     /*
      * 当使用spy的时候，会真正调用相应的方法(除非使用其他手段修改相应的返回值， 比如doXxx())
      * 注意：应当尽可能仔细使用，并且尽量少地使用spy，比如在处理遗留的代码的时候
-     * 在一个真正的对象上使用Spy，可以理解为“有限制的mocking”；但是在1.8之前，Mockito并不是真正
-     * 有限制的mock，原因在于，我们认为有限制的mock是代码的一部分。在某些方面，我们发现了使用部分mocks
+     * 在一个真正的对象上使用Spy，可以理解为“partial mocking”；但是在1.8之前，Mockito并不是真正
+     * partial mock，原因在于，我们认为partial mock是代码的一部分。在某些方面，我们发现了使用部分mocks
      * 的合理之处(例如：第三方接口，遗留代码的临时重构，全部的文章，参考以下内容
      * {@see  partial-mocking
      * https://monkeyisland.pl/2009/01/13/subclass-and-override-vs-partial-mocking-vs-refactoring/})
@@ -296,7 +284,8 @@ public class OfficalTest_Part_2 {
     public void step_19() {
         ArrayList mock = mock(ArrayList.class);
         BDDMockito.given(mock.add("Test")).willReturn(false);
-
+        System.out.println("mock.add(\"Test\") = " + mock.add("Test"));
+        verify(mock).add("Test");
     }
 
     /*
@@ -305,8 +294,6 @@ public class OfficalTest_Part_2 {
      * 警告：这个功能应该在单元测试中很少用到。
      * 对于具有不可靠的外部依赖性的BDD规范的特定用例，实施了该行为。
      * 这是在一个Web环境中，来自外部依赖关系的对象被序列化以在层之间传递。
-     *
-     *
      */
     /**
      * {@see Mockito

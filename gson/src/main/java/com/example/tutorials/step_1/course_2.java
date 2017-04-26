@@ -6,9 +6,6 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 
-/**
- * Created by JunWei on 2017/2/14.
- */
 
 public class course_2 {
     public static void main(String[] args) {
@@ -18,7 +15,9 @@ public class course_2 {
         Type type = new TypeToken<HashMap<String, AmountWithCurrency>>() {
         }.getType();
         HashMap<String, AmountWithCurrency> amount = gson.fromJson(dollarJson, type);
-        System.out.println();
+        for (String s : amount.keySet()) {
+            System.out.println(String.format(s,"utf-8") + "---" + amount.get(s));
+        }
     }
 }
 class AmountWithCurrency {

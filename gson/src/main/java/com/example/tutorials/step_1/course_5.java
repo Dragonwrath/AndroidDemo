@@ -3,9 +3,6 @@ package com.example.tutorials.step_1;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-/**
- * Created by JunWei on 2017/2/14.
- */
 
 public class course_5 {
     public static void main(String[] args) {
