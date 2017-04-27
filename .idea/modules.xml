@@ -25,6 +25,7 @@
       <module fileurl="file://$PROJECT_DIR$/android-tftp/android-tftp.iml" filepath="$PROJECT_DIR$/android-tftp/android-tftp.iml" />
       <module fileurl="file://$PROJECT_DIR$/android-v4-widget/android-v4-widget.iml" filepath="$PROJECT_DIR$/android-v4-widget/android-v4-widget.iml" />
       <module fileurl="file://$PROJECT_DIR$/android-v7-widget/android-v7-widget.iml" filepath="$PROJECT_DIR$/android-v7-widget/android-v7-widget.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android-widget/android-widget.iml" filepath="$PROJECT_DIR$/android-widget/android-widget.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/dagger2test/dagger2test.iml" filepath="$PROJECT_DIR$/dagger2test/dagger2test.iml" />
       <module fileurl="file://$PROJECT_DIR$/encryptedfilelib/encryptedfilelib.iml" filepath="$PROJECT_DIR$/encryptedfilelib/encryptedfilelib.iml" />
