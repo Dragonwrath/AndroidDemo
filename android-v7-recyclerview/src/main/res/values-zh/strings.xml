@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="edit">编辑</string>
+    <string name="app_name">RecyclerViewDemo</string>
+    <string name="select_all">全选</string>
+    <string name="delete">删除</string>
+</resources>
