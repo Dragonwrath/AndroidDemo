@@ -10,6 +10,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/android-app-root" />
+            <option value="$PROJECT_DIR$/android-app-tool" />
             <option value="$PROJECT_DIR$/android-bind-service" />
             <option value="$PROJECT_DIR$/android-coordinate" />
             <option value="$PROJECT_DIR$/android-enctryptedfile" />

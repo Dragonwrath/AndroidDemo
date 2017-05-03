@@ -27,6 +27,7 @@
         android:id="@+id/delete"
         android:text="@string/delete"
         android:layout_margin="5dp"
+        android:onClick="delete"
         android:layout_width="wrap_content"
         android:layout_toRightOf="@id/select_all"
         android:layout_height="wrap_content"/>

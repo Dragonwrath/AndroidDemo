@@ -24,6 +24,7 @@
             android:textSize="20sp"
             android:hint="title"
             android:gravity="center"
+            android:background="@color/colorPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <TextView
@@ -31,6 +32,7 @@
             android:textSize="20sp"
             android:hint="description"
             android:gravity="center"
+            android:background="@color/colorAccent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>

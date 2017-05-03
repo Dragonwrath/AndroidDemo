@@ -33,8 +33,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     public void setEdited() {
         edit = !edit;
     }
-    public void setSelectAll() {
-        selectAll = !selectAll;
+    public void setSelectAll(boolean selectAll) {
+        this.selectAll = selectAll;
     }
     public void setOnListener(RecyclerViewListener listener) {
         this.listener = listener;
