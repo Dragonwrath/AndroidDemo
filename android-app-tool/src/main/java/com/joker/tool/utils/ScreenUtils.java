@@ -20,6 +20,10 @@ public class ScreenUtils {
     private static int STATUS_BAR_HEIGHT;
     private static int VISUAL_BAR_HEIGHT;
 
+    private ScreenUtils(){
+        throw new AssertionError();
+    }
+
     //获取屏幕宽度
     public static int getScreenWidth(Context context) {
         if (SCREEN_WIDTH == 0) {
@@ -56,7 +60,7 @@ public class ScreenUtils {
         return STATUS_BAR_HEIGHT;
     }
 
-    //获取底部虚拟按键栏高度
+    //获取底部虚拟按键栏高度 API17以上有效
     public static int getVisualBarHeight(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1)
         if (VISUAL_BAR_HEIGHT == 0) {

@@ -69,7 +69,7 @@ public class Operation_Do {
 
     public static void main(String[] args) {
         init();
-        step_4();
+        step_3();
 
         System.out.println();
     }
@@ -111,6 +111,8 @@ public class Operation_Do {
         Subscription subscribe = Observable.create(new Observable.OnSubscribe<Object>() {
             @Override
             public void call(Subscriber<? super Object> subscriber) {
+                if (!subscriber.isUnsubscribed())
+                    subscriber.onNext(3);
                 subscriber.unsubscribe();
             }
         }).doOnSubscribe(new Action0() {

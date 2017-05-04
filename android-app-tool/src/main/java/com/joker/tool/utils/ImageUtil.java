@@ -65,6 +65,10 @@ public class ImageUtil {
      */
     public static final int REQUEST_CODE_GETIMAGE_IMAGEPAVER = 3;
 
+
+    private ImageUtil(){
+        throw new AssertionError();
+    }
     /**
      * 写图片文件 在Android系统中，文件保存在 /data/data/PACKAGE_NAME/files 目录下
      *

@@ -19,6 +19,9 @@ public class DesUtils {
 
 	private static DesUtils desUtils;
 
+	private DesUtils(){
+		throw new AssertionError();
+	}
 	public static DesUtils getDes(Context context) {
 		if (desUtils == null) {
 			desUtils = new DesUtils(context);

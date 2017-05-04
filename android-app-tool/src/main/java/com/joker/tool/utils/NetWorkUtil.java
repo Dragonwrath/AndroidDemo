@@ -8,6 +8,9 @@ import android.net.wifi.WifiManager;
 
 public class NetWorkUtil {
 
+    private NetWorkUtil(){
+        throw new AssertionError();
+    }
     public static boolean checkEnable(Context paramContext) {
         boolean i = false;
         NetworkInfo localNetworkInfo = ((ConnectivityManager) paramContext

@@ -8,6 +8,10 @@ import java.util.UUID;
 
 public class PhoneUtils {
 
+	private PhoneUtils(){
+		throw new AssertionError();
+	}
+
 	//该方法存在空指针，以及首位字符不为0的情况，导致问题出现
 	public static String getDeviceUuid(Context context) {
 		final TelephonyManager tm = (TelephonyManager) context
@@ -25,6 +29,7 @@ public class PhoneUtils {
 		return deviceUuid.toString();
 	}
 
+	//推荐使用这种方法 可以考虑增加相应的机型
 	public static String getDeviceRandomUUid(Context context){
 		return UUID.randomUUID().toString(); //获取一个随机的UUID
 	}
