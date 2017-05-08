@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.joke.media_camera.BuildConfig;
 import com.joke.media_camera.Important;
 import com.joke.media_camera.MainActivity;
 import com.joke.media_camera.R;
@@ -159,7 +159,6 @@ public class CameraActivity extends AppCompatActivity {
             "使用Uri.fromFile(file) 可以保证任何app都可以访问相应的内容，因此其安全性非常低" +
             "FileProvider的获取到的Uri可以保证只有私有内容，只允许自己访问,因此安全性相对较高" +
             "}"
-
     )
     @OnClick(R.id.button3)
     public void onButton3Click(){
@@ -190,11 +189,17 @@ public class CameraActivity extends AppCompatActivity {
         }
 
         if (requestCode == REQUEST_SAVE_PHOTO && resultCode == RESULT_OK) {
-            if (data != null && data.getData() != null)
-                mSuface.setImageURI(data.getData());
-            else
-                mSuface.setImageURI(Uri.fromFile(new File(mCurrentPhotoPath)));
-            mText.setText(mCurrentPhotoPath);
+            Uri  uri = null;
+            if (data != null && data.getData() != null) {
+                uri = data.getData();
+            } else {
+                uri = Uri.fromFile(new File(mCurrentPhotoPath));
+            }
+            if (uri != null) {
+                mSuface.setImageURI(uri);
+                mText.setText(mCurrentPhotoPath);
+                startPhotoZoom(uri);
+            }
             return;
         }
         if (requestCode == INTENT_PICK_IMAGE && resultCode == RESULT_OK) {
@@ -226,6 +231,8 @@ public class CameraActivity extends AppCompatActivity {
 
     private static final int PHOTO_REQUEST_CUT = 103;
 
+
+    //裁剪相应的图片
     private void startPhotoZoom(Uri uri) {
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setDataAndType(uri, "image/*");
