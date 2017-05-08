@@ -3,4 +3,5 @@
     <string name="app_name">Media&amp;CameraDemo</string>
     <string name="capture">拍照</string>
     <string name="gallery">选取</string>
+    <string name="crop">crop</string>
 </resources>

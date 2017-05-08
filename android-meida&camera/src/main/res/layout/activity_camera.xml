@@ -18,9 +18,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/button1"/>
-    <SurfaceView
+    <Button
+        android:id="@+id/button3"
+        android:text="@string/crop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/button2"/>
+    <TextView
+        android:id="@+id/text"
+        android:maxLines="1"
+        android:textSize="12sp"
+        android:hint="test"
+        android:textColorHighlight="@color/colorPrimary"
+        android:layout_below="@id/button1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
         android:id="@+id/suface"
+        android:scaleType="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/button1"/>
+        android:layout_below="@+id/text"/>
 </RelativeLayout>

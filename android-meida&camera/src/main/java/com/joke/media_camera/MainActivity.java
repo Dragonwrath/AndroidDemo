@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Environment;
+import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -46,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
 
 //        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
 //        intent.setType("image/*");
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-        startActivityForResult(intent,1);
+//        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+//        startActivityForResult(intent,1);
 
 
     }

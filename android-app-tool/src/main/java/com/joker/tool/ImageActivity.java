@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.hardware.Camera;
+import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,18 +26,21 @@ public class ImageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image);
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        filter.addAction(Camera.ACTION_NEW_PICTURE);
-        mReceiver = new ImageReceiver();
-        registerReceiver(mReceiver,filter);
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Thumbnails.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent,10);
+
+//        IntentFilter filter = new IntentFilter();
+//        filter.addAction(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+//        filter.addAction(Camera.ACTION_NEW_PICTURE);
+//        mReceiver = new ImageReceiver();
+//        registerReceiver(mReceiver,filter);
 
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unregisterReceiver(mReceiver);
+//        unregisterReceiver(mReceiver);
     }
 
     class ImageReceiver extends BroadcastReceiver {

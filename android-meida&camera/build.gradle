@@ -32,6 +32,8 @@ dependencies {
     annotationProcessor  "com.jakewharton:butterknife-compiler:${butterknife_library_version}"
 
     compile "com.android.support:appcompat-v7:$rootProject.ext.supportVersion"
+    compile "com.android.support:support-v4:$rootProject.ext.supportVersion"
+    compile "com.android.support:exifinterface:$rootProject.ext.supportVersion"
     compile "io.reactivex:rxandroid:$rootProject.ext.rxandroid"
     compile "io.reactivex:rxjava:$rootProject.ext.rxjava"
     testCompile "junit:junit:$rootProject.ext.junit"

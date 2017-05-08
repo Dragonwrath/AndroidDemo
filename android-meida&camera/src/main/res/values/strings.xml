@@ -2,4 +2,5 @@
     <string name="app_name">Media&amp;CameraDemo</string>
     <string name="capture">capture</string>
     <string name="gallery">gallery</string>
+    <string name="crop">crop</string>
 </resources>
