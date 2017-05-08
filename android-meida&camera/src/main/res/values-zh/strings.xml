@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Media&amp;CameraDemo</string>
+    <string name="capture">拍照</string>
+    <string name="gallery">选取</string>
+</resources>

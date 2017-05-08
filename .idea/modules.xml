@@ -13,6 +13,7 @@
       <module fileurl="file://$PROJECT_DIR$/android-glide/android-glide.iml" filepath="$PROJECT_DIR$/android-glide/android-glide.iml" />
       <module fileurl="file://$PROJECT_DIR$/android-greendao/android-greendao.iml" filepath="$PROJECT_DIR$/android-greendao/android-greendao.iml" />
       <module fileurl="file://$PROJECT_DIR$/android-https/android-https.iml" filepath="$PROJECT_DIR$/android-https/android-https.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android-meida&amp;camera/android-meida&amp;camera.iml" filepath="$PROJECT_DIR$/android-meida&amp;camera/android-meida&amp;camera.iml" />
       <module fileurl="file://$PROJECT_DIR$/android-mock/android-mock.iml" filepath="$PROJECT_DIR$/android-mock/android-mock.iml" />
       <module fileurl="file://$PROJECT_DIR$/android-mvp/android-mvp.iml" filepath="$PROJECT_DIR$/android-mvp/android-mvp.iml" />
       <module fileurl="file://$PROJECT_DIR$/android-mvp-nucleus/android-mvp-nucleus.iml" filepath="$PROJECT_DIR$/android-mvp-nucleus/android-mvp-nucleus.iml" />
