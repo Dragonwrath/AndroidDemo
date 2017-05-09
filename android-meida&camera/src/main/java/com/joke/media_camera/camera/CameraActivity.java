@@ -21,7 +21,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.joke.media_camera.BuildConfig;
 import com.joke.media_camera.Important;
 import com.joke.media_camera.MainActivity;
 import com.joke.media_camera.R;
@@ -76,7 +75,7 @@ public class CameraActivity extends AppCompatActivity {
 
     @RequiresApi(23)
     private void checkPermission() {
-        if ((checkSelfPermission(Manifest.permission.CAMERA) &
+        if ((checkSelfPermission(Manifest.permission.CAMERA) |
                 checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE))
                 != PackageManager.PERMISSION_GRANTED
                 ) {
@@ -103,20 +102,22 @@ public class CameraActivity extends AppCompatActivity {
 
     private void dispatchTakePictureIntent2() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        // Ensure that there's a camera activity to handle the intent
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            // Create the File where the photo should go
             File photoFile = null;
             try {
                 photoFile = createImageFile();
             } catch (IOException ex) {
                 // Error occurred while creating the File
             }
-            // Continue only if the File was successfully created
             if (photoFile != null) {
-                Uri photoURI = FileProvider.getUriForFile(this,
-                        "com.joke.media_camera.fileprovider",
-                        photoFile);
+                Uri photoURI = null;
+                if (Build.VERSION.SDK_INT >= 24) {   //判断相应的版本使用相应的Uri
+                    photoURI = FileProvider.getUriForFile(this,
+                            "com.joke.media_camera.fileprovider",
+                            photoFile);
+                } else {
+                    photoURI = Uri.fromFile(photoFile);
+                }
                 takePictureIntent.putExtra("return-data", true);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 startActivityForResult(takePictureIntent, REQUEST_SAVE_PHOTO);
@@ -131,8 +132,8 @@ public class CameraActivity extends AppCompatActivity {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-//        File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-
+        if (storageDir == null)
+            storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
                 imageFileName,  /* prefix */
                 ".jpg",         /* suffix */
@@ -240,8 +241,13 @@ public class CameraActivity extends AppCompatActivity {
         intent.putExtra("crop", "true");
 
         // aspectX aspectY 是宽高的比例
-        intent.putExtra("aspectX", 1);
-        intent.putExtra("aspectY", 1);
+        if (android.os.Build.MANUFACTURER.contains("HUAWEI")) {// 华为特殊处理 不然会显示圆
+            intent.putExtra("aspectX", 9998);
+            intent.putExtra("aspectY", 9999);
+        } else {
+            intent.putExtra("aspectX", 1);
+            intent.putExtra("aspectY", 1);
+        }
 
         // outputX,outputY 是剪裁图片的宽高
         intent.putExtra("outputX", 300);
@@ -251,7 +257,8 @@ public class CameraActivity extends AppCompatActivity {
         intent.putExtra(MediaStore.EXTRA_OUTPUT,uri);
         intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
 
-        startActivityForResult(intent, PHOTO_REQUEST_CUT);
+        if (intent.resolveActivity(getPackageManager()) != null)
+            startActivityForResult(intent, PHOTO_REQUEST_CUT);
     }
 
     class ImageReceiver extends BroadcastReceiver {

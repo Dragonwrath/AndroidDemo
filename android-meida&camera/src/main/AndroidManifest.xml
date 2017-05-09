@@ -10,8 +10,6 @@
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="18"/>
-
-
     <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
@@ -23,16 +21,11 @@
         <activity android:name=".MainActivity">
         </activity>
         <activity android:name=".camera.CameraActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
+
         </activity>
         <activity android:name=".camera.custom.CustomCameraActivity">
-
         </activity>
         <activity android:name=".camera.haoyayi.CameraActivity"/>
-
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -43,6 +36,13 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths"/>
         </provider>
+
+        <activity android:name=".camera.camera2.Camera2Activity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
