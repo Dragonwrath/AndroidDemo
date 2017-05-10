@@ -3,17 +3,62 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.yang.sinademo.MainActivity">
 
-    <Button
-        android:id="@+id/feature_oauth"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="6dp"
-        android:layout_marginTop="20dp"
-        android:onClick="onOauth"
-        android:gravity="left|center_vertical"
-        android:text="@string/weibosdk_demo_feature_oauth" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/feature_oauth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:layout_marginTop="20dp"
+            android:onClick="onOauth"
+            android:gravity="left|center_vertical"
+            android:text="@string/weibosdk_demo_feature_oauth" />
+        <Button
+            android:id="@+id/feature_get_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:layout_marginTop="20dp"
+            android:onClick="onGetUser"
+            android:gravity="left|center_vertical"
+            android:text="@string/getUserApi" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/text"
+        android:textSize="22sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/text1"
+        android:textSize="22sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/text2"
+        android:textSize="22sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/text3"
+        android:textSize="22sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/text4"
+        android:textSize="22sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <ImageView
+        android:id="@+id/image1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 </LinearLayout>

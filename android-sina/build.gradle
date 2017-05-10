@@ -35,6 +35,13 @@ dependencies {
     })
     compile "com.android.support:appcompat-v7:${android_support_library_version}"
     testCompile 'junit:junit:4.12'
-    compile(name: 'openDefault-1.0.0-openDefaultRelease', ext: 'aar')
+    compile(name: 'openDefault-2.0.3', ext: 'aar')
 
+    compile "io.reactivex:rxjava:${rxjava_library_version}"
+    compile "com.squareup.retrofit2:retrofit:${rxjava2_library_version}"
+    compile "com.squareup.retrofit2:retrofit-converters:${rxjava2_library_version}"
+    compile "com.squareup.retrofit2:converter-gson:${rxjava2_library_version}"
+    compile "com.squareup.retrofit2:adapter-rxjava:${rxjava2_library_version}"
+    compile "io.reactivex:rxandroid:${rxandroid_library_version}"
+    compile "com.github.bumptech.glide:glide:${glide_library_version}"
 }
