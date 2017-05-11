@@ -18,18 +18,22 @@ import com.sina.weibo.sdk.auth.sso.SsoHandler;
 import com.sina.weibo.sdk.exception.WeiboException;
 import com.sina.weibo.sdk.net.RequestListener;
 import com.yang.sinademo.Constants;
-import com.yang.sinademo.MainTabActivity;
+import com.yang.sinademo.share.MainTabActivity;
 import com.yang.sinademo.R;
 import com.yang.sinademo.UserApi;
 
 import java.util.HashMap;
 
 import okhttp3.OkHttpClient;
+import okhttp3.ResponseBody;
+import retrofit2.HttpException;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 public class SinaLoginImpl implements LoginInterface<SinaUser>{
@@ -92,7 +96,40 @@ public class SinaLoginImpl implements LoginInterface<SinaUser>{
 
     @Override
     public void onFailure(Throwable t) {
-        //TODO implement the method
+        //如果是RESTful类型，那么在HttpException可以直接获取到相应的错误内容
+        //以及错误code进行相应的区分
+        //如果不是RESTful，那么可以参考的方式是，将其利用Adapter进行转换
+        //关于RESTfull，就是在利用相应的返回码进行相应的判断，
+        //如果是200，那么走正常的业务逻辑，
+        //如果是其他大于400的值，会进行相应的判断，之后调用Response.error()方法，
+        //传递出相应的错误内容
+        if (t instanceof HttpException) {
+            HttpException exception = (HttpException) t;
+            final retrofit2.Response<?> response = exception.response();
+            Observable.just(exception)
+                    .map(new Func1<HttpException, SinaError>() {
+                        @Override
+                        public SinaError call(HttpException e) {
+                            ResponseBody responseBody = response.errorBody();
+                            String s = null;
+                            try {
+                                s = new String(responseBody.bytes());
+                            } catch (Exception ex){
+                            }
+
+                            return new Gson().fromJson(s,SinaError.class);
+                        }
+                    })
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Action1<SinaError>() {
+                        @Override
+                        public void call(SinaError error) {
+                            if (error != null)
+                                Toast.makeText(activity,error.toString(),Toast.LENGTH_LONG).show();
+                        }
+                    });
+        }
     }
 
     private class SelfWbAuthListener implements WbAuthListener {
@@ -152,6 +189,4 @@ public class SinaLoginImpl implements LoginInterface<SinaUser>{
                     }
                 });
     }
-
-
 }

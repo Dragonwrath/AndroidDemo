@@ -16,7 +16,6 @@ import com.sina.weibo.sdk.auth.Oauth2AccessToken;
 import com.yang.sinademo.login.SinaError;
 import com.yang.sinademo.login.SinaUser;
 
-import java.io.InputStream;
 import java.util.HashMap;
 
 
@@ -115,15 +114,11 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public SinaError call(HttpException e) {
                                 ResponseBody responseBody = response.errorBody();
-
-                                InputStream stream = responseBody.byteStream();
-
                                 String s = null;
                                 try {
                                     byte[] bytes;
-
-                                         bytes = responseBody.bytes();
-                                         s = new String(bytes);
+                                     bytes = responseBody.bytes();
+                                     s = new String(bytes);
 
                                 } catch (Exception ex){
                                 }
@@ -137,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
                         .subscribe(new Action1<SinaError>() {
                             @Override
                             public void call(SinaError error) {
+                                if (error != null)
                                 Toast.makeText(MainActivity.this,error.toString(),Toast.LENGTH_LONG).show();
                             }
                         });

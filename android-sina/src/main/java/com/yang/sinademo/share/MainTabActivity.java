@@ -1,4 +1,4 @@
-package com.yang.sinademo;
+package com.yang.sinademo.share;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
@@ -21,6 +21,7 @@ import com.sina.weibo.sdk.api.WebpageObject;
 import com.sina.weibo.sdk.api.WeiboMultiMessage;
 import com.sina.weibo.sdk.share.WbShareHandler;
 import com.sina.weibo.sdk.utils.Utility;
+import com.yang.sinademo.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
