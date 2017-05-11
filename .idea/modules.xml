@@ -22,7 +22,7 @@
       <module fileurl="file://$PROJECT_DIR$/android-receiver/android-receiver.iml" filepath="$PROJECT_DIR$/android-receiver/android-receiver.iml" />
       <module fileurl="file://$PROJECT_DIR$/android-retrofit/android-retrofit.iml" filepath="$PROJECT_DIR$/android-retrofit/android-retrofit.iml" />
       <module fileurl="file://$PROJECT_DIR$/android-rxjava/android-rxjava.iml" filepath="$PROJECT_DIR$/android-rxjava/android-rxjava.iml" />
-      <module fileurl="file://$PROJECT_DIR$/android-share_sdk_sms/android-share_sdk_sms.iml" filepath="$PROJECT_DIR$/android-share_sdk_sms/android-share_sdk_sms.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android-share_sdk/android-share_sdk.iml" filepath="$PROJECT_DIR$/android-share_sdk/android-share_sdk.iml" />
       <module fileurl="file://$PROJECT_DIR$/android-sina/android-sina.iml" filepath="$PROJECT_DIR$/android-sina/android-sina.iml" />
       <module fileurl="file://$PROJECT_DIR$/android-tftp/android-tftp.iml" filepath="$PROJECT_DIR$/android-tftp/android-tftp.iml" />
       <module fileurl="file://$PROJECT_DIR$/android-v4-widget/android-v4-widget.iml" filepath="$PROJECT_DIR$/android-v4-widget/android-v4-widget.iml" />
