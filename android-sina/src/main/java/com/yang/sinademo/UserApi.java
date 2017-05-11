@@ -1,7 +1,7 @@
 package com.yang.sinademo;
 
 
-import com.yang.sinademo.sina.SinaUser;
+import com.yang.sinademo.login.SinaUser;
 
 import java.util.HashMap;
 

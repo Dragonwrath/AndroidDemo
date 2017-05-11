@@ -1,4 +1,4 @@
-package com.yang.sinademo.sina;
+package com.yang.sinademo.login;
 
 import com.google.gson.annotations.SerializedName;
 

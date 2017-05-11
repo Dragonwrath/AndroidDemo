@@ -13,8 +13,8 @@ import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.sina.weibo.sdk.auth.AccessTokenKeeper;
 import com.sina.weibo.sdk.auth.Oauth2AccessToken;
-import com.yang.sinademo.sina.SinaError;
-import com.yang.sinademo.sina.SinaUser;
+import com.yang.sinademo.login.SinaError;
+import com.yang.sinademo.login.SinaUser;
 
 import java.io.InputStream;
 import java.util.HashMap;
