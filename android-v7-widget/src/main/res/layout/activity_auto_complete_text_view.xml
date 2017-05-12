@@ -11,5 +11,11 @@
     <android.support.v7.widget.AppCompatAutoCompleteTextView
         android:id="@+id/auto_complete_text_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:completionHint="最近搜索记录"
+        android:completionThreshold="1"
+        android:digits="abdcd"
+        android:imeOptions="actionDone"
+        android:drawableRight="@mipmap/ic_launcher"
+        />
 </LinearLayout>
