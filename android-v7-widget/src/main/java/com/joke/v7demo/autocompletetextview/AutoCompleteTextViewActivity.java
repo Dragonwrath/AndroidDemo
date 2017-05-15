@@ -38,17 +38,9 @@ public class AutoCompleteTextViewActivity extends AppCompatActivity implements V
         mTextView.setOnTouchListener(this);
         mTextView.setOnEditorActionListener(this);
         mTextView.setImeOptions(EditorInfo.IME_ACTION_DONE);
-        try {
-            Class<TextView> clazz = TextView.class;
-            Method method = clazz.getMethod("getEditorForTesting");
-            method.setAccessible(true);
-            EditorInfo editorInfo = (EditorInfo) method.invoke(mTextView, new Object[]{});
-            mTextView.onCreateInputConnection(editorInfo);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-//        String digits = "abcdef";
-//        mTextView.setKeyListener(DigitsKeyListener.getInstance(digits));
+
+        String digits = "abcdef";
+        mTextView.setKeyListener(DigitsKeyListener.getInstance(digits));
     }
 
     @Override
