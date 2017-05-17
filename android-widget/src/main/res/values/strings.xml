@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">WidgetDemo</string>
+    <string name="app_name">Widget</string>
+    <string name="exit">Exit</string>
+    <string name="reload_content">Reload Content</string>
+    <string name="next">Next</string>
+    <string name="last">Last</string>
 </resources>

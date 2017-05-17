@@ -1,13 +1,19 @@
 package com.joke.media_camera;
 
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
+import android.app.job.JobService;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -17,6 +23,7 @@ import com.joke.media_camera.camera.haoyayi.CameraActivity;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView mText;
     private TextView mText2;
     private ImageView mImage;
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +57,20 @@ public class MainActivity extends AppCompatActivity {
 //        intent.setType("image/*");
 //        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
 //        startActivityForResult(intent,1);
-
-
+        if (Build.VERSION.SDK_INT >= 21) {
+            JobScheduler scheduler = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
+            List<JobInfo> jobs = scheduler.getAllPendingJobs();
+            for (JobInfo job : jobs) {
+                StringBuilder builder = new StringBuilder();
+                builder.append(job.getBackoffPolicy()).append("\n")
+                        .append(job.getExtras()).append("\n")
+                        .append(job.getId()).append("\n")
+                        .append(job.getService()).append("\n")
+                        .append(job.getService()).append("\n")
+                ;
+                Log.e(TAG, "onCreate: "+builder.toString());
+            }
+        }
     }
 
     @Override

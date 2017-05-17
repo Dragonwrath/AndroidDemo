@@ -5,7 +5,7 @@ android {
     buildToolsVersion "25.0.2"
 
     defaultConfig {
-        applicationId "com.joke.cordinate"
+        applicationId "com.joke.coordinate"
         minSdkVersion 14
         targetSdkVersion 25
         versionCode 1
@@ -32,4 +32,6 @@ dependencies {
     compile "com.android.support:recyclerview-v7:${android_support_library_version}"
     compile "com.android.support:support-v4:${android_support_library_version}"
     compile "com.android.support:cardview-v7:${android_support_library_version}"
+    compile "com.android.support:design:${android_support_library_version}"
+
 }

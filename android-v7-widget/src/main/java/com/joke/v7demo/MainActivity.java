@@ -13,5 +13,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         SimpleArrayMap map = new SimpleArrayMap();
         SeekBar mSeek;
+        test();
+    }
+
+    private void test() {
+        System.out.println("4"+3+1);
+        System.out.println(4+3 + "1");
     }
 }

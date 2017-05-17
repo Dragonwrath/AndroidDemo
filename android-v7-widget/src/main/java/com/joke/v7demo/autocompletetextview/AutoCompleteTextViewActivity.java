@@ -11,6 +11,7 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,15 +33,16 @@ public class AutoCompleteTextViewActivity extends AppCompatActivity implements V
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auto_complete_text_view);
         mTextView = (AppCompatAutoCompleteTextView) findViewById(R.id.auto_complete_text_view);
-        AutoCompleteAdapter<String> adapter = new AutoCompleteAdapter<>(this);
+//        AutoCompleteAdapter<String> adapter = new AutoCompleteAdapter<>(this);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, COUNTRIES);
 
         mTextView.setAdapter(adapter);
         mTextView.setOnTouchListener(this);
         mTextView.setOnEditorActionListener(this);
         mTextView.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
-        String digits = "abcdef";
-        mTextView.setKeyListener(DigitsKeyListener.getInstance(digits));
+//        String digits = "abcdef";
+//        mTextView.setKeyListener(DigitsKeyListener.getInstance(digits));
     }
 
     @Override

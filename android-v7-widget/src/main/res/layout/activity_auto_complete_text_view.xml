@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:completionHint="最近搜索记录"
         android:completionThreshold="1"
-        android:digits="abdcd"
+        android:maxLines="1"
         android:imeOptions="actionDone"
         android:drawableRight="@mipmap/ic_launcher"
         />

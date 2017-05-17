@@ -13,9 +13,15 @@
         <activity android:name=".ratingStarDemo.RatingStarDemoActivity">
         </activity>
         <activity android:name=".autocompletetextview.AutoCompleteTextViewActivity">
+
         </activity>
-        <activity android:name=".actionmenuview.ActionMenuViewActivity"
+        <activity
+            android:name=".actionmenuview.ActionMenuViewActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity android:name=".appcompatcheckedtextView.AppCompatCheckedTextViewActivity">
+        </activity>
+        <activity android:name=".multiautocompletetextview.MultiAutoCompleteTextViewActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>

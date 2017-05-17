@@ -1,13 +1,15 @@
-package com.joke.widget.android.widget.image;
+package com.joke.widget.linearlayout;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class ImageActivity extends AppCompatActivity {
+import com.joke.widget.R;
+
+public class LinearLayoutActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_image);
+        setContentView(R.layout.activity_linear_layout);
     }
 }
