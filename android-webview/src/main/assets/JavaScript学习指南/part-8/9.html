@@ -1,0 +1,61 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+        在JS中可能出现一些将相应的内容泄漏的风险，不过不必担心。
+        因为为了避免这些问题的出现，JS将其操作限制在一个沙箱中，沙箱是一个受限的环境，
+        使得脚本无法访问浏览器所在的计算机中的机缘。
+        另外浏览器所实现的安全策略要远远多于JS语言实现的机制。它还定义了一个针对浏览器的
+        安全策略，用来判断脚本是否能够执行。
+
+    */
+
+
+    /*
+    表单提交之后的拦截方式
+    1、使用内嵌的事件句柄捕获submit事件
+    2、使用传统的事件句柄捕获该事件
+    3、使用更现代的addEventListener/attachEvent方法捕获该事件。
+    */
+
+    /*
+    为表单添加事件：不同方法
+    主要事件是submit,其事件句柄是onsubmit
+    document.getElementById("someform").onsubmit = formHandler;
+    通过内嵌方法为表单添加一个事件句柄，主要需要加上一个return语句
+    <form name ="someForm" onsubmit="return formHandler();">
+
+    但是更好的方法应该是捕获相应的事件
+    */
+
+    //创建一个可复用的事件处理函数
+    function catchEvent(eventObj,event,eventHandler) {
+        if(eventObj.addEventListener) {
+            eventObj.addEventListener(event,eventHandler,false);
+        } else if(eventObj.attachEvent) {
+            event = "on" + event;
+            eventObj.attachEvent(event,eventHandler);
+        }
+    }
+
+
+    //创建一个可服用的函数，取消相应的事件
+    function cancelEvent(event) {
+        if(event.preventDefault) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            event.returnValue = false;
+            event.cancelBubble = true;
+        }
+    }
+
+
+	</script>
+</head>
+<body onload="load()">
+<p>Imagine a form with five fields</p>
+</body>
+</html>

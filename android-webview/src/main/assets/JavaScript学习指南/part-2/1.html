@@ -1,0 +1,47 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+    转义字符
+       \n  换行符
+       \"  表示引号
+       \\ 表示反斜杠
+       \u7231 表示中文简体汉字
+    */
+    /*
+        字符串编码
+        encodeURI和encodeURIComponent方法的用途就是对字符串进行转义，
+        也就是说对字符串进行编码，将其从ASCII码或者非ASCII码字符转换成
+        URIencoding的字符
+        对于下列字符进行编码
+       ; , / ? : @ & = + $
+       对于以下的字符不会进行编码
+       - _ · ! ~ * ' ( )
+       对于页面片段符号#也不会进行编码
+        encodeURIComponent 方法会对所有字符（除了列举的字符）进行编码，
+        而相应的解码函数为decodeURI
+        其中encodeURIComponent对应的解码方法为decodeURIComponent
+        encodeURI对应的解码方法为decodeURI
+    */
+
+    function encodeStrings() {
+        var sOne = encodeURIComponent("http://burningbird.net/index.php?pagename=$1&page=$2");
+        var sTwo = encodeURI("http://somapplication.com/?castname=zE&URL=");
+        document.writeln(sOne);
+        document.writeln(sTwo);
+
+        var sOneDe = decodeURIComponent(sOne);
+        var sTwoDe = decodeURI(sTwo);
+                document.writeln(sOneDe);
+                document.writeln(sTwoDe);
+
+    }
+	</script>
+</head>
+<body onload="encodeStrings()">
+<p>Imagine a form with five fields</p>
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+       Event对象
+       传统事件处理也被称为DOM Level 0事件处理，因为它基于浏览器中对DOM的早期实现。
+       也就是Level 0，分为Netscape和IE两大阵营
+       Event对象是和所有事件相关的。它有一些用来提供事件相关信息的属性，如Web页面中
+       鼠标点击的位置。
+       IE将Event视为window对象的属性，当处理事件时，通过程序访问window对象，
+       其所包含的数据也会相应的进行填充
+       而在其他的浏览其中，这个程序将会出错。因为它应该作为函数的一部分传入
+
+    */
+
+
+    /*
+        为了做到相应的兼容，我们应该首先判断是否有相应的event事件
+        这样，我们就可以正确的处理了。
+    */
+
+    function mouseDown(event) {
+        var theEvent = event ? event:window.event;
+        var locationStr= "X = "+theEvent.screenX + " Y = " + theEvent.screenY;
+        alert(locationStr);
+		return false;
+    }
+    document.onmousedown = mouseDown ;
+
+
+    /*
+    Event提供的属性中，以下是跨浏览器兼容的
+        altKey	返回当事件被触发时，"ALT" 是否被按下。
+	    clientX	返回当事件被触发时，鼠标指针的水平坐标。
+        clientY	返回当事件被触发时，鼠标指针的垂直坐标。
+        ctrlKey	返回当事件被触发时，"CTRL" 键是否被按下。
+        keyCode	对于 keypress 事件，该属性声明了被敲击的键生成的 Unicode 字符码。对于 keydown 和 keyup 事件，它指定了被敲击的键的虚拟键盘码。虚拟键盘码可能和使用的键盘的布局相关。
+        screenX	返回当某个事件被触发时，鼠标指针的水平坐标。
+        screenY	返回当某个事件被触发时，鼠标指针的垂直坐标。
+        shiftKey	返回当事件被触发时，"SHIFT" 键是否被按下。
+        type	返回当前 Event 对象表示的事件的名称。
+        而在跨浏览器兼容上
+        需要使用获取鼠标移动到的对象
+        var element = theEvent.fromElement ? theEvent.fromElement :
+        theEvent.relatedTarget;
+        要解决浏览器差异中的 用来表示接收到事件的对象的target属性
+        var theSrc = theEvent.target ? theEvent.target : theEvent.srcElement;
+    */
+
+
+	</script>
+</head>
+<body  >
+</body>
+</html>

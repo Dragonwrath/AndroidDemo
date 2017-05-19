@@ -1,0 +1,53 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+      函数字面量
+     也被称为函数表达式，因为创建的函数将称为表达式的一部分，而不是一种特有类型的语句。
+     例如
+     var func = function(x,y) {
+        return x*y;
+     }
+     alert(func(3,3));
+    */
+
+
+    /*
+
+
+    */
+
+    function funcObject(x,y,z) {
+        alert(z(x,y));
+    }
+
+    function testFunc(){
+        var num = funcObject(3,4,function(x,y) { return x * y});
+        document.open();
+        document.writeln(num);
+        document.close();
+    }
+    /*
+    例如分别输入
+    return x+y
+    1
+    2
+    那么将返回12
+
+    因为表示的是字符串的连接操作
+
+    如果需要作为int值，那么需要使用
+    return parseInt(x) + parseInt(y);
+    1
+    2
+    即可
+    动态函数的使用需要特别注意
+    */
+	</script>
+</head>
+<body onload="testFunc()">
+<p>Imagine a form with five fields</p>
+</body>
+</html>

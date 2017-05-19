@@ -1,0 +1,72 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+   选择列表框，为用户提供了一个从列表中选择一项或者多项的方法，要定义一个select元素，可以使用如下语法
+   <select name = "theSelection" multiple = "multiple">
+   <option value = "Opt1">Option 1</option>
+   <option value = "Opt2">Option 2</option>
+   <option value = "Optn">Option n</option>
+   </select>
+
+   select 元素提供一下属性
+   disabled 钙元素是否被禁用
+   form 其包含的表单
+   length 选项数组中包含的选项数
+   option 选项数组
+   selectedIndex 对于单选框元素，那么它就是当前选中的项目编号；
+                对于多选框元素，它的值就是选中的第一个值
+   type 元素类型
+    */
+
+
+    /*
+
+    */
+
+    //创建一个可复用的事件处理函数
+    function catchEvent(eventObj,event,eventHandler) {
+        if(eventObj.addEventListener) {
+            eventObj.addEventListener(event,eventHandler,false);
+        } else if(eventObj.attachEvent) {
+            event = "on" + event;
+            eventObj.attachEvent(event,eventHandler);
+        }
+    }
+
+    catchEvent(window,"load",setupEvents);
+
+    function setupEvents(event) {
+        catchEvent(document.getElementById("someForm"),"submit",checkForm);
+    }
+
+    function checkForm(event) {
+        var opts = document.getElementById("someForm").selectOpts.options;
+
+        for(var i = 0 ; i < opts.length; i++) {
+            if(opts[i].selected) {
+                alert(opts[i].text + "  " +opts[i].value );
+            }
+        }
+
+        //没有任何服务器端处理，取消submit事件
+        return false;
+    }
+
+	</script>
+</head>
+<body >
+<form id="someForm" action="">
+    <p>
+        <select id="selectOpts" multiple="multiple" >
+            <option value = "Opt1">Option 1</option>
+            <option value = "Opt2">Option 2</option>
+            <option value = "Opt3">Option 3</option>
+        </select>
+        <input type="submit" value="Submit">
+    </p>
+</form>
+</body>
+</html>

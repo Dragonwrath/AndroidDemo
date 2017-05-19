@@ -1,0 +1,103 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+        单选按钮radio button
+
+        <form id = "someForm" action="">
+            <p>
+                <input type="radio" value = "Opt 1" name = "radiogroup"/>Option 1 <br/>
+                <input type="radio" value = "Opt 2" name = "radiogroup"/>Option 2 <br/>
+            </p>
+        </form>
+        复选框 checkbox
+
+        <form id = "someForm" action="">
+            <p>
+                Option 1: <input type="checkbox" value = "Opt 1" name = "checkbox1"/><br/>
+                Option 2: <input type="checkbox" value = "Opt 2" name = "checkbox2"/><br/>
+            </p>
+        </form>
+
+
+    */
+
+
+    /*
+        动态添加checkbox
+        var newCheckBox = document.createElement("input");
+        newCheckBox.type = "checkbox";
+        newCheckBox.name = "color1";
+        newCheckBox.checked = true;
+        someForm.appendChild(newCheckBox);
+    */
+
+    //创建一个可复用的事件处理函数
+    function catchEvent(eventObj,event,eventHandler) {
+        if(eventObj.addEventListener) {
+            eventObj.addEventListener(event,eventHandler,false);
+        } else if(eventObj.attachEvent) {
+            event = "on" + event;
+            eventObj.attachEvent(event,eventHandler);
+        }
+    }
+
+
+
+    //创建一个可服用的函数，取消相应的事件
+    function cancelEvent(event) {
+        if(event.preventDefault) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            event.returnValue = false;
+            event.cancelBubble = true;
+        }
+    }
+
+    catchEvent(window,"load",setupEvents);
+
+    function setupEvents(event) {
+        catchEvent(document.getElementById("someForm"),"submit",checkColors);
+    }
+
+    function checkColors(event) {
+        var theEvent = event ? event : window.event;
+
+        var colorOpts  = document.getElementById("someForm").getElementByTagName("input");
+        var isChecked = false;
+        for(var i = 0 ; i < colorOpts.length; i++) {
+            if((colorOpts[i].type == "checkbox") &&
+                (colorOpts[i].checked)){
+               isChecked = true;
+               break;
+            }
+        }
+
+        //没有一个checkbox被选中
+        if(!isChecked) {
+            alert("You must check one of the four color checkboxes")
+            cancelEvent(theEvent);
+        }
+    }
+
+	</script>
+</head>
+<body >
+<form id = "someForm" action="">
+    <p>
+        <input type="checkbox" value = "red" name = "color1"/>:red<br/>
+        <input type="checkbox" value = "blue" name = "color2"/>:blue<br/>
+        <input type="checkbox" value = "green" name = "color3"/>:green<br/>
+        <input type="checkbox" value = "yellow" name = "color4"/>:yellow<br/>
+
+
+        Option 2: <input type="checkbox" value = "Opt 5" name = "checkbox2"/>:black<br/>
+
+        <input type="submit" value="Submit"/>
+    </p>
+</form>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*type 类型
+    text/ecmascript 以ECMAScript方式来解释脚本。
+    text/jscript 以JavaScript方式解释
+    text/vbscript  以下两种都是微软的VBScript方式处理
+    text/vbs
+    以上的内容都是基于MIME编码，MIME是一种内容编码的方式，基于MIME编码，
+    浏览器可以处理这种类型，或者跳过这段代码，从而确保只有处理该脚本的应用
+    才能访问脚本
+    */
+    function hello() {
+        var msg = 'hello world';
+        document.open()
+		document.write(msg);
+		document.close();
+    }
+	</script>
+</head>
+<body>
+
+<p>Imagine a form with five fields</p>
+</body>
+<body onload="hello()">
+</body>
+
+</html>

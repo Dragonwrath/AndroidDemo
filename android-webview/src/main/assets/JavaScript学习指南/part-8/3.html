@@ -1,0 +1,72 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+       动态修改选择列表框
+       新建一个option元素
+       opts[opts.length] = new Option("Option Four","Opt 4");
+       删除某个选项
+       opts[2] = null;
+       删除所有选项
+       opts.length = 0;
+    */
+
+    //创建一个可复用的事件处理函数
+    function catchEvent(eventObj,event,eventHandler) {
+        if(eventObj.addEventListener) {
+            eventObj.addEventListener(event,eventHandler,false);
+        } else if(eventObj.attachEvent) {
+            event = "on" + event;
+            eventObj.attachEvent(event,eventHandler);
+        }
+    }
+
+
+
+    //创建一个可服用的函数，取消相应的事件
+    function cancelEvent(event) {
+        if(event.preventDefault) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            event.returnValue = false;
+            event.cancelBubble = true;
+        }
+    }
+
+    catchEvent(window,"load",setupEvents);
+
+    function setupEvents(event) {
+        catchEvent(document.getElementById("someForm"),"submit",checkForm);
+    }
+
+    function checkForm(event) {
+        var theEvent = event ? event : window.event;
+
+        var opts = document.getElementById("someForm").selectOpts.options;
+
+        for(var i = 0 ; i < opts.length; i++) {
+            if(opts[i].selected) {
+                opts[i] = null;
+            }
+        }
+        cancelEvent(theEvent);
+    }
+
+	</script>
+</head>
+<body >
+<form id="someForm" action="">
+    <p>
+        <select id="selectOpts" multiple="multiple" >
+            <option value = "Opt1">Option 1</option>
+            <option value = "Opt2">Option 2</option>
+            <option value = "Opt3">Option 3</option>
+        </select>
+        <input type="submit" value="Submit">
+    </p>
+</form>
+</body>
+</html>

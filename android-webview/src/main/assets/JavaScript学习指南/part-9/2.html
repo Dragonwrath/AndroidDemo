@@ -1,0 +1,108 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+    浏览器的window对象封装了整个浏览器环境，包括window的“chrome”(浏览器的一部分，用来封装document)
+    实际的Web页面、以及页面中的事件。
+    window是一个全局对象，它始终存在，即使是隐式的（而非显式的）。
+    window对象的方法和属性可以分为4类：
+    1、创建新窗口、维护现有窗口的行为
+    2、在窗口中创建带分区的文档（帧和iframes）
+    3、定时器的创建和控制
+    4、用来控制浏览器窗体内特定元素的属性，如document、navigator、screen等
+    */
+
+
+    /*
+       3个默认弹出对话框的方法
+       alert 只显示存放的消息，不返回任何值
+       confirm 创建一个都有一个问题、两个按钮（Cancel和OK）的对话框，
+       如果用户点击了OK按钮，返回true，如果点击了Cancel按钮返回false
+       prompt方法弹出一个带文本框的窗口，同时提供Cancel和Ok按钮
+       var response = prompt("What's your name ?","Wouldn't you like to know ....");
+       第二个参数如果不指定字符串，最好传入一个空字符串，否则。可能出现某些浏览器为undefined的情况
+    */
+
+    /*
+       创建自定义窗口可以使用window对象的open方法
+       该方法有几个参数，他们都是可选的
+       参数1 是要打开的URL，
+       参数2 位窗口指定的名称，通过它可以实现父窗口和子窗口之间的通信，
+            如果打开了多个窗口，通过它还能够完成兄弟窗口之间的通信。
+       参数3 是一组window对象选项，他们将整合在一个字符串中，每个选项通过逗号分开，用来控制新窗口的额外观和行为
+
+       例如我们看下面的例子
+       window.open("http://www.baidu.com","test","width = 600, height = 400, toolbar = no, location = no");
+       只有在你的脚本拥有UniversalBrowserWrite权限的时候才能够修改所有的默认值，这需要脚本签名支持。
+       所以最好避免这些选项。
+    */
+
+    //创建一个可复用的事件处理函数
+    function catchEvent(eventObj,event,eventHandler) {
+        if(eventObj.addEventListener) {
+            eventObj.addEventListener(event,eventHandler,false);
+        } else if(eventObj.attachEvent) {
+            event = "on" + event;
+            eventObj.attachEvent(event,eventHandler);
+        }
+    }
+
+
+    //创建一个可复用的函数，取消相应的事件
+    function cancelEvent(event) {
+        if(event.preventDefault) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            event.returnValue = false;
+            event.cancelBubble = true;
+        }
+    }
+
+    //TEST -1
+    //    catchEvent(window,"load", openNewLink);
+
+    //TEST -2
+    catchEvent(window,"load", setupEvents);
+
+    function setupEvents(event) {
+        document.forms[0].elements[0].focus();
+        var eventObject = document.getElementById("panicbutton");
+        catchEvent(eventObject,"click",openHelp);
+    }
+
+    function openNewLink() {
+        var optionString = prompt("Enter your option string: ","");
+        optionString = optionString ? optionString: "";
+        window.open("http://www.baidu.com","test",optionString);
+    }
+
+    function openHelp(x) {
+        var optionString = "width = 200, height = 150, menubar = no, toolbar = no, scrollbars = no ,location = no,resizeable = no";
+        var helpWindow = window.open("help.html","test",optionString);
+        helpWindow.focus();
+        helpWindow.moveTo(x.screenX,x.screenY);
+        return false;
+    }
+	</script>
+</head>
+<body >
+<form id = "currentForm" action="">
+    <p>
+        Your name:<input type="text" size="50"/>
+
+    </p>
+
+</form>
+
+<div id="panicbutton"  style="width : 200px; height : 150px;background-color :#f00;
+    padding:5px; margin-left:50px">
+<p>
+    Click for Help
+</p>
+
+</div>
+</body>
+</html>

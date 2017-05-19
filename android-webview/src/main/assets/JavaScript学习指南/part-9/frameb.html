@@ -1,0 +1,46 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>Frame B</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+
+    /**
+		window.onload = function() {
+	        var theFrame = document.getElementById("thelink");
+	        theFrame.onclick= function () {
+                parent.framea.location.replace("frameb.html");
+	        }
+		}
+
+	*/
+
+    //创建一个可复用的事件处理函数
+    function catchEvent(eventObj,event,eventHandler) {
+        if(eventObj.addEventListener) {
+            eventObj.addEventListener(event,eventHandler,false);
+        } else if(eventObj.attachEvent) {
+            event = "on" + event;
+            eventObj.attachEvent(event,eventHandler);
+        }
+    }
+
+    function replaceMethod() {
+        if (self != top) {
+            if(top.location.replace) {
+                top.location.replace(self.location.href);
+            } else {
+                top.location.href = self.document.href;
+            }
+        }
+    }
+	
+	catchEvent(window,"load",replaceMethod)
+
+	</script>
+</head>
+
+<body>
+<h1>Frame B</h1>
+<p><a href="" id="thelink">Steal this page</a></p>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*正则表达式
+        var pattern = new RegExp('s+');
+        var pattern = /s+/;
+        以上的两种方式是等价的
+
+        如果定义好了相应的内容可以使用test方法
+        例如
+        pattern.test(str) 返回boolean类型的值
+
+        需要注意的是以上两种方式是进行大小写区分的，如果不区分可以使用如下的方式
+        通过增加标志位的方法，来进行限定，例如
+        var pattern = /JavaScript rules/i;
+        i选项是正则表达式匹配的标识符，用来强制匹配过程，忽略大消息
+        g选项标识全局匹配，
+        m选项标识多行匹配，^标识一行的开始 $标识一行的结束
+
+        还可以通过以下的方式增加相应的匹配选项
+        var pattern = new RegExp('s+','g');
+        或者同时使用
+        var pattern = new RegExp('JS*','ig');
+
+
+    */
+
+    /*
+       正则表达式的应用
+       在正则表达式中
+       \s表示特殊字符(空格、制表符、换行符等)
+       \+表示是一般的加号，而不是表示特殊字符
+        星号* 表示出现零次或者多次
+        加号+ 表示字符出现一次或者多次
+        问号? 表示字符出现零次或者一次
+        点号. 表示字符只出现一次
+        贪婪匹配(.*) 前者点号可以表示任何字符 /".*"/
+        延迟匹配(.*?)
+
+        \D 表示查找任何非数字符号
+        \d 表示只匹配数字
+        [^0-9]表述匹配数字以外的任何字符
+        [0-9] 表述只匹配数字
+
+    */
+
+    function hello() {
+        var msg = 'hello world';
+        document.open()
+		document.write(msg);
+		document.close();
+    }
+	</script>
+</head>
+<body>
+
+<p>Imagine a form with five fields</p>
+</body>
+<body onload="hello()">
+</body>
+
+</html>

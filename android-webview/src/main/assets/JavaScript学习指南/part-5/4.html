@@ -1,0 +1,54 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+       嵌套的函数、函数闭包与内存泄漏
+       function outer(args) {
+            function inner(args) {
+               inner statements;
+            }
+       }
+       对于一个嵌套的函数，内部函数将在外部函数内执行，包括对外部函数变量和参数的访问。
+       而外部函数并不应访问内部函数的变量，也不应调用将访问内部函数的应用程序。
+
+    */
+
+    function outerFunc(base) {
+       var punc = "!";
+       //返回内部函数
+       return function(ext) {
+            return base + ext + punc;
+       }
+    }
+
+
+    function load() {
+        var baseString = outerFunc("Hello  ");
+        var newString = baseString("World");
+
+        alert(newString);
+
+        var notherString = baseString("Reader!");
+        alert(notherString);
+
+        var anotherBase = outerFunc("Hiya, Hey ");
+        var lastString = anotherBase("you");
+        alert(lastString);
+
+    }
+
+    /*
+    关于以上方式的一些疑问
+    以上的代码，每当JS应用程序创建一个新的作用范围时，如果需要的话讲创建相关的
+    scoping bubble(作用范围冒泡)，以封装这个作用范围。
+    这将应用在函数中，它将在自己的作用范围内执行。
+
+    */
+	</script>
+</head>
+<body onload="load()">
+<p>Imagine a form with five fields</p>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+    回调函数
+    数组的方法中
+    filter方法用来去报添加到数组中的元素能满足特定的标准
+    forEach将逐一处理每个元素
+    map方法 将对数组中的所有元素执行回调函数，并更具其执行结果创建一个新数组
+
+    区别是
+        forEach主要是针对数组中每个元素执行一个函数
+        map则根据针对数组中每个元素中执行一个函数的结果生成一个新数组
+
+    every方法将针对数组中每个元素执行回调函数，知道其中一个元素返回false为止
+    some方法与every方法相反，直到其中一个元素返回true位置
+    element、index和array每个回调函数都有3个参数
+
+    */
+
+
+    /*
+
+
+    */
+
+    function checkColor(element, index, array) {
+        return (element >= 0 && element < 256);
+    }
+
+    function checkCount(element, index, array) {
+        return (element.length == 3);
+    }
+
+
+    function load() {
+
+        //color 数组
+        var colors = new Array();
+        colors[0] = [0, 262, 255];
+        colors[1] = [255, 255, 255];
+        colors[2] = [255, 0, 0];
+        colors[3] = [0, 255, 0];
+        colors[4] = [0, 0, 255];
+        colors[5] = [-5, 999, 255];
+        colors[6] = [255, 255, 1255];
+
+        var testedColors = new Array();
+
+        for(var i in colors) {
+            testedColors[i] = colors[i].filter(checkColor);
+        }
+
+        //输出第一轮的结果
+        document.writeln("<h3>First check</h3> ");
+
+        for(i in testedColors) {
+            document.writeln(testedColors[i] + "<br />");
+        }
+
+        //过滤出少于3个值的元素
+        var newTested = testedColors.filter(checkCount);
+        document.writeln("<br /><h3>Second</h3> ");
+
+        //输出余下的元素
+        for(i in newTested) {
+            document.writeln(newTested[i] + "<br />");
+        }
+    }
+	</script>
+</head>
+<body onload="load()">
+<p>Imagine a form with five fields</p>
+</body>
+</html>

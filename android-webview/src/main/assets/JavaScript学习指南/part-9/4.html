@@ -1,0 +1,63 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+        location对象的属性都是与页面位置相关的。
+        我们可以使用replace方法来改变frame中所显示的页面
+        也可以使用reload方法，就使得浏览器刷新文档。
+        我们同样的也可以获取到一些页面相关的属性例如
+location.hash   例如http://<some.com>/<somepage>#<somehash>格式的
+                URL中"somehash"是#号后的值
+location.host   URL的主机名（域名）和端口号
+location.hostname 返回 web 主机的域名
+location.pathname 返回当前页面的路径和文件名
+location.port 返回 web 主机的端口 （80 或 443）
+location.protocol 返回所使用的 web 协议（http:// 或 https://）
+location.search   查询字符串，如果存在则是从页面中派生的。
+location.target   如果有的话，表示载入URL的目标元素名称
+    */
+
+
+    //创建一个可复用的事件处理函数
+    function catchEvent(eventObj,event,eventHandler) {
+        if(eventObj.addEventListener) {
+            eventObj.addEventListener(event,eventHandler,false);
+        } else if(eventObj.attachEvent) {
+            event = "on" + event;
+            eventObj.attachEvent(event,eventHandler);
+        }
+    }
+
+
+    //创建一个可服用的函数，取消相应的事件
+    function cancelEvent(event) {
+        if(event.preventDefault) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            event.returnValue = false;
+            event.cancelBubble = true;
+        }
+    }
+
+    //以下方法的作用是在一个帧中，如果不是顶层窗口，
+    //那么就将顶层窗口的位置赋值自己。
+    catchEvent(window,"load",replaceMethod)
+    function replaceMethod() {
+        if (self != top) {
+            if(top.location.replace) {
+                top.location.replace(self.location.href);
+            } else {
+                top.location.href = self.document.href;
+            }
+        }
+    }
+
+	</script>
+</head>
+<body >
+<p>Imagine a form with five fields</p>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+	/*
+    <!---->
+	该HTML注释无法使用，因为在旧版本的浏览器，会直接忽略该脚本，
+	但是新一代的浏览器则会执行该脚本
+	*/
+	/*
+	但是如果需要隐藏还可以通过XHTML的CDATA
+	这样就可以跳过function 中定义的代码
+	由于使用CDATA可能存在兼容性问题，因此最好不要使用CDATA
+	*/
+	<![CDATA[
+		function hello() {
+			document.open();
+			document.write("hello");
+			document.close();
+		}
+	]]>
+	</script>
+</head>
+<body>
+
+<p>Imagine a form with five fields</p>
+</body>
+<body onload="hello()">
+</body>
+<p>Hi</p>
+</html>

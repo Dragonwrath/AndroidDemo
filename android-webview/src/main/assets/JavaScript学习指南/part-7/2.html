@@ -1,0 +1,62 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+    0级事件处理
+
+    此事件句柄的名称是以"on"开头
+
+    也可以通过window对象的onload事件纸牌一个函数
+    window.onload= loadSomething;
+    如果想要禁用事件处理，那么可以将事件句柄的值设置为null
+
+    */
+
+
+    function helloMsg() {
+       alert("hello First");
+    }
+
+
+      function helloTwice() {
+       alert("hello Twice");
+    }
+
+    window.onload = helloTwice;
+
+    /*
+       相应的内容只显示一个aler对话框的原因是在DOM Level 0事件模型中
+        任何对象只允许指定一个事件句柄，因此指定的函数不会附加上去，
+        如果需要指定多个函数，可以考虑
+        <body onload="helloMsg();helloTwice()">
+        或者使用传统模式
+        function helloMsg() {
+             alert("hello First");
+             helloTwice();
+        }
+    内嵌事件可以在所有浏览器中正常使用，但是依然应该被限制。
+    如果你为HTML元素添加一个事件并且需要修改JS的函数名或者行为，那么由于你当时指定事件
+    实在不同页面中将某个函数指定成事件句柄的，因此需要找到每个页面、元素，手动修改这些内容。
+    应当完全避免这个情况
+
+
+    当function doSomething() {
+        //完成某些操作
+        return false;
+        //当从事件句柄函数中返回false，意味要求浏览器停止执行事件行为。
+    }
+    */
+
+
+    /*
+
+
+    */
+	</script>
+</head>
+<body onload="helloMsg()">
+<p>For More Test</p>
+</body>
+</html>

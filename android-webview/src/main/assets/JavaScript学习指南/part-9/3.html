@@ -1,0 +1,52 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+    frame 对象定义了以下属性:parent 、length 和name，对于跨帧通信而言
+    name和parent属性特别重要，
+    其父元素framest(帧集、包括帧的窗口)可以通过每个帧的名字访问所有子帧
+    (也可以通过帧数组，以对象数量作为索引值)每个帧都可以通过通用的关键字
+    parent来访问该帧集。兄弟帧元素之间可以通过parent和对象的name属性来
+    访问。
+    不过我们可以同样的使用window的第二个对象location来替代它
+    */
+
+    /*
+    parent.frameb.location.replace("framea.html");
+
+    我们可以使用location的replace方法来载入自身的内容。这样就可以产生
+    相应的替换的作用
+    */
+
+    //创建一个可复用的事件处理函数
+    function catchEvent(eventObj,event,eventHandler) {
+        if(eventObj.addEventListener) {
+            eventObj.addEventListener(event,eventHandler,false);
+        } else if(eventObj.attachEvent) {
+            event = "on" + event;
+            eventObj.attachEvent(event,eventHandler);
+        }
+    }
+
+
+    //创建一个可服用的函数，取消相应的事件
+    function cancelEvent(event) {
+        if(event.preventDefault) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            event.returnValue = false;
+            event.cancelBubble = true;
+        }
+    }
+
+
+	</script>
+</head>
+    <frameset cols = "50%,*">
+        <frame name="framea" src = "framea.html"/>
+        <frame name="frameb" src = "frameb.html"/>
+    </frameset>
+</html>

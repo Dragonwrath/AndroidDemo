@@ -31,9 +31,11 @@
             <option value="$PROJECT_DIR$/android-share_sdk" />
             <option value="$PROJECT_DIR$/android-sina" />
             <option value="$PROJECT_DIR$/android-tftp" />
+            <option value="$PROJECT_DIR$/android-theme" />
             <option value="$PROJECT_DIR$/android-v4-widget" />
             <option value="$PROJECT_DIR$/android-v7-recyclerview" />
             <option value="$PROJECT_DIR$/android-v7-widget" />
+            <option value="$PROJECT_DIR$/android-webview" />
             <option value="$PROJECT_DIR$/android-wechat" />
             <option value="$PROJECT_DIR$/android-widget" />
             <option value="$PROJECT_DIR$/app" />

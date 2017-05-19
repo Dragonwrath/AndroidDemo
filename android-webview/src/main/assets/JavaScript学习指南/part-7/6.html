@@ -1,0 +1,66 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+        DOM Level 0事件模型，指的是以前的事件模型，
+        DOM Level 2事件模式，指的是新的，基于规范的事件模型
+        主要区别在于
+        1、新事件模型不依赖于特定的事件来处理属性;
+        2、你可以对任何一个对象的任何一种事件注册多个事件句柄函数
+
+        用来替代事件句柄属性的是每个对象提供的3个方法
+        addEventListener
+        removeEventListener
+        dispatchEvent
+
+        object.addEventListener('event',eventFunction,boolean);
+        第一个参数是click或者load之类的事件
+        第二个参数是指定的事件句柄函数
+        第三个参数用来指定事件是cascade-down模式或冒泡模式处理
+                false代表以冒泡模式处理，否则就将把这个事件监听器改成事件捕获模型
+    */
+
+
+    /*
+        以cascade-down模式来处理的时候
+        将执行元素堆栈最外层的元素，然后依次处理里面的元素，直到处理到最里层的元素
+        以冒泡模式来处理，将是从最里层“冒泡”到最外层。
+    */
+
+
+
+    function cascadeDown(event) {
+        alert("Capturing: " + this);
+    }
+
+    function bubbleUp(event) {
+        alert("Bubbling: " + this);
+    }
+
+    window.onload = setup;
+
+    function setup(event) {
+        //事件捕获
+        document.addEventListener('click',cascadeDown,true);
+        document.forms[0].addEventListener('click',cascadeDown,true);
+        document.forms[0].elements[0].addEventListener('click',cascadeDown,true);
+
+        //事件捕获
+        document.addEventListener('click',bubbleUp,false);
+        document.forms[0].addEventListener('click',bubbleUp,false);
+        document.forms[0].elements[0].addEventListener('click',bubbleUp,false);
+    }
+	</script>
+</head>
+<body >
+
+<form style = "background-color: #f00; width:100px; height:100px; padding:10px" action="">
+<p>
+    <input type="submit" value="Submit"/><br/>
+</p>
+
+</form>
+</body>
+</html>

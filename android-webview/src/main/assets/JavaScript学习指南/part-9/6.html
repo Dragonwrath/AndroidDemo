@@ -1,0 +1,97 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+
+    <style type="text/css">
+        #block
+        {
+            width:400px;
+        }
+    </style>
+    <script type="text/javascript">
+    /*
+    location对象的属性有两类定时器
+    一类是一次性的
+    一类是周期性的
+    两种定时器都能取消，一次性定时器只会被调用一次
+    要想创建一个不重复触发的定时器，可以使用setTimeout方法。
+    调用它时至少指定两个参数
+    1、函数文字量或函数名称，该函数将在定时器指定的延迟事件到了的时候开始执行
+    2、以毫秒为单位的延迟事件
+    如果需要向指定的函数传入参数，那么应该在这两个参数后面，并用逗号分隔
+    如果需要清除可以使用clearTimeout方法。
+
+    var tmOut = setTimeout(func,5000,"param1","param2",...,paramn);
+    clearTimeout(tmOut)
+    如果是周期性的使用可以使用setInterval方法
+    var tmOut = setInterval("functionName",5000);
+    clearInterval(tmOut);
+    限制：
+        IE浏览器中setInterval和setTimeout方法是不支持在后面添加函数
+        调用所需参数的。
+    */
+
+
+    /*
+        在XML中只能以id属性作为元素表示，不能使用name属性
+        而XHTML，依然允许使用那么属性作为表示
+    */
+
+
+
+    //创建一个可复用的事件处理函数
+    function catchEvent(eventObj,event,eventHandler) {
+        if(eventObj.addEventListener) {
+            eventObj.addEventListener(event,eventHandler,false);
+        } else if(eventObj.attachEvent) {
+            event = "on" + event;
+            eventObj.attachEvent(event,eventHandler);
+        }
+    }
+
+
+    //创建一个可服用的函数，取消相应的事件
+    function cancelEvent(event) {
+        if(event.preventDefault) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            event.returnValue = false;
+            event.cancelBubble = true;
+        }
+    }
+
+    catchEvent(window,"load",colorChange);
+   
+	
+	function colorChange() {
+        document.getElementById("block").style.backgroundColor="#ffffff";
+        setTimeout("colorFlash(255)",300);
+    }
+
+    function colorFlash(newColor) {
+        var hexVal = newColor.toString(16);
+        //确保长度为2
+        if(hexVal.length < 2){
+            hexVal = "0" + hexVal;
+        }
+
+        var colorString = "#ffff" + hexVal;
+        var blockDiv = document.getElementById("block");
+        blockDiv.style.backgroundColor = colorString;
+
+        if(newColor > 0) {
+            newColor -= 5;
+            setTimeout("colorFlash("+newColor+")",50);
+        }
+
+    }
+	</script>
+</head>
+<body >
+<div id = "block">
+<h1>Hello</h1>
+</div>
+</body>
+</html>

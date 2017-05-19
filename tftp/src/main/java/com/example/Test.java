@@ -3,7 +3,9 @@ package com.example;
 
 import java.nio.charset.Charset;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -50,5 +52,33 @@ public class Test {
         String pattern = "[\ue900-\u9fbb].*";
         System.out.println("pattern = " + Arrays.toString(new String("\ue900".getBytes(),"utf-8").getBytes()));
         System.out.println("pattern = " + (new String("\u9eff".getBytes(),"utf-8")));
+
+        User str  = new User("original");
+        List<Integer> array = new ArrayList<>();
+        for (int i = 0; i < 6; i++) {
+            array.add(i);
+        }
+
+        test(str,array);
+        System.out.println(str);
+        System.out.println("Arrays.toString(array) = " + array.get(2));
+    }
+
+    private static void test(User str,List<Integer> array) {
+        str = new User("override");
+        array.set(2,222222);
+    }
+
+    static class User {
+        String name;
+
+        public User(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String toString() {
+            return name;
+        }
     }
 }

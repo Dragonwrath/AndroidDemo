@@ -1,0 +1,86 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+    文本域需要执行验证，否则会出现“坏数据”
+
+    当执行验证时，我们需要关心的内容有
+    当鼠标移动到文本类型的input域，时，触发focus事件：
+    当鼠标离开时，将触发blur事件。
+    当他们的内容被修改时，将触发change事件
+    需要通过捕获change事件，验证内容
+    或者通过blur事件，来确认填入的香烟的事件的值
+    */
+
+    /*
+    有一点需要特别注意不要使用focus方法，让光标回到这个表单域，
+    因为在Opera之类的浏览器中，将导致一个无法结束的循环。
+    因此底线是不要通过focus方法来强调必填表单域
+    */
+
+    //创建一个可复用的事件处理函数
+    function catchEvent(eventObj,event,eventHandler) {
+        if(eventObj.addEventListener) {
+            eventObj.addEventListener(event,eventHandler,false);
+        } else if(eventObj.attachEvent) {
+            event = "on" + event;
+            eventObj.attachEvent(event,eventHandler);
+        }
+    }
+
+
+    //创建一个可复用的函数，取消相应的事件
+    function cancelEvent(event) {
+        if(event.preventDefault) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            event.returnValue = false;
+            event.cancelBubble = true;
+        }
+    }
+
+
+
+    catchEvent(window,"load",setupEvents);
+
+    function setupEvents(event) {
+        catchEvent(document.getElementById("text2"),"blur",checkedRequired);
+        catchEvent(document.getElementById("text1"),"change",validateField);
+    }
+
+    function checkedRequired(event) {
+        var theEvent = event ? event : window.event;
+        var target = theEvent.target ?  theEvent.target: theEvent.srcElement;
+        var textInput = target.value;
+
+        if(textInput == null || textInput =="") {
+            alert("value is required in field");
+        }
+    }
+
+    function validateField(event) {
+        var theEvent = event ? event : window.event;
+        var target = theEvent.target ?  theEvent.target: theEvent.srcElement;
+
+        var rgEx = /^\d{3}[-]?\d{2}[-]?d[4]$/g;
+
+        var OK = rgEx.exec(target.value);
+        if(!OK) {
+        alert("not an ssn");
+        }
+    }
+	</script>
+</head>
+<body >
+<form id = "someForm" action="">
+<input type="text" name = "text1" id="text1"/><br/>
+<input type="password" name = "text2" id="text2"/><br/>
+<input type="hidden" name = "text3" value="hidden Value"/><br/>
+<textarea  name="text4" cols = "50" rows = "10">The text area</textarea><br/>
+<input type="submit" value="Submit"/>
+</form>
+</body>
+</html>

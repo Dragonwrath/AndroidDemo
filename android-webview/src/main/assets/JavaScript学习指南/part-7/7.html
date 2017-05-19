@@ -1,0 +1,63 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+        在IE中不存在addEventListener与removeEventListener，但是存在相应的方法
+        attachEvent和detachEvent
+        相应的语法是object.attachEvent("eventhandler",function);
+        第一个参数是事件句柄，第二个参数是其函数。
+
+    */
+
+
+    /*
+        跨浏览器兼容的事件处理：
+    */
+
+    function clickMe(event) {
+        var eventTarget = event.target ? event.target: event.srcElement;
+        alert(eventTarget + " " + event.type);
+        var canBeCanceled = event.cancelable ?  event.cancelable : "NA";
+        alert("Can be cancelled? " + canBeCanceled);
+        var bubbleEvent = event.bubbles ? event.bubbles : "NA";
+        alert("Bubbling? " + bubbleEvent);
+        var theTime = event.timeStamp ? event.timeStamp : "NA";
+        alert(theTime);
+    }
+
+    window.onload = setup;
+    window.onunload = cleanup;
+
+
+    function setup() {
+        var evtObject = document.getElementById("clickme");
+
+        //检查对象模型
+        if(evtObject.addEventListener) {
+            document.addEventListener('click',clickMe,false);
+        } else if(evtObject.attachEvent) {
+            document.attachEvent('click',clickMe);
+        } else if(evtObject.onclick) {
+            evtObject.onclick = clickMe;
+        }
+    }
+
+    //清理 用于解决内存问题，在相应的页面离开、刷新的时候释放相应的内存
+    //一般情况在IE的浏览器中出现该问题可能性较高
+    function cleanup(){
+        var evtObject = document.getElementById("clickme");
+         if(evtObject.detachEvent) {
+            document.detachEvent('onclick',clickMe);
+        }
+    }
+	</script>
+</head>
+<body >
+<div id="clickme"
+     style = "background-color: #f00; width:200px; height:200px; padding:20px">
+<p>Click Me</p>
+</div>
+</body>
+</html>

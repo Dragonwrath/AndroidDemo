@@ -1,0 +1,51 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+        this关键字表示的是当前调用的函数或者方法的所有者。
+        对于一个全局函数而言，它表示的是window对象
+        对于一个对象方法而言，它表示的就是该对象实例。
+        对于一个事件句柄而言，它表示的就是接受到该事件的元素。
+
+    */
+
+    /*
+    //使用了this关键字来访问window对象的status属性
+       window.onlaod = setupEvents;
+       function setupEvents() {
+            alert(this.status);
+       }
+    //函数中的this指向的是div元素本身
+    document.getElementById("first").onmousedown = function() {
+        alert(this);
+        alert("first element event");
+    }
+
+    //使用this是访问事件触发后表单值的简单方法。
+    */
+
+
+    window.onload = setObjects;
+
+    function setObjects() {
+        document.getElementById("personData").firstName.onblur = testValue;
+    }
+
+
+    function testValue() {
+        alert("Hi " + this.value);
+    }
+
+	</script>
+</head>
+<body >
+<form id="personData" action="">
+   <p>
+       First name: <input type="text" id = "firstName"/><br/><br/>
+       Second name: <input type="text" id = "secondName"/>
+   </p>
+</form>
+</body>
+</html>

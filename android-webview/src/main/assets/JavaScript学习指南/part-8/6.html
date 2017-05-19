@@ -1,0 +1,70 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+      文本框(text)多行文本框(textarea)密码框(password)
+      <input type="text | hidden | password" name = "fieldName" value = "Some value"/>
+      <textarea  name = "fieldName" rows = "10" cols = "10">Initial text</textarea>
+    */
+
+
+    //创建一个可复用的事件处理函数
+    function catchEvent(eventObj,event,eventHandler) {
+        if(eventObj.addEventListener) {
+            eventObj.addEventListener(event,eventHandler,false);
+        } else if(eventObj.attachEvent) {
+            event = "on" + event;
+            eventObj.attachEvent(event,eventHandler);
+        }
+    }
+
+
+    //创建一个可复用的函数，取消相应的事件
+    function cancelEvent(event) {
+        if(event.preventDefault) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            event.returnValue = false;
+            event.cancelBubble = true;
+        }
+    }
+
+
+
+    catchEvent(window,"load",setupEvents);
+
+    function setupEvents(event) {
+        catchEvent(document.getElementById("someForm"),"submit",validateForm);
+    }
+
+    function validateForm(event) {
+        var theEvent = event ? event : window.event;
+        var strResults = "";
+        var textInputs = document.getElementById("someForm").getElementsByTagName("input");
+
+        for(var i = 0; i< textInputs.length; i++) {
+            if(textInputs[i].type != "submit" ) {
+                strResults +=textInputs[i].value;
+            }
+        }
+
+        document.getElementById("text4").value = strResults;
+        cancelEvent(theEvent);
+    }
+	</script>
+</head>
+<body >
+<form id = "someForm" action="">
+    <p>
+        <input type="text" name = "text1"/><br/>
+        <input type="password" name = "text2"/><br/>
+        <input type="hidden" name = "text3" value="hidden Value"/><br/>
+        <textarea  id = "text4" cols = "50" rows = "10">The text area</textarea>
+        <input type="submit" value="Submit"/>
+    </p>
+</form>
+</body>
+</html>

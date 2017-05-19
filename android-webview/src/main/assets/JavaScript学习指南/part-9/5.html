@@ -1,0 +1,88 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+    和frame不一样iframe是内嵌在页面中，可以指定相应的宽度和高度，如果都设置为0，
+    那么它将被隐藏起来。
+    iframe会把它嵌入到的页面视为自己的父元素，这样他就能够和更高层页面进行通信
+    可以使用document的getElementById方法来访问它，也可以使用target属性载入其内容
+
+    基于远程脚本，客户端页面能够访问服务器端的远程服务，并且可以将这些服务的结果数据
+    返回给客户端，而且无须重载客户端。
+    现在，这一功能被称作Ajax。
+
+    */
+
+
+    /*
+
+    如果要访问与iframe关联的window对象，那么需要引入一个名为contentWindow的新属性。
+    它用来表示iframe的window对象。
+    你可以用contentWindow方法捕获针对iframe的onload事件句柄
+    */
+
+    //创建一个可复用的事件处理函数
+    function catchEvent(eventObj,event,eventHandler) {
+        if(eventObj.addEventListener) {
+            eventObj.addEventListener(event,eventHandler,false);
+        } else if(eventObj.attachEvent) {
+            event = "on" + event;
+            eventObj.attachEvent(event,eventHandler);
+        }
+    }
+
+
+    //创建一个可服用的函数，取消相应的事件
+    function cancelEvent(event) {
+        if(event.preventDefault) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            event.returnValue = false;
+            event.cancelBubble = true;
+        }
+    }
+
+    catchEvent(window,"load",function(){
+        catchEvent(document.forms[0],"click",colorChange)
+    });
+
+    //使用iframe的远程脚本
+    function colorChange() {
+        var colors = document.forms[0].color;
+        var result = document.getElementById('result');
+
+        for(var i = 0; i< colors.length; i++) {
+            if(colors[i].checked) {
+                var myFrame = document.getElementById('myFrame');
+                myFrame.contentWindow.location.href = "service.php?color=" +
+                colors[i].value;
+                myFrame.onload = function(){
+                    result.innerHTML =
+                    myFrame.contentWindow.document.getElementById("val2").innerHTML;
+                }
+            }
+        }
+    }
+	</script>
+</head>
+<body >
+<div>
+    <form action="">
+        <p>
+            <input type="radio" name="color" value="read">RED<br/>
+            <input type="radio" name="color" value="blue">BLUE<br/>
+        </p>
+    </form>
+</div>
+<iframe
+        name = "myFrame"
+        id="myFrame"
+        style="width : 0;height : 0;border : 0"
+        src="service.php"></iframe>
+<div id="result">
+</div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+    浏览器对象模型（BOM）是一组从浏览器上下文中继承而来的对象，这也是绝大多数JS
+    应用程序中函数运行的上下文。优势它也被称为DOM Level 0。
+    BOM是一个层次化的对象集，每个层次上的对象都可以通过他的父对象来访问。
+    可以通过window对象访问BOM中的所有对象，它是最顶层的元素
+    下一层是document，与它同级的对象还有navigator、frames、location、history和screen对象
+    通过document对象可以访问form、anchor、link、cookie和image对象集合；
+    form对象也又拥有作为其子元素的元素集合
+
+
+    */
+
+
+    /*
+        在XML中只能以id属性作为元素表示，不能使用name属性
+        而XHTML，依然允许使用那么属性作为表示
+    */
+
+    /*
+
+    */
+
+    //创建一个可复用的事件处理函数
+    function catchEvent(eventObj,event,eventHandler) {
+        if(eventObj.addEventListener) {
+            eventObj.addEventListener(event,eventHandler,false);
+        } else if(eventObj.attachEvent) {
+            event = "on" + event;
+            eventObj.attachEvent(event,eventHandler);
+        }
+    }
+
+
+    //创建一个可服用的函数，取消相应的事件
+    function cancelEvent(event) {
+        if(event.preventDefault) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            event.returnValue = false;
+            event.cancelBubble = true;
+        }
+    }
+
+
+	</script>
+</head>
+<body >
+<p>Imagine a form with five fields</p>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>哔哩哔哩 (゜-゜)つロ 干杯~-bilibili</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+      要管理元素堆栈中的事件，就需要事件冒泡。
+      在事件冒泡中，最内部的元素将首先触发改时间，然后是堆栈内的下一个元素触发该事件，
+      依次类推，知道最外面的额元素。如果事件句柄被指定给所有的元素，那么这些事件将依次
+      被触发。
+
+    */
+	window.onload = setupEvents;
+    function setupEvents() {
+        document.getElementById("first").onmousedown = function(event) {
+
+            var theEvent = event ? event : window.event;
+            alert("first element event");
+
+         //   stopEvent(theEvent);
+        }
+
+        document.getElementById("second").onmousedown = function() {
+            alert("second element event");
+        }
+
+        document.onmousedown = function() {
+                alert("document event");
+        }
+
+    }
+
+    function stopEvent(event) {
+            if(event.stopPropagation) {
+                event.stopPropagation();
+            } else {
+                event.cancelBubble = true;
+            }
+
+    }
+    /*
+        如果只希望一个元素触发事件句柄，那么可以取消事件的冒泡机制。
+        在IE中可以使用cancelBubble属性
+        其他的可以使用stopPropagation方法
+        例如
+        function stopEvent(event) {
+            if(event.stopPropagation) {
+                event.stopPropagation();
+            } else {
+                event.cancelBubble = true;
+            }
+
+        }
+    */
+	</script>
+</head>
+<body>
+<div id="first" style="padding : 20px; background-color:#ff0;width:150px;">
+<div id="second" style="background-color:#f00;width:100px;height:100px; border:1px dashed #000">
+</div>
+</div>
+</body>
+</html>

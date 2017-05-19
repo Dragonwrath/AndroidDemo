@@ -1,0 +1,48 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+    String转换
+
+    undefined 输出结果为"undefined"
+    null      输出结果为"null"
+    布尔值     "true"或者"false"
+    数字       数字相应的字符串，NaN输出NaN
+    */
+
+    /*
+    boolean转换
+    默认转换为false
+    undefined 输出结果为false
+    null      输出结果为false
+    数字      数字相应的字符串，NaN或者0表示false，否则为true
+    字符串    如果是空字符串，那么结果为false，否则为true
+    对象      true
+    */
+    function hello() {
+        var msg = 'hello world';
+        document.open()
+		document.write(msg);
+		document.close();
+    }
+
+
+    /*
+    number转换
+    undefined 输出结果为NaN
+    null      输出结果为0,在IE中返回NaN
+    布尔值     如果为true，返回1，否则返回0，在IE中返回NaN
+    对象      NaN
+    */
+	</script>
+</head>
+<body>
+
+<p>Imagine a form with five fields</p>
+</body>
+<body onload="hello()">
+</body>
+
+</html>

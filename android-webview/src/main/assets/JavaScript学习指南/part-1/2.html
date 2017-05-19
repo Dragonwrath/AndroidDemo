@@ -1,0 +1,29 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+
+    /* 常见的事件句柄
+       onclick
+       onmouseover
+       onmouseout
+       onfocus 当某元素获得焦点时出发onblur 当某个元素失去焦点
+        */
+    function hello() {
+    /*
+		document会覆盖页面之前的内容，因此要特别注意
+    */
+	
+	
+        document.open()
+		document.write("hello world!");
+		document.close();
+    }
+	</script>
+</head>
+<body onload="hello()">
+
+</body>
+
+</html>
