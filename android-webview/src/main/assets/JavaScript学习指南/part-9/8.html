@@ -1,0 +1,50 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+      document对象
+      链接和锚(anchor)之间的差别在于使用了不同的属性，他们都是基于anchro标签（<a></a>）
+      如果指定了href属性，它就是一个链接；
+      如果指定了thename属性，那他就是一个锚，他提供了一个访问页面指定位置的机制
+    */
+
+
+    /*
+
+    */
+
+    /*
+
+    */
+
+    //创建一个可复用的事件处理函数
+    function catchEvent(eventObj,event,eventHandler) {
+        if(eventObj.addEventListener) {
+            eventObj.addEventListener(event,eventHandler,false);
+        } else if(eventObj.attachEvent) {
+            event = "on" + event;
+            eventObj.attachEvent(event,eventHandler);
+        }
+    }
+
+
+    //创建一个可服用的函数，取消相应的事件
+    function cancelEvent(event) {
+        if(event.preventDefault) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            event.returnValue = false;
+            event.cancelBubble = true;
+        }
+    }
+
+
+	</script>
+</head>
+<body >
+<p>Imagine a form with five fields</p>
+</body>
+</html>

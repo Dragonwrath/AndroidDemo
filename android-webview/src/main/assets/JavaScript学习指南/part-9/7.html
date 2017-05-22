@@ -7,16 +7,45 @@
     history 对象负责维护浏览器中页面载入操作的历史记录。同样，其方法和属性能够完成通过
     浏览器的后退和前进按钮实现道长。
     可以使用next和previous或者back和forward之类的属性来遍历历史记录。
-
+    使用current 可以找到当前页面，并找到历史记录的长度(保存在历史记录缓冲区中的页面数)
+    你可以使用go方法跳转到指定的页面，如果传入复数代表后退几页，如果传入正数代表前进几页
+    history.go(-3)
+    history.go(3)
+    但是需要注意的是当我们使用Ajax页面效果时，需要注意，因为他们采用的页面子阿如模式是不一样的。
     */
 
 
     /*
+      screen对象中所包含的信息都是与屏幕相关的，包括宽度、高度、以及颜色或者像素浓淡。
+      它具体支持的属性会随着浏览器以及他们版本的变化而改变，
+      不过以下的属性应该不会发生变化
+
+      availWidth(或者width) - 可用的屏幕宽度，以像素表示
+      availHeight(或者height) - 可用的屏幕高度，以像素表示
+      availTop(或者top) - 窗口可以放置的最顶部位置，以像素表示
+      availLeft(或者left) - 窗口可以放置的最左边位置，以像素表示
+      colorDepth - 屏幕的颜色深度
+      pixelDepth - 屏幕上每个像素的位元数
+
+      需要注意的是 实际的宽高和可用的宽高存在一些差距，主要看工具条是放在顶部、底部还是边上。
 
     */
 
     /*
-
+     navigator对象提供的是和浏览器和其他访问该页面用户代理的相关信息，通过它可以检查操作系统、浏览器
+     或浏览器族、安全策略、语言以及cookie是否启用，有些特殊的浏览器还提供了一个数组，用来保存当前已安装的
+     插件的名称。
+     appCodeName 浏览器源代码基础的名称
+     appName     浏览器的名称
+     appMinorVersion 浏览器的子版本号
+     appVersion    浏览器的主版本号
+     cookieEnabled cookie是否启用
+     mimeTypes 他是一个数组，用来保存浏览器所支持的MIME类型
+     onLine 用户是否练级
+     platform 浏览器运行的平台
+     plugins  他是一个数组，用来保存浏览器所安装的插件
+     userAgent 针对浏览器（或其他用户代理）的、完整地用户代理描述
+     systemLanguage 浏览器支持的语言
     */
 
     //创建一个可复用的事件处理函数
@@ -41,7 +70,32 @@
         }
     }
 
+    catchEvent(window,"load",loadThis);
+    function loadThis() {
+        document.write("可用宽度：" + screen.availWidth);
+        document.write("可用高度：" + screen.availHeight);
 
+        txt = "<p>Browser CodeName: " + navigator.appCodeName + "</p>";
+        txt+= "<p>Browser Name: " + navigator.appName + "</p>";
+        txt+= "<p>Browser Version: " + navigator.appVersion + "</p>";
+        txt+= "<p>Cookies Enabled: " + navigator.cookieEnabled + "</p>";
+        txt+= "<p>Platform: " + navigator.platform + "</p>";
+        txt+= "<p>User-agent header: " + navigator.userAgent + "</p>";
+        txt+= "<p>User-agent language: " + navigator.systemLanguage + "</p>";
+	    document.write("navigator对象：" + txt);
+
+        if(navigator.mimeTypes) {
+            document.writeln("navigator.mimeType[1].description: " +
+            navigator.mimeTypes[1].description + "<br/>");
+             document.writeln("navigator.mimeType[1].type: " +
+            navigator.mimeTypes[1].type + "<br/>");
+		}
+        if(navigator.plugins) {
+            for(var i = 0; i < navigator.plugins.length; i++)
+            document.writeln("navigator.mimeType["+ i + "].description: " +
+            navigator.mimeTypes[i].description + "<br/>");
+        }
+    }
 	</script>
 </head>
 <body >
