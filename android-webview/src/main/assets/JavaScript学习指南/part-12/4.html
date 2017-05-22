@@ -1,0 +1,119 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+
+    <style type="text/css">
+
+        #div1 {
+            overflow : hidden;
+            position : relative;
+            border : 5px solid  #000;
+            width: 400px;
+            height: 200px;
+            left: 100px;
+            top: 100px;
+        }
+
+        img {
+            border : 1px solid  #000;
+        }
+    </style>
+    <script type="text/javascript">
+
+    /*
+
+
+    */
+
+    //创建一个可复用的事件处理函数
+    function catchEvent(eventObj,event,eventHandler) {
+        if(eventObj.addEventListener) {
+            eventObj.addEventListener(event,eventHandler,false);
+        } else if(eventObj.attachEvent) {
+            event = "on" + event;
+            eventObj.attachEvent(event,eventHandler);
+        }
+    }
+
+
+    //创建一个可复用的函数，取消相应的事件
+    function cancelEvent(event) {
+        if(event.preventDefault) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            event.returnValue = false;
+            event.cancelBubble = true;
+        }
+    }
+
+    var dragObject = null;
+    var mouseOffset = null;
+
+
+    document.onmousemove = mouseMove;
+    document.onmouseup = mouseUp;
+
+
+    function MousePoint(x,y){
+        this.x = x;
+        this.y = y;
+    }
+
+    function mousePosition(event) {
+        var x = parseInt(event.clientX);
+        var y = parseInt(event.clientY);
+        return new MousePoint(x,y);
+    }
+
+    function getMouseOffset(target, event) {
+        var theEvent = event ? event : window.event;
+        var mousePos = mousePosition(theEvent);
+		
+        var x = mousePos.x - target.offsetLeft;
+        var y = mousePos.y - target.offsetTop;
+        return new MousePoint(x,y);
+    }
+
+    function mouseUp(event) {
+        dragObject = null;
+    }
+
+
+    function mouseMove(event) {
+        if(!dragObject) return;
+        var theEvent = event ? event : window.event;
+        var mousePos = mousePosition(theEvent);
+        if(dragObject) {
+            dragObject.style.position = "relative";
+            dragObject.style.top = mousePos.y- mouseOffset.y  + "px";
+            dragObject.style.left = mousePos.x- mouseOffset.x  + "px";
+            return false;
+        }
+    }
+
+    function makeDraggable(item) {
+        if (item) {
+            item = document.getElementById(item);
+            item.onmousedown = function(theEvent) {
+                dragObject = this;
+                mouseOffset = getMouseOffset(this, theEvent);
+                return false;
+            }
+        }
+    }
+
+    window.onload = function() {
+        makeDraggable("img1");
+    }
+	</script>
+</head>
+<body >
+<div id="div1">
+    <p> Hello CSS</p>
+    <img src="fig0903.png" alt="Figure 9-1" id="img1">
+</div>
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+    DOM的另一个重要的元素就是Elment，所有页面元素都将从Element元素中继承API和属性，其主要功能是
+    获取和设置属性值，以及检查属性是否存在
+    getAttribute(name)
+    setAttribute(name,value)
+    removeAttribute(name)
+    getAttributeNode(name)
+    setAttributeNode(attr)
+    removeAttributeNode(attr)
+    hasAttribute(name)
+    Element属性不是总能通过对象属性访问，属性是对象类的组成部分，而不是类的实例。
+    因此属性可以与document、Element、Node甚至是如HTMLDocumentElement的HTML元素对象相关联。
+    例如
+    <img src="dotty.gif" width="100" alt="an image" align = "left">
+    如果访问可以通过
+    var img = document.images[0];
+    var imgStr = img.getAttribute("src") + " " +
+                img.getAttribute("width") + " " +
+                img.getAttribute("alt") + " " +
+                img.getAttribute("align") + " " ;
+    你可以可以通过getElementsByTagName方法来获取，而它只是根据文档上下文来处理元素。
+
+    */
+
+    /*
+
+    */
+
+    /*
+
+    */
+
+    //创建一个可复用的事件处理函数
+    function catchEvent(eventObj,event,eventHandler) {
+        if(eventObj.addEventListener) {
+            eventObj.addEventListener(event,eventHandler,false);
+        } else if(eventObj.attachEvent) {
+            event = "on" + event;
+            eventObj.attachEvent(event,eventHandler);
+        }
+    }
+
+
+    //创建一个可复用的函数，取消相应的事件
+    function cancelEvent(event) {
+        if(event.preventDefault) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            event.returnValue = false;
+            event.cancelBubble = true;
+        }
+    }
+
+
+	</script>
+</head>
+<body >
+<p>Imagine a form with five fields</p>
+</body>
+</html>

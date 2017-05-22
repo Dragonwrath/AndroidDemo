@@ -1,0 +1,74 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+    DOM HTML API
+    DOM (HTML) Level 1和DOM (HTML) Level 2
+    它是一组接口对象集，通过这些接口可以访问原有的、新创建的页面对象，
+    每个都与特定类型的页面对象相关联。
+    HTML API不仅从基本的HTML元素继承了属性和方法，还会从核心的Node对象
+    中继承。绝大多数DOM（HTML）对象也是从HTML Element中继承的有用以下的属性
+    id
+    title
+    lang 元素及其内容的语言
+    dir 文字方向
+    className 等价于class属性
+    HTMLFormElement是HTML中form元素的接口对象
+    HTMLParagraphElement是HTML中p(段落)元素的接口对象
+    绝大多数DOM（HTML）属性都是可读写的。
+    */
+
+    /*
+
+    */
+
+    /*
+
+
+    */
+
+    //创建一个可复用的事件处理函数
+    function catchEvent(eventObj,event,eventHandler) {
+        if(eventObj.addEventListener) {
+            eventObj.addEventListener(event,eventHandler,false);
+        } else if(eventObj.attachEvent) {
+            event = "on" + event;
+            eventObj.attachEvent(event,eventHandler);
+        }
+    }
+
+
+    //创建一个可复用的函数，取消相应的事件
+    function cancelEvent(event) {
+        if(event.preventDefault) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            event.returnValue = false;
+            event.cancelBubble = true;
+        }
+    }
+
+    catchEvent(window,"load",loadImage);
+
+    function loadImage() {
+        var img = document.images[0];
+        var imgAttr = img.id + " " + img.alt + " " + img.className;
+        img.src = "fig0903.png";
+        img.width = "800";
+        img.height = "498";
+        img.alt = "Alertnative";
+        img.align = "Left";
+        img.title = "Osprey";
+    }
+
+	</script>
+</head>
+<body >
+<p>
+    <img src="fig0901.jpg" alt="test image" class="testimage" id="original"/>
+</p>
+</body>
+</html>

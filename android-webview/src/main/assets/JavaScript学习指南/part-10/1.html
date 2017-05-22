@@ -1,0 +1,62 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+    cookie是保存在客户端的一小块数据，它是基于键值信息的，有服务器端提供，JS可以在会话
+    期间或者不同会话之间（Web访问）对一些信息做持久化存储
+    JavaScript 有许多规则，其中包括进制文件访问，也就是在JS中不能直接打开、创建或者删除
+    操作系统中的文件。
+    它只提供了很底层的网络功能，如Web页面载入。
+    基于JS沙箱，JS应用程序初始化一个访问其他网站的连接是受限的，数据传输是禁止的，也就是
+    同源安全策略（same-origin security policy）。
+    */
+
+    /*
+    同源安全策略（same-origin security policy）
+    该策略确保了不同域名、协议或端口的页面之间不能够通过脚本进行通信。
+    该策略将应用于不同页面之间的通信，包括父窗口中的表单和内嵌窗口之间的通信，比如帧及iframe
+    而网站开发人员可以解决同源问题。它可以使用相同的域名、不同的主机名（也就是子域名）来避开这一限制
+    如使用about.somecompany.com和help.somecompany.com.
+    还可以通过document对象中的一个为domain的属性来解决该限制，它可以设置只允许子域名的
+    页面之间进行通信，不过只允许的是子域名中的页面，也就是只当document对象的属性和原先的主机名匹配时。
+    如果通过JS代码的页面通过http://admin.somecompany.com的URL访问的，那么可以将document.domain设置
+    为somecompany.com,但是你不能设置为othercompany.com，因为它是一个不同的域名。
+    设置完成之后，就可以与help.somecompany.com中的页面进行通信
+
+    */
+
+    /*
+    而从其他域名中链接进来的脚本是不适用同源安全策略的。
+    */
+
+    //创建一个可复用的事件处理函数
+    function catchEvent(eventObj,event,eventHandler) {
+        if(eventObj.addEventListener) {
+            eventObj.addEventListener(event,eventHandler,false);
+        } else if(eventObj.attachEvent) {
+            event = "on" + event;
+            eventObj.attachEvent(event,eventHandler);
+        }
+    }
+
+
+    //创建一个可复用的函数，取消相应的事件
+    function cancelEvent(event) {
+        if(event.preventDefault) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            event.returnValue = false;
+            event.cancelBubble = true;
+        }
+    }
+
+
+	</script>
+</head>
+<body >
+<p>Imagine a form with five fields</p>
+</body>
+</html>

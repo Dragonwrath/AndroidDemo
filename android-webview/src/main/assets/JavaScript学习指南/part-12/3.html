@@ -1,0 +1,138 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+
+    <style type="text/css">
+        div {
+            padding: 5px;
+        }
+        #nav {
+            background-color : #ccc;
+            width: 100px;
+            cursor : pointer;
+        }
+
+        #div1 {
+            background-color : #00f;
+            color : #000;
+            font-size : larger;
+            position : absolute;
+            width: 400px;
+            height: 200px;
+            left: -410px;
+            top: -400px;
+        }
+        #div2 {
+            background-color : #ff0;
+            color : #000;
+            font-size : larger;
+            position : relative;
+            width: 400px;
+            height: 200px;
+            left: -410px;
+            top: -400px;
+            z-index: 4;
+        }
+        #div3 {
+            background-color : #f00;
+            color : #000;
+            font-size : larger;
+            position : fixed;
+            width: 400px;
+            height: 200px;
+            left: -410px;
+            top: -400px;
+        }
+    </style>
+    <script type="text/javascript">
+    /*
+    CSS2 规范
+    position 可选值 relative、absolute、static、inherit或者fixed
+        static是绝大多数元素的默认设置，
+        relative，元素可以通过偏移量来定位
+        absolute 元素不属于也面临，就可以设置
+        fixed  固定位置，该元素是基于某些视图来定位的。；
+    top 元素的top属性来设置它与容器顶部的相对位置
+    left
+    bottom 为0，则表示底部位置，值越大，离底部越远
+    right  为0，表示页面右边，值越大，离页面右边越远
+    z-index
+
+    display属性还会影响定位和布局
+    fly-in 是动态Web页面效果的一种，。
+    */
+
+    //创建一个可复用的事件处理函数
+    function catchEvent(eventObj,event,eventHandler) {
+        if(eventObj.addEventListener) {
+            eventObj.addEventListener(event,eventHandler,false);
+        } else if(eventObj.attachEvent) {
+            event = "on" + event;
+            eventObj.attachEvent(event,eventHandler);
+        }
+    }
+
+
+    //创建一个可复用的函数，取消相应的事件
+    function cancelEvent(event) {
+        if(event.preventDefault) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            event.returnValue = false;
+            event.cancelBubble = true;
+        }
+    }
+
+
+    var slides =["div1","div2","div3"];
+    var x=0;
+	var y=0;
+    var currentSlide = 0;
+
+    catchEvent(window, "load", loadData);
+
+    function loadData() {
+        document.getElementById("nav").onclick = nextSlide;
+    }
+
+    function nextSlide() {
+        setTimeout("moveBlock()",1000);
+    }
+
+    function moveBlock() {
+        x+=20;
+        y+=20;
+        var obj = document.getElementById(slides[currentSlide]);
+        obj.style.top = x + "px";
+        obj.style.left = y + "px";
+        if(x < (100 + currentSlide * 60)) {
+            setTimeout("moveBlock()",1000);
+        } else {
+           currentSlide++;
+            x =0; y =0;
+        }
+
+        if (currentSlide >= slides.length) {
+            document.getElementById("nav").onclick = null;
+        }
+    }
+	</script>
+</head>
+<body >
+<div id="nav">
+    <p>Next slide</p>
+</div>
+<div id="div1">
+    <p>Blue block that is absolutely positioned.</p>
+</div>
+<div id="div2">
+    <p>Yellow block that is relatively positioned, and given a z-index of 4.</p>
+</div>
+
+<div id="div3">
+    <p>Red block that is fixed positioned.</p>
+</div>
+</body>
+</html>

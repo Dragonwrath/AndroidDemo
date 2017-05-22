@@ -1,0 +1,90 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+     表示图像URL的src属性
+     var newImage = new Image();
+     newImage.src = "someimage.png";
+     点击任何一个div元素都会改变当前img元素的src属性，
+    */
+
+
+    /*
+
+    */
+
+    /*
+
+    */
+
+    //创建一个可复用的事件处理函数
+    function catchEvent(eventObj,event,eventHandler) {
+        if(eventObj.addEventListener) {
+            eventObj.addEventListener(event,eventHandler,false);
+        } else if(eventObj.attachEvent) {
+            event = "on" + event;
+            eventObj.attachEvent(event,eventHandler);
+        }
+    }
+
+
+    //创建一个可服用的函数，取消相应的事件
+    function cancelEvent(event) {
+        if(event.preventDefault) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            event.returnValue = false;
+            event.cancelBubble = true;
+        }
+    }
+
+    catchEvent(window,"load",loadLinks)
+
+
+    var currentPhoto = 0;
+    var pics = new Array();
+    function loadLinks() {
+        for(var i = 0 ;i < 5 ;i++) {
+            pics[i] = new Image();
+
+        }
+         pics[0].src = "fig0901.png";
+         pics[1].src = "fig0902.png";
+         pics[2].src = "fig0903.png";
+
+        document.getElementById("next").onclick = nextPic;
+        document.getElementById("prev").onclick = prevPic;
+    }
+
+    function changePhoto(photo) {
+        document.images[0].src = pics[photo].src;
+    }
+
+    function nextPic(){
+        currentPhoto++;
+        if(currentPhoto < pics.length) {
+            changePhoto(currentPhoto);
+        } else {
+            alert("at the end of the photo list");
+        }
+    }
+
+    function prevPic(){
+        if(currentPhoto < pics.length) {
+            currentPhoto--;
+            changePhoto(currentPhoto);
+        } else {
+            alert("at the beginning of the photo list");
+        }
+    }
+	</script>
+</head>
+<body >
+<div id="next"><span>Next</span></div>
+<div id="prev"><span>Previous</span></div>
+<img src="fig0901.png" />
+</body>
+</html>

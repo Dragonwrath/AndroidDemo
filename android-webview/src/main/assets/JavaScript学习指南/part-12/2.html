@@ -1,0 +1,106 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+
+    <style type="text/css">
+        #div1{ width : 600px;}
+        #smaller {
+            background-color : #00f;
+            cursor : pointer;
+        }
+        #div1 {
+        font-size : 15px;
+        letter-spacing : normal;
+        text-align : left;
+        text-transform : none;
+        line-height : 10px;
+        font-weight : normal;
+        }
+    </style>
+    <script type="text/javascript">
+    /*
+    第一个呈现性的HTML元素就是font(字体)，它也是一个可以从老版本HTML中找到的元素，在所有
+    的Web页面中都很常用。
+    font-family:在JS中可以通过fontFamily访问它，可以修改字体的字体集。
+    font-size 在JS中可以通过fontSize访问它，它可以用来设置字体大小。可以使用具体数值例如（12pt或2.5em），
+                还可以使用预设定的字体大小xx-small,x-small、small、medium、large
+    font-size-adjust 在JS中可以通过fontSizeAdjust访问它，它是字母x的高度与字体大小指定高度之间的比值，
+    font-stretch 在JS中可以通过fontStretch访问，它用来扩展或压缩字体，包括normal、wider、narrower、
+    font-style   在JS中可以通过fontStyle访问他，可选值有normal、italic、oblique
+    font-variant 在JS中可以通过fontVariant访问它 使用特定字体的small-cap变体,那么就将其值设置为small-caps
+    font-weight 在JS中可以通过fontWeight访问它 设置字体的浓淡
+    font本事可以一次性修改多个字体属性
+    div1.style.font ="italic small-caps 400 14pt verdana";
+    */
+
+    /*
+    文本属性
+    color       JS-color 设置文本颜色
+    line-height JS-lineHeight 设置两行之间的间距，也可以设置为normal
+    text-decoration JS-textDecoration 设置为none、underline、overline或者line-through，不要使用blink
+    text-transform  JS-textTransform  设置为none、capitalize(单词首字母大写)、uppercase、lowercase
+    text-indent     JS-textIndent     设置首行是缩进量
+    white-space     JS-whiteSpace     设置为normal、pre或nowrap
+    direction       JS-direction      设置为ltr(从左到右)或者rtl
+    text-align      JS-textAlign      设置为文本的对齐方式，可以设置为left、right、center或者jusitfy
+    word-spacing    JS-wordSpacing    设置单词之间的空白间距，可以设置为normal或者指定长度
+
+
+    */
+
+    /*
+
+
+    */
+
+    //创建一个可复用的事件处理函数
+    function catchEvent(eventObj,event,eventHandler) {
+        if(eventObj.addEventListener) {
+            eventObj.addEventListener(event,eventHandler,false);
+        } else if(eventObj.attachEvent) {
+            event = "on" + event;
+            eventObj.attachEvent(event,eventHandler);
+        }
+    }
+
+
+    //创建一个可复用的函数，取消相应的事件
+    function cancelEvent(event) {
+        if(event.preventDefault) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            event.returnValue = false;
+            event.cancelBubble = true;
+        }
+    }
+
+    function getStyle(obj,jsprop,cssprop) {
+        if(obj.currentStyle) {
+            alert('currentStyle' + obj.currentStyle[jsprop]);
+        } else if(window.getComputedStyle) {
+            alert('getComputedStyle ' + document.defaultView.getComputedStyle(obj,null).getPropertyValue(cssprop));
+        } else {
+            alert("Nothing");
+        }
+    }
+
+
+    function changeElement() {
+        var obj = document.getElementById("div1");
+        alert(obj.style.backgroundColor);
+        getStyle(obj,"backgroundColor","background-color");
+        obj.style.backgroundColor ="FF0000";
+        alert(obj.style.backgroundColor);
+    }
+
+    document.onclick = changeElement;
+	</script>
+</head>
+<body >
+<div id="div1">
+    <p> Hello CSS</p>
+</div>
+</body>
+</html>

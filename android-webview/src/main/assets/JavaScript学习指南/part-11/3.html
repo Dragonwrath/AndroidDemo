@@ -1,0 +1,79 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+    table元素的工程方法inserRow，传入的参数为-1，表示在表格最后添加一行，
+    inserRow方法返回一个实现HTMLTableRowElementinterface几口的对象，而在
+    HTMLTableRowElement几口对象中海油一个insertCell的工厂方法，它将创建一个HTMLTableCellElement的对象，
+    用来表示特定的单元格，通过insertCell方法可以创建两种单元格。
+    西面的例子使用document对象的使用createTextNode的工厂方法，将根据传入的字符串创建一个text对象
+    然后使用appendChild方法将text对象添加到表单中。
+    使用removeCell和removeRow方法来删除表格单元格和表格行
+
+    */
+
+
+    //创建一个可复用的事件处理函数
+    function catchEvent(eventObj,event,eventHandler) {
+        if(eventObj.addEventListener) {
+            eventObj.addEventListener(event,eventHandler,false);
+        } else if(eventObj.attachEvent) {
+            event = "on" + event;
+            eventObj.attachEvent(event,eventHandler);
+        }
+    }
+
+
+    //创建一个可复用的函数，取消相应的事件
+    function cancelEvent(event) {
+        if(event.preventDefault) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            event.returnValue = false;
+            event.cancelBubble = true;
+        }
+    }
+
+    catchEvent(window,"load",loadData);
+
+    function loadData(){
+        var tb1 = document.getElementById('table1');
+        tb1.border = "5px";
+        tb1.cellPadding = "5px";
+
+        var img = document.getElementById('img1');
+        img.vspace = "10";
+
+        //为每个属性添加一个表格行
+        var row 1 = tb1.insertRow(-1);
+        //创建两个表格单元格
+        var cell1 = row1.insertCell(0);
+        var cell2 = row1.insertCell(1);
+        //创建文本值
+        var txtAttr1 = document.createTextNode("src");
+        var txtAttr1Val = document.createTextNode(img.src);
+
+        //将文本值添加到单元格上
+        cell1.appendChild(txtAttr1);
+        cell2.appendChild(txtAttr1Val);
+    }
+
+    function
+
+	</script>
+</head>
+<body >
+<p>
+    <img src="fig0901.png" alt="test image" class="testimage" id="img1"/>
+</p>
+<table id="table1">
+    <tr>
+        <th>Attribute</th>
+        <th>Value</th>
+    </tr>
+</table>
+</body>
+</html>

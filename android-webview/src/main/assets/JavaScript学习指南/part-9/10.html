@@ -1,0 +1,85 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+      innerHTML
+      现代浏览器仍然对document对象中innerHTML属性提供了支持。
+      使用innerHTML属性可以修改页面中的任何一个HTML元素，它之所以依然流行，是因为
+      通过它可以修改页面元素时无须构建整个页面的内容。
+      只需要添加一个HTML格式的字符串，然后通过innerHTML就可以添加到Web页面中。
+      使用innerHTML意味着无论想Web页面添加了什么，他们都无法融合到页面的document树
+      因此如果混合使用innerHTML和新的DOM方法，将会带来很大的破坏。
+
+
+    */
+
+
+    /*
+
+    */
+
+    /*
+
+    */
+
+    //创建一个可复用的事件处理函数
+    function catchEvent(eventObj,event,eventHandler) {
+        if(eventObj.addEventListener) {
+            eventObj.addEventListener(event,eventHandler,false);
+        } else if(eventObj.attachEvent) {
+            event = "on" + event;
+            eventObj.attachEvent(event,eventHandler);
+        }
+    }
+
+
+    //创建一个可服用的函数，取消相应的事件
+    function cancelEvent(event) {
+        if(event.preventDefault) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            event.returnValue = false;
+            event.cancelBubble = true;
+        }
+    }
+
+    catchEvent(window,"load",loadLinks)
+
+
+    var currentPhoto = 0;
+    var pics = new Array();
+    function loadLinks() {
+        setTimeout("changeElements()",3000);
+    }
+
+    function changeElements() {
+        var elem1 = document.getElementById("elem1");
+        var elem2 = document.getElementById("elem2");
+        var elem3 = document.getElementById("elem3");
+
+        var tmp = elem1.innerHTML;
+        elem1.innerHTML = elem3.innerHTML;
+        elem3.innerHTML = elem2.innerHTML;
+        elem2.innerHTML = tmp;
+    }
+
+	</script>
+</head>
+<body >
+<div id="elem1">
+    <p>Paragraph text.</p>
+</div>
+<div id="elem2">
+    <ul>
+        <li>option 1</li>
+        <li>option 2</li>
+    </ul>
+</div>
+<div id="elem3">
+    <p><a href="9.html">Example 9</a></p>
+</div>
+</body>
+</html>

@@ -8,6 +8,17 @@
       链接和锚(anchor)之间的差别在于使用了不同的属性，他们都是基于anchro标签（<a></a>）
       如果指定了href属性，它就是一个链接；
       如果指定了thename属性，那他就是一个锚，他提供了一个访问页面指定位置的机制
+
+      document对象的links集合是由页面中所有超链接组成的，它的访问方法和数组一样，
+      首先是页面上的第一个链接，然后是沿着右下方所找到的后续链接。
+      也可以为每个超链接添加一个标识符，这样就能通过这个标识符来访问数组中的链接。
+
+      在这个集合中的每一项都是一个link对象，它也有自己的属性。
+      它的属性和location对象的属性类似，host、protocol、search和hash，每个豆浆返回超
+      链接中的特定片段。
+      你可以通过href属性访问完整的链接，还可以通过text属性显示相关的链接对象（文本显示）。
+
+
     */
 
 
@@ -41,10 +52,27 @@
         }
     }
 
+    catchEvetn(window,"load",loadLinks)
+
+    function loadLinks() {
+        var links ="";
+        for(var i = 0 ;i < document.links.length;i++) {
+            links = links + document.links[i].href + "\n\n";
+        }
+        alert(links);
+    }
 
 	</script>
 </head>
 <body >
-<p>Imagine a form with five fields</p>
+<p>
+    The
+    <a href="https://msdn.microsoft.com/workshop/author/dhtml/reference/objects/link.app">
+        links
+    </a> collection off the document
+    <a href="http://www.w3.org/TR/html4/struct/objects.html">object</a>
+    consists of all hypertext links in the page,accessible as an array.
+    
+</p>
 </body>
 </html>

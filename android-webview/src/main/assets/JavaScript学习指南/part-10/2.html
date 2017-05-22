@@ -1,0 +1,120 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+    要创建一个cookie，你需要提供cookie(或称为键)、关联的值、过期事件以及该cookie相关
+    路径。要访问一个cookie，可以通过document.cookie获得，并将其转成cookie格式。
+    document.cookie赋一个类似以下格式的字符串值。
+    document.cookie = "cookieName = cookieValue; expires = data; path = path";
+    cookie的名称和值可以根据你的需要设置，只要是简单值即可，我们通常在命名cookie时以"$"
+    或"_"为前缀，然后跟上其他字符。
+    由于不同浏览器之间存在明显差异，因此最好只是用基本类型（字符串、布尔型和数字型）
+    document.cookie设置字符串中，过期时间是一个重要部分，它需要以专门的GMT(UTC)格式表示。
+    它将创建一个data对象，然后使用toGMTString方法进行转换，以确保该日期值能够正常使用。
+    如果没有提供日期，那么它会默认为值在当前会话有用，当浏览器会话结束时就会删除它。
+    cookie的路径特别重要，如果这里的域名、路径将会与页面请求的域名、路径作比较，如果不同步
+    那么该cookie将无法被访问或设置。
+    如果路径设置为"path=/"，那么将使得cookie所允许的路径时该域名的顶级目录。
+    也就是访问页面位于的顶级URL，例如http://somedomain.com
+    */
+
+    /*
+    如果要检查cookie是否启用可以使用
+    if(navigator.cookieEnabled)\
+    而在IE6.X就没有正确地设置该属性，在这种情况下，除了设置一个cookie看看是否能够找到它之外，
+    没有什么好办法。
+    */
+
+    /*
+    cookie的一些限制
+    对一个域名而言只能存储20个cookie，总容量不大于4KB。
+    */
+
+    /*
+        设置、读取、删除cookie
+    */
+
+    //创建一个可复用的事件处理函数
+    function catchEvent(eventObj,event,eventHandler) {
+        if(eventObj.addEventListener) {
+            eventObj.addEventListener(event,eventHandler,false);
+        } else if(eventObj.attachEvent) {
+            event = "on" + event;
+            eventObj.attachEvent(event,eventHandler);
+        }
+    }
+
+
+    //创建一个可复用的函数，取消相应的事件
+    function cancelEvent(event) {
+        if(event.preventDefault) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            event.returnValue = false;
+            event.cancelBubble = true;
+        }
+    }
+
+    //if cookie enabled
+    catchEvent(window, "load", loadLinks);
+    function loadLinks() {
+        if(navigator.cookieEnabled) {
+            var sum = readCookie("sum");
+            if (sum) {
+                var iSum = parseInt(sum) + 1;
+                alert("cookie count is " + iSum);
+                if(iSum > 5) {
+                    eraseCookie("sum");
+                } else {
+                    setCookie("sum" ,iSum);
+                }
+            } else {
+                alert("no cookie, setting now ");
+            }
+            setCookie("sum", 0);
+        }
+    }
+
+    //将cookie有效值设置为2017年
+    function setCookie(key,value) {
+        var cookieDate = new Date(2017,11,10,19,30,30);
+        document.cookie = key + "=" + encodeURI(value) + "; expires="
+        + cookieDate.toGMTString() + "; path=/";
+    }
+
+    //在每个cookie之前用分号分割
+    function readCookie(key) {
+        var cookie = document.cookie;
+        var first = cookie.indexOf(key + "=");
+        //存在cookie
+        if (first >= 0) {
+            var str = cookie.substring(first,cookie.length);
+            var last = str.indextOf(";");
+
+            //如果是最后一个cookie
+            if (last < 0) last = str.length;
+
+            //获取cookie的值
+            str = str.substring(0, last).split("=");
+            return decodeURI(str[1]);
+        } else {
+            return null;
+        }
+    }
+
+    //将cookie的有效期设置为过去，以达到删除cookie的目的
+    function eraseCookie(key) {
+        var cookieDate = new Date(2000,11,11,11,11,11);
+        document.cookie = key + "= ; expires="
+        + cookieDate.toGMTString() + "; path=/";
+    }
+
+	</script>
+</head>
+<body >
+<p>Imagine a form with five fields</p>
+</body>
+</html>

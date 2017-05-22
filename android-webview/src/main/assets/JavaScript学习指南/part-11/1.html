@@ -1,0 +1,58 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+    W3C 发布DOM的发布了两个不同的API
+    Core API 和HTML API
+    DOM的Core API是语言无关(也是模型无关的)API，它就是提供修改、删除或创建Web页面内容
+    所需的各种功能。
+    它是一个通用的API，能够应用于各种形式的XML标准，包括Web页面上的XHTML，也包括Ajax调用
+    返回的HTML。该API由如Node、NodeList、Attr、Element和非常重要的Document等对象组成。
+    它还提供了浏览器必须支持的基本数据类型和预期行为。
+
+    DOM的HTML API是面向对象的、层次性的Web页面元素相映射的对象：针对的是document的
+    HTMLDocumentElement、针对body的HTMLBodyElement等。
+    它涵盖了W3C发布的前两个规范，但是在W3C发布的第三个规范DOM Level3中，所有增加和修改的
+    内容都是针对Core API的，HTML API没有受到直接的影响。
+    */
+
+    /*
+
+    */
+
+    /*
+
+
+    */
+
+    //创建一个可复用的事件处理函数
+    function catchEvent(eventObj,event,eventHandler) {
+        if(eventObj.addEventListener) {
+            eventObj.addEventListener(event,eventHandler,false);
+        } else if(eventObj.attachEvent) {
+            event = "on" + event;
+            eventObj.attachEvent(event,eventHandler);
+        }
+    }
+
+
+    //创建一个可复用的函数，取消相应的事件
+    function cancelEvent(event) {
+        if(event.preventDefault) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            event.returnValue = false;
+            event.cancelBubble = true;
+        }
+    }
+
+
+	</script>
+</head>
+<body >
+<p>Imagine a form with five fields</p>
+</body>
+</html>
