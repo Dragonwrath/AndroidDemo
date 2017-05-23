@@ -1,0 +1,85 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+
+    <style type="text/css">
+        #div1{background-color: #ffff00}
+    </style>
+    <script type="text/javascript">
+    /*
+    CSS属性中有连字符，如border-color，那么将去除连字符，并且第二个词的首字母大写表示；
+    也就是说CSS中的border-color在JS中编程borderColor
+    例如我们获取一个节点
+    var div = document.getElementById("div1");
+    div.style.borderColor = "#000";
+
+    而CSS中的float属性是个例外，在IE中使用的是styleFloat，在其他浏览器中为cssFloat
+    */
+
+    /*
+    需要记住一点
+    元素的CSS属性在未定义的情况下，取决于各个浏览器内部设置的，以及样式表中的设置和元素继承得到的样式。
+    不同类型的浏览器使用的属性是不同的
+    微软和Opera支持的是currentStyle属性
+    Mozilla和Safari/Webkit则支持的是 window.getComputedStyle.
+    对于getComputedStyle方法，你传入的CSS属性时，必须采用和样式表中设置样式相同的语法。
+    不过对于 currentStyle 方法而言，你将使用JS符号
+
+    */
+
+    /*
+
+
+    */
+
+    //创建一个可复用的事件处理函数
+    function catchEvent(eventObj,event,eventHandler) {
+        if(eventObj.addEventListener) {
+            eventObj.addEventListener(event,eventHandler,false);
+        } else if(eventObj.attachEvent) {
+            event = "on" + event;
+            eventObj.attachEvent(event,eventHandler);
+        }
+    }
+
+
+    //创建一个可复用的函数，取消相应的事件
+    function cancelEvent(event) {
+        if(event.preventDefault) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            event.returnValue = false;
+            event.cancelBubble = true;
+        }
+    }
+
+    function getStyle(obj,jsprop,cssprop) {
+        if(obj.currentStyle) {
+            alert('currentStyle' + obj.currentStyle[jsprop]);
+        } else if(window.getComputedStyle) {
+            alert('getComputedStyle ' + document.defaultView.getComputedStyle(obj,null).getPropertyValue(cssprop));
+        } else {
+            alert("Nothing");
+        }
+    }
+
+
+    function changeElement() {
+        var obj = document.getElementById("div1");
+        alert(obj.style.backgroundColor);
+        getStyle(obj,"backgroundColor","background-color");
+        obj.style.backgroundColor ="FF0000";
+        alert(obj.style.backgroundColor);
+    }
+
+    document.onclick = changeElement;
+	</script>
+</head>
+<body >
+<div id="div1">
+    <p> Hello CSS</p>
+</div>
+</body>
+</html>
