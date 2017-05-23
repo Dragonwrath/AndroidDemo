@@ -1,0 +1,127 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+
+    <style type="text/css">
+        .label {
+        background-color :#000033;
+        width:400px;
+        padding :10px;
+        margin:0 20px;
+        color : #fff;
+        text-align : center;
+        border-bottom: 1px solid #ffffff;
+        cursor : pointer;
+        position : relative;
+
+        }
+        .elements {
+        background-color :#ccd9ff;
+        width:400px;
+        padding :10px;
+        margin:0 20px
+        display: block;
+        position : fixable;
+
+        }
+    </style>
+    <script type="text/javascript">
+    /*
+    我们可以通过如下的代码获取到CSS类名，从而获取元素
+    同时为了解决兼容性，我们可以使用如下的代码
+    if(document.querySelectorAll) {
+        elems = document.querySelectorAll('.elements');
+    } else if(document.getElementsByClassName){
+        document.getElementsByClassName('elements');
+    }
+
+    */
+
+    /*
+
+
+    */
+
+    /*
+
+
+    */
+
+    //创建一个可复用的事件处理函数
+    function catchEvent(eventObj,event,eventHandler) {
+        if(eventObj.addEventListener) {
+            eventObj.addEventListener(event,eventHandler,false);
+        } else if(eventObj.attachEvent) {
+            event = "on" + event;
+            eventObj.attachEvent(event,eventHandler);
+        }
+    }
+
+
+    //创建一个可复用的函数，取消相应的事件
+    function cancelEvent(event) {
+        if(event.preventDefault) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            event.returnValue = false;
+            event.cancelBubble = true;
+        }
+    }
+
+    window.onload =function() {
+        var elems = null;
+        var labels = null;
+        if(document.querySelectorAll) {
+            elems = document.querySelectorAll('.elements');
+            labels = document.querySelectorAll('.label');
+        } else if(document.getElementsByClassName){
+            elems = document.getElementsByClassName('elements');
+            labels = document.getElementsByClassName('label');
+        }
+        if(elems) {
+            for(var i = 0; i < elems.length; i++){
+                elems[i].style.display = 'none';
+            }
+            for(var i = 0; i < labels.length; i++){
+                labels[i].onclick = showBlock;
+            }
+        }
+    }
+
+    function showBlock(event) {
+        var theEvent = event ? event : window.event;
+        var theSrc = theEvent.target ? theEvent.target : theEvent.srcElement;
+        var itemId = "elements" + theSrc.id.substr(5,1);
+        var item = document.getElementById(itemId);
+        if (item.style.display == 'none') {
+            item.style.display = 'block';
+        } else {
+            item.style.display = 'none';
+        }
+    }
+
+	</script>
+</head>
+<body >
+<div class="label" id="label1">
+    Name
+</div>
+<div class="elements" id="elements1">
+    <label >First Name:</label><br/>
+    <input type="text" name="firstname"/><br/><br/>
+    <label >Last Name:</label><br/>
+    <input type="text" name="lastname"/><br/><br/>
+</div>
+<div class="label" id="label2">Address</div>
+<div class="elements" id="elements2">
+    <label >Street Address:</label><br/>
+    <input type="text" name="street"/><br/><br/>
+    <label >City:</label><br/>
+    <input type="text" name="city"/><br/><br/>
+    <label >State:</label><br/>
+    <input type="text" name="state"/><br/><br/>
+</div>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+
+    <style type="text/css">
+        div{ margin : 20px; width : 200px;height : 200px;}
+        #div1{background-color: #ffff00}
+        #div2{background-color: #00ff00}
+    </style>
+    <script type="text/javascript">
+    /*
+    一次性对象
+    创建一次性对象的例子
+    特别注意使用键值对的时候，中间为","
+    var oneOff= {
+        vara : "valuea",
+        varb : "valueb",
+        method : function() {
+            return this.vara + "  " + this.varb;
+        }
+    }
+    调用
+    oneOff.vara;
+    oneOff.method();
+    亦或者
+    var oneOff = new Object();
+    oneOff.vara = "valuea";
+    oneOff.varb = "valueb";
+    oneOff.method : function() {
+            return this.vara + "  " + this.varb;
+        };
+     调用
+    oneOff.vara;
+    oneOff.method();
+
+    再或者
+     var oneOff= {
+        this.vara = "valuea";
+        this.varb = "valueb";
+        this.method = function() {
+            return this.vara + "  " + this.varb;
+        }
+    }
+    */
+
+    //创建一个可复用的事件处理函数
+    function catchEvent(eventObj,event,eventHandler) {
+        if(eventObj.addEventListener) {
+            eventObj.addEventListener(event,eventHandler,false);
+        } else if(eventObj.attachEvent) {
+            event = "on" + event;
+            eventObj.attachEvent(event,eventHandler);
+        }
+    }
+
+
+    //创建一个可复用的函数，取消相应的事件
+    function cancelEvent(event) {
+        if(event.preventDefault) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            event.returnValue = false;
+            event.cancelBubble = true;
+        }
+    }
+
+    var flipper = {
+        obj1 : null,
+        obj2 : null,
+        getStyle : function(obj,jsStyleName,styleName) {
+            if(obj.currentStyle) {
+                return obj.currentStyle(jsStyleName);
+            } else if(window.getComputedStyle) {
+                return document.defaultView
+				.getComputedStyle(obj,null)
+				.getPropertyValue(styleName);
+            } else {
+                return undefined;
+            }
+		},
+        setBackgroundColor : function(obj,color) {
+            obj.style.backgroundColor = color;
+        },
+        flipColors : function() {
+            var color1 = this.getStyle(this.obj1,"backgroundColor","background-color");
+            var color2 = this.getStyle(this.obj2,"backgroundColor","background-color");
+            this.setBackgroundColor(this.obj1,color2);
+            this.setBackgroundColor(this.obj2,color1);
+        }
+    };
+
+    window.onload = function(){
+        flipper.obj1 = document.getElementById("div1");
+        flipper.obj2 = document.getElementById("div2");
+    }
+
+    document.onclick = function() {
+        flipper.flipColors();
+    }
+	</script>
+</head>
+<body >
+<div id="div1">
+    <p> DIV1</p>
+</div>
+<div id="div2">
+    <p> DIV2</p>
+</div>
+</body>
+</html>

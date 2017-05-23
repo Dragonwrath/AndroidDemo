@@ -1,0 +1,74 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+   JS不区分整数值和浮点数
+   JS采用IEEE 754标准定义的64位浮点数格式表示数字，因此可以同时表示浮点数与整数
+   0x或者0X表示十六进制
+   八进制直接量是明令禁止的
+   更加简洁的表示方法就是[digits][.digits][(E|e)[(+|-)]digits]
+   Math.pow(2,53) //求幂运算
+   Math.round(0.6) //四舍五入
+   Math.ceil(.6) //向上取整
+   Math.floor(0.6) //向下取整
+   Math.abs(-5) //取绝对值
+   Math.pow(9,1/3) 就是求9的立方根
+   Math.exp(3)   //e的三次幂
+   需要注意的是当数字运算超出JS表示的数字上限（溢出），结果为一个特殊的
+   无穷大（infinity）值，在JS中以Infinity表示，-Infinity表示负无穷
+   被零整除 在JS中不会曝出，会返回无穷大或者负无穷大，但是有一个例外 0/0 ，结果是NaN
+
+   我们看下面的一个例子
+    var zero = 0;
+    var negz = -0;
+    zero === negz; // true;
+    1/zero === 1/negz; //false 正负无穷大不相等
+
+    需要注意的是JS的数值在使用浮点数是需要注意，由于采用分数表示法，因此计算结果会产生差异
+    例如
+    var x= .3- .2;
+    var y = .2 - .1;
+    x == y //false
+
+    */
+
+    /*
+    以下的值都会转换成false
+    undefined
+    null
+    0
+    -0
+    NaN
+    ""
+    所有的值，包括对象都会转换成true
+    null可以认为是一个特殊的对象之，含义为“非对象”
+    undefined说么这个属性或元素不存在
+    判断相等==认为两者是相等的
+    因此要判断需要使用严格相等运算符 ===
+
+    */
+
+    /*
+    全局属性 ，比如undefined、Inifinity和NaN
+    全局函数，比如isNaN，parseInt
+    构造函数，比如Date(),RegExp(),String(),Object()和Array()
+    全局对象，比如Math和JSON
+    */
+    function hello() {
+        var msg = 'hello world';
+        document.open()
+		document.write(msg);
+		document.close();
+    }
+	</script>
+</head>
+<body>
+
+<p>Imagine a form with five fields</p>
+</body>
+<body onload="hello()">
+</body>
+
+</html>

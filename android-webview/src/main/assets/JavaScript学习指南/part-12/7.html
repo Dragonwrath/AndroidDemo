@@ -1,0 +1,101 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+
+    <style type="text/css">
+        #data1 {
+        position : absolute;
+        top:100px; left : 100px;
+        padding: 0;
+        width: 200px;
+        height: 200px;
+        background-color: #ffff00;
+        clip: rect(0px,200px,200px,0px);
+        }
+    </style>
+    <script type="text/javascript">
+    /*
+    CSS中的clip属性可以指定一个形状以及该形状的大小
+    支持的形状偶rect
+    clip: rect{topval, rightval, bottomval, leftval};
+
+    */
+
+    /*
+
+
+    */
+
+    /*
+
+
+    */
+
+    //创建一个可复用的事件处理函数
+    function catchEvent(eventObj,event,eventHandler) {
+        if(eventObj.addEventListener) {
+            eventObj.addEventListener(event,eventHandler,false);
+        } else if(eventObj.attachEvent) {
+            event = "on" + event;
+            eventObj.attachEvent(event,eventHandler);
+        }
+    }
+
+
+    //创建一个可复用的函数，取消相应的事件
+    function cancelEvent(event) {
+        if(event.preventDefault) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            event.returnValue = false;
+            event.cancelBubble = true;
+        }
+    }
+
+    var bottom =200;
+    var clipped = false;
+
+    document.onclick = testItem;
+
+    function testItem() {
+       if(clipped) {
+            unClipItem();
+       } else {
+            clipItem();
+       }
+    }
+
+    function clipItem(){
+        bottom -=20;
+        var clip = "rect(0px,200px," + bottom + "px,0px)";
+        var obj = document.getElementById("data1");
+        obj.style.clip = clip;
+        if (bottom == 40) {
+            clipped = true;
+        } else {
+            setTimeout("clipItem()",100);
+        }
+    }
+
+    function unClipItem() {
+        bottom +=20;
+        var clip = "rect(0px,200px," + bottom + "px,0px)";
+        var obj = document.getElementById("data1");
+        obj.style.clip = clip;
+        if (bottom == 200) {
+            clipped = false;
+        } else {
+            setTimeout("unClipItem()",100);
+        }
+    }
+
+	</script>
+</head>
+<body >
+<div id="data1">
+    <p> Hello CSS</p>
+</div>
+</body>
+</html>

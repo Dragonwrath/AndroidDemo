@@ -1,0 +1,115 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+
+    <style type="text/css">
+        .help {
+        position:absolute;
+        left:300px;
+        top : 200px;
+        visibility:hidden;
+        width:10px;
+        padding:10px
+        border:1px solid #f00;
+        }
+
+        form {
+        margin:20px;
+        background-color : #dfe1cb;
+        padding : 20px;
+        width : 200px
+        }
+
+        label {cursor:help}
+    </style>
+    <script type="text/javascript">
+    /*
+    CSS如果想要影藏一个元素，之需要将其visibility属性设置为hidden，
+    将其设置为visible就可见了
+    如果设置为inherit，那么该元素将从包含它的元素中继承该属性的设置值
+    可以将opacity属性设置为完全透明，这样可以隐藏元素。
+    不过它和visibility属性一样，该元素依然会存在于页面流中
+    如果将display属性设置为none，那么它将被隐藏。
+    display属性设置为block 将像块级元素那样显示
+    display属性设置为inline，那么将显示在适当的位置，并不会添加新行
+
+    */
+
+    /*
+
+
+    */
+
+    /*
+
+
+    */
+
+    //创建一个可复用的事件处理函数
+    function catchEvent(eventObj,event,eventHandler) {
+        if(eventObj.addEventListener) {
+            eventObj.addEventListener(event,eventHandler,false);
+        } else if(eventObj.attachEvent) {
+            event = "on" + event;
+            eventObj.attachEvent(event,eventHandler);
+        }
+    }
+
+
+    //创建一个可复用的函数，取消相应的事件
+    function cancelEvent(event) {
+        if(event.preventDefault) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            event.returnValue = false;
+            event.cancelBubble = true;
+        }
+    }
+
+
+    window.onload = function() {
+        var labels = document.getElementsByTagName("label");
+        for(var i = 0; i < labels.length;i++) {
+            labels[i].onclick = showHelp;
+        }
+    }
+
+    function showHelp(event) {
+        var theEvent = event ? event : window.event;
+        var theSrc = theEvent.target ? theEvent.target : theEvent.srcElement;
+        //首先隐藏所有帮助信息
+
+        var item1 = document.getElementById("item1");
+        var item2 = document.getElementById("item2");
+
+        item1.style.visibility = "hidden";
+        item2.style.visibility = "hidden";
+
+        if(theSrc.id == "label1") {
+            item1.style.visibility = "visible";
+        } else {
+            item2.style.visibility = "visible";
+        }
+    }
+	</script>
+</head>
+<body >
+<form action="">
+    <p>
+        <label id="label1">One</label>
+        <input type="text"><br/><br/>
+        <label id="label2">Two</label>
+        <input type="text">
+    </p>
+
+</form>
+<div id="item1" class="help">
+    <p>First Item</p>
+</div>
+<div id="item2" class="help">
+    <p>Second Item</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+
+    <style type="text/css">
+        #div1{background-color: #ffff00}
+    </style>
+    <script type="text/javascript">
+    /*
+    在某个对象的上下文中调用apply函数，从而为另一个对象应用某个方法。
+    该函数中定义了两个参数，一个表示的调用对象的上下文，用this表示
+    另一个表示第二个对象参数的数组变量
+    call函数与apply唯一的区别是，它不需要将第二个对象方法参数添加到数组中，
+    而是可以直接列出每个参数，
+    apply和call方法允许在另一个对象中调用某个方法。
+    如果要调用构造方法，就可以如下
+    call第一个参数指向当前对象this， 另一个参数是该对象的构造函数
+    obj.call(this,arg1,arg2,...,argn);
+    apply第一个参数指向当前对象this， 另一个参数是 参数数组
+    apply方法更适用于共享的参数集合，否则call方法更方便
+     */
+
+    /*
+
+    */
+
+    /*
+
+
+    */
+
+    //创建一个可复用的事件处理函数
+    function catchEvent(eventObj,event,eventHandler) {
+        if(eventObj.addEventListener) {
+            eventObj.addEventListener(event,eventHandler,false);
+        } else if(eventObj.attachEvent) {
+            event = "on" + event;
+            eventObj.attachEvent(event,eventHandler);
+        }
+    }
+
+
+    //创建一个可复用的函数，取消相应的事件
+    function cancelEvent(event) {
+        if(event.preventDefault) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            event.returnValue = false;
+            event.cancelBubble = true;
+        }
+    }
+
+    function Tune(title, type) {
+        this.title = title;
+        this.type = type;
+        this.getTitle = function() {
+            return "Song: " + this.title + " Type: " + this.type;
+        }
+    }
+
+    function Artist_tune(title, type, artist) {
+        this.artist = artist;
+       // this.toString("Artist is " + artist);
+       //注意apply调用方法的参数顺序问题，必须与调用的对象保持一致
+       //当该类调用的参数对象多于目标参数时，只会取相应的参数
+        Tune.apply(this, arguments);
+        this.toString = function() {
+            return "Artist: " + this.artist + " " + this.getTitle();
+        }
+    }
+
+    window.onload = function() {
+        Artist_tune.prototype = new Tune();
+        var song = new Artist_tune("I want to ","rock","Beatles");
+        document.writeln(song.toString());
+    }
+
+	</script>
+</head>
+<body >
+
+</body>
+</html>

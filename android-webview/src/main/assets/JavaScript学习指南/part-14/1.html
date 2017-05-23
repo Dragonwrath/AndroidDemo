@@ -1,0 +1,152 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+
+    <style type="text/css">
+       div.elem{ margin : 20px;}
+       div#cities { display : none;}
+    </style>
+    <script type="text/javascript">
+    /*
+    XMLHttpRequest
+    open open方法的语法是open(method,url[aysnc,username,passowrd])
+        它用来创建到指定URL的连接;
+    setRequestHeader 语法是setRequestHeader(label,value) 为请求头添加标记/值对
+    send 语法 send(content) 发送请求，并附上相应的数据
+    getAllResponseHeaders 语法getAllResponseHeaders() 已字符串形式返回HTTP英达的头
+    getResponseHeader 语法getResponseHeader(label) 获取应答头指定的信息
+    abort 语法 abort() 取消当前请求
+
+    */
+
+    //创建一个可复用的事件处理函数
+    function catchEvent(eventObj,event,eventHandler) {
+        if(eventObj.addEventListener) {
+            eventObj.addEventListener(event,eventHandler,false);
+        } else if(eventObj.attachEvent) {
+            event = "on" + event;
+            eventObj.attachEvent(event,eventHandler);
+        }
+    }
+
+
+    //创建一个可复用的函数，取消相应的事件
+    function cancelEvent(event) {
+        if(event.preventDefault) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            event.returnValue = false;
+            event.cancelBubble = true;
+        }
+    }
+
+    var xmlHttpObj;
+
+    catchEvent(window,"load" ,function() {
+        document.getElementById("cities").style.display = "block";
+        document.getElementById("submitButton").style.display = "none";
+        document.getElementById("stateList").onchange = populateList;
+    });
+
+    //创建XHR对象 同时解决浏览器兼容性问题
+    function getXmlHttp(){
+        var xmlhttp = null;
+        if(window.XMLHttpRequest) {
+            xmlhttp = new XMLHttpRequest();
+            if (xmlhttp.overrideMimeType) {
+                xmlhttp.overrideMimeType('text/xml');
+            }
+        } else if(window.ActiveXObject) {
+			try {
+			xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+			} catch(e) {
+				try{
+					xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+				} catch(e) {
+					xmlhttp = null;
+				}
+			}
+        }
+        return xmlhttp;
+    }
+
+    //准备并发送XHR请求 GET方式
+    function populateList(){
+        var state = encodeURIComponent(document.getElementById("stateList").value);
+        var url = 'ajax-1.php?state=' + state;
+        if(!xmlHttpObj){
+            xmlHttpObj = getXmlHttp();
+        }
+        if(!xmlHttpObj){
+            return;
+        }
+        xmlHttpObj.open('GET',url,true);
+        xmlHttpObj.onreadystatechange= getCities;
+        xmlHttpObj.send(null);
+    }
+
+    /*
+        //准备并发送XHR请求 POST方式
+        function populateList(){
+        var state = document.getElementById("stateList").value;
+        var url = 'ajax-1.php';
+        var qry = 'state=' +state;
+
+        if(!xmlHttpObj){
+            xmlHttpObj = getXmlHttp();
+        }
+        if(!xmlHttpObj){
+            return;
+        }
+        xmlHttpObj.open('POST',url,true);
+        xmlHttpObj.onreadystatechange= getCities;
+        xmlHttpObj.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        xmlHttpObj.send(qry);
+    }
+    */
+
+
+    /*
+    XMLHttpRequest 还有6个属性
+    onreadystatechange 用来保存当请求的ready状态改变时调用的函数
+    readystate 有5个可选值
+    0 表示请求未初始化
+    1 表示请求处于open阶段
+    2 表示请求已发送
+    3 表示正在接受应答
+    4 表示应答接受完成
+    responseText 文本格式的应答消息
+    responseXML XML格式的应答消息，可以将其视为有效XML处理
+    status 返回请求的状态，如404、500正常是200
+    statusText 以文字表示的请求状态
+    */
+    function getCities(){
+        if(xmlHttpObj.readyState == 4 && xmlHttpObj.status == 200) {
+          document.getElementById('cities').innerHTML =  xmlHttpObj.responseText;
+        } else if(xmlHttpObj.readyState == 4 && xmlHttpObj.status != 200) {
+          document.getElementById('cities').innerHTML = 'Error';
+        }
+    }
+
+	</script>
+</head>
+<body >
+    <h3>Select State:</h3>
+    <form action="ajax-1.php" method="get">
+        <div class="elem">
+            <select name="state" id="stateList">
+                <option value="CA">CA</option>
+                <option value="MO">MO</option>
+                <option value="WA">WA</option>
+                <option value="ID">ID</option>
+            </select>
+            <p><input type="submit" value="Get Cities" id="submitButton"></p>
+        </div>
+        <div class="elem" id="cities">
+            <p> </p>
+        </div>
+    </form>
+</body>
+</html>

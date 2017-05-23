@@ -1,0 +1,137 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+
+    <style type="text/css">
+        #div1{background-color: #ffff00}
+    </style>
+    <script type="text/javascript">
+    /*
+    在JS 1.5引擎中一共实现了6类错误
+    EvalError eval使用不正确；
+    RangeError 数字值超出范围所抛出的错误
+    ReferenceError 使用无效引用所抛出的
+    SyntaxError 无效语法所抛出的错误
+    TypeError 变量类型与预期不符合所抛出的错误
+    URIError  encodeURI和decodeURI使用不正确抛出的
+    我们可以使用instanceof来判断错误类型
+    try{
+        var someArray = null;
+        alert(someArray[19]);
+    } catch(e) {
+        if( e instanceof TypeError){
+
+        }
+    } finally {
+        someArray = null;
+    }
+
+    */
+
+    /*
+
+    */
+
+    /*
+
+
+    */
+
+    //创建一个可复用的事件处理函数
+    function catchEvent(eventObj,event,eventHandler) {
+        if(eventObj.addEventListener) {
+            eventObj.addEventListener(event,eventHandler,false);
+        } else if(eventObj.attachEvent) {
+            event = "on" + event;
+            eventObj.attachEvent(event,eventHandler);
+        }
+    }
+
+
+    //创建一个可复用的函数，取消相应的事件
+    function cancelEvent(event) {
+        if(event.preventDefault) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            event.returnValue = false;
+            event.cancelBubble = true;
+        }
+    }
+
+
+    /*
+    function Tune(title) {
+        this.title = title;
+    }
+
+    function printTitle() {
+        document.writeln(this.title + "<br\>");
+    }
+
+    window.onload = function() {
+        Tune.prototype.print = printTitle;
+
+        var oneTune = new Tune("One Title");
+        oneTune.print();
+
+        var twoTune = new Tune("Two Title");
+        twoTune.print();
+
+        Tune.prototype.print = function(){
+            document.writeln("hahhahaha" + "<br\>");
+        };
+
+        var threeTune = new Tune("Three Title");
+
+        threeTune.print = function() {
+            document.writeln("hehehehe" + "<br\>");
+        };
+
+        threeTune.print();
+    }
+
+    */
+    function Tune() {}
+
+    function printTitle() {
+        document.writeln(this.title + "<br\>");
+    }
+
+   window.onload = function() {
+        var t =  Tune.prototype;
+        //getter 和setter
+        /*
+        定义set和get方法需要注意的是：
+        1、从.prototype中获取相应的属性
+        2、前后两个下划线的定义方式，
+        这样就可以将内部的变量myTitle，在外部展示的时候变为title显示，隐藏了相应的细节
+        不加getter和setter的时候输出为
+        One Title
+        Two Title
+        加了getter和setter的时候输出为
+        Title is One Title
+        Title is Two Title
+        主要可以观察到我们在getter上的设置
+        */
+        t.__defineGetter__("title",function() { return "Title is " + this.myTitle;})
+        t.__defineSetter__("title",function(tt) {  this.myTitle = tt;})
+        t.print = printTitle;
+
+        var oneTune = new Tune();
+        oneTune.title = "One Title";
+        oneTune.print();
+
+        var twoTune = new Tune("Two Title");
+        twoTune.title = "Two Title";
+        twoTune.print();
+
+   }
+
+
+	</script>
+</head>
+<body >
+</body>
+</html>
