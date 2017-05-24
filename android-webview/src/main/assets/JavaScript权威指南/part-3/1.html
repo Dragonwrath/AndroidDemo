@@ -56,6 +56,34 @@
     构造函数，比如Date(),RegExp(),String(),Object()和Array()
     全局对象，比如Math和JSON
     */
+
+    /*
+    undefined 转换成数字为NaN
+    null      转换成数字为0
+    true      转换成数字为1
+    false      转换成数字为0
+    */
+
+    /*
+    数组转换成字符串
+    所有的对象继承了两个装换方法。
+
+    toString 方法
+    默认的返回字符串的方法
+    ({x:2,y:2}).toString() 结果为"[object object]"
+    其他的一些例子
+    [1,2,3].toString() 转换结果为"1,2,3"
+    //数组继承了默认的valueOf()方法，这个方法返回的是一个对象而不是一个原始值
+    (function(x) { f(x); }).toString(); 转换结果为"function(x) {\n f(x); \n}"
+
+    valueOf()
+    默认将对象转换成原始值，他只是简单返回对象本身
+    var d = new Date(2010,0,1);
+    d.valueOf(); //结果为1262332800000
+
+
+
+    */
     function hello() {
         var msg = 'hello world';
         document.open()
