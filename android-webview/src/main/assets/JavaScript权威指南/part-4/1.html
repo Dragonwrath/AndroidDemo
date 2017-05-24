@@ -4,11 +4,52 @@
     <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
     <script type="text/javascript">
     /*
+    typeof运算后的返回值
+    x typeof x
+    undefined       "undefined"
+    null            "object"
+    true 或false    "boolean"
+    任意数字或NaN    "number"
+    任意字符串       "string"
+    任意函数         "function"
+    任意内置对象(非函数) "object"
+    任意宿主对象  由编译器各自实现的字符串，
+            但不是以上的"undefined" "boolean" "number" "string"
+
+    */
+
+    /*
+    delete 操作符 删除对象属性或者数组元素
+    需要注意，ES5严格模式下，会抛出delete异常
+    var o={x:1,y:2};
+    delete o.x; //删除一个对象属性，返回true
+    typeof o.x; //属性不存在，返回"undefined"
+    delete o.x; //删除不存在的属性，返回true；
+    delete l;   //不能删除通过var声明的变量，返回false
+                //严格模式下，将抛出一个异常
+    */
+
+    /*
+    void 运算符
 
 
     */
 
     /*
+    for in循环
+    for(var p in o )
+    for/in循环中variable的值可以当做赋值表达式的左值，它可以是任意表达式
+    每次循环都会计算这个表达式。
+    例如
+    var o = {x:1,y:2mz:3};
+    var a = [], i = 0;
+    for(a[i++] in o) //结果为empty
+
+    for/in循环并不会遍历对象的所有属性，只有"可枚举"(enumeralbe)的属性才会遍历到
+    由于JS语言核心定义的内置方法就不是可枚举性
+    很多内置的对象是"不可枚举的"（nonenumerable）
+    此外还需要注意，浏览器厂商的定义相应的枚举的顺序的实现也不一致
+    一般情况来说，是按照属性定义的先后顺序来枚举简单对象的属性，先定义的西安美居
 
     */
     function hello() {

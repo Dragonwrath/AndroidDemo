@@ -1,0 +1,202 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+    JS数组的索引是基于0的32位数值，最大可能索引是2e32-2
+    */
+
+    /*
+    稀疏数组就是包含从0开始的不连续索引的数组
+    例如
+    a = new Array(5); //数组没有元素，但是数组元素为5
+    a = []; //创建一个空数组，长度为0
+    a[1000] = 0; //数组长度为1001
+    省略的元素在数组中是存在的，其值是undefined，
+    var a1 =[,,,]; //[undefined,undefined,undefined]
+    var a2 = new Array(3); //数组没有元素
+    0 in a1; //false,a1在索引0出有一个元素
+    0 in a2; //false,a1在索引0出没有个元素
+    var a1 = [,];
+    0 in a1; //false 在一些版本中连续逗号的情况下会插入undefined值，
+    */
+
+    /*
+    改变数组长度，见改变数组的内容
+    a = [1,2,3,4,5];
+    a.length = 3; //a只保留钱3个元素
+    a.length = 0 ;//a删除所有元素。
+    a.length = 5; //长度为5，但是没有元素
+    */
+
+    /*
+    ----ES3常见数组方法
+    Array.join(),将数组中所有元素都转换成字符串并连接在一起，返回最后生成的字符串
+    默认使用逗号分隔，也可以指定分隔符
+    var a = [1,2,3];
+    a.join(); //"1,2,3"
+    a.join(" "); // "1 2 3"
+    Array.reverse 方法将数组中的元素颠倒顺序，返回逆序后的数组
+
+    Array.sort 方法将数组中的元素排序并返回排序后的数组
+    如果数组中包含undefined元素，它将被拍到数组末尾
+    sort方法可以传递一个比较函数，来决定排序顺序
+    a.sort(function(a,b) { return b-a});
+
+    concat() 方法创建并返回一个新数组
+    var a = [1,2,3];
+    a.concat(4,[5,[6,7]]); //返回[1,2,3,4,5,[6,7]]
+
+    slice方法 可以指定两个参数
+    以下例子以长度为m个元素的数组为例
+    第一个参数，指定的位置 ，正数n表示第n个元素，负数-n表示m-n
+    第二个参数，指定的长度，整数n表示需要切割n个元素， 负数-n表示，切割到m-n个元素
+
+
+    splice方法是在数组中插入或删除元素的通用方法
+    splice的第一个参数制定了插入和(或)删除的起始位置
+    第二个参数指定了应该从数组中删除的元素的个数
+    它返回的是一个由删除元素组成的数组
+    var a = [1,2,3,4,5,6,7,8];
+    a.splice(4); //返回[5,6,7,8] a是[1,2,3,4]
+    a.splice(1,2);//返回[2,3]a是[1,4]；
+    插入元素
+    var a = [1,2,3,4,5]
+    a.splice(2,0,'a','b');返回[] ,a是[1,2,'a','b',3,4,5]
+    a.splice(2,2,[1,2],3);返回['a','b'] ,a是[1,2,[1,2],3,3,4,5]
+
+    push和pop方法
+    push方法是入栈
+    pop是将最后一个元素弹出，
+
+    unshift和shift
+    与前面的两个方法雷士，只是他们是在数组的头部进行入栈和出栈操作
+
+    */
+
+
+    /*
+    ES5 中的数组方法
+    新增方法概述
+    大多数方法的额第一个参数接收一个函数，并对数组的每个元素(或者一些元素)
+    调用一次该函数
+    如果是稀松数组，对不存在的元素不调用传递的函数
+    大多数情况下，调用提供的函数使用三个参数：数组元素、元素的索引、数组本身
+    通常只需要第一个参数即可，如果有第二个参数，则调用的函数被看做第二个参数的方法
+
+    forEach()
+    var data = [1,2,3,4,5];
+    var sum = 0;
+    data.forEach(function(value) { sum += value;}) //累加，结果为15
+    data.forEach(function(v,i,a) { a[i] = v+ 1;}) //结果为[2,3,4,5,6]
+    由于无法中断，因此只能try异常
+    function foreach(a,f,t) {
+        try{a.forEach(f,t);}
+        catch(e) {
+            if(e === foreach.break) return;
+            else throw e;
+        }
+    }
+    foreach.break = new Error("StopIteration");
+
+
+    map()方法就是调用数组的每个元素传递给指定的函数，并返回一个数组，
+    它包含该函数的返回值
+    a =[1,2,3];
+    b = a.map(function(x) { return x*x; }); //b是[1,4,9]
+
+    filter()方法返回的是数组元素是调用的数组的一个子集，传递的函数式用来逻辑判定的，
+    该函数返回true或false
+    a = [5,4,3,2,1];
+    smallValues = a.filter(function(x) { return x < 3}); //[2,1]
+    everyother = a.filter(function(x,i) { return i%2 ==0}); //[5,3,1]
+    此外filter会跳过稀松数组中缺少的元素，它的返回数组总是稠密的
+    甚至可以压缩空缺并删除undefined和null元素
+    a = a.filter(function(x){ return x !=== undefined && x !== null;});
+
+
+    every和some
+    every是针对所有的，当所有判定都为真是，才返回true，在其判定函数第一次返回为false时，函数立即结束，返回false
+    some是针对其中的一个元素的，只要有一个元素满足就返回true,在其判定函数第一次返回为true时，立即返回，返回true
+    a = [1,2,3,4,5]
+    a.every(function(x) { return x < 10;})
+    a.some(function(x) { return x < 10;})
+
+    reduce 和reduceRight
+    使用指定的函数将数组元素组合生成单个值
+    reduce 需要两个值第一个是 相应的函数，第二个是可选的初始值，如不指定
+    则将数组第一个元素作为初始值，在空数组上，不带初始值，将导致类型错误异常
+    reduceRight的工作原理与reduce一样，只是从右往左进行
+    var a = [1,2,3,4,5]；
+    var sum = a.reduce(function(x,y) { return x + y;},0);求和
+
+    union函数使用第一个参数的属性值
+    var objects = [{x:1,a:1},{y:2,a:2},{z:3,a:3}];
+    var leftunion = objects.reduce(union);//{x:1,y:2,z:3,a:1};
+    var rightunion = objects.reduceRight(union);//{x:1,y:2,z:3,a:3};
+
+    indexOf和lastIndexOf
+    第一个参数为搜索值，第二个参数为可选值，代表数组索引，如果没有找到返回-1
+
+    */
+    /*
+    在ES5之后
+    Array.isArray 来判断是否为数组
+    如果在ES3中可以这么写
+    var isArray = Function.isArray || function(o) {
+        return typeof o === "object" &&
+        Object.prototype.toString.call(o) === "[object Array]";
+
+    }
+    JS数组有一些特性是其他对象所没有的
+    1、当有新元素添加到列表中时，自动更新length属性
+    2、设置length为一个较小值将截断数组
+    3、从Array.prototype中继承一些有用的方法
+    4、其类属性为Array
+    而类数组就是把拥有一个数值length属性和对应非负整数的对象看做一种类型的数组
+    判断是否为类数组
+    function isArrayLike(o) {
+        if (o //o非null、undefined等
+        && typeof o === "object" //o是对象
+        && isFinite(o.length)  //o.lenght是有限数组
+        && o.length >= 0
+        && o.length === Math.floor(o.length)
+        && o.length < 424967296)
+        return true; //o是类数组对象
+        else return false;
+        )
+    }
+
+    在JS 中一些DOM方法返回的就是类数组对象，例如document.getElementsByTagName()
+    由于JS数组方法是特意定义为通用的，因此不能在类数组上正确工作。
+    但是在ES5上所有的数组方法都是通用的，而ES3上除了toString 和toLocalString意外的所有方法也是通用的
+    因此我们可以借助Function.call方法调用
+    var a = {"0":"a","1":"b","2":"c",length :3}; //类数组对象
+    Array.prototype.join.call(a,"+"); //"a+b+c"
+    Array.prototype.slice.call(a, 0 ); //["a","b","c"]
+    ES5上我们就可以直接调用
+    Array.join(a,"+");
+    Array.slice(a,0);
+
+    因此为了兼容性，我们可以这样定义
+    Array.join = Array.join || function(a,sep) {
+        return Array.prototype.join.call(a,sep);
+    }
+    */
+
+function hello() {
+        var a= [1,2,3];
+        delete a["1"];
+        document.writeln(a.toString() + "<br\>");
+    }
+	</script>
+</head>
+<body>
+
+<p>Imagine a form with five fields</p>
+</body>
+<body onload="hello()">
+</body>
+
+</html>

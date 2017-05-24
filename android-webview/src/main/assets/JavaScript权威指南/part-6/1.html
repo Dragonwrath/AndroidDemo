@@ -1,0 +1,343 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+    对象除了名字和值之外，每个属性还有一些与之相关的值，成为属性特征 property atrribute
+    可写 writable
+    可枚举 enumerable
+    可配置 configurable
+    ES5之前，通过代码给对象创建的属性都是具有以上三个属性的
+    ES5 则对这些特性加以配置
+    除了包含属性，每个对象还拥有三个相关的对象特性(object attribute)
+    对象的原型 (prototype) 执行另一对象，本对象的属性继承自它的原型对象
+    对象的类(class) 是一个标识对象类型的字符串
+    对象的扩展属性(extensible flag) 指明了（在ES5 中）是否可以向该对象添加新属性
+    */
+
+    /*
+    JS中对象和两类属性的划分
+    内置对象 (native object) 由ECMAScript规范定义的对象或类
+    宿主对象 (host object) 由JS解释器所嵌套的宿主环境（比如Web浏览器）定义的
+    自定义对象 (user-defined object) 是由运行中的JS代码创建的对象
+    自有属性(own property) 是直接在对象中定义的属性
+    继承属性 (inherited property) 是在对象的原型对象中定义的属性
+
+    var book = {
+        "main title" :"JS", //属性名字有空格的，必须用字符串表示
+        "sub-title" : "The Definitive Guide", //属性名字里有连字符，必须用字符串表示
+        "for" : "all audiences", //for是保留字，因此必须用引号 ES5中可不用引号，不过ES3必须用引号
+    }
+    //最后一个属性的逗号将忽略，不过最好不要写，因为在IE中会报错
+    */
+
+    /*
+    ES5中定义了一个Object.create()方法，
+    它创建一个新对象，其中第一个参数是这个对象的原型，第二个参数可选，用来对对象的属性进一步描述
+    var o1 = Object.create({x:1,y:2}); //o1继承了属性x和y
+    var o2 = Object.create(null); //o2不继承任何属性和方法
+    var o3 = Object.create(Object.prototype); // o3 和{}和new Object()一样
+
+    */
+
+    /*
+    ES3中用以下代码来模拟原型继承
+
+    //inherit() 返回一个继承自原型对象p的属性的新对象
+    //这里使用ES5中的Object.create()函数，如果存在的话
+    //如果不存在，退化成其他方法
+
+    function inherit(p) {
+        //p 是一个对象，但不能为null
+        if (p == null) throw TypeError();
+        //如果存在Object.create函数，则直接使用
+        if (Object.create) return Object.create(p);
+        //进一步类型检查
+        var t = typeof p;
+        if (t !== "object" && t !== "function") throw TypeError();
+        //定义一个空构造函数
+        function f() {};
+        //将其原型属性设置为p
+        f.prototype = p;
+        //使用f()创建p的继承对象；
+        return new f();
+    }
+    */
+
+    /*
+    ES3中如果要访问属性为保留字的属性
+    需要使用o["for"]或者o["class"]的方式
+    ES5 则可以直接使用
+    由于JS是弱类型语言，当通过[]来访问对象的属性时，属性名通过字符串表示
+    而字符串是JS的数据类型，在程序运行时可以修改和创建他们。
+    */
+
+    /*
+    属性赋值失败的情况
+    1、o的属性p是只读的，不能给只读属性重新赋值（defineProperty()方法中有一个例外
+    可以对可配置的只读属性重新赋值）
+    2、o中的属性p是继承属性，且它是只读的：不能通过同名自由属性覆盖只读的继承属性
+    3、o中不存在自由属性p：o没有使用setter方法设置属性p，并且o的可扩展(extensible attribute)
+    是false
+    */
+
+    /*
+    删除属性
+    delete运算符只能删除自有属性，不能删除继承属性
+    delete不能删除那些可以配置性为false的属性，
+    某些内置对象的属性是不可删除的，比如通过变量声明和函数声明创建的全局对象属性
+    delete 不能删除用var修饰的局部变量
+    严格模式中delete后必须显示指定对象及其属性
+    delete x; //报语法错误
+    delete this.x;
+    */
+    /*
+    in 运算符，hasOwnProperty()和propertyIsEnumerable()来完成工作
+    hasOwnProperty()方法用来检测给定的名字是否是对象的自有属性，继承属性它将返回false
+    propertyIsEnumerable()方法，只有检测到自由属性且这个属性的可枚举行(enumerable attribute)
+    为true时才返回true。某些内置属性是不可枚举的，通常JS代码创建的属性都是可枚举的。
+    还可以使用!==来判断一个属性是undefined的，来判断其是否存在
+    使用！==是因为它可以区分null和undefined
+    但是需要注意，如果属性值为undefined，那么只能使用in操作符来判断
+
+    */
+
+    /*
+    枚举属性
+    许多工具库给Object.prototype添加了新的方法或属性
+    这些方法和属性可以被所有对象继承并使用。
+    在ES5之前，新添加的方法是不能定义为不可枚举的，为了避免这种情况，需要过滤
+    for/in循环返回的属性
+    for(p in o ) {
+        if(!o.hasOwnProperty(p)) continue; //跳过继承的属性
+    }
+    for(p in o ) {
+        if(type o[p] === 'function') continue; //跳过方法
+    }
+    */
+
+    /*
+    一些常用的枚举属性的对象工具函数
+
+    */
+    /*
+    * 把p中的可枚举属性复制到o中，并返回o
+    * 如果o和p中含有同名属性，则覆盖o中的属性
+    * 这个函数并不处理getter和setter以及复制属性
+    */
+    function extend(o,p) {
+        for(prop in p ) {
+            o[prop] = p[prop]
+        }
+        return o;
+    }
+
+    /*
+    * 把p中的可枚举属性复制到o中，并返回o
+    * 如果o和p中含有同名属性，o中的属性将不受影响
+    * 这个函数并不处理getter和setter以及复制属性
+    */
+    function merge(o,p) {
+        for(prop in p ) {
+            if(o.hasOwnProperty[prop]) continue;
+            o[prop] = p[prop]
+        }
+        return o;
+    }
+
+
+    /*
+    * 如果o在p中没有同名属性，则从o中删除该属性
+    * 返回o
+    */
+    function restrict(o,p) {
+        for(prop in p ) {
+           if(!(prop in p )) delete o[prop];
+        }
+        return o;
+    }
+
+    /*
+    * 如果o在p中有同名属性，则从o中删除该属性
+    * 返回o
+    */
+    function subtract(o,p) {
+        for(prop in p ) {
+           delete o[prop];
+        }
+        return o;
+    }
+
+
+    /*
+    * 返回一个对象，该对象同时拥有o的属性和p的属性
+    * 如果o和p中有重名属性，则使用p中的属性
+    */
+    function union(o,p) {
+       return extend(extend({},o),p);
+    }
+
+
+    /*
+    * 返回一个对象，该对象同时拥有o的属性和p的属性
+    * 想当与o和p的交集，但是p中的属性值被忽略
+    */
+    function union(o,p) {
+       return restrict(extend({},o),p);
+    }
+
+
+    /*
+    * 返回一个数组，该数组包含的是o中可枚举的自有属性的名字
+    * 想当与o和p的交集，但是p中的属性值被忽略
+    */
+    function keys(o) {
+       if(typeof o !== 'object') throw TypeError();
+       var result = [];
+       for(var prop in o ) {
+            if(o.hasOwnProperty(prop))
+                result.push(prop);
+       }
+       return result;
+    }
+    /*
+    除了for/in循环外，ES5定义了两个以枚举属性名称的函数
+    1、Object.keys()，它返回一个数组，这个数组由对象中可枚举的自有属性的名称组成
+    原理与keys函数类似
+    2、Object.getOwnPropertyNames(),它返回对象的所有自由属性的名称。
+    */
+
+
+    /*
+    ES5中
+    getter和setter定义的属性为“存取器属性”（accessor property）
+    如果属性同时又getter和setter，那么它就是一个读写属性，
+    如果只有getter，那么它就是一个只读属性
+    如果它只有setter，那么它就是一个只写属性，读取只写属性，总返回undefined
+    我们可以调用Object.getOwnPropertyDescriptor()来获取某个对象的属性描述符
+    */
+
+    /*
+    在ES5中我们可以将存取器属性的getter方法和setter方法看成属性的特征
+    因此我们可以认为一个属性包含了一个名字和4个特性
+    数据属性的4个特征分别是value、writable、enumerable、configurable
+    存取器属性的4个特征分别是getter、setter、enumerable、configurable
+    如果想要设置属性的特性，或者让新建的属性具有某种特性，可以调用Object.defineProperty()
+    例如
+    var o = {};
+    Object.defineProperty(o,"x",{
+    value : 1,
+    writable : true,
+    enumerable: false,
+    configurable: true
+    });
+    新创建的属性来说，默认的特性值是false 或者 undefined
+    注意不要修改继承属性
+    如果需要同时修改或者创建多个属性，可以使用以下的方法
+    var p = Object.defineProperties({}, {
+    x:{ value : 1, writable : true, enumerable: false, configurable: true},
+    y:{ value : 1, writable : true, enumerable: false, configurable: true}
+    })
+
+    而在ES5之前非标准的老式API用来查询和设置时由4个方法组成
+    所有的对象都拥有这4个方法
+    __lookupGetter__()
+    __lookupSetter__()
+    以上的方法用以返回一个命名属性的getter和setter方法
+    __defineGetter__()
+    __defineSetter__()
+    用于定义getter和setter
+    */
+
+
+
+    /*
+    原型属性 是用来继承属性的，它是在实例对象创建之初就设置好的
+    我们可以用isPrototypeOf来检测p是否是o的原型
+    例如
+    var p {x:1};
+    var o = Object.create(p);
+    p.isPrototypeOf(o); //true,o继承自P
+    Object.prototype.isPrototypeOf(p); //true
+    */
+    /*
+    classof函数
+    function classof(o) {
+        if (o === null) return "NULL";
+        if (o === undefined) return "Undefined";
+        return Object.prototype.toString.call(o).slice(8,-1);
+    }
+    */
+
+    /*
+    ES5定义了用来查询和设置对象可扩展性的函数，通过将对象传入Object.isExtensible(),
+    来判断该对象是否可扩展。
+    通过调用Object.preventExtensions()，可以将对象转换为不可扩展的，它只影响到对象本身
+    的可扩展性
+    而Object.seal()与Object.preventExtensions()类似，除了能够将对象设置为不可扩展的，
+    还可以将对象的所有自由属性都设置为不可配置的
+    通过使用Object.isSealed来检测对象是否封闭。
+    Object.freeze()将更严格地锁定对象,除了将对象设置为不可扩展和将其属性设置为不可配置之外
+    还将它自有的所有数据属性设置为只读，如果对象具有存取器属性的setter方法，存取器属性将不受影响
+    仍可以通过给属性赋值调用他们，
+    可以使用Object.isFrozen()来检测对象是否冻结
+
+    */
+
+
+    /*
+    对象序列化时值将对象的状态转换为字符串，也可以将字符串还原为对象
+    ES5提供了内置函数JSON.stringify()和JSON.parse()来
+
+    */
+
+
+    /*
+    toLocalString()Object上依然调用的是toString Date和Number对其做了定制
+    将数字和事件本地化
+
+    */
+    function loadData() {
+		var random = {
+			get octet() { return Math.floor(Math.random()*256);}
+		};
+
+		var o1 = Object.getOwnPropertyDescriptor({x:1},"x");
+		document.write(o1+"<br/>");
+
+
+		var o2 = Object.getOwnPropertyDescriptor(random,"octet");
+		document.write(o2+"<br/>");
+
+		var o3 = Object.getOwnPropertyDescriptor({},"x");
+		document.write(o3+"<br/>");
+		var o4 = Object.getOwnPropertyDescriptor({},"toString");
+		document.write(o4+"<br/>");
+
+        var o = {};
+        Object.defineProperty(o,"x",{
+        value : 1,
+        writable : true,
+        enumerable: false,
+        configurable: true
+        });
+        Object.defineProperty(o,"x",{  writable : true });
+        o.x = 2;
+        var str = Object.getOwnPropertyDescriptor(o,"x");
+        document.write(o.x+"<br/>");
+
+    }
+    window.onload = loadData;
+
+  
+	</script>
+</head>
+<body>
+
+<p>Imagine a form with five fields</p>
+</body>
+<body >
+</body>
+
+</html>
