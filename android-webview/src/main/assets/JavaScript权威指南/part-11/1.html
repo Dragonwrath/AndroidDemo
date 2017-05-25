@@ -1,0 +1,190 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+    关于JS子集安全性的一些要求
+    1、eval()和Function()构造函数在任何安全子集里都是禁止使用的，因为他们可以执行任意
+    代码，而且JS无法对这些代码做静态分析
+    2、禁止使用this关键字，因为函数(在非严格模式中，可以通过this访问全局对象)，而沙箱
+    系统的一个重要目的就是阻止对全局对象的访问
+    3、禁止使用with语句，因为with语句增加了静态代码检查的难度
+    4、禁止使用某些全局变量，在客户端JS中，浏览器窗口对象可以当做全局对象，因此具有双重
+    身份，因此代码不能有对window对象的引用，（因为浏览器对象除了作为普通的全局对象之外，
+    还能通过他们去操作浏览器和DOM）。同样的，客户端document对象定义了可以用来操控整个页面
+    内容的方法。将document的控制权交给一段不受信任的代码会有隐患，
+    安全子集有两种方法来处理类似的document这类全局对象
+        第一种方法，沙箱完全禁掉他们，并定义一组自定义API用以对分配给它的web页面做有限制的访问
+        第二种方法，在沙箱代码所运行的“容器"内定义一个只对外提供安全的标准DOM API的“外观面板”
+    （facade）或“document代理对象”（proxy）
+    5、禁止使用某些属性和方法，以免沙箱中的代码拥有过多的权限。
+        这些属性和方法包括
+        arguments对象的两个属性caller和callee(甚至在某些子集中禁止使用arguments对象)
+        函数的call和apply方法，以及constructor和prototype属性
+        非标准的属性例如__proto__
+    6、静态分析可以有效地防止带有点.运算符的属性存取表达式去读写特殊属性。但是使用[]来访问属性
+    就不同对其进行静态分析。因此安全子集进制使用方括号，除非方括号内是一个数字或字符串直接量
+
+    */
+
+    /*
+    JS1.5版本之后可以使用const 修饰常量但是需要注意
+    对已存在的常量重复声明会报错
+    const pi = 3.14;
+    p = 4; //直接忽略，不会报错
+    const pi =4 ; //报错
+    var pi = 4; //报错
+    //指定JS版本  <script type="text/javascript;version = 1.8">
+    由于JS中的变量缺少块级作用域的支持，因此在JS1.7之后增加了let
+    它的使用方式如下
+    1、作为变量声明和var一样
+    2、在for或for/in循环中，作为var的替代方案
+    3、在语句块中定义一个新变量并显式指定它的作用域
+    4、定义一个表达式内部作用域的变量，这个变量只在表达式内可以用
+    可以认为let严格规范了相应的变量的作用范围，
+    let声明的变量只属于就近的花括号括起来的语句块
+
+    通过var声明的变量在它们所声明的函数内始终是存在的，知道代码执行到相应的
+    var语句才开始初始化变量，而let变量与之情况类似，只是为执行到初始化时，
+    它的值为undefined
+    let x = 1,y = 2;
+    let(x = x+1, y = x+2) {
+        console.log(x+y);//5
+    };
+    console(x+y); //3
+    解构赋值
+    可用于初始化用var和let新声明的变量
+    可以作为在函数返回一组结果的时候使用，然而当配合对象或者嵌套对象时，解构赋值
+    变得更加复杂且容易搞混
+    let [x,y] = [1,2];  //x =1,y = 2;
+    [x,y] = [x+1,y+1] ; //x= x+1,y= y+1
+    [x,y] = [y,x] ; //互换
+    console.log([x,y]) //输出[3,2]
+    let first ,second,all;
+    all = [first , second] = [1,2,3,4] //first =1, second = 2 all = [1,2,3,4]
+    */
+
+    /*
+    JS 1.7对for/in循环的功能进行了扩展，可以用它来遍历可迭代的对象。
+    如果关键字in右侧的值是可迭代的，那么for/in循环就会自动调用它的__iterator__()方法
+    来获得一个迭代器对象
+    例如我们看下面的例子
+    我们创建一个可迭代对象和它的迭代器的时候必须手写__iterator__方法并抛出异常
+    function range(min,max) {
+        return{
+            get min() {return min;},
+            get max() {return max;},
+            includes:function(x) {
+                return min <= x && x <= max;
+            },
+            __iterator__:function() {
+                let val = Math.ceil(min);
+                return {
+                    next : function(){
+                        if(val > max) {
+                            throw StopIteration; //迭代到结尾抛出异常
+                        }
+                            return val++;
+                    }
+                };
+            }
+        };
+    }
+
+    抛出的异常for/in会自动帮我们处理，
+    如果想从可迭代对象中显式获得一个迭代器对象，字需要在JS 1.7中调用
+    Iterator()函数即可，它会自动返回对象的__iterator__方法的调用结果
+    而该函数可以传入第二个参数，它也会参与到__iterator__方法的调用
+    Iterator()函数 还有两个重要的特性
+    1、它只对自由属性进行遍历而忽略继承的属性
+    2、如果给Iterator()传入第二个参数为true，那么返回的迭代器只对属性名遍历，忽略属性值
+    */
+    /*
+    JS 1.7 新关键子yield
+    用法和return类似，返回函数中的一个值
+    区别在于，使用yield的函数“产生”一个可保持函数内部状态的值，这个值是可以恢复的。
+    因此该方法使得yield成为编写迭代器的有力工具，而任何使用关键字yield的函数，哪怕(
+    yield在代码逻辑中是不可达的)都成为"生成器函数（generator function）."
+    虽然生成器函数也是通过function声明的，typeof运算符返回的也是“function”，但是生成器
+    是一个对象用以表示生成器函数的当前执行状态，它定义了一个next方法，后者可恢复生成器函数的执行，
+    直到遇到下一条yield语句位置。
+    此时yield语句的返回值，就是生成器next方法的返回值。如果通过执行return或者到达函数体末尾时，
+    生成器的next方法将抛出一个 StopIteration。
+    只要一个对象包含可抛出StopIteration的next方法，它就是一个迭代器对象。
+    可以用for/in进行遍历
+    生成器函数不需要返回
+    function fibonacci() {
+        let x =0, y = 1;
+        while(true) {
+            yield y;
+            [x,y] = [y, x + y];
+        }
+    }
+    //调用生成器函数获取一个生成器
+    f = fibonacci();
+    for(let i = 0 ; i< 10;i++) console.log(f.next());
+    执行10次之后，f依然保持生成器函数的执行状态，如果不适用，可以调用f.close方法来释放
+
+    调用生成器的send方法，可以添加一个参数帮助我们处理
+    function counter(initial) {
+        let nextValue = initial;
+        while(true){
+            try {
+                let increment = yield nextValue;
+                if (increment)
+                    nextValue += increment;
+                else nextValue++;
+            } catch(e) {
+                if(e === 'reset') {
+                    nextValue = initial;
+                } else throw e;
+            }
+
+        }
+    }
+
+    let c = counter(10); //用10来初始化
+    console.log(c.next()); //输出10
+    console.log(c.send(2)); //输出12
+    console.log(c.throw('reset')); //输出10
+
+    数组推导是从Python借用过来的概念，利用另一个数组或可迭代对象来初始化数组的技术
+    一般数组推导的语法如下
+    [ expression for (variable in object) if ( condition)]
+    例如
+    let evensquares = [ x*x for(x in range(0,10)) if (x%2 === 0)]
+
+    生成器表达式
+    之前定义了一个map函数
+    function map(i,f) {
+        for (let x in i) yield f(x);
+    }
+    我们可以使用生成器表达式，直接写为
+    let h = (f(x) for (x in g));
+
+    JS1.8中如果函数只计算一个表达式并返回它的值，关键字return 和花括号都可以省略，
+    例如
+    let succ = function(x) x+1;
+    等价于
+    let succ = fucntion(x) {
+        return x+1;
+    }
+
+    */
+    function hello() {
+        var msg = 'hello world';
+        document.open()
+		document.write(msg);
+		document.close();
+    }
+	</script>
+</head>
+<body>
+
+<p>Imagine a form with five fields</p>
+</body>
+<body onload="hello()">
+</body>
+
+</html>

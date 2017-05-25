@@ -1,0 +1,53 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+    Window 对象是所有客户端JS特性和API的主要接入点，它表示Web浏览的一个窗口或窗体。
+    Window对象还定义了一些属性，比如Location对象的Location属性
+    window.location = "http://www.oreilly.com";
+    还定义了一些方法例如alert
+    Window对象本身是全局对象。
+    Window对象中海油一个重要的属性documet，它引用了Document对象
+    表示显示在窗口中的文档。其中定义了一些重要的方法，例如getElementById()
+
+    如果要使用XTML最好把所有的JS代码都放到一个CDATA部分中
+    如果使用了src属性script变迁直接的任何内容都会被忽略，如果需要，在script标签之间
+    添加代码的补充说明文档或者版权信息
+    */
+
+    /*
+    JavaScript程序是由Web页面所包含的所有JavaScript代码(内联脚本、HTML事件处理程序和javascript:RUL)
+    和通过script标签的src引用的外部JS代码组成。
+    这些代码公用一个全局Window对象这意味着，他们可以看到相同的Document对象，可以共享相同的全局函数和变量的集合
+
+    如果Web页面包含一个嵌入的窗体(通常使用iframe元素)，嵌入文档中的JS代码和被嵌入文档的JS代码会使用不同的
+    全局变量。如果外面和里面的文档来自同一个服务器，那么两个文档的代码就可以交互。
+    并且如果你愿意，就可以把他们当做同一个程序的两个相互作用的部分
+    script标签可以有defer和async属性(前提是，浏览器支持)可以改变脚本的执行方法
+    <script defer src = " deferred.js">
+    <script async src = " async.js">
+    defer和async属性会告诉浏览器，不会使用document.write(),因此在下载脚本的时候继续解析和渲染文档，
+    defer属性是的浏览器延迟脚本的执行，知道文档的载入和解析完成，才可以操作
+    async属性使得浏览器可以晶块地执行搅拌，而不用在下载脚本时阻塞文档解析，
+    如果两个属性同时存在会遵从async属性
+
+    */
+
+    function hello() {
+        var msg = 'hello world';
+        document.open()
+		document.write(msg);
+		document.close();
+    }
+	</script>
+</head>
+<body>
+
+<p>Imagine a form with five fields</p>
+</body>
+<body onload="hello()">
+</body>
+
+</html>

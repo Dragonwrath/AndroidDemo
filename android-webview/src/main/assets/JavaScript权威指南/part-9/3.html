@@ -1,0 +1,85 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+    使用ES5属性特性增加对象可扩展性的限制，增加类的健壮性
+    ES5可以通过设置属性为"不可枚举"(nonenumerable)
+
+    //将代码包装在一个匿名函数中，这样定义的变量在这个函数作用域内
+    (function() {
+    //定义一个不可枚举的属性 objectId，它可以被所有对象继承
+    //有雨该属性是只读的，因此它是只读的
+    //它是不可配置的，因此它是不能删除的
+    Object.defineProperty(Object.prototye,"objectId", {
+        get : idGetter;
+        enumerable : false;
+        configurable : false;
+    });
+
+    function idGetter() {
+        if(!(idprop in this)) {
+            if(!Object.isExtensible(this))
+                throw Error("Can't define id for nonextensible objects");
+            Object.defineProperty(this,idprop,{
+                value : nextid++;
+                writable : false;
+                enumerable : false;
+                configurable : false;
+            });
+        }
+        return this[idprop];
+    };
+
+    var idprop= "|**objectId**|";
+    var nextid = 1;
+    }()); //立即执行这个包装函数
+    */
+
+    /*
+    创建一个不可变的类，它的属性和方法都是只读的，将实例方法设置为"只读"和不可删除的
+    //这个方法可以使用new调用，也可以省略new，它可以构造函数也可以用工厂函数
+    function Range(from,to) {
+        var props = {
+            from: {value: from,enumerable : true, writable : false, configurable: false },
+            to: {value: to, enumerable : true, writable : false, configurable: false }
+        };
+        //如果作为构造函数来调用定义属性
+        //否则，作为工厂方法来调用
+        if(this instanceof Range) {
+            Object.defineProperties(this, props);
+        } else
+        return Object.create(Range.prototype,props);
+    }
+
+    Object.preventExtensions()
+    可以将对象设置为不可扩展的
+    Object.seal
+    将阻止用户给对象添加新属性，还能将当前已有的属性配置设置为不可配置的。
+    Object.freeze（）
+    同样会把所有属性都设置为只读的和不可配置的。
+
+    */
+
+    /*
+
+
+    */
+
+    function hello() {
+        var msg = 'hello world';
+        document.open()
+		document.write(msg);
+		document.close();
+    }
+	</script>
+</head>
+<body>
+
+<p>Imagine a form with five fields</p>
+</body>
+<body onload="hello()">
+</body>
+
+</html>

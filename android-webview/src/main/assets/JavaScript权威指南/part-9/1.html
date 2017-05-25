@@ -40,26 +40,172 @@
     */
 
     /*
+    JS中的类牵扯三种不同的对象
+    构造函数对象
+    为JS的类定义了名字，任何添加这个构造函数对象中的属性都是类字段和类方法
+    原型对象
+    被类的所有实例所继承，如果原型对象的属性值是函数的话，这个函数就作为类的实例方法来调用
+    实例对象
+    类的每个实例都是一个独立的对象，直接给这个实例定义的属性是不会为所有实例对象所共享的。
+    定义参考rang2.js
+    JS中基于原型的继承机制是动态的，对象从其原型继承属性，如果创建对象之后原型的属性发生变化
+    也会影响到继承这个原型的所有实例对象。
+    这意味着我们可以通过原型对象添加新方法扩展JS类，
+    Complex.prototype.conj = function() {return new Complex(this.r, -this.r); };
+    我们也可以给系统内置的类进行扩展。
+    例如我们之前扩展的bind方法在ES3上就是未实现的
+    if(!Function.prototype.bind) {
+        Function.prototype.bind = function(o/*,args*/) {
+            //bind
+        };
+    }
+    */
 
+    /*
+    instanceof
+    如果o继承自c.prototype,则表达式o instanceof c 为true
+    isPrototypeof
+    可以帮助检测某个特定的原型对象
+    这两个方法有个特定的去电就是无法通过对象获得类名
+    两个框架页面继承自两个相同但是独立的原型对象，那么一个框架页面中的Array()构造函数
+    和另个框架页面的Array()构造函数不是同一个构造函数，instanceof结果为false
+    */
+
+    /*
+    constructor属性
+    可以帮助我们检测是否属于某个类的方法
+    function typeAndValue(x) {
+        if (x == null) return "";
+        switch(x.constructor){
+        case Number : return "Number: " +x;
+        }
+    }
+    同样的也无法在多个执行上下文的场景中正常工作，比如浏览器窗口的多个框架子页面
+
+    如何解决这个问题
+    我们知道一个窗口的Array构造函数和另一个窗口的Array构造函数式不相等的，
+    但是他们的名字是一样的。
+    在一些JS的实现中为函数对象提供了一个非标准的属性name，用来表示函数名称
+    对于那些没有name属性的JS。可以将函数转换成字符串，提取函数名
+    下面就介绍这种方法
+    //可以判断值类型的type()函数
+    function type(o) {
+        var t,c,n //type,class,name;
+
+        //处理null值
+        if (o === null) return "null";
+        //处理NaN，NaN和它自身不相等
+        if (o !== o) return "NaN";
+        //如果typeof的值不是"object",则使用这个值
+        //这可以识别出原始值的类型和函数
+        if ((t = typeof o) !== "object") return t;
+        //返回对象的类型，除非值为"Object"
+        //这种方式可以识别出大多数的内置对象
+        if((c = classof(o)) !== "Object") return c;
+        //如果对象构造函数的名字存在的话，则返回它
+        if(o.constructor && typeof o.constructor === "function"
+        && (n = o.constructor.getName))) return n;
+        //其他类型的无法判断，一律返回“Object”
+        return "Object";
+    }
+
+    //返回对象的类
+    function classof(o) {
+        return Object.prototype.toString.call(o).slice(8,-1);
+    }
+
+    //返回函数的名字（可能是空字符串），不是函数返回null
+    Function.prototype.getName = function(){
+        if("name" in this) return this.name;
+        return this.name = this.toString().match(/function\s*([^(]*)\(/)[1];
+
+    }
+
+    由于以上的识别方法都多少存在问题。
+    解决办法就是规避掉这些问题，不关注“对象的类是什么”，而是关注“对象能做什么”，这种思考方式
+    称作"鸭式辨识"
+    像鸭子一样走路、游泳并且嘎嘎叫的鸟就是鸭子----作家James Whitecomb Reley
+    我们怎么判断一个对象是否真的是Array的实例
+    1、包含一个值是非负整数的length--会走路
+    2、天假新元素时，数组的长度会自动更新，并且给length设置更小的整数是，
+    数组会被自动阶段---会游泳和嘎嘎叫
+    //利用鸭型辨识显得函数
+    function quacks(o) {
+        for(var i = 1 ;i < arguments.length; i++) {
+            var arg = arguments[i];
+            switch (typeof arg){
+            case 'string': //string：直接用名字检查
+                if(typeof o[arg] !== 'function') return false;
+                continue;
+            case 'function'： //function ：检查函数的额原型对象上的额方法
+            arg = arg.prototype; //如果实参是函数，则使用它的原型 直接进入下个case
+            case 'object':
+                for(var m in arg) { //遍历对象的每个属性
+                    if (typeof arg[m] !== "function" ) continue;
+                    if (typeof o[m]   !== "function") return false;
+                }
+            }
+        }
+        return true; //如果程序执行到这里说明o实现了所有的方法
+    }
+    对于该方法我们需要注意的是，它只能通过特定的名称来检测对象是否含有一个或多个值为函数的属性，
+    我们无法获知已经存在的属性的细节信息。
+    quacks方法不能应用于内置类，因为内之泪的方法都是不可枚举的。
+    ES5 可以使用Object.getOwnPropertyName来补救
 
     */
 
     /*
-
+    创建Set.js
+    */
+    /*
+    标准转换方法
+    toString
+    toLocalString
+    valueof  将对象转换成原始值
+    toJSON 对JSON.stringify()的自动调动
     */
 
     /*
+    增加equals方法
+    我们可以自己增加equals方法，让其具有比较性
+    Range.prototype.constructor = Range;
+    Range.prototype.equals = function(that) {
+        if(that ==null) return false;
+        if(that.constructor !== Range) return false;
+        return this.from == that.from && this.to == that.to;
 
+    };
+
+    还可以编写compareTo方法 让Range类具有比较性
+    Range.prototype.compareTo = function(that) {
+        if(!(that instanceof Range)) {
+            throw new Error(" Can't compare a Range with " + that);
+        }
+        var diff = this.from - that.from;
+
+        return (diff == 0) ?  (this.to - that.to) : diff;
+    }
+    之后我们就可以进行比较了
+    sort(function(a,b) {return a.compareTo(b);});
     */
 
     /*
+    Range类的闭包方案
+    function Range(from,to) {
+        this.from = function() { return this.from;};
+        this.to =  function() { return  this.to;};
+    }
 
-
-
+    Range.prototype = {
+        includes: function(x) { return this.from <= x && x <= this.to; },
+        foreach: function(f) { for(var x = Math.ceil(this.from); x <= this.to ; x++) f(x);
+        },
+        toString: function (f) { return  "(" + this.from + "..." + this.to + ")"; }
+    }
+    如果使用这种技术将会带来更高的系统开销，降低运行速度，占用更多的内存
 
     */
-
-
 
     function range2() {
 
@@ -80,6 +226,8 @@
         r.foreach(console.log);
         console.log(r);
     }
+
+
     </script>
 </head>
 <body>
