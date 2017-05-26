@@ -109,6 +109,116 @@
     */
 
     /*
+    HTML元素由一个标签和一组成为属性(attribute)的名/值对组成
+    HTML元素的属性值在代表这些元素的HTMLElement对象的属性(property)中可用的。
+    表示HTML文档元素的HTMLElement对象定了读写属性，他们映射了元素的HTML属性。
+    HTMLElement定义了通用的HTTP属性（如id,标题lang和dir）的属性，以及事件处理
+    程序属性（如onclick）。
+    特定的Element子类型为其元素定义了特定的属性
+    HTML属性名不区分大小写，但JS属性名则大小写敏感，从HTML属性名转换到JS属性名应该采用小写，
+    如果属性不止一个单词。
+    有些HTML属性在JS中是保留字，对于这些属性，一般的规则是为属性名加前缀HTML，例如HTML的for
+    属性(<label>元素)，在JS中变为htmlFor属性，class在JS中是保留字，它是HTML非常重要的class
+    属性，是上面规则的一个例外，在JS代码中变成className
+    表示HTML属性的值通常是字符串，当属性为布尔值或数字，属性也是布尔值或数值。
+    事件处理程序属性值总是为Function对象(或null)
+    HTML5规范定义了一个新的属性（如<input>和相关元素的form属性）用以元素ID转换为实际的Element对象
+    任何HTML元素的style属性值为CSSStyleDeclaration对象
+
+    获取和设置非标准的HTML属性
+    通过
+    getAttribute和setAttribute
+    例如
+        var image = document.images[0];
+        var width = parseInt(image.getAttribute("WIDTH"));
+        image.setAttribute("class", thumbnail);
+    Element类型还有两个相关方法
+    hasAttribute和removeAttribute,
+    如果操作包括赖在其他命名空间中属性的XML文档，可以使用者4个方法的命名空间版本
+    getAttributeNS、setAttributeNS、hasAttributeNS和removeAttributeNS
+    这些方法需要两个属性名字字符串作为参数
+    第一个是标识命名空间的URI，第二个通常是属性的本地名字，在命名空间中是无效的。
+    特别的是setAttributeNS的第二个参数应该是属性的有效名字，它包含命名空间的前缀。
+
+    数据集属性
+    HTML元素上绑定一些额外的信息也很有帮助，当JS选取这些元素并以某种方式操纵这些信息，
+    有时候可以通过给class属性添加特殊的标识符来完成，其他时候可以借助使用非标准的属性。
+    可以使用getAttribute和setAttribute来读写非标准属性的值。
+    为此文档不再是合法有效的HTML
+    HTML5提供了一个解决方案。在HTML5文档中，任意以"data-"为前缀的小写的属性名字都是合法的。
+    这些"数据集属性"将不会对其元素的表现产生影响，他们定义了一个标准的、附加额外数据的方法。
+    HTML5还在Element对象上定义了dataset属性，该属性指代了一个对象，它的各个属性都应该去掉
+    前缀的data-属性，因此dataset.x应该保存data-x属性的值，带连字符的属性就应该变成
+    data-jquery-test属性就变成dataset.jqueryTest属性
+    <span class = "sparkline" data-ymin = "0" data-ymax = "10">
+    1 1 1 2 2 3 4 5 5 4 3 5 6 7 7 4 2 1
+    </span>
+    //假设ES5可以工作
+    var sparklines = document.getElementsByClassName("sparkline");
+    for(var i = 0; i < sparklines.length; i++) {
+        var dataset = sparklines[i].dataset;
+        var ymin = parseFloat(dataset.ymin);
+        var ymax = parseFloat(dataset.ymax);
+        var data = sparklines[i].textContent.split(" ").map(parseFloat);
+        drawSparkline(sparklines[i],ymin,ymax,data);
+    }
+    //dataset属性如果没在当前浏览器中实现
+    var sparklines = document.getElementsByClassName("sparkline");
+    for(var i = 0; i < sparklines.length; i++) {
+        var elt = sparklines[i];
+        var ymin = parseFloat(elt.getAttribute("data-ymin"));
+        var ymax = parseFloat(elt.getAttribute("data-ymax"));
+        var points = elt.getAttribute("data-points");
+        var data = elt.textContent.split(" ").map(parseFloat);
+        drawSparkline(sparklines[i],ymin,ymax,data);
+    }
+    Node类型定义了attributes属性，针对非Element对象的任何元素，该属性为null
+    对于Elements对象，attributes属性是只读的类数组对象，它代表元素的所有属性。
+    类似NodeList,attributes对象也是事实的，它可以使用数字索引访问。
+    document.body.attributes[0]
+    document.body.attributes.bgcolor
+    document.body.attributes["ONLOAD"]
+    */
+    /*
+    读取Element的innerHTML属性作为字符串标记返回哪个元素的内容。
+    在元素上设置该属性调用了Web浏览器的解析器，用新字符串内容的解析展现形式
+    替代元素当前的内容。
+    通常innerHTML效率非常高，但是对innerHTML使用"+="操作符重复最佳一小段文本缺
+    效率低下，因为他们既要序列化，又要解析。
+    outerHTML属性，查询outerHTML时，返回的HTML或XML标记的字符串包含被查询元素的
+    开头和结尾标签。当设置元素的outerHTML是，元素本身被新的内容所替换。
+    只有Element节点定义了outerHTML属性，Document节点则无。
+    IE引入的特性是insertAdjacentHTML方法，它将任意的HTML标记字符串掺入到指定元素
+    “相邻”的位置。标记是该方法的第二个参数，并且“相邻”的精确含义依赖于第一个参数的值。
+    第一个参数为具有以下值之一的字符串：beforbegin、afterbegin、beforeend和afterend
+    beforbegin      afterbegin                    beforeend afterend
+    |                    |                            |      |
+    | <div id = "target">| This is the element content|</div>|
+
+    标准的方法是用Node的textContent属性来实现
+    var para = document.getElementByTagName("p")[0];
+    var text = para.textContent;    //原文本是"Simple document"
+    para.textContent = "Hello World!"; //修改段落内容
+    以上方法除IE的所有浏览器都支持。
+    在IE中，可以用Element的innerText属性来替代。
+    在JS中字符串""是假值。
+    //一个参数，返回元素的textContent或innerText
+    //两个参数，用value参数的值设置元素的textContent或innerText
+    function textContent(element,value) {
+        var content = element.textContent;
+        if(value === undefined){
+            if(content !== undefined) return content;
+            else return element.innerText;
+        } else {
+            if(content !== undefined) element.textContent = value;
+            else element.innerText = value;
+        }
+
+    }
+    textContent属性就是将制定元素的所有后代Text节点简单串联在一起。
+    innerText没有一个明确指定的行为，但它不返回<script>元素的内容，忽略多于的空白，并试图保留表格格式。
+    同时innerText针对某些表格元素（如 <table> <tbody> 和 <tr>）是只读属性。
+
 
 
     */
