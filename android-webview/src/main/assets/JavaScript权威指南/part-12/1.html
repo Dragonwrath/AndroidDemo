@@ -32,6 +32,51 @@
     defer属性是的浏览器延迟脚本的执行，知道文档的载入和解析完成，才可以操作
     async属性使得浏览器可以晶块地执行搅拌，而不用在下载脚本时阻塞文档解析，
     如果两个属性同时存在会遵从async属性
+    延迟脚本会按照他们在文档里出现顺序执行
+    异步脚本会在他们载入执行，这意味着他们可能会无序执行。
+    在不支持async属性的浏览器里，实现脚本的异步载入
+    //异步载入并执行一个指定URL中的脚本
+    function loadasync(url) {
+        var head = document.getElementsByTagName("head")[0];
+        var s = document.createElement("script");
+        s.src = url;
+        head.appendChild(s);
+    }
+    上面的函数可以帮助我们动态载入脚本。
+
+    我们不鼓励将JS代码和HTML内容混淆在一起
+    最简单的方法就是讲JS函数赋给目标对象的属性
+    onLoad,当文档载入完成时，调用一个函数
+    function onLoad(f) {
+        if(onLoad.loaded) {
+            window.setTimeout(f,0);
+        } else if(window.addEventListener){
+            window.addEventListener("load",f,false);
+        } else if(window.addEvent){
+            window.addEvent("load",f);
+        }
+        onLoad.loaded =false;
+        onLoad(function() { onLoad.loaded = true;});
+    */
+
+    /*
+    JS语言核心并不包括任何线程机制，并且客户端JS传统上也米有定义任何线程机制
+    HTML5定义了一种作为后台线程的WebWorker，但是JS客户端还想养个的单线程一样工作。
+    HTML5定义的WebWorker 是一个用来执行计算密集任务并不冻结用户界面的后台线程。
+
+    一些常用的开发者网站
+    https：//developer.mozilla.org
+    https：//msdn.microsoft.com
+    https：//developer.apple.com/safari
+    https：//code.google.com/doctype
+    https：//en.wikipedia.org/wiki/Comparison_of_layout_engines_(HTML_5)
+    https：//en.wikipedia.org/wiki/Comparison_of_layout_engines_(Document_Object_Model)
+
+    处理兼容性问题的类库
+    由于IE不支持canvas元素
+    因此可以引入 https：//code.google.com/explorecanvas
+
+
 
     */
 
