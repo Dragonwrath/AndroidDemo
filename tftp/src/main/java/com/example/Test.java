@@ -1,6 +1,7 @@
 package com.example;
 
 
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -40,6 +41,14 @@ public class Test {
 //        }.start();
 
 
+        displayChar();
+    }
+
+    private static void displayChar() {
+        char c = 1;
+        System.out.println("(char)1 = " + (int)'?');
+    }
+    private static void decodeChar() throws UnsupportedEncodingException {
         float max = Math.max(3.2f, 3f);
         int testmax = (int) Math.ceil(max);
         System.out.println("max = " + testmax);
@@ -53,7 +62,7 @@ public class Test {
         System.out.println("pattern = " + Arrays.toString(new String("\ue900".getBytes(),"utf-8").getBytes()));
         System.out.println("pattern = " + (new String("\u9eff".getBytes(),"utf-8")));
 
-        User str  = new User("original");
+        Test.User str  = new Test.User("original");
         List<Integer> array = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
             array.add(i);

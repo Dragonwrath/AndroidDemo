@@ -1,0 +1,130 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+    DOM
+    Document Ojbect Model
+
+    低于IE8的浏览器中getElementById对匹配元素id不区分大小写，而且也返回匹配那么属性的元素
+    在IE中，getElementsByName也返回id属性匹配指定值的元素。
+    因此为了兼容，不要将相同的字符串同时用作名字和ID
+    form img iframe applet embed object 为他们设置name属性值，即在
+    Document对象中创建以那么属性值为名字的属性
+    getElementsByTagName方法可以用来选取指定类型(标签吗)的所有HTML或XML元素，该方法返回一个
+    NodeList对象，HTML标签不区分大小写。
+    不过我们也可以通过其他的一些标签来读取
+    由于这些属性指代HTMLCollection对象，因此我们可以用元素的ID或者名字来索引
+    比如我们可以通过
+    document.forms.shipping_address或者document.shipping_address来引用
+    HTMLDocument也定义了embeds和plugins属性
+    而scripts在H5中是标准属性，其他的还有document.body 以及document.head
+
+
+    */
+
+    /*
+    在JS中class是关键字，所以客户端JS使用className属性来保存HTML的class属性值，
+    来保存HTML的class属性，class属性通常与CSS样式表一样使用，
+    对某组内的所有元素应用相同的样式。
+    我们看一些例子
+    //查找class属性值中包含warning的元素
+    var warings = document.getElementByClassName("warning");
+    //查找以log命名并且有error 和fatal 类的元素的所有后代
+    var log = document.getElementById("log");
+    var fatal = log.getElementsByClassName("fatal error");
+    在怪异模式中，它是为了向后兼容性而存在的。
+    其中一个怪异行为时在class属性中和CSS样式表中的类标识符不区分大小写，
+    getElementsByClassName使用的是样式表匹配算法，如果文档以怪异模式渲染。
+    该方法将执行不区分大小写的字符串比较，否则区分大小写
+    此外在IE8以及更低的版本
+    getElementsByClassName在所有当前浏览器中都实现了，
+    IE8支持的是querySelectorAll方法
+    */
+
+    /*
+    CSS选择器选取元素
+    #nav //id为nav的元素
+    div  //所有div元素
+    .warning //所有在class属性中包含了warning的元素
+    p[ lang = "fr"] //所有使用发育的段落， 如<p lang = "fr">
+    *[name = "x" ] //所有包含name = "x"属性的元素
+    当然也可以组合使用
+    span.fatal.error //class中包含fatal和error的所有span元素
+    span[lang = "fr"].waring //所有使用发育且其class中包含waring的span元素
+    可以指定文档结构
+    #log span   //id为log的元素的后代元素中的所有span元素
+    #log>span   //id为log的元素的子元素中的所有span元素
+    body>h1:first-child //body的子元素和第一个h1元素
+    选择器可以组合起来选取多个或多组元素
+    div，#log //所有div元素以及id = log的元素
+    与CSS3选择器的标准化一起的另一个称作“选择器API”的W3C标准定义了获取匹配一个给定
+    选择器的元素的JS方法，该API的关键是Document方法的querySelectorAll，它接收包含
+    一个CSS选择器的字符串参数，返回一个表示文档中匹配其的所有元素的NodeList对象。
+    该方法在选择器字符串非法时，将抛出一个异常
+    而相似的方法还有querySelector方法，它只返回第一个匹配的元素
+
+    document.all[]虽然已经被取代，但是依然可能看到它
+    document.all[0]
+    document.all["navbar"]
+    */
+
+    /*
+    文档结构和遍历
+    Document对象、Element对象和文档中表示文本的Text对象都是Node对象
+    Node定义了以下重要的属性
+    parentNode
+    该节点的父节点，或者针对类似Document对象应该为null，因为他们没有父节点
+    childNode
+    只读的类数组对象（NodeList对象）它是该节点的子节点的实时表示
+    firstChild、lastChild
+    该节点的子节点的第一个和最后一个，如果该节点没有子节点则为null
+    nextSibling，previousSibling
+    该节点的兄弟节点的前一个和下一个，具有相同父节点的两个节点为兄弟节点。
+    节点的顺序反映了他们在文档中出现的位置，这两个属性将在节点之间以双向链表的形式链接起来
+    nodeType
+    该节点的类型，9表示Document节点，1表示Element节点，3表示Text节点，8表示Comment节点
+    11表示DocumentFragment节点
+    nodeValue
+    Text节点或Comment节点的文本内容
+    nodeName
+    元素的标签名，以大写形式表示
+
+    当将主要的兴趣点集中在文档中的元素上，而不是他们之间的文本上，我们可以将文档
+    看成Element对象树，忽略文档Text 和Comment节点
+    该API的第一个部分是Element对象的 children 属性，它也是一个NodeList对象，但不同的是
+    children列表只包含Element对象 Text和Comment节点没有children属性，这意味着Node.parentNode
+    属性不可能返回Text或Comment节点，任何Elment的parentNode总是另一个Element
+    该API的第二哥部分是Element属性，后者类似于Node对象的子属性和兄弟属性
+    以下的内容只代表Element
+    firstElementChild，lastElementChild
+        类似于 firstChild、lastChild
+    nextElementSibling，previousElementSibling
+        类似于 nextSibling，previousSibling
+    childElementChild
+        子元素的数量，返回的值与children.length值相等
+
+
+    */
+
+    /*
+
+
+    */
+    function hello() {
+        var msg = 'hello world';
+        document.open()
+		document.write(msg);
+		document.close();
+    }
+	</script>
+</head>
+<body>
+
+<p>Imagine a form with five fields</p>
+</body>
+<body onload="hello()">
+</body>
+
+</html>

