@@ -65,21 +65,21 @@
     分别对应的是Navigator对象和Screen对象
     navigator属性引用的是浏览器厂商和版本的
     Navigator对象的常用属性
-    appName
-    appVersion
-    userAgent 浏览器在它的USER-AGENT HTTP头部中发送的字符串，通常包含
-        appVersion中的所有信息，并且常常也可能包含其他细节。
-    platform
-    onLine 浏览器是否连接到网络
-    geolocation 用来确定用户地理位置信息的接口
-    javaEnabled  一个非标准方法，当Java小程序时返回true
-    cookieEnable 非标准方法，如果浏览器可以保存永久cookie返回true
+        appName
+        appVersion
+        userAgent 浏览器在它的USER-AGENT HTTP头部中发送的字符串，通常包含
+            appVersion中的所有信息，并且常常也可能包含其他细节。
+        platform
+        onLine 浏览器是否连接到网络
+        geolocation 用来确定用户地理位置信息的接口
+        javaEnabled  一个非标准方法，当Java小程序时返回true
+        cookieEnable 非标准方法，如果浏览器可以保存永久cookie返回true
 
     Screen对象
     它提供有关窗口显示的大小和可用的颜色数量信息
-    width 和 height 以像素为单位的窗口打下
-    availWidth 和 availHeight 实际可用的显示大小
-    colorDepth 显示的BPP（bits-per-pixel） 典型值有16、24、32
+        width 和 height 以像素为单位的窗口打下
+        availWidth 和 availHeight 实际可用的显示大小
+        colorDepth 显示的BPP（bits-per-pixel） 典型值有16、24、32
 
     对话框
     alert 显示一条消息并等待用户关闭
@@ -128,7 +128,7 @@
     /*
     每一个标签也都有独立的browsing context，每个context 都有独立的window对象，他们之间互不干扰
     每个标签也也不会知道其他标签也正在运行的脚本，以及相应的内容。
-    但是窗口不是综合其他窗口完全没有关系，一个窗口或标签页中的搅拌可以打开新的窗口或标签也，当一个脚本
+    但是窗口不是总是和其他窗口完全没有关系，一个窗口或标签页中的脚本可以打开新的窗口或标签页，当一个脚本
     这样做时，这样多个窗口或窗口与另一个窗口的文档之间就可以相互操作
 
     HTML文档经常用iframe来嵌套多个文档，由iframe创建的嵌套浏览上下文使用它自己的Window对象所表示的

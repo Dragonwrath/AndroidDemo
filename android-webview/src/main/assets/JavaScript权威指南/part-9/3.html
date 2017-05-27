@@ -12,7 +12,7 @@
     //定义一个不可枚举的属性 objectId，它可以被所有对象继承
     //有雨该属性是只读的，因此它是只读的
     //它是不可配置的，因此它是不能删除的
-    Object.defineProperty(Object.prototye,"objectId", {
+    Object.defineProperty(Object.prototype,"objectId", {
         get : idGetter;
         enumerable : false;
         configurable : false;

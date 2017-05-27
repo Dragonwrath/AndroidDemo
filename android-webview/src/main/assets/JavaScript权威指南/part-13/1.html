@@ -9,10 +9,10 @@
     window.location = "http://www.oreilly.com";
     还定义了一些方法例如alert
     Window对象本身是全局对象。
-    Window对象中海油一个重要的属性documet，它引用了Document对象
+    Window对象中还有一个重要的属性document，它引用了Document对象
     表示显示在窗口中的文档。其中定义了一些重要的方法，例如getElementById()
 
-    如果要使用XTML最好把所有的JS代码都放到一个CDATA部分中
+    如果要使用XHTML最好把所有的JS代码都放到一个CDATA部分中
     如果使用了src属性script变迁直接的任何内容都会被忽略，如果需要，在script标签之间
     添加代码的补充说明文档或者版权信息
     */
@@ -28,9 +28,9 @@
     script标签可以有defer和async属性(前提是，浏览器支持)可以改变脚本的执行方法
     <script defer src = " deferred.js">
     <script async src = " async.js">
-    defer和async属性会告诉浏览器，不会使用document.write(),因此在下载脚本的时候继续解析和渲染文档，
-    defer属性是的浏览器延迟脚本的执行，知道文档的载入和解析完成，才可以操作
-    async属性使得浏览器可以晶块地执行搅拌，而不用在下载脚本时阻塞文档解析，
+    defer和async属性会告诉浏览器不会使用document.write(),因此在下载脚本的时候继续解析和渲染文档，
+    defer属性是的浏览器延迟脚本的执行，直到文档的载入和解析完成，才可以操作
+    async属性使得浏览器可以尽快地执行脚本，而不用在下载脚本时阻塞文档解析，
     如果两个属性同时存在会遵从async属性
     延迟脚本会按照他们在文档里出现顺序执行
     异步脚本会在他们载入执行，这意味着他们可能会无序执行。

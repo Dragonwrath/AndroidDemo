@@ -22,7 +22,7 @@
     range2的例子中使用了它自身的一个新对象重写预定义的Range.prototype对象，
     因此新定义的原型对象就不含有constructor属性。我们可以显示的给原型添加一个构造函数
 
-     Range.prototype = {
+    Range.prototype = {
         constructor: Range; //显示设置构造函数反向引用
         includes: function(x) { return this.from <= x && x <= this.to; },
         foreach: function(f) { for(var x = Math.ceil(this.from); x <= this.to ; x++) f(x);
@@ -192,6 +192,7 @@
 
     /*
     Range类的闭包方案
+    将Range类的属性私有化
     function Range(from,to) {
         this.from = function() { return this.from;};
         this.to =  function() { return  this.to;};

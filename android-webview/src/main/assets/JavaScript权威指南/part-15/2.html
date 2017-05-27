@@ -1,0 +1,203 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+    生成目录表
+    详见generateContent.js
+
+    */
+
+    /*
+    在顶级窗口和标签页中，视口只是实际显示文档内容的浏览器的一部分，不包括浏览器的外壳。
+    文档坐标比视口坐标更加基础，并且在用户滚动时它们不会发生变化
+    为了在坐标系之间相互转换，我们需要判定浏览器窗口的滚动条的位置。
+    Window对象的pageXOffset和pageYOffset属性，在所有浏览器中提供了这些值，除了IE8以及更早的版本
+    IE和其他浏览器都可以通过scrollLeft和scrollTop属性来获得滚动条的位置。
+    正常情况下通过查询文档的根节点，来获取这些值 document.documentElement,
+    但在怪异模式下，必须在文档的body元素document.body查询他们
+
+    //查询跟滚动条的位置
+    function getScrollOffsets(w) {
+        w = w || window;
+        if(w.pageXOffset != null) return {x : w.pageXOffset, y : w.pageYOffset};
+        //对于标准模式下的IE（或其他浏览器）
+        var d = w.document;
+        if ( d.compatMode = "CSS1compat") {
+            return {x : d.documentElement.scrollLeft, y:d.documentElement.scrollTop};
+        }
+
+        //对于怪异模式
+        return { x: d.body.scrollLeft, y : d.body.scrollTop};
+    }
+
+    //判断视扣的尺寸是非常有用，为了确定文档的那部分可见，
+    利用滚动偏移量查询视口尺寸的建档方法在IE8以及更早的版本都无法工作。
+    //查询窗口的视口尺寸
+    function getViewportSize(w) {
+        w = w || window;
+
+        //IE8之外的浏览器
+        if(w.innerWidth != null) return { w: w.innerWidth, h: w.innerHeight};
+
+        //对于标准模式下的IE（或其他浏览器）
+        var d = w.document;
+        if(document.compatMode == "CSS1Compat") {
+            return { w: d.document.Element.clientWidth, w: d.document.Element.clientHeight};
+
+        //怪异模式
+        return { w : d.body.clientWidth, h : d.body.clientHeight};
+        }
+    }
+
+
+
+    */
+
+    /*
+    //查询元素的几何尺寸
+    getBoundingClientRect方法在IE5中引入，目前所有浏览器都支持。
+    （其中client是一个间接指代，它就是Web浏览器客户端-专指它定义的窗口或视口）
+    这个方法返回元素在视口坐标的位置，为了转换成有效的文档坐标，需要加上滚动的偏移量
+    var box = e.getBoundingClientRect();
+    var offsets = getScrollOffsets();
+    var x = box.left + offset.x;
+    var y = box.top  + offset.y;
+
+    获取元素的宽高 （IE中未实现width和height属性）
+    var box = e.getBoundingClientRect();
+    var w = box.width || (box.right - box.left);
+    var h = box.height || (box.bottom - box.top);
+
+    浏览器的布局块元素总是矩形的，例如图片、段落和div元素等
+    但是内联元素如span code 和b 等，可能跨多行，由多个矩形组成。
+    因此 getBoundingClientRect方法返回的是总的大小，
+    如果想要查询内联元素每个独立矩形可以使用getClientRects方法获取一个只读的类数组对象
+    它的每个元素类似与getBoundingClientRect返回的矩形对象
+
+    并且要注意，以上的方法不是实时的，他们只在调用方法时，获取的文档十句状态的静态快照
+    如果此时用户改变了浏览器窗口打下，不会更新他们。
+
+    判断元素在某点
+    可以用document对象的elementFromPoint方法来判定。
+    传递X和Y坐标，（使用视口坐标而非文档坐标）该方法返回在指定位置的一个元素
+
+    滚动。
+    scrollLeft和scrollTop属性可以设置让浏览器滚动
+    更简单的方式是Window对象的scrollTop方法或者scroll方法接受一个点的X和Y坐标，
+    并作为滚动条的偏移量设置他们。
+    scrollBy方法是相对的，是在滚动条的偏移量上增加
+
+    还可以使用需要显示的HTML元素上调用scrollIntoView方法直接滚动，该方法保证元素在视口
+    中课前，默认情况下它视图将元素的上边缘放在或者尽量接近视口的上边缘，如果传递false作为参数，
+    它将试图将元素的下边缘放在或尽量接近视口的下边缘。
+    任何HTML元素的只读属性offsetWidth和offsetHeight以CSS像素返回它的屏幕尺寸。
+    返回的尺寸包含元素的边框和内边距，除去了外边距。
+    这些值是文档坐标，并且直接指定元素的位置。但是对于已经定位元素的后代元素和一些其他元素，
+    这些属性返回的坐标是相对于祖先元素而非文档，我们可以通过offsetParent属性来指定这些属性相对的
+    父元素。如果offsetParent为null，那么这些属性为文档坐标
+    function geElementPosition(e) {
+        var x = 0 , y = 0;
+        while(e != null) {
+            x += e.offsetLeft;
+            y += e.offsetTop;
+            e = e.offsetParent;
+        }
+        return {x : x,y : y};
+    }
+
+    */
+
+    /*
+    每个HTML元素都有以下的属性
+    offsetWidth           clientWidth         scrollWidth
+    offsetHeight          clientHeight        scrollHeight
+    offsetLeft            clientLeft          scrollLeft
+    offsetTop             clientTop           scrollTop
+    offsetParent
+    由于每个HTML元素的实际内容可能比分配的黑子更大，因此单个元素可能有滚动条(CSS的overflow属性)
+    clientWidth 和 clientHeight 类似于 offsetWidth 和 offsetHeight，不同的是他们不包含边框大小
+    只包含内容和他们的内边距。同时，如果浏览器在内边距和边距之间添加了滚动条
+    clientWidth 和 clientHeight 其返回值也不包含滚动条。
+    类似与i code span 这些内联元素clientWidth 和 clientHeight 总返回0；
+    clientLeft 和clientTop 他们返回元素的内边距的外边缘和它的边框的外边缘之间的水平距离和垂直距离。
+    通常这些值就等于左边和上边的边框宽度。clientLeft 和clientTop 包含了滚动条的宽度，
+    对于内联元素来说，这两个值宗伟0
+    scrollWidth 和scrollHeight 是元素的内容区域加上它的内边距再 加上任何溢出内容的尺寸。
+    当内容正好和内容区域想匹配，而且没有溢出的时候，这些属性与 clientWidth 和 clientHeight 是相等的。
+    当溢出是，返回值比 clientWidth 和 clientHeight 大
+
+    scrollLeft 和 scrollTop 指定元素的滚动条的位置。
+
+    当文档包含可滚动的且有溢出内容的元素时，getElementPosition方法就不能正常工作了。
+    不过可以参考以下的方法
+    function getElementPos(elt) {
+        var x =0, y = 0;
+        for ( var  e = elt; e != null; e.offsetParent) {
+            x += e.offsetLeft;
+            y += e.offsetTop;
+        }
+        //再次循环所有的祖先元素，减去滚动的偏移量
+        for(var e = elt.parentNode; e != null && e.nodeType == 1; e = e.parentNode) {
+            x -= e.scrollLeft;
+            y -= e.scrollTop;
+        }
+        return { x:x, y:y};
+    }
+
+    */
+
+
+    /*
+    var fields = document.getElementById("address").getElementsByTagName("input");
+    querySelectorAll 支持的浏览器，从一个表单中选择所有的单选按钮或所有同名的元素
+    document.querySelectorAll('#shipping input[type = "radio"]');
+    //id为shipping的表单 所有名字为method的单选按钮
+    document.querySelectorAll('#shipping input[type = "radio"][name = "method"]');
+    有name或id属性的from元素开通过以下方法来获取 以name = "address"属性 的form为例
+    window.address //不可靠不要使用
+    document.address //仅当表单有name属性时可用
+    document。forms.address //显示访问有name或id的表单
+    document.form[n]      //不可靠，n是表单的序号
+    如果address表单的第一个元素的name是street，可以用以下形式
+    document.forms.address[0]
+    document.forms.address.street
+    document.address.street //当有name = address时可用，而不是id为address
+    或者明确选取第一个元素
+    document.forms.address.elements[0]
+    document.forms.address.elements.street
+    一般来说指定的文档元素用id属性比name属性更佳
+    当用name来索引一个HTMLCollection对象并且它包含多个元素来共享name时，返回值是一个类
+    数组对象，
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    */
+    function hello() {
+        var msg = 'hello world';
+        document.open()
+		document.write(msg);
+		document.close();
+    }
+	</script>
+</head>
+<body>
+
+<p>Imagine a form with five fields</p>
+</body>
+<body onload="hello()">
+</body>
+
+</html>

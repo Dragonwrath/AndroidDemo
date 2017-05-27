@@ -27,6 +27,7 @@
     }
 
     不过有种更加值得提倡的做法。那就是通过Function.prototype.extend()方法来重写
+    之后立即调用相应的方法，由于该方法的生命周期在函数调用之后就结束了
     var NonNullSet = (function() { //定义并立即调用这个函数
         var superClass = Set;  //指定父类
         return superClass.extend(
