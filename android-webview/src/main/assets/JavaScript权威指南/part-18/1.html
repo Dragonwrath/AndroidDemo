@@ -1,0 +1,309 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+    超文本传输协议（HyperText Transfer Protocol ，HTTP）
+    当用脚本设置window对象的location属性或调用表单对象的submit方法时，都会初始化
+    HTTP请求。
+    在这两种情况下，浏览器会加载新页面。
+    Ajax （Asynchronous JavaScript and XML）描述了一种主要使用脚本操纵HTTP的Web应用架构
+    主要特点是使用脚本操纵HTTP和Web服务器进行数据交互，不会导致页面重载，避免页面重载的能力使得
+    Web应用感觉更像传统的桌面应用。
+    Comet（Comet: Low Latency Data for the Browser）某种意义上Comet和Ajax相反，在Comet中
+    Web服务器发起通信并异步发送消息到客户端。如果Web应用需要响应服务端发送的消息，则它会使用Ajax技术
+    发送或请求数据
+
+    实现Ajax和Comet的方式有很多种 ，这些底层的实现有时称为传输协议(transport)
+    img元素有一个src属性，当脚本设置这个属性为URL时，浏览器会发起HTTPGET请求会从这个URL下载图片。
+    img元素无法实现完整的Ajax传输协议，因为数据交换是单向的。
+    iframe元素更加强大，为了把iframe作为Ajax协议使用，脚本首先要把发送给Web服务器的信息编码到URL中，然后
+    设置iframe 的src属性为该URL，服务器能够创建一个包含响应内容的HTML文档，并把它返回给Web浏览器，并且在
+    iframe 中显示它。脚本能通过把你 iframe的文档对象来读取服务端的响应。
+        如果使用必须获取一个一个实例化的 XMLHttpRequest 对象
+    */
+    //在IE5和IE6中模拟 XMLHttpRequest
+    if(window.XMLHttpRequest == undefined) {
+        window.XMLHttpRequest = function() {
+            try {
+                return new ActiveXObject("Msxml2.XMLHTPP.6.0");
+            } catch(e1) {
+                try {
+                    return new ActiveXObject("Msxml2.XMLHTPP.3.0");
+                } catch(e2) {
+                    throw new Error();
+                }
+            }
+        }
+    }
+    /*
+    一个HTTP请求由4部分组成
+        HTTP请求方法 或 “动作”
+        正在请求的URL
+        一个可选的请求头集合，其中可能包含身份验证信息
+        一个可选的请求主体
+    服务器返回的HTTP响应包含3部分
+        一个数字或文字组成的状态码，用来显示请求的成功和失败
+        一个响应头集合
+        响应主体
+    指定请求
+    调用 XMLHttpRequest 对象的open方法 去指定这个请求的两个必须部分，方法和URL
+    request.open("GET","data.csv");
+    open方法的第一个参数为指定的方法
+    第二个参数为URL，它是请求的主体
+    XMLHttpRequest 允许以下的方法 GET POST DELETE HEAD OPTIONS 和PUT
+    而HTTP CONNECT方法  TRACE方法和TRACK方法，由于安全风险已被明确禁用。
+    如果指定绝对URL、协议、主机和端口通常必须匹配所在文档的对应内容:跨域请求通常会报错。
+    使用 Content-Type 头指定主体的MIME类型
+    request.setRequestHeader("Content-Type","text/plain");
+    以下的头，你不能通过 setRequestHeader 方法设置头部
+    Accept-Charset       Content-Transfer-Encoding      TE
+    Accept-Encoding      Date                           Trailer
+    Connection           Expect                         Transfer-Encoding
+    Connection-Length    Host                           Upgrade
+    Cookie               Keep-Alive                     User-Agent
+    Cookie2              Referer                        Via
+
+    发送请求之后调用send方法,才开始启动网络，setRequestHeader 必须在open之后，send之前，
+    否则会抛出异常
+    request.send(null);
+
+    一个完整的HTTP响应由状态码、响应头集合和响应主体组成。
+    getResponseHeader 和 getAllResponseHeaders 能查询响应头，XMLHttpRequest会自动处理
+    cookie，它会从 getAllResponseHeaders 头返回集合中过滤掉cookie投。
+    而getResponseHeader 传递 "Set-Cookie" 和"Set-Cookie2" 则返回null
+    响应主体可以从 responseText 属性中得到文本形成 从responseXML属性中得到Document形式。
+
+    XMLHttpRequest 规范的readyState值
+    UNSENT           0  open尚未调用
+    OPENED           1  open已调用
+    HEADERS_RECEIVED 2  接收到头信息
+    LOADING          3  接收到响应主体
+    DONE             4  响应完成
+
+    调用send时，即使readyStae仍处于OPENED 状态，也通常触发它。
+    为了监听 readystatechange 事件，请把事件处理函数设置为 XMLHttpRequest对象的
+    onreadystatechange 属性，也能使用  addEventListener
+
+    */
+
+    //获取HTTP相应的 onreadystatechange
+    function getText(url, callback) {
+        var request = new XMLHttpRequest();
+        request.open("GET",url);
+        request.onreadystatechange = function() {
+            if ( request.readyState === 4 && request.status === 200) {
+                var type = request.getResponseHeader("Content-Type");
+                if(type.match(/^text/)) callback(request.responseText);
+            }
+        };
+        request.send(null);
+    }
+    /*
+    假设服务器使用"text/plain""text/plain""text/html""text/css"这样的MIME类型发送文本响应。
+    然后我们使用XMLHttpRequest对象的responseText属性得到它。
+    */
+    function get(url, callback) {
+        var request = new XMLHttpRequest();
+        request.open("GET",url);
+        request.onreadystatechange = function() {
+            var type = request.getResponseHeader("Content-Type");
+            if (type === "application/json")
+                callback(JSON.parse(request.responseText));
+        }
+        request.send(null);
+    }
+    /*
+    检查该相应的 Content-Type 头且专门处理 application/json
+    如果特殊编码的另一个响应类型是"application/javascript"或"text/javascript",这种情况下，不需要使用
+    XMLHttpRequest 对象，因为 <script>元素本身操作HTTP脚本的能力完全可以实现加载并执行脚本，
+    且记住  <script>元素能发起跨域HTTP请求，而 XMLHttpRequest API则进制
+    responseText属性只能用于文本。而Web服务端通常还使用二进制数据 响应Http请求
+    XHR2 定义了处理二进制相应的方法。
+    如果"Content-Type"头中包含了错误的"charset"参数，那么XMLHttpRequest将使用错误的编码来解析响应，并且
+    responseText中的字符可能是错的。XHR2定义了 overrideMimeType 方法来解决这个问题，并且大量的浏览器已经实现
+    了它，如果相对于服务器你更了解资源的MIME类型，那么在调用send之前把类型传递给overrideMimeType ，这样使得
+    XMLHttpRequest 忽略 "Content-Type"头儿使用指定的类型
+    request.overrideMimeType("text/plain; charset = utf-8");
+
+    1、表单编码的请求
+    默认情况下,HTML表单通过POST方法发送给服务器，而编码后的表单数据则用作请求主体。
+    对表单数据使用的编码方案相当简单：对每个表单元素的名字和值执行普通的URL编码（使用
+    十六进制转义码替换特殊字符），使用等号把编码后的名字和值分开，并用 & 符号分开 键值对。
+    一个简单表单的编码 例如
+    find=pizza&zipcode=21234$radius=1km
+    表单数据编码格式有一个正式的MIME类型
+    application/x-www-from-urlencoded
+    当使用post提交这种顺序的表单数据时，必须是指“Content-Type”请求头为这个值
+
+    之后需要注意的就是将JS对象进行进行相应的转换，其中需要注意的url编码的问题
+
+    2、JSON编码的请求
+    使用json，那么就必须将 "Content-Type" 设置为 "application/json"
+    request.setRequestHeader("Content-Type","application/json");
+    request.send(JSON.stringify(data)); //json字符串转换
+
+    3、XML编码的请求
+    <query>
+        <find zipcode = "01234" radius = "1km">
+            pizza
+        </find>
+    </query>
+    如果查询为以上元素，那么可以考虑使用XML Document对象
+    例如下面的例子
+    需要注意的是如果send()传入一个字符串，但没有指定Content-Type投，那么
+    XMLHttpRequest将会添加 "ext/plain;charset=UTF-8"
+    */
+    //当接收到响应是，调用回调函数
+    function postQuery(url, what, where, radius, callback) {
+        var request = new XMLHttpRequest();
+        request.open("POST",url);
+        request.onreadystatechange = function() {
+            if (request.readystate === 4 && callback) callback(request);
+        };
+
+        var doc = document.implementation.createDocument("","query",null);
+        var query = doc.documentElement;
+        var find = doc.createElement("find");
+        query.appendChild(find);
+        find.setAttribute("zipcode",where);
+        find.setAttribute("radius",radius);
+        find.appendChild(doc.createTextNode(what));
+        //使用XML编码的数据，将自动设置 Content-Type
+        request.send(doc);
+    }
+    /*
+    4、上传文件
+    用户通过 <input type="file"> 元素选择文件是，表单将在它产生的POST请求主体中发送文件内容。
+    XHR2 API允许通过向send方法传入File对象来实现上传文件，但是XMLHTTPRequest 不行
+    每个<input type="file"> 又一个files属性。它是File对象中的类数组对象
+    而文件类型是更通用的二进制大对象(Blob)类型中的一个子类型。
+    XHR2允许向send方法传入任何Blob对象。 如果没有显式设置Content-Type投 ，这个Blob对象的type舒勇
+    就是用于设置待上传的Content-Type投。
+
+
+    5、multipart/form-data 请求
+    当HTML表单 同时包含文件上传元素和其他元素时，必须使用 Content-Type为 "multipart/form-data"为
+    头部的POST方法来提交表单。
+    这种编码包括使用长 “边界”字符串把请求主体分离成多个部分。
+    XHR2定义了新的 FormData API。它容易实现多部分请求主体。
+    首先使用 FormData()构造函数 创建FormData对象，然后按需多次调用这个对象的append 方法把个体（可以是
+    字符串、File或 Blob 对象）添加到请求中， 最后把 FromData对象传递给 send 方法
+    function postFormData(url, data, callback) {
+        if(typeof FormData === "undefined")
+            throw new Error();
+        var request = new XMLHttpRequest();
+        request.open("POST",url);
+        request.onreadystatechange = function() {
+            if (request.readystate === 4 && callback) callback(request);
+        };
+        var formData = new FormData();
+        for (var name in data) {
+            if(!data.hasOwnProperty(name)) continue; //跳过继承属性
+            var value = data[name];
+            if(typeof value === "function" ) continue;
+            formData.append(name,value);
+        }
+        request.send(formData);
+     }
+     XMLHttpRequest 调用send 会触发loadstart事件。
+     XMLHttpRequest 对象在加载服务器的响应是通常每间隔50ms 会发生progress事件。
+     如果请求快速完成，可能不触发progress事件，当事件完成，会触发load事件。
+     当请求完成后， 检查 XMLHttpRequest 对象的 status状态 码是否等于 200
+     HTTP 请求无法完成有三种情况
+     1、请求超时，触发timeout事件
+     2、请求中止，触发abort事件
+     3、出现网络错误，例如多重定向问题，阻止请求完成，触发error事件。
+
+     如何判断浏览器是否支持progress事件
+     if("onprogress" in (new XMLHttpRequest())) { }
+     而域progress事件相关的额，还有三个属性
+     loaded 目前传输的字节数值
+     total  自"Content-length"投传递的数据的整体长度，如果不知道内容长度，则为0
+     lengthComputable  true 可以获取内容长度， false 无法获取
+
+     上传进度事件
+     XHR2 可以用于检测HTTP请求上传的事件，相应的对象有upload属性。
+     它对应着一个对象，定义了addEventListener方法和整个progress事件集合，但upload
+     对象没有定义 onreadystatechange属性， upload仅仅 能触发新的事件类型。
+     var x =  new XMLHttpRequest();
+     x.onprogress 可以用来金控相应的下载速度。
+     x.upload.onprogress 可以用来监控请求的上传进度
+
+     中止请求和超时
+     XMLHttpRequest 和 XHR2 可以使用abort方法触发 abort事件。
+     使用前需要进行检测
+     var xhr =  new XMLHttpRequest();
+     if ("onabort" in (xhr))
+
+     XHR2 定义了timeout属性来指定请求自动中止后的毫秒数，也定义了timeout事件用于当超时
+     发生时触发（不是abort事件）
+
+     跨域HTTP请求
+     可以在 <form><iframe> 元素中使用跨域URL，是的浏览器显示最终的跨域文档。
+     但是由于同源策略，浏览器不允许原始脚本查找跨域文档的内容。
+     因为使用 XMLHttpRequest ，文档内容都可以通过responseText属性暴露，所有同源策略不
+     允许 XMLHttpRequest 进行跨域请求。不过可以使用script元素，来加载任何来源的脚本。
+
+     XHR2通过在HTTP相应中选择发送合适的CORS（Cross-Origin Resource Sharing 跨域资源共享）
+     允许跨域访问网站。
+     除了IE8都支持。
+     如果给 XMLHttpRequest 的open方法传入用户和密码， 那么他们绝对不能通过跨域请求发送。
+     跨域请求也通常不会包含其他任何用户证书 :cookie和HTTP身份验证令牌(token)通常不会作为请求的
+     内容部分发送且任何作为跨域响应接收的cookie都会丢弃。
+
+     借助 <script > 元素法作为一种Ajax传输机制：只需是指script元素的src属性， 如果它还没有插入到
+     document中，则需要插入。然后浏览器就会发送一个HTTP请求下载src属性指向的URL.
+     使用 script 元素进行Ajax传输的主要原因有
+     1、它不受同源策略的影响，因此可以使用它们从其他的服务器请求数据
+     2、包含JSON编码数据的响应体会自动执行
+     不过不应该使用这样技术，因为攻击者可能进入服务器，接管你的网页，运行它们的代码。
+
+     使用 script 元素 作为Ajax 传输的技术称为 JSONP，如果HTTP请求得到的香烟数据是经过JSON编码的，
+     则适用该技术，P代表填充 或前缀。
+     JSONP 中的P的意义是相应内容必须用JS函数名和圆括号包裹起来。
+     例如 handleResponse( [1,2,{"buckle": "my shoe"}])
+     为了使服务器返回指定的 json 可以考虑 在URL后 追加 ?jsonp
+     一般来说 使用 jsonp的查询函数来指定回调函数的名，和callback 函数 是许多支持JSONP的服务都能分辨的。
+
+    //发送JSONP请求，再执行回调
+    function getJSONP(url,callback) {
+        var cbnum  = "cb" + getJSONP.counter++;
+        var cbname = "getJSONP."+ cbnum;
+
+        if(url.indexOf("?") === -1)
+            url += "?jsonp=" + cbname;
+        else
+            url += "&jsonp=" + cbname;
+        var script = document.createElement("script");
+        getJSONP[cbnum] = function(response) {
+            try { callback(response); }
+            finally {
+                delete getJSONP[cbnum];
+                script.parentNode.removeChild(script);
+            }
+        };
+        script.scr = url;
+        document.body.appendChild(script);
+    }
+    getJSONP.counter = 0;
+    */
+
+
+    function hello() {
+        var msg = 'hello world';
+        document.open()
+		document.write(msg);
+		document.close();
+    }
+	</script>
+</head>
+<body>
+
+<p>Imagine a form with five fields</p>
+</body>
+<body onload="hello()">
+</body>
+
+</html>

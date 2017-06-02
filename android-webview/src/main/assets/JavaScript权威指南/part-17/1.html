@@ -1,0 +1,340 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+    事件类型
+    事件的分类
+        依赖于设备的输入事件
+        mousedown mousemove mouseup keydownkeypress 和keyup
+        独立于设备的输入事件
+        click事件表示激活了链接、按钮或其他文档元素
+        用户界面事件
+        通常出现在定义Web应用用户界面的HTML表单元素上，包括文本输入域获取键盘焦点的focus事件
+        状态变化事件
+        用来表示某正生命周期或相关状态的变化。例如当文档完全加载时，在Window对象上会发生load事件。
+        特定API事件
+        HTML5 定义的自己的事件类型，拖放API
+        计时器和错误处理程序
+
+    */
+
+    /*
+    传统事件类型
+    1、表单事件
+        form元素的submit和reset事件，
+        IE定义了focusin和focusout事件替代focus和blur事件。
+        在textarea和其他文本输入表单元素，出IE外的浏览器都会触发input事件。由于该事件对象没有指定输入
+        文本的内容，不过可以使用textinput事件将会成为这个事件的替换方案。
+    2、Window事件
+        是指事件的繁盛和浏览器窗口本身而非窗口中显示的任何特定文档内容相关。
+        load事件，当文档和其所有外部资源完全加载并显示给用户时就会触发
+        可以使用DOMContentLoaded和readystatechange来替代load事件。
+        unload与load想法，用户离开当前文档转向其他文档时出发。扩用来保存用户状态。
+        beforeunload事件，可以提醒用户是否确认离开页面的机会
+        resize 重置窗口大小
+        scroll 窗口滚动事件。
+    3、鼠标事件
+        clientX和clientY属性制定了鼠标在窗口坐标的位置
+        button和which属性制定了按下的鼠标键是哪个。
+        detail属性代表了是单击双击还是三击
+        mousemove mouseup mousedown mouseover鼠标的移动事件
+        click 是独立于设备的表单事件，它不仅仅在表单元素上出发，还可以在任何文档元素上出发，同时
+        传递拥有之前介绍的所有鼠标相关额外中断的事件对象。
+        如果两次单击鼠标，在第二个click事件之后是dbclick事件。
+        mousewheel事件 鼠标滚轮滚动
+    4、键盘事件
+        keyCode，
+        altKey、ctrlKey、metaKey、shiftKey
+
+    */
+
+    /*
+    HTML5事件
+
+    加入了用于播放音频和视频的 auto 和video元素。
+    他们想要的事件序列有
+    canplay         loadedata       playing     stalled
+    canplaythrough  loadedmetadata  progress    suspend
+    durationchange  loadstart       ratechange  timeupdate
+    emptied         pause           seeked      voluemechange
+    ended           play            seeking     waiting
+    拖放API 实现Web和原生应用间的数据传输
+    dragstart   drag    dragend
+    dragenter   dragover dragleave
+    drop
+    触发拖放事件的事件对象， 其附加属性dataTransfer
+
+    历史管理机制 允许Web应用同浏览器的返回和前进按钮交互
+    该机制涉及的事件是hashchange和popstate
+
+    离线Web应用的支持，可以安装到本地应用缓存中。
+    两个重要事件是offline和online
+    还定义了大量其他事件通知应用下载和应用缓存更新
+    cached     checking    downloading      error
+    noupdate   obsolete    progress         updateready
+
+
+    */
+
+    /*
+    触摸屏和移动设备事件
+
+    */
+
+
+    /*
+    注册事件处理程序有两种方式
+    1、给事件目标对象或文档元素设置属性
+    2、将事件处理程序传递给对象或者元素
+    */
+    /*
+    设置JS对象属性来为事件处理程序
+    onclick onchange onload
+    例如
+     window.onload = function(){
+        var elt = document.getElementById("address");
+        elt.onsubmit = function() { return validate(this);}
+     }
+     这种方式缺点是其设计都是围绕着假设每个事件目标对于每种事件类型将最多只有一个处理程序。
+     更好的处理方式是 使用一种不修改或覆盖任何已有注册处理程序的技术，例如
+     addEventListener
+    */
+
+    /*
+    设置THML标签属性为事件处理程序
+    例如 <button onclick="alert('Thank You')"></button>
+    由于应当将来避免HTML内容和JS行为混合，因此应当避免这种写法，应当使用
+    addEventListener方法
+    我们看下面的例子
+    <button id = "button"> click me </button>
+
+    var b = document.getElementById("button");
+    b.onclick = function() { alert('Thank You');};
+    b.addEventListener("click",function() { alert('Thank You');} , false)
+
+   这两个方法区别是addEventListener不影响onclick属性的值
+   多次调用addEventListener 是为同一个对象注册同一个事件类型的多个处理程序函数，该事件类型的注册
+   处理程序都会按照注册的顺序调用。，但是使用相同对象在同一个对象上多次调用addEventListener是无效的，因为只会
+   注册一次。
+   可以通过removeEventListener来移除
+
+    IE9之前的IE不支持addEventListener 可以通过attachEvent和detachEvent方法来替代
+
+    */
+
+    /*
+    IE8 及以前的版本中，通过设置属性注册事件处理程序，，当调用他们时，并未传递事件对象。取而代之，需要通过
+    全局对象window.event来获得事件对象。
+    function handle(event) {  event = event || window.event;}
+
+    通过HTML属性来注册事件处理程序， 会被转换成能存储全局变量的顶级函数，而不是本地函数。
+    但是因为历史原因，他们运行在一个修改后的作用域链中。
+
+    事件传播
+    繁盛在文档元素上的大部分事件都会冒泡，但是例外的是focus、blur和scroll事件，
+    文档元素上的load事件会冒泡，但是它会在Document对象上停止冒泡儿不会传播到window对象
+
+    事件取消
+    在支持addEventListener的浏览器中，也能通过调用事件对象的 preventDefault 方法取消对事件的
+    默认操作
+    在IE9之前的IE中可以通过设置事件对象的 returnValue 属性为false来达到同样的效果
+    function cancelHandler(event) {
+        var event = event || window.event;
+
+        if(event.preventDefault) event.preventDefault(); //标准技术
+        if(event.returnValue) event.returnValue = false; //IE
+        return false;
+    }
+    调用事件对象的 stopPropagation 方法可以阻止事件的继续传播。
+    IE9之前的IE不支持 stopPropagation 方法， 可以使用cancelBubble属性 设置为true 则阻止事件进一步传播
+
+    文档加载事件
+    load事件直到文档和所有图片加载完毕时才发生。在文档完全解析之后，但是在所有图片全部加载完毕之前开始运行脚本
+    通常是安全的。
+    当文档加载解析完毕且所有延迟（deferred）脚本都执行完毕时会触发 DOMContentLoaded 事件，此时图片和异步
+    （aysnc）脚本可能依旧在加载，但是文档已经为操作准备就绪了。
+
+    document.readyState属性随着文档加载过程而变，在IE中每次状态改变都伴随着Document对象上的 readystatechange 事件。
+    当IE 接收到complete状态时，使用这个事件来做判断是可行的。
+    HTML5标准化了readystatechange事件，但它仅仅在load事件之前触发。
+    */
+    //通过 DOMContentLoaded  和 readystatechange 或load事件发生时会触发注册函数
+    var whenReady = (function(){
+        var funcs = [];
+        var ready = false;
+        function handler(e) {
+            if (ready) return; //已经运行过一次
+            if (e.type === "readystatechange" && document.readyState !== "complete")
+            return; //如果发生 readystatechange 事件，但状态不是complete ，表示文档未就绪
+
+            //运行所有注册函数
+            //注意每次都要计算length，以防这些函数的调用可能会导致注册更多的函数
+            for(var i = 0; i < funcs.length; i++) {
+                funcs[i].call(document);
+            }
+
+            ready = true;
+            funcs = null;
+        }
+
+        if (document.addEventListener) {
+            document.addEventListener("DOMContentLoaded",handler,false);
+            document.addEventListener("readystatechange",handler,false);
+            document.addEventListener("load",handler,false);
+        } else if(document.attachEvent) {
+            document.attachEvent("onreadystatechange",handler);
+            window.attachEvent("onload",handler);
+        }
+
+        return function whenReady(f) {
+            if(ready) f.call(document);
+            else funcs.push(f);
+        }
+
+    }());
+
+    /*
+    鼠标事件
+    除了mouseenter和mouseleave 都能冒泡， 连接和提交按钮上的click事件都有默认操作且能够阻止
+
+    click 高级事件
+    contextmenu 可以取消事件，当上下文菜单即将出现时触发。当前浏览器在鼠标右击时显示上下文菜单。
+    dbclick
+    mousedown
+    mouseup
+    mouseover 当鼠标进入元素时出发，relatedTarget （在IE中是fromElement）指的是鼠标来自的元素
+    mouseout 当鼠标离开元素时出发，relatedTarget （在IE中是fromElement）指的是鼠标来自的元素
+
+    mouseenter/mouseleave IE中引入，H5将其标准化
+
+    传递给鼠标处理程序的事件对象有clientX和clientY属性，他们制定了鼠标指针相对于包含窗口的坐标
+    altKey ctrlKey metaKey 和shiftKey属性制定了当事件发生时是否有各种键盘辅助按键按下。
+
+    */
+
+    /*
+    mousewheel事件
+    鼠标滚轮事件，可以取消来阻止默认操作
+    在FireFox之外的所有浏览器都支持"mousewheel"事件，FireFox使用"DOMMouseScroll"
+    传递个“mousewheel”处理程序的事件对象有 wheelDelta 属性，其指定用户股东滚轮有多远，
+    为了支持使用二位轨迹球而非一维滚轮的Apple鼠标，除了wheelDelat属性外，事件对象还有wheelDeltaX和
+    wheelDeltaY
+
+    Firefox中 可以使用DOMMouseScroll 取代 mousewheel事件
+    使用 事件对象的 detail属性 取代 wheelDelta
+    但是需要注意的是 两者的属性值的缩放比率和正负符号不同。 detail乘以-40 和 mousewheel 的 wheelDelta相等。
+
+    而制定了三个维度的旋转是， detail乘以-120 和 mousewheel 的 wheelDelta相等。
+    */
+
+    /*
+    拖放事件
+    Drag-and-Drop DND
+    drag source  和drop target回见传输数据的用户界面。
+    他们必须和底层OS结合，是的他们能在不相关的应用间工作
+    他们必须适用于 移动 复制 和链接 数据传递操作，允许托房源和拖放目标通过设置限制允许的操作，
+    然后让用户选择（通常使用键盘辅助间）许可设置
+    它们必须为拖放源提供一种方式指定待拖动的图标或图像
+    它们必须为托房源和拖放目标的DnD交互过程提供基于事件的通知
+
+
+    IE DnD API 总是基于事件且JS API包含两个事件集，一个在拖放源上触发，另一个在拖放目标上触发。
+    任何有HTML draggable属性的文档元素都是拖放源。
+
+
+
+
+
+
+
+
+
+
+
+    */
+
+    /*
+    文本事件
+    keydown事件和keyup事件是低级事件，
+    keypress事件是较高级的事件，它表示产生一个可打印字符。
+    textinput事件和 textInput事件都传递一个简单的事件对象，它有一个用保存输入文本的
+    data属性（inputMethod是建议用于指定输入源），data属性通常只保存单个字符，但其他输入源
+    通常可能包含多个字符。
+    keypress事件表示输入的单个字符，在大多数浏览器中，事件对象的keyCode属性指定了输入字符的编码
+    而Firefox使用的是charCode。
+    大多数浏览器只在当产生可打印字符时触发keypress事件，但Firefox在产生非打印字符时也触发keypress事件。
+    可以通过取消textinput、textInput和keypress事件来阻止字符输入，这意味着可以使用这些事件来过滤输入。
+    下面实现的代码，实现了这种过滤，它查找有额外属性（非标准）data-allowed-char的 <input type = text>
+    元素，这个模块在这类文本输入域上注册了textinput、textInput、和keypress事件的处理程序来限制用户只能
+    输入出现在许可属性值中的字符。
+    
+    */
+    /*
+    <input id = "zip"type="text" data-allowed-chars = "0123456789"
+    data-messageid = "zipwarn">
+    <span id = "zipwarn" style = "color: red; visibility:hidden">只支持数字</span>
+    */
+    /*
+    keypress和textinput事件是在新输入的文本真正插入到聚焦的文档元素前触发，这就是这些
+    事件处理程序能够取消事件和阻止文本插入的原因。
+    在文本插入到元素后才触发的input事件类型input。
+    <input type="text" oninput="this.value = this.value.toUpperCase();">
+    HTML5标准化了input事件，除了IE外的所有浏览器都支持它，
+    在IE中，可以使用不标准的 propertychange 事件检测文本输入元素的value属性改变来实现相似
+    相似的效果。
+    */
+
+    //使用propetychange事件探测文本输入
+    function forceToUpperCase(element) {
+        if (typeof element === "string") element = document.getElementById(element);
+        element.oninput = upcases;
+        element.onpropertychange = upcaseOnPropertyChange;
+
+        function upcase(event){ this.value = this.value.toUpperCase();}
+
+        function upcaseOnPropertyChange(event) {
+            var e = event || window.event;
+            if (e.propertyName === "value") {
+                this.onpropertychange = null;
+                this.value = this.value.toUpperCase();
+                this.onpropertychange = upcaseOnPropertyChange;
+            }
+        }
+    }
+
+
+    /*
+    键盘事件
+    当用户再键盘按下或释放按键时，会发生keydown和keyup事件。
+    他们由辅助键、功能键和字母数字键产生，如果用户按键足够长事件会导致它开始重复
+    那么keyup事件到达之前会收到多个keydown事件。
+
+
+
+
+
+
+
+
+
+
+
+    */
+    function hello() {
+        var msg = 'hello world';
+        document.open()
+		document.write(msg);
+		document.close();
+    }
+	</script>
+</head>
+<body>
+
+<p>Imagine a form with five fields</p>
+</body>
+<body onload="hello()">
+</body>
+
+</html>

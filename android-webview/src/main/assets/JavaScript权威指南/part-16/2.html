@@ -1,0 +1,186 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+    CSS动画
+    setTimeout设置动画作用事件
+    setInterval 设置间隔
+    元素的style属性代表了元素的内联样式，它覆盖所有的样式表，它是设置CSS属性值来改变
+    元素的视觉表现最好的地方。
+    如果需要查询元素应用的的样式，需要使用CSSStyleDeclaration对象来表示。
+    区别是，计算样式是只读的，虽然它确切地决定了浏览器在渲染元素时使用的样式属性值。
+
+    使用窗口对象的 getComputedStyle 方法获得一个元素的计算样式。
+    第一个参数是获取其计算样式的元素，
+    第二个参数，通常是null或者空字符串，但也可以是命名CSS伪对象的字符串，如":before"
+    ":after" ":first-line" ":first-letter"
+    计算样式和内联样式的区别是
+    1、计算样式属性是只读的
+    2、计算样式的值是绝对值，类似于百分比和浮点数之类的全部转换为绝对值。所有指定尺寸的，后缀都
+    会增加px的字符串，颜色以rbg(#,#,#)或rgba(#,#,#,#)的格式返回
+    3、不计算负荷属性，他们只基于最基础的属性，例如不要查询margin而是应该查询marginTop
+    4、计算样式的cssText属性为定义
+
+    需要注意的还有IE不支持getComputedStyle
+    //用指定的因子缩放元素e的文本支持
+    function scale(e,factor) {
+        var size = parseInt(window.getComputedStyle(e,"").fontSize);
+        e.style.fontSize = factor*size + "px";
+    }
+    */
+
+    /*
+    脚本化CSS类
+    通过内联style属性脚本化CSS样式的一个可选方案是脚本化HTML的class属性值，
+    改变了元素的class就改变了应用于元素的一组样式表选择器，它能在同一个时刻改变多个CSS属性
+    例如
+    .attention {
+        background-color : yellow;
+        font-weight:bold;
+        border : solid black 2px;
+    }
+    HTML属性class在JS代码中应该可以用于使用className的JS代码
+    如下代码设置和清除元素的className属性来为元素添加和移除attention类
+    function graAttention(e) { e.className = "attention";}
+    function releaseAttention(e) { e.className = "";}
+    以上的方法，只是代表只指定0个或者1个类名，如果有多个类名就无法工作。
+    然而HTML元素可以有多个CSS类名，
+    HTML5解决了这个问题，为每个元素定义了一个classList属性，该属性是DOMTokenList
+    对象，它是一个只读的类数组对象，它包含了元素的单独类名。
+    该对象，可以通过add和remove方法为元素的class属性添加和删除一个类名
+    toggle方法表示如果不存在类名就添加一个，否则就删除它。
+    contains方法，检测是否包含一个指定的类名。
+    */
+    function classList(e) {
+        if(e.classList) return e.classList;
+        else return new CSSClassList(e);
+    }
+
+    function CSSClassList(e) { this.e = e;}
+
+    CSSClassList.prototype.contains = function(c) {
+        if(c.length === 0 || c.indexOf(" ") !=-1 ){
+            throw new Error();
+        }
+        var classes = this.e.className;
+        if( !classes ) return false;
+        if ( classes === c) return true;
+        //\b在正则中代表单词编辑
+        return classes.search("\\b" + c +"\\b" ) != -1;
+    }
+
+    CSSClassList.prototype.add = function(c) {
+        if(this.contains(c)) return;
+        var classes = this.e.className;
+        if(classes && classes[classes.length-1] != " ")
+            c = " "+c;
+        this.e.className += c;
+    }
+    CSSClassList.prototype.remove = function(c) {
+        if(c.length === 0 || c.indexOf(" ") !=-1 ){
+            throw new Error();
+        }
+
+        var pattern = new RegExp("\\b" + c + "\\b\\s*","g");
+        this.e.className = this.e.className = replace(pattern, "");
+    }
+
+
+    /*
+    脚本化样式表
+    如果这么做，会经常需要使用两类对象
+    第一类是元素对象，由 style 和 link 元素表示，两种元素包含或引用样式表，
+    第二类是 CSSStyleSheet 对象，它表示样式表本身。
+    document.styleSheets 属性是一个只读的类数组对象，它包含 CSSStyleSheet 对象，表示
+    与文档关联在一起的样式表。
+    如果 为定义或引用样式表的 style 或 link 元素，定义了id可以通过document.getElementById来选择他们
+    如果定义了title属性，该title作为对应CSSStyleSheet对象的title属性就可以用
+
+    由style link CSSStyleSheet 都定义了一个在JS中设置和查询的disabled属性。
+    如果 disabled 设置为true 样式表 就被浏览器关闭并忽略。
+    */
+    function disableStylesheet(ss) {
+        if(typeof ss === "number" ) {
+            document.styleSheets[ss].disabled = true;
+        } else {
+            var sheets = document.querySelectorAll(ss);
+            for(var i = 0; i < sheets.length; i++) {
+                sheets[i].disabled = true;
+            }
+        }
+    }
+
+    /*
+    查询、插入与删除样式规则
+
+    IE8以及更早版本实现的API，与其他浏览器之间有些差别
+
+    document.styleSheets[]数组元素是CSSStyleSheet对象，
+    在IE中有一个rules数组 值包含样式表中实际存在的规则
+    在其他浏览器中有cssRules数组，代表CSSRule对象，在标准API中该对象代表CSS规则
+    包含如@import 和@page等指令
+    CSSRule对象 有两个属性，在标注API可以很方便的使用
+    selectText是规则的CSS选择器，它引用了一个描述与选择器相关联的样式的科协CSSStyleDeclaration对象。
+    标准的API接口定义了insertRule和deleteRule方法来添加和删除规则。
+    document.styleSheets[0].insertRule("H1 { text-weight : bold;}",0)
+    IE不支持insertRule 和deleteRule，但定义了addRule和removeRule
+    */
+
+    //用API对样式表进行一些可疑的修改
+    var ss = document.styleSheets[0];
+    var rules = ss.cssRules ? ss.cssRules : ss.rules;
+    for( var i = 0; i < rules.length; i++) {
+        var rule = rules[i];
+        if(!rule.selectorText) continue;
+        var selector = rule.selectorText;
+        var ruleText = rule.style.cssText;
+
+        if(selector == "h1") {
+            if(ss.insertRule) ss.insertRule("h2 {" + ruleText + "}",rules.length);
+            else if(ss.addRule) ss.addRule("h2",ruleText,rules.length);
+        }
+    }
+
+
+    /*
+    在大多数浏览器中可以使用标准的DOM技术
+    只要创建一个全新的style元素，将其插入到文档的头部，然后用innerHTML属性来设置样式表内容
+    但在IE8以及更早的版本中，通过CSSStyleSheet对象的非标准方法document.createStyleSheet来创建
+    */
+    function addStyles(styles) {
+        var styleElt,styleSheet;
+        if(document.createStyleSheet) {
+            styleSheet = document.createStyleSheet();
+        } else {
+            var head = document.getElementsByTagName("head")[0];
+            styleElt = document.createElement("style");
+            head.appendChild(styleElt);
+            styleSheet = document.styleSheets[document.styleSheets.length - 1];
+        }
+
+        if(typeof styles === "string") {
+            if (styleElt) styleElt.innerHTML = styles;
+            else styleSheet.cssText = styles;
+        }
+    }
+
+
+
+    function hello() {
+        var msg = 'hello world';
+        document.open()
+		document.write(msg);
+		document.close();
+    }
+	</script>
+</head>
+<body>
+
+<p>Imagine a form with five fields</p>
+</body>
+<body onload="hello()">
+</body>
+
+</html>

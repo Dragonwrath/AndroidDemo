@@ -1,0 +1,255 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+    jQuery基础
+    该类库定义了一个全局函数jQuery().由于使用频繁，因此在类库中还定义了一个快捷别名：$
+    这是自jQuery在全局命名空间中定义的唯一两个变量。
+    查找所有div元素
+    var divs = $("div");
+    该方法返回的值表示0个或多个DOM元素，这就是jQuery对象。
+    jQuery()是工厂函数，不是构造哈数，它返回一个新创建的对象。
+    并且支持链式调用例如
+    查找拥有details类的p元素，将其高亮显示，并将其中隐藏的p元素快速显示出来。
+    $("p.details").css("background-color","yellow").show("fast");
+
+
+    jQuery函数
+    1、查询与查询结果
+    传递CSS选择器字符串给 $(),它返回的jQuery对象表示匹配(或称为选中)的元素集。
+    可以用size()方法 来替代length属性
+    用get()方法来替代方括号索引，用toArray()方法来将jQuery对象转换为真实数组。
+    jQuery对象 还有其他属性
+    selector 属性是创建jQuery对象时的选择器字符串
+    context  属性是上下文对象，是传递给$()方法的第二个参数，如果没有传递，默认为Document
+    jquery   属性是 所有jQuery对象都有一个名为jQuery的属性，检测该属性是否存在
+            可以简单快捷将jQuery与其他的类数组对象区分开，该属性值是字符串形式的jQuery版本
+    var body = $("script",document.body); //获取document body中的所有 script 元素
+    body.selector //"script"
+    body.context  //document.body
+    body.jquery //1.4.2
+    遍历 jQuery对象 中的所有元素可以使用each方法来替代for循环，有点类似ES5中的forEach数组方法
+    它接收一个回调函数作为唯一参数，回调函数作为匹配元素的方法来调用。，因此在回调函数里this关键字
+    指代的是Element对象。 each方法还会将索引值和该元素作为第一个和第二个参数传递给回调函数。this和第二个参数
+    都是原生文档元素，而不是jQuery对象。
+    each方法，在回调函数的任一元素上返回false，遍历就将终止
+
+    jQuery对象的map方法与Array.prototype.map()方法类似，它接收回调函数作为参数。并为jQuery对象中的
+    每一个元素都调用回调函数，同时将回调函数的返回值手机起来，并且将这些返回值封装成一个新的jQuery对象返回。
+
+    jQuery对象的index方法， 返回该元素在jQuery对象中的索引值
+
+    jQuery对象的is方法，如果至少有一个匹配该选择器，则返回true
+
+    */
+
+    /*
+    jQuery的getter和setter
+    jQuery对象可以获取get或设置setHTML属性\CSS样式\元素内容\位置宽高的值
+    getter
+    1、方法只会查询元素集中的第一个元素，返回单个值，如果遍历所有使用map
+    setter
+    1、这些方法会给jQuery对象中的每一歌元素设置值，然后返回该jQuery对象以便链式调用
+    2、这些方法经常接收对象参数，在这种情况下，该对象的每个属性都指定一个需要设置的键值对。
+    3、这些方法经常接收函数参数，在这种情况下，会调用该函数来计算需要设置的值，调用该函数时的this
+    值对应的元素，第一个参数是该元素的索引值，第二个参数是当前值
+
+    1、获取设置HTML属性
+    attr方法是jQuery中用于HTML属性的getter/setter。该方法处理浏览器的兼容性和一些特殊情况，
+    还让HTML属性名和JS属性名可以等同使用
+    removeAttr方法可以用来所有选中元素的某个属性。
+    $("form").attr("action") //获取第一个form元素的action属性
+    $("#icon").attr("src","icon.gif")  //设置1个属性
+    $("#banner").attr({ src : "banner.gif", //设置4个属性
+                        atl: "Advertisement",
+                        width:720,height:64})
+    $("a").attr("target",function() {  //非站内连接在新窗口中打开
+        if(this.host == location.host) return "_self"
+        else return "_blank"
+    })
+    $("a").attr({target:function() {}});
+    $("a").removeAttr("target");
+
+    2、获取和设置CSS属性
+    css方法和attr方法类似。
+    $("h1").css("font-weight");
+    $("h1").css("fontWeight");
+    $("div.note").css("border","solid black 2px");
+    $("h1").css("font-size",function(i,curval) {
+        return Math.round(1.25* parseInt(curval));
+
+    });
+
+    3、获取和设置CSS类
+    class属性值会被解析成一个由空格分割的CSS类名列表。
+    addClass() removeClass()
+    toggleClass() 当元素还没有某些类的存在，添加这些类，如果有则删除
+    hasClass() 用来判断某些类是否存在。
+
+    $("h1").addClass("hilite"); //给所有h1元素添加一个类
+    $("h1+p").addClass("hilite first"); //h1后面的p添加两个类
+    $("section").addClass(function(n) { //传递一个函数用于匹配每一个元素添加自定义类
+        return "section" + n;
+    });
+
+    $("div").removeClass(); //删除div中的所有类
+
+    $("h1").toggleClass("hilite"，true); //作用类似addClass
+    $("h1").toggleClass("hilite"，false); //作用类似removeClass
+
+    $("p").hasClass("first"); //hasClass只能接受单个类名，并且不支持函数参数
+    $("#lead").is(".first.hilite");  //is更加灵活
+
+
+    4、设置和获取HTML表单值
+    val() 方法用来设置和获取HTML表单元素的value属性，还可以用于获取和设置复选框、单选按钮
+    以及 select 元素的选中状态
+
+    $("#surname").val(); //获取surname文本域的值
+    $("select").val();//从select 中获取单一元素
+    $("select#extras").val();//从select multiple 中获取一组值
+    $("input:radio[name = ship]:checked").val() //获取选中的单选按钮的值
+    $("#email").val("Invalid email address"); //给文本域设置值
+    $("input:text").val(function() {
+        return this.defaultValue;
+    })
+
+    5、设置和获取元素内容
+    text()和 html() 用来获取和设置元素的纯文本或HTML内容。
+    不带参数使用时，text方法返回所有匹配元素的所有子孙文本节点的存文本内容。
+    该方法可以工作在任何浏览器中。
+    不带参数调用html方法，它会返回第一个匹配元素的HTML内容。
+    x.html()和 x[0].innerHTML 一样高效
+    如果传入字符串给text 和 html ，该字符串会用作该元素的纯文本或格式化的HTML文本内容，它
+    会替换掉所有存在的内容。
+    var title = $("head title").text();
+    var headline = $("h1").html();
+    $("h1").text(function(n,current){
+        return "*" + (n+1)+ ": " + current
+    })
+
+    6、获取和设置元素的位置宽高
+    offset() 可以获取或设置元素的位置，该方法相对文档来计算位置值，返回一个对象，带有left和top属性
+    用来表示X和Y坐标。如果传入带有这些属性的对象，会给元素设置指定的位置。
+    var elt = $("#sprite");
+    var position = elt.offset();
+    position.top +=100;
+    elt.offset(position);
+
+    $("h1").offset(function(index,curpos) {
+        return {left : curpos.left + 25 * index , top : curpos.top}
+    })
+
+    position方法 和offset方法很像，但是只能用作getter，它返回的元素位置是相对于其偏移于父元素。
+    任何元素都有一个offsetParent属性，其位置是相对的，在某些浏览器下，也会把表格单元等其他元素
+    当做偏移父元素。
+    jQuery只会把定位元素作为偏移父元素，jQuery对象的offsetParent()方法则会把每个元素隐射到最近
+    定位元素的祖先元素或 body元素。
+    offset 返回元素的绝对位置，用相对于文档的坐标来表示
+    position 返回相对于元素的offsetParent()的偏移量
+    width()和height() 返回基本的宽高 ，不包含内边距、边框和外边距
+    innerWidth和innerHeight 返回元素的宽高，包含内边距的宽高
+    outerWidth 和 outerHeight 返回的是包含元素内边距和边框的尺寸，如果传入true ，将返回
+    包含元素外边距的尺寸。
+
+    width和height
+    特性 1
+    当jQuery对象的第一个元素是Window或Document对象是 width和height返回的是窗口的视口大小或文档的
+    整体尺寸
+    特性 2
+    这两个方法可是setter也可以是getter，如果传递值给只写方法，他们会给jQuery对象中的每一个元素设置宽高
+    注意不能给 Window或Document对象 设置宽高。如果传入数值，则默认单位为像素，如果传输字符串，贼当做CSS
+    的width和 height属性的值，如果传入函数，可以计算要设置的宽高。
+
+    width和height方法作为getter方法时，默返回的元素的内容盒子的尺寸，不包含内边距、边框和外边距
+    用作setter是，指定的是内容盒子的大小。
+    但是，如果一个元素的CSS box-sizing属性设置的 border-box ，那么设置的尺寸包含内边距和边框。
+    例如 对于来说
+    使用content-box 作为盒模型的元素e $(e).width(x).width()  =>返回x
+    使用 border-box 作为盒模型的元素e $(e).width(x).width()  =>返回就不是x
+
+    scrollTop和scrollLeft 获取或设置元素的滚动条位置，不能传递函数给这两个方法
+    当用在Document对象上时，会获取或设置存放该Document的Window对象的滚动条位置。
+
+
+    7、获取和设置元素数据
+    data() 可以用来设置或获取与文档元素、Document或Window对象相关联的数据。
+    data()不接收函数参数，
+    data() 传递对象是该对象的属性将替换掉与元素相关联的旧数据
+    removeData() 从元素中删除数据， 不指定参数时，会删除与元素相关联的所有数据
+
+    */
+
+    /*
+    修改文档结构
+    1、插入和替换元素
+    操作                      $(target).method(content)    $(content).method(target)
+    在目标元素结尾处插入内容     append()                     appendTo()
+    在目标元素起始处插入内容     prepend()                    prependTo()
+    在目标元素后面处插入内容     after()                      insertAfter()
+    在目标元素前面处插入内容     before()                     insertBefore()
+    将目标元素替换为内容        replaceWith()                 replaceAll()
+    以上方法的一些要点
+    1、第二列方法，会把传入的字符串当做需要插入的HTML字符串
+        第三列方法，会把它当做选择器，来标识目标元素
+    2、第三列方法不接收函数参数， 第二列可以
+    3、第二列方法返回的是调用自身的 jQuery对象 ，该对象中的元素可能有新内容或新兄弟节点，但元素本身并没有修改。
+        第三列方法返回的是调用自身的 jQuery对象 是已经执行操作后的新内容
+    例如
+    $("h2").each(function() {
+        var h2 = $(this);
+        h2.replaceWith("<h1>" + h2.html + "</h1>" );
+    });
+    如果传入函数，this值指向该元素。
+
+    2、赋值元素
+    clone() 创建并返回每一个选中元素（包含元素所有子孙）的一个副本，
+    需要注意的是，返回的副本还不是文档的一部分
+
+    3、包装元素
+    wrap()包装每个选中的元素
+    wrapInner() 包装每个选中元素的内容
+    wrapAll() 将选中元素作为一组来包装
+    这些方法通常传入一个新建的包装元素或用来创建包装元素的HTML字符串，如果有需要HTML字符串
+    可以包含多个嵌套元素，但必须是单个最内层的元素。
+    如果传入函数给这些方法，它会在每个元素的上下文中调用一次，this指向钙元素，元素的索引值
+    是唯一参数，应该返回需要返回表示包装元素的字符串\Element或jQuery对象
+
+    $("h1").wrap(document.createElement("i")); //产生 <i> <hi> </hi> </i>
+    $("h1").wrapInner("<i/>"); //产生 <h1> <i></i></h1>
+    //其他所有段落包装在一个div里
+    $("body>p:not(:first)").wrapAll(" <div class = "rest"></div>")
+
+    4、删除元素
+    empty() 删除每个选中的元素的所有子节点（包括文本节点），但不会修改元素本身
+    remove() 方法会从文档中移除选中元素（以及所有元素的内容）
+    不带参数调用remove() 会从文档中移除 jQuery对象的所有元素
+    如果传入一个参数，会被作为选择器
+    同时该方法还会移除所有事件处理程序以及可能绑定到移除元素上的其他数据
+    detach()方法 与remove类似，但是不会移除事件处理程序和数据
+    如果只是临时移除元素，之后可能还需要再次插入，detach可能更有用
+
+    unwrap方法，用来实现元素移除，其方式是wrap 和wrapAll的反向操作。
+    移除每一个选中元素的父元素，不影响选中元素及其兄弟节点。
+    unwrap 不接收可选的选择器参数
+
+    */
+
+    function hello() {
+        var msg = 'hello world';
+        document.open()
+		document.write(msg);
+		document.close();
+    }
+	</script>
+</head>
+<body>
+
+<p>Imagine a form with five fields</p>
+</body>
+<body onload="hello()">
+</body>
+
+</html>

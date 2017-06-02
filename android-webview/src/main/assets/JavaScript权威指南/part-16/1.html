@@ -1,0 +1,190 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+    层叠样式表
+    Cascading Style Sheet CSS是一种指定HTML文档视觉表现的标准。
+    CSS支持/**/注释，但不支持//的注释
+    样式表通过选择器将一组样式属性和使用选择器(selector)描述的一组HTML元素关联在一起
+    一个选择器 可以基于元素ID、类名或标签名或者更多条件指定一个或多个文档中的元素
+
+    p {  } //选择器p匹配所有的 <p>元素
+    .warning {} //任何以 "warning" 类命名的元素
+
+    可以用 <style>标签把一个CSS样式包在 head标签中。
+     <html>
+        <head> <title> Test</title></head>
+        <style>
+         body {}
+         p {}
+        </style>
+     </html>
+    如果要在多个页面使用是，通常将其保存在自己的文件中较好。
+     <head>
+     <title> Test</title>
+     <link rel="stylesheet" href="mystyles.css" type = "text/css">
+     </head>
+     如果一个元素，匹配到样式表中的多个选择器，在此情况下，所有这些算择期的关联样式
+     属性都将应用到这个元素上。
+     如果不同的原则器为同一个样式定义了不同的值，那么与最具体的选择器相关联的值将覆盖其值
+    非标准属性
+    浏览器实现非标准的CSS属性时，会在属性名钱加厂商前缀
+    FireFox  为 -moz-
+    Chrome   为 -webkit-
+    IE       为 -ms-
+    标准化属性 中有个例子是border-radius
+    .radius 10 {
+        border-radius ：10px;
+        -moz-border-radius :10px;
+        -webkit-border-radius : 10px;
+    }
+
+    */
+
+    /*
+    重要的CSS 样式属性
+    position
+    top、left、bottom、right
+    width、height
+    z-index
+    display
+    visibility
+    clip
+    overflow  定义元素比分配的空间更大时的处理方法
+    margin、border、padding  元素的空白和边框
+    background
+    opacity 元素的不透明或半透明度，CSS3的属性
+
+    CSS定位元素
+    static 默认属性， 指定元素按照常规的文档内容流进行定位，不能使用top、left和垒砌其他属性定位，
+    absolute 指定元素相对于它包含的元素定位，相对于所有其他的元素，绝对定位的元素是独立定位的。它不是静态定位
+    元素中文档流的一部分，它的定位要么是相对于最近的定位祖先元素，要门是相对于文档本身。
+    fixed  指定元素相对于浏览器窗口进行定位，固定定位的元素总是显示在哪里，不会随着文档其他部分而滚动。
+    固定定位的元素与其他所有元素是独立的，它不是文档流的一部分，除了IE6之外，大多数浏览器都支持
+    relative 指定元素按照常规的文档流进行布局，它的定位相对于它在文档流中的位置而调整。系统保留着元素在正常
+    文档流中的空间。
+    设置了static之外的值，就可以通过元素的top、left、bottom、right 属性的一些组合指定元素的位置
+
+    一些例子
+    一个距离文档左上 各100像素的元素
+    <div style = "position : absolute; left : 100px; top : 100px;"></div>
+    一个元素的在文档的右下角
+    "position : absolute; bottom :00px; right : 0px;"
+    定位一个元素让其右、上边缘相对于 窗口右上个10 px，且不随文档的滚动而滚动
+    "position : fixed; top : 10px; right : 10px;"
+
+    指定元素的宽度方法可以通过同时指定left和right属性。
+    如果同时指定left、right、width属性，那么width属性将覆盖right属性。
+
+    CSS中常见的一些单位
+    px 像素
+    in 英寸
+    cm 厘米
+    pt 点
+    em 字体行高
+    还可以通过自定百分比来设置相应的位置
+    "position : absolute; bottom :25%; right : 25%;"
+
+    z-index 默认为0
+    当两个或多个元素重叠在一起是，他们是按照从低到高的z-index顺序绘制的。
+
+    CSS3规范了text-shadow 属性在文本下产生阴影效果
+    <!--text-shadow  自动产生的阴影-->
+    <span style = "text-shadow : 3px 3px 1px #888"></span>
+    <!-- 产生相同的效果-->
+    <span style = "position : relative">
+        Shadowed
+            <span style = "position :absolute; top : 3px; left : 3px ; z-index : -1; color: #888">
+            Shadowed
+            </span>
+    </span>
+    CSS允许指定元素周围的边框、外边距和内边距。元素的边框是一个围绕（或部分围绕）元素绘制的
+    矩形（或者CSS3中的圆角矩形）
+
+    border : solid black 1px; //1像素的黑色实线边框
+    border : 3px dotted rea; //3像素的红色点线边框
+
+    border-top-width和border-left-color 可以为元素的单条指定宽度、样式和颜色
+    border-radius属性指定圆滑边框的所有角，也可以更明确的属性名设置单独的圆角
+    border-top-right-radius:50px
+
+    标注CSS盒模型规定了width和height样式属性给定内容请矛的 尺寸，并且不包含内边距和边框，可以称为
+    这种盒模型为“内容盒模型”。
+    在IE6之前和在IE6-8的怪异模式中显示一个页面是（页面中缺少 <!DOCTYPE> 或者有一个不够严格的doctype时）
+    width和height属性确实是是包含内边距和边框宽度的。CSS3引入了box-sizing属性，默认值是content-box,
+    如果设置为这样，那么它制定了一个标准的盒模型。如果设置为border-box那么浏览器将会为元素应用IE的盒模型，
+    也就是说width和height是包含边框和内边距的。
+    box-sizing属性在当今所有的浏览器中都支持，但是有相应的前缀
+    Chrome 和 Safari -webkit-box-sizing
+    Firefox          -moz-box-sizing
+    Opra和IE8        box-sizing
+
+    Visibility 元素可见性 但保留空间
+    display 它用来接收它的容器指定元素的显示类型，它指定元素是否是块状元素、内联元素、列表项等。
+    如果为none，收影响的元素将不会显示，甚至没有布局。
+
+    CSS3 可以支持RGBA 也定义了对HSL(色相-饱和度-值)和HSLA颜色规范的支持。它除了IE不支持之外，其他的浏览器都支持
+    background-color 指定背景颜色
+    background-image 指定背景图像
+    background-attachment 、background-position、background-repeat
+
+    默认情况下不是所有元素都是透明的，例如默认情况下部分元素有默认的北京颜色。
+    如果必须设置为透明可以考虑 background-color 设置为transparent
+    CSS3中可以通过opacity属性来处理0表示完全透明， 1表示不透明。
+    除了IE,其他浏览器都支持
+    IE可以通过filter属性指定透明度。按百分比是指， 0%表示完全透明，100%表示不透明
+
+    overflow属性指定内容超出元素的大小是，有以下含义
+    visible 默认，如果需药内容可以绘制在元素的外边框
+    hidden   裁减掉或隐藏移除的内容
+    scroll   内容超出尺寸宽度时，通过滚动来查看相应内容。
+    auto     滚动条只在超出时显示，
+
+    CSS2裁剪区域是矩形的。语法如下
+    style = "clip : rect(0px 100px 100px 0px)
+    其中该括号内的指必须使用长度，不能够使用百分比。
+    还可以给四个值设置auto来指定裁剪区域的边缘是否就是元素边框对应的边缘
+    style = "clip : rect(auto 100px auto auto);"
+
+    在JS中style属性它的值不是字符串而是一个 CSSStyleDeclaration对象 。
+    对应相应的属性为去掉连字符 之后的单词，相应的单词驼峰法表示，例如
+    font-size  e.style.fontSize = "24pt";
+    font-weight  e.style.fontWeight = "bold";
+    在JS中如果使用 CSSStyleDeclaration对象 的style属性是，需要记住所有的值都是字符串
+    例如，如下表示
+    e.style.position = "absolute";
+    e.style.fontFamily = "sans-serif";
+    e.style.backgroundColor = "#ffffff";
+    e.style.left = "300px";
+    当然也可以通过计算后设置
+    e.style.left = a + b +"px";
+
+    //两种方法都可以设置e的样式属性为字符串s
+    e.setAttribute("style",s);
+    e.style.cssText = s;
+
+    //两种方法都可以查询e的样式属性
+    s = e.getAttribute("style");
+    s = e.style.cssText;
+
+
+    */
+
+    function hello() {
+        var msg = 'hello world';
+        document.open()
+		document.write(msg);
+		document.close();
+    }
+	</script>
+</head>
+<body>
+
+<p>Imagine a form with five fields</p>
+</body>
+<body onload="hello()">
+</body>
+
+</html>

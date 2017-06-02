@@ -32,7 +32,7 @@
         return { x: d.body.scrollLeft, y : d.body.scrollTop};
     }
 
-    //判断视扣的尺寸是非常有用，为了确定文档的那部分可见，
+    //判断视口的尺寸是非常有用，为了确定文档的那部分可见，
     利用滚动偏移量查询视口尺寸的建档方法在IE8以及更早的版本都无法工作。
     //查询窗口的视口尺寸
     function getViewportSize(w) {
@@ -169,22 +169,165 @@
     document.forms.address.elements.street
     一般来说指定的文档元素用id属性比name属性更佳
     当用name来索引一个HTMLCollection对象并且它包含多个元素来共享name时，返回值是一个类
-    数组对象，
+    数组对象。
+    例如我们看下面的例子
+    <form action="" name = "shipping">
+        <fieldset>
+        <legend>
+            Shipping Method
+        </legend>
+        <label for=""> <input type="radio" name = "method" value = "1st" >First-class</label>
+        <label for=""> <input type="radio" name = "method" value = "2day" >2-day Air</label>
+        <label for=""> <input type="radio" name = "method" value = "overnite" >Overnight</label>
+        </fieldset>
+    </form>
+    var methods = document.forms.shipping.elements.method;
 
+    action、encoding、method、target属性直接对应于相同名称的HTML标签，这些属性控制了表单
+    是如何来调价数据到Web服务器并如何显示的。
+    Form对象用来提交表单的方法有
+    submit 用来提交表单
+    reset 用来重置表单元素的值
+    所有（或多数）表单元素通常都具有以下属性，
+    type 表示表单元素的类型的只读的字符串，
+    form 对包含元素的Form对象的只读引用，或者如果元素没有包含在一个form元素中，其值为null
+    name 只读字符串，由HTML属性name指定
+    value 可读写的字符串，制定了表单元素包含或代表的“值”
 
+    每个form元素都有onsubmit事件处理程序来监听表单提交。还有一个onreset事件处理程序。
+    onsubmit事件处理程序只能通过点击提交按钮来触发
+    直接调用表单的submit方法不触发onsubmit事件处理程序
+    onreset事件处理程序和onsubmit类似。它在表单重置之前调用，通过返回false能够阻止
+    表单元素被重置。，比如，可以弹出一个对话框，提醒用户是否重置，通过不同的返回值来进行操作。
+    onreset只能通过点击 重置 按钮来触发。 直接调用表单的reset方法不触发onreset事件处理程序
 
+    与表单元素交互的时候，他们往往会触发click或change事件通过定义onclick或onchange事件处理
+    程序可以处理这些事件。
+    表单元素获取焦点会触发focus事件，失去焦点会触发blur事件。
 
+    按钮
+    通过input元素指定type为button或者直接使用button元素定义
+    开关按钮
+    单选和复选框元素都定义了checked属性，该属性是可读写的布尔值，它制定了元素当前是否选中。
+    defaultChecked属性是布尔值，自定了元素在第一次加载页面的时候是否被选中。
 
+    文本域
+    HTML5中placeholder属性制定了用户输入前在输入域中显示的提示信心
+    <input type="text" placeholder = "yyyy-mm-dd">
+    Textarea元素类似文本输入域元素，输入多行内容
+    <input type="password">
+    <input type="file"> 将用户输入待上传到Web服务器的文件的名称。
 
+    Select元素表示用户可以做出选择的一组选项（用Option元素表示），通常将其渲染为下拉菜单的形式。
+    当type属性设置为"select-multiple" 表示允许用户选取多个选项
+    当type属性设置为"select-one" 表示允许用户选取单个选项。
+    Select显示的选项是由 <option>元素定义，Select定义了options属性，它是一个包含多个Option元素的类数组
+    当用户选择或取消一个选项，Select元素触发onchange事件
+    针对select-one，它的可读写属性selectedIndex指定了哪个选项当前被选中
+    针对select-multiple，需要遍历options[]数组的元素，检测selected属性值
+    每个Option对象都有一个text属性，它制定了Select元素中的选项所显示的纯文本字符串。
 
-
-
-
-
-
-
+    var zaire = new Option("Zaire", //text属性
+                           "zaire", //value属性
+                           false, //defaultSelected属性
+                           false); //selected属性
+    不过不推荐这种方法，因此可以使用更标准的额Document.createElement()
+    Node.insertBefore()， Node.removeChild
 
     */
+
+    /*
+    Document的属性
+    cookie 允许JS程序读写HTTP cookie的特殊属性
+    domain 允许当Web页面之间的交互时，相同域名下互相信任的Web服务器之间协作放宽同源策略安全限制
+    lastModified 包含文档修改事件的字符串
+    location 与Window对象的location属性引用相同的Location对象
+    referrer 如果有，它表示浏览器导航到当前链接的上一个文档。该属性值与HTTP的Referer头信息的内容相同
+    title 文档的 <title></title>标签之间的内容
+    URL  文档的URL，只读字符串，不是Location对象，该属性与loaction.href的初始值相同，不包含Location对象的动态变化
+    也就是说如果用户再文档中导向到一个新的片段，location.href会发生变化，而document.URL则不会
+
+    */
+
+    /*
+    document.write 会将其字符串参数连接起来然后将结果字符串掺入到文档中调用它的脚本元素的位置，当脚本
+    执行结束，浏览器解析生成的属性并显示它。
+    有一点非常重要，就是只有在解析文档时才能使用write()方法输入HTML到当前文档中。
+    需要注意的是使用了defer或async属性的搅拌中不要使用document.write
+    在当前的代码中document.write方法，不在常用，innerHTML属性和其他DOM技术提供了更好的方法
+    来为文档增加内容。
+
+    */
+    //定义一个简单的innerHTML属性的流式API
+    function ElementStream(elt) {
+        if (typeof elt === "string") elt = document.getElementById(elt);
+        this.elt = elt;
+        this.buffer = "";
+    }
+
+    ElementStream.prototype.write = function(){
+        this.buffer += Array.prototype.join.call(arguments, "") ;
+    };
+    ElementStream.prototype.writeln = function(){
+        this.buffer += Array.prototype.join.call(arguments, "") + "\n" ;
+    };
+    ElementStream.prototype.close = function(){
+        this.elt.innerHTML = this.buffer;
+        this.buffer = "";
+    };
+
+    /*
+    获取选取的文本
+    function getSelectedText() {
+        if(window.getSelection) {
+            //HTML 5标准API
+            return window.getSelection();
+        } else if( document.selection)  {//IE特有
+            return document.selection.createRange().text;
+        }
+    }
+    */
+
+    /*
+    有两种方法启用编辑功能
+    1、设置任何标签的HTML contenteditable 属性：
+    2、设置对应元素的JS contenteditable属性
+    例如
+    <div id ="editor" contenteditable>
+    Click to edit
+    </div>
+    在支持contenteditable元素的 是，可以为元素体检spellcheck属性来显示开启或者关闭拼写检查功能
+
+    而将Document的 designMode 属性设置为on 将使得整个文档可编辑，designMode并没有HTML属性
+    不过可以通过代码设置
+    <iframe src="about:blank" frameborder="0" id = "editor"></iframe>
+    <srcipt>
+        onLoad(function(){
+            var editor = document.getElementById("editor");
+            editor.contentDocument.designMode = "on";
+        });
+    </srcipt>
+
+
+
+    execCommand方法
+    该方法 使得浏览器可以定义多像文本编辑命令。
+    该方法第一个参数是 相应的命令,类型为字符串。
+    第二个参数为true，代表浏览器会自动提示用户输入所需值，为了提高可移植性，应传递false
+    第三个参数是用户输入的值
+    //加粗
+    function hold() { document.execCommand("hold" ,false , url);}
+    //创建超链接
+    function link() {
+    var url = prompt("Enter link destination")
+    if(url) document.execCommand("createlink" ,false , url);}
+
+    我们可以使用document.queryCommandSupport 传递命令名来查询浏览器是否支持
+    document.queryCommandEnabled 来查询当前所使用的命令。
+    目前HTML5标准中已经支持了，很多的命令。具体可以查看相应的标准。
+
+    */
+
     function hello() {
         var msg = 'hello world';
         document.open()
