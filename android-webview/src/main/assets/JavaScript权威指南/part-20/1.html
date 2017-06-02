@@ -147,13 +147,35 @@
 
     /*
     4、应用程序存储和离线Web应用
-    将应用程序自身保存起来，包括所有运行的文件。
+    HTML5新增 应用程序缓存
+    将应用程序自身保存起来，包括所有运行的文件,之后如果有更新的文件，会替换现有文件
     只有在用户 卸载或者删除的时候，才会被移除，不会因为清除缓存而被清除。
 
     为了保证正常运行需要 给html 标签设置 manifest属性
+    <!DOCTYPE HTML>
+    <html mainfest = "myapp.appache">
+    <head></head>
+    <body></body>
+    </html>
     清单文件的内容首相必须以 "CACHE MANIFEST" 字符串开始，
     其余的就是要缓存的URL列表，一行一个URL
     注释通过# 注释
+    CACHE MANIFEST
+    #注释
+    myapp.html
+    myapp.js
+    myapp.css
+    images/background.png
+
+    应用程序约定以.appcache 作为文件扩展名，这只是约定
+    Web服务器真正识别清单是通过"text/cache-manifest"这个MIME类型的一个清单。
+    如果无服务器设置的Content-Type头的MIME类型，那么就不会缓存。
+
+    定义复杂的清单文件
+    CACHE 区域
+    NETWORK 表示该URL的资源从不缓存，通过网络获取
+    FALLBACK 清单项没两行都包含两个URL，第二个URL是需要加载和存取在缓冲中的资源，第一个URL是前缀。
+
     */
     function hello() {
         var msg = 'hello world';
