@@ -1,0 +1,173 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+    1、localStorage 和 sessionStorage
+    这两个属性都代表着同一个Storage对象
+    一个持久化关联数组。数组使用字符串来索引，存储的值也是字符串。
+    两者的区别在于存储的有效期和作用域不同。
+
+    var name = localStorage.username;
+    name = localStorage["username"];
+    if(var name in localStorage) {
+        var value = localStorage[name];
+    }
+    localStorage 存储的数据是永久性的，除非可以删除
+    它的作用域限定在文档源（document origin）级别，文党员是通过协议、主机名以及端口三者确定的
+    同源的文档间共享相同的localStorage数据，可以互相读取对方的数去，甚至覆盖对方的数据。
+    同时也收到浏览器供应商的限制
+
+    sessionStorage 存储的数据有效期不同，前者的有效期和存储数据的脚本所在的最顶层的窗口或者浏览器标签页一样。
+    一旦窗口或者浏览器标签页被关闭，则数据永久删除。（现在浏览器已具备恢复功能）
+    它的作用域也是在限定的文档源中，同时还被限定在顶层窗口中。
+
+    存储API。
+    setItem 存储键值对
+    getItem 获取对应 的值。
+    key     获取相应的 键
+    removeItem 删除单个键值对
+    clear 删除全部
+    IE8不支持delete操作符
+    需要记住的是如果不调用setItem方法，直接给相应的 存储对象赋值，
+    那么将在函数调用完后直接被抛弃。
+
+    如果不支持Web存储标注，那么可以使用cookie 或者IE 的userData来存储
+    var memory  = window.localStorage ||
+    (window.UserDataStorage && new UserDataStorage()) ||
+    new cookieStorage();
+    var username = memory.getItem("username");
+
+    浏览器有两个标签页打开了同源的页面。一个localStorage的改变会接收到一个存储改变的事件。
+    而sessionStorage的改变只有当前有相牵连的窗口时才会触发存储事件。
+    与存储事件相关的事件对象有5个非常重要的属性（IE8 不支持）
+    key  对应的键名，如果调用了clear函数，那该属性值为null
+    newValue 保存该项的新值，或者调用removeItem() ，该属性值为null
+    oldValue 改变或删除该项钱，保存该项原先的值：当插入一个新项的时候，该属性为null
+    storageArea 这个属性值就好比是目标Window对象上的localStorage属性或者sessionStorage属性
+    url 触发该存储变化脚本所在文档的URL。
+
+    最后需要注意的是
+    localStorage和存储事件都采用广播机制，浏览器会对当前正在访问同样站点的所有窗口发送消息。
+
+
+    */
+
+    /*
+    2、cookie
+    cookie 是指Web浏览器存储的少量数据，同时它是与具体的Web页面或站点相关。
+    从最底层看，作为HTTP协议的一种扩展实现cookie。
+    cookie数据会自动在Web浏览器和Web服务器之间传输，服务器端脚本就可以读写存储在客户端的cookie的值。
+    在JS中使用cookie不会采用任何加密机制，因此他们是不安全的。
+
+    所有操作都要通过以特殊形式的字符串形式读写Document对象的cookie属性来完成。
+    每个cookie的有效值和作用域都可以通过cookie属性来分别指定。
+    ---1 cookie属性：有效期和作用域
+    cookie的默认有效期只能持续在Web浏览器的会话期间，
+    但是cookie的作用域 和整个浏览器进程有效期一直，而不是单个浏览器窗口的有效期。
+    可以通过设置max-age属性来更改有效期。
+    cookie的作用域通常是通过文档源和文档路径来确定。
+    该作用域通过cookie的path和domain属性配置
+    默认与创建它的Web页面有关。
+    通过设置cookie的domain属性可以读取同一域名下的多页面cookie
+    cookie的属性secure 如果设置为true 那么只能通过HTTPS或其他安全协议连接。
+
+    ---2 保存cookie
+    name=value
+    cookie的键值对是不允许包含分号，逗号和空白符。因此在存储钱使用 encodeURIComponent 方法
+    document.cookie = "version="+ encodeURIComponent(document.lastModified);
+    如果设置其他的属性可以考虑比如max-age
+    cookie += "; max-age=" + (daysTolive*60*60*24);
+    设置其他属性
+    ; path=path
+    ; domain=domain
+    ; secure
+
+    ---3 读取cookie
+    //读取函数
+    function getcookie() {
+        var cookie ={};
+        var all = document.cookie;
+        if(all === "") {
+            return cookie;
+        }
+        var list = all.split("; ");
+        for(var i =0,len = list.length; i < len; i++) {
+            var cookie = list[i];
+            var p = cookie.indexOf("=");
+            var name = cookie.substring(0,p);
+            var value = cookie.substring(p+1);
+            value = decodeURIComponent(value);
+            cookie[name] = value;
+        }
+
+        return cookie;
+    }
+
+    ---4 cookie的局限性
+    每个Web服务器保存的cookie书不能超过20个，每个cookie保存的数据不能超过4KB
+
+    ---5 cookie的相关存储
+
+    */
+
+
+    /*
+    利用IE userData持久化数据
+    IE5以及以上版本的浏览器是通过document元素后面附加一个专属的“DHTML行为”来实现客户端存储
+
+    创建一个专属元素
+    var memory = document.createElement("div");
+    memory.id = "_memory";
+    memory.style.display = "none";
+    memory.style.behavior = "url('#default#userData')"; //特别重要，附加userData行为
+    document.body.appendChild(memory);
+
+    一旦元素被赋予了"userData"行为，钙元素就有load()和save()方法。
+    数据载入后，可以使用 getAttribute()来查询这些元素 setAttribute()方法设置属性
+    memory.load("myStoredData");
+    var name = memory.getAttribute("username");
+    if(!name) {
+        name = prompt("What is your name?")
+        memory.setAttribute("username", name);
+        memory.save("myStoredData");
+    }
+    userData 处处的数据，除非手动删除否则永久有效。
+    通过指定 expires 属性来指定它的过期事件。
+    var now =(new Data()).getTime();
+    var expires = now + 100 * 24 * 60 *60 *1000;
+    expires = new Date(expires).toUTCString();
+    memory.expires = expires;
+
+    IE userData的作用域限制在和当前文档同目录的文档中。
+    userData 通过设置path 和domain属性来控制或改变作用域的方法。
+
+    */
+
+    /*
+    4、应用程序存储和离线Web应用
+    将应用程序自身保存起来，包括所有运行的文件。
+    只有在用户 卸载或者删除的时候，才会被移除，不会因为清除缓存而被清除。
+
+    为了保证正常运行需要 给html 标签设置 manifest属性
+    清单文件的内容首相必须以 "CACHE MANIFEST" 字符串开始，
+    其余的就是要缓存的URL列表，一行一个URL
+    注释通过# 注释
+    */
+    function hello() {
+        var msg = 'hello world';
+        document.open()
+		document.write(msg);
+		document.close();
+    }
+	</script>
+</head>
+<body>
+
+<p>Imagine a form with five fields</p>
+</body>
+<body onload="hello()">
+</body>
+
+</html>

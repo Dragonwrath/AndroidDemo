@@ -1,0 +1,135 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+    jQuery工具函数
+    jQuery.browser 是一个对象 根据浏览器不同会有不同的属性
+        IE mise = true
+        Firefox mozilla = true
+        Safari或Chrome webkit = true
+        Opera opera = true
+    还可以通过jQuery.browser.version 获取版本
+
+    jQuery.contains()
+     接收两个文档元素作为对象，如果第一个包含第二个，返回true
+
+    jQuery.each()
+    工具函数可以遍历数组元素和对象属性
+    第一个参数是遍历的数组或对象
+    第二个参数是每个数组元素或对象属性上调用的函数，
+
+    jQuery.extend()
+    该函数接收对象作为参数， 将第二个复制到第一个参数对象中。
+    如果以存在就覆盖，
+    如果第一个参数是true ，那么就将进行深拷贝
+
+    jQuery.globalEval()
+    会在全局上下文中执行JS代码字符串，就像script 元素的内容一样。
+
+    jQuery.grep()
+    接收数组作为第一个参数，以及一个判断函数作为第二个参数。返回一个新数组。
+    如果第三个参数为false，会反转判断函数
+
+    jQuery.inArray()
+    与indexOf类似，第一个参数是任意值，第二个参数是数组
+
+    jQuery.isArray()
+    判断是否是原生数组对象
+
+    jQuery.isFunction()
+
+    jQuery.isEmptyObject()
+
+    jQuery.makeArray()
+    如果是类数组对象会复制到一个真的数组中，如不是类数组，会返回一个新数组，只包含一个元素
+
+    jQuery.map()
+    第一个参数是数组或类数组，第二个参数为映射函数。
+    每一个数组元素和其序号都会传入映射函数
+
+    jQuery.merge()
+    第二个添加到第一个， 第二个不会被修改，浅拷贝
+
+    jQuery.parseJSON()
+    传入格式有误会抛异常
+
+    jQuery.proxy()
+    与Function对象的bind方法一样，
+    接收函数作为第一个参数，对象作为第二个参数，并返回一个对象，
+
+    jQuery.support
+    类似于jQuery.browser，用来做可移植性的特性探测。
+
+    */
+
+    /*
+    jQuery选择器和选取方法
+    1、简单选择器
+    简单选择器的开头部分（显式或隐式地）是标签类型声明
+    "p"表示<p>
+    "*" 表示任意元素
+    详细可以查表
+    常用的有
+    #id 某id的元素
+    .class 某class 属性为xx的所有元素
+    [attr] 拥有attr属性的所有元素
+    :button 等 button属性的元素
+
+    2、组合选择器
+    A B   在A的元素的子孙元素中选取匹配选择器B的文档元素
+    A > B 在A的元素的子  元素中选取匹配选择器B的文档元素
+    A + B 在A的元素的下一个兄弟元素中，选择匹配苏泽奇B的文档元素
+    A ~ B 在A的元素后面的兄弟元素中，选取匹配选择器B的文档元素
+
+    3、选择器组
+    一组由逗号分隔的列表，有一个或多个简单或组合选择器构成
+
+    选取方法
+    first() 返回jQuery对象仅包含选中元素中的第一个
+    last() 返回jQuery对象仅包含选中元素中的最后一个
+    eq()  返回jQuery对象只包含指定序号的单个选中元素
+    var paras = $('p');
+     paras.eq(1); //选取第二个 元素p
+
+    slice() 切割开始的序号和结束的序号， 一个参数就代表指定的序号
+
+    filter() 过滤指定的元素
+    not() 与filter功能一样，含义相反
+    add() 扩充选区，增加选择范围
+
+    children() 方法返回每个选中元素的直接子元素
+    contents() 方法返回每一个元素的所有子节点
+
+    next()和prev 选中元素的下一个和上一个兄弟元素
+
+    nextAll和prevAll 前面和后面的所有兄弟元素
+
+    siblings() 返回每一个选中元素的所有兄弟元素
+
+    nextUntil和prevUntil  接收一个选择器参数，会选中元素后面或前面的所有兄弟元素
+
+    parent 返回每个选中元素的父节点
+
+    parents 返回每个选中元素的祖先节点
+
+    parentUnti 返回每一个选中元素的祖先元素，
+    */
+
+    function hello() {
+        var msg = 'hello world';
+        document.open()
+		document.write(msg);
+		document.close();
+    }
+	</script>
+</head>
+<body>
+
+<p>Imagine a form with five fields</p>
+</body>
+<body onload="hello()">
+</body>
+
+</html>
