@@ -176,6 +176,69 @@
     NETWORK 表示该URL的资源从不缓存，通过网络获取
     FALLBACK 清单项没两行都包含两个URL，第二个URL是需要加载和存取在缓冲中的资源，第一个URL是前缀。
 
+    CACHE MANIFEST
+    CACHE:
+    myapp.html
+    myapp.css
+    myapp.js
+
+    FALLBACK
+    videos/offline_help.html
+
+    NETWORK
+    cgi/
+
+    ---2 缓存的更新
+    浏览器会检查清单文件，但不会主动去更新，因此要让文件生效就必须去更新下载清单文件
+    设置相应版本号
+    CACHE MANIFEST
+    #MyApp version:1 (更改这个数字以便让浏览器重新下载这个文件)
+    MyApp.html
+    MyApp.js
+
+    如果想让Web应用从缓存中卸载，就必须在服务器端删除清单文件。这样就会返回404，
+    同时修改HTML文件让他们与清单文件断开连接。
+    检查清单文件与更新缓存的操作是异步的
+    因此在更新清单文件之后，需要载入两次，1、缓冲中载入老版本，随后更新，2、从缓存中载入新版本
+    触发更新事件
+    //如果window有更新事件
+    applicationcache.onupdateready = function() {
+        var reload = confirm("Reload ??");
+        if(reload) location.reload();
+    }
+    每次载入一个设置manifest属性的HTML文件，刘篮球都会触发checking事件，并通过网络载入清单文件。
+    可能触发以下的事件
+    1、没有可用的更新，已缓存，清单未改动触发noupdate事件
+    2、有可能的更新，已缓存，清单已改动 会触发downloading事件，下载会触发progress事件，下载完成触发updateready事件
+    3、首次载入新的应用程序 未缓存 downloading 和progress事件。下载完成，会发cached事件
+    4、浏览器处于离线， 未缓存 触发error事件
+    5、清单文件不存在，浏览器在线，已缓存浏览器触发obsolet事件，会将应用程序从缓存中移出
+
+    可以通过applicationCache.status属性来查看
+
+    ApplicationCache.UNCACHED(0)
+    应用程序没有设置maifest属性，未缓存
+    ApplicationCache.IDLE(1)
+    清单文件已经检查完毕，并且已经缓存了最新的应用程序
+    ApplicationCache.CHECKING(2)
+    浏览器正在检查清单文件
+    ApplicationCache.DOWNLOADING(3)
+    浏览器正在下载并缓存清单中列举的所有文件
+    ApplicationCache.UPDATEREADY(4)
+    已经下载和缓存了最新版的应用程序
+    ApplicationCache.OBSOLETE(5)
+    清单文件不存在，缓存将被清除
+
+    ApplicationCache
+    update方法，显式调用更新缓存算法以检查是否有最新版本的应用程序
+    swapCache方法 一般不推荐使用。可能触发，新老版本的 版本错乱。
+    ---3离线Web应用
+    通过检测navigator.online属性检测浏览器是否在线。
+    在Window对象上注册在线和离线事件的处理程序，可以检测网络俩接状态的改变。
+
+
+
+
     */
     function hello() {
         var msg = 'hello world';

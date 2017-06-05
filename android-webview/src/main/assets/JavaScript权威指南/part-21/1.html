@@ -1,0 +1,313 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang = "en">
+<head>
+    <title>hello,world</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <script type="text/javascript">
+    /*
+    1、脚本化图片
+    在HTML中动态的替换图片可以考虑以下的例子
+    <img src="images/help.gif"
+        onmouseover="this.src = 'images/help_rollover.gif'"
+        onmouseout="this.src = 'images/help.gif'"
+    >
+    但是如果这样使用，如果网络不稳定，将会产生延迟，会有卡顿，为了提高响应度，
+    可以先通过代码魂村相应的图片
+    <script >(new Image()).src = "images/help_rollover.gif";</script>
+    <img src="images/help.gif"
+         onmouseover="this.src = 'images/help_rollover.gif'"
+         onmouseout="this.src = 'images/help.gif'"
+    >
+    这样会提升了相应的缓存速度
+
+    不过有更好的方法
+    可以 优雅的实现图片的翻转
+    //给dataset 中顶一个一个data-rollover 属性，这样就可以检测包含相应的属性的img元素，
+    //就是需要翻转的
+    onload(function() {
+        for(var i =0; i < document.images.length; i++) {
+            var img = document.images[i];
+            var rollover = img.getAttribute("data-rollover");
+            if(!rollover) continue; //跳过没有相应rollover属性的图片
+            //确保将图片缓存，使用一个新的Image保存起来
+            (new Image()).src = rollover;
+            img.setAttribute("data-rollout",imag.src);
+            img.onmouseover = function() {
+                this.src = this.getAttribute("data-rollover");
+            }
+            img.onmouseout = function() {
+                this.src = this.getAttribute("data-rollout");
+            }
+        }
+    });
+    */
+
+    /*
+    2、脚本化音频和视频
+    audio  和 video 元素可以通过制定 source 来指定相应的 格式
+    //注意source元素，没有闭合标签，也没有任何的内容，切记
+    <audio id = "music">
+        <source src="music.mp3" type ="audio/mpeg">
+    </audio>
+    多种格式
+    <video id="news" width="640" height="480" controls preload>
+        <!--Firefox和Chrome支持的WebM格式-->
+        <source src="news.webm" type ='"video/webm";codecs = "vp8,vorbis"'>
+        <!--IE和Safari支持的H.264格式-->
+        <source src="news.mp4" type ='"video/mp4";codecs = "avc1.42e01e,mp4a.40.2"'>
+        <!--Flash插件作为后备方案-->
+        <object width="640" height="480" type="application/x-shockwave-flash"
+                data="flash_movie_player.swf">
+            <!--这里的参数元素用于配置Flash视频播放器-->
+            <!--文本是最终的后备内容-->
+            <div>video element not supported and Flash plugin not installed.</div>
+        </object>
+    </video>
+    audio  和 video 元素 支持一个controls属性，乳沟数值了该属性（或者对应的JavaScript属性设置为true）
+    他们将会显示一系列播放控件。
+    这两个元素还提供了API能让脚本控制媒体，唯一不同的是 video 元素还有width黑height属性。
+    audio 元素 没有任何视觉外观， 不过可以使用相应的构造函数，讲媒体源URL作为参数，来创建一个屏幕外音频元素
+    new Audio('chime.wav').play();
+
+    ---1 类型选择和加载
+    可以调用canPlayType() 方法并将媒体的MIME类型
+    如果是不能播放的类型， 将返回一个空的字符串（一个假值），反之将返回一个字符串
+    可"maybe"或者"probably"
+    var a = new Audio();
+    if(a.canPlayType("audio/wav")) {
+        a.src = "soundeffect.wav";
+        a.play();
+    }
+    当设置了元素的src属性，媒体就开始加载了，除非设置preload为auto，否则，只会加载
+    少量内容。而当设置了 source 元素除非显示了调用load()方法，否则不会加载source 元素指定的
+    媒体源文件。
+    ---2 控制媒体播放
+    window.addEventListener("load",function(){
+        document.getElementById("music").play();
+    },false);
+    可以通过设置currentTime属性来定点播放，还可以指定跳过播放的事件，
+    initialTime和duration属性确定了currentTime的有效值范围。
+    volume 表示播放音量，介于0和1之间，
+    muted  设置为true，进入静音
+    playbackRate 表示指定媒体播放速度，负值表示回放。
+    defaultPalybackRate 指定默认的播放
+    loop 指定媒体是否需要循环播放，布尔值
+    preload 指定用户在开始播放前，预加载值，none不需要加载
+    metadata 属性表示诸如时长、比特率、帧大小这样的元数据而不是媒体加载内容需要加载。
+    autoplay 属性指定当已经缓存足够多的媒体内容时是否需要自动开始播放。
+
+    ---3 查询媒体状态
+    以下的值为只读属性
+    paused true 表示暂停
+    seeking 表示播放器跳转到一个新的播放点，
+    ended  表示播放器播放完并且停下来，如果设置loop属性未true ，ended 永不为true
+    duration 指定媒体的时长，单位为秒，如果为载入，只会返回NaN，如果Internet广播这种无限时长的流媒体，
+        会返回Infinity
+    initialTime 指定媒体的开始时间，单位秒，对于固定时长的媒体剪辑，属性值为0.
+        当设置currentTime属性，其值不能小于initialTime
+    played属性 返回已经播放的时间
+    buffered属性 返回当前已经缓冲的时间段
+    seekable 属性 返回当前播放器需要跳过的时间段。
+
+    played、buffered、seekable都是TimeRanges对象。
+    每个对象都有一个length属性，表示当前的一个时间段
+    start() 和 end()  返回当前时间段的起始事件和结束事件点。
+    一般使用都是start(0)和end(0)
+    readyState
+    networkState
+    error
+    这三个属性定义了数字类型，而且每一个有效值都定义了对应的数字常量
+    readyState属性
+    HAVE_NOTHING        0
+    HAVE_METADATA       1
+    HAVE_CURRENT_DATA   2
+    HAVE_FUTURE_DATA    3
+    HAVE_ENOUGH_DATA    4
+
+    networkState属性
+    NETWORK_EMPTY       0
+    NETWORK_IDLE        1
+    NETWORK_LOADING     2
+    NETWORK_NO_SOURCE   3
+
+    error属性
+    MEDIA_ERR_ABORTED   1
+    MEDIA_ERR_NETWORK   2
+    MEDIA_ERR_DECODE    3
+    MEDIA_ERR_SRC_NOT_SUPPORTED 4
+    */
+
+    /*
+    3-SVG
+    除了IE 意外主流的浏览器都支持
+    早期浏览器可以使用 object
+    <object data="sample.svg" type="image/svg+xml"></object>
+    不过应该避免这种方式，因为它只是将SVG图片变成了图片格式。
+    甚至可以嵌入到文本中,
+    在XHTML中写法
+    <body>
+        This is a read square: <svg:svg width="10" height="10">
+            <svg:rect x="0" y="0" width="10" height="10" fill="red"/>
+        </svg:svg>
+    </body>
+    在HTML 5中的写法
+    <body>
+    This is a read square: <svg width="10" height="10">
+        <rect x="0" y="0" width="10" height="10" fill="red"/>
+    </svg>
+    </body>
+    */
+
+    /*
+    canvas 在文档中创建了一个面板
+    <canvas> 和SVG 有一个重要区别
+        使用canvas来绘制图形通过它提供的方法，而SVG 绘制图形是通过构建一颗XML元素树来实现。
+
+        相应的优势和缺点
+        SVG 绘制可以通过加单的移出相应元素来编辑图片
+        canvas 绘制，必须进行重绘
+
+        通过在canvas元素上调用画布的getContext()方法，调用该方法时，传递一个"2d"参数，会获得一个
+        CanvasRenderingContext2D对象，画布API 值得就是该对象的方法
+    var canvas = document.getElementById("canvas_id");
+    var c = canvas.getContext("2d");
+    ---1 绘制线段和填充多边形
+        c.beginPath(); //开始一条新路径
+        c.moveTo(100,100); //从（100,100）开始定义一条新的子路径
+        c.lineTo(200,200); //从（100,100）到（200,200）绘制一条线段
+        c.lineTo(100,200); //从（200,200）到（100,200）绘制一条线段
+        c.fill(); //填充一个三角形区域
+        c.stroke(); //绘制三角形的两条边
+        c.closePath(); //将路径闭合
+
+    ---2 图形属性
+        fillStyle   填充时的颜色、渐变或图案等样式
+        font      绘制文本时CSS字体
+        globalAlpha  绘制像素时要添加的透明度
+        globalCompositeOperation 如何合并新的像素点和下面的像素点
+        lineCap  如何渲染线段的末端
+        lineJoin 如何渲染顶点
+        lineWidth 外框线的宽度
+        miterLimit 紧急斜接顶点的最大长度
+        textAlign 文本水平对齐方式
+        textBaseline 文本竖直对齐方式
+        shadowBlur 阴影的清晰或模糊程度
+        shadowColor 下拉阴影的颜色
+        shadowOffsetX 阴影的水平偏移量
+        shadowOffsetY 阴影的数值偏移量
+        strokeStyle 勾勒线段时的颜色、渐变或图案样式
+
+        save 方法可以将当前图形状态压入用于已保存状态的栈上
+        restore 会从栈中弹出并恢复最近一次保存的状态
+
+    ---4 坐标系变换
+        setTransform 方法能够直接设置画布的变换矩阵
+        translate 方法将坐标原点进行上下左右移动
+        rotate方法 坐标轴根据指定角度绘制
+        scale 方法实现对X轴或Y轴上的距离进行延长和缩放
+        setTransform 和transform方法 接受同样的参数
+        前者是对默认坐标系进行变换，将结果映射在新的坐标系中
+        transform 方法是在当前坐标系进行变换
+
+    ---5 绘制和填充曲线
+        arc()  给当前路径添加一个圆弧接受6个参数
+            圆心的x,y坐标，圆的半径，弧形的开始和结束的角度，弧形的方向
+        arcTo() 绘制一条直线和一段圆弧。
+        bezierCurveTo() 实现当前子路径添加一个新的点，并用三次贝塞尔曲线将它和当前点相连。
+        quadraticCurveTo() 二次贝塞尔曲线，只有唯一控制点
+
+    ---6 矩形
+        fillRect  使用当前的fillStyle来指定填充指定的矩形
+        一个参数矩形的顶点，另一个参数指定矩形宽高
+        strokeRect() 使用当前strokeStyle和其他线段的属性来勾勒指定矩形的外边框
+        clearRect() 会忽略当前填充样式，采用透明的黑色像素
+    ---7颜色、透明度、渐变以及团
+
+    ---8 线段绘制相关的属性
+        lineWidth 线宽
+        lineCap 指定一个未封闭的子路径端的端点如何封顶
+            butt 表示线段端点直接结束
+            square 表示在端点的基础上再延长线段宽度一般的长度
+            round 表示在端点的基础上延长一个半圆圆的半径是线段宽度一般
+        lineJoin 指定子路径顶点如何连接
+            miter表示一直延伸两条路径段的外侧边缘知道某一点回合
+            round 表示将汇合的顶点变得圆润
+            bevel 表示用一条直线将汇合的顶点切除
+
+    ---9 文本
+        font属性指定了绘制文本时候采用的字体，该属性值是一个字符串。
+        "48pt sans-serif"
+        "bold 18px Times Roman"
+        "italic 12pt monospaced"
+        "bolder smaller serif"
+        textAlign 指定文本应当参照X轴坐标如何进行水平对其
+                start left center right end
+        textBaseline 指定文本应当参照Y轴坐标如何进行垂直对齐
+            top hanging middle alphabetic ideographic bottom
+        绘制文本钱，可以先通过measureText方法，该方法返回一个TextMetrics对象，
+        他指定在当前字体绘制文本时的尺寸。
+    ---10 裁剪
+        clip() 裁剪指定区域。
+        要点，在调用clip方法前调用save方法，以便回复未裁剪区域
+
+    ---11 阴影
+        shadowColor 属性指定阴影的颜色，默认为透明的黑色
+        shadowOffsetX和属性shadowOffsetY 属性指定阴影的X轴和Y轴的偏移量，默认值为0
+            表示直接将阴影绘制在图形正下方
+        shadowBlur 属性指定阴影边锋的模糊程度，其默认值为0。
+    ---12 图片
+        drawImage 用于将图片的像素内容绘制到画布上。
+        3个参数的方法
+            第一个参数图片源
+            第二个参数和第三个参数指定待会之图片的左上角位置的X轴和Y轴
+        5个参数的方法
+            另外的两个宽度指定宽高
+        9个参数的方法
+            指定一个源矩形局域到一个目标矩形区域，只会复制源矩形区域内的像素。
+            其中2-5个参数指定源矩形区域，
+            其中6-9个参数指定图片要会在的目标矩形区域。
+    ---13 合成
+        设置globalComposteOperation属性
+        source-over
+        source-atop
+        source-in
+        source-out
+        destination-over
+        destination-atop
+        destination-in
+        destination-out
+        copy
+        lighter
+        xor
+    ---14像素操作
+        getImageData()方法返回一个ImageData对象。
+        createImageData()方法可以创建一个空的ImageData对象。通过putImageData方法将这些像素复制到画布中。
+    ---15 命中检测
+        isPointInPath 方法确定一个指定的点是否落在（或者在边界上）当前路径中。
+        //检测一个鼠标事件是否发生在当前路径上
+        function hitpatch(context,event){
+            var canvas = context.canvas;
+            //通过转换和缩放将鼠标事件左边转换成画布坐标
+            var bb = canvas.getBoundingClientRect();
+            var x =(event.clientX - bb.left) * (canvas.width/bb.width);
+            var y =(event.clientY - bb.top) * (canvas.height/bb.height);
+            return context.isPointInPath(c,y);
+        }
+    ---16 迷你图
+
+    */
+    function hello() {
+        var msg = 'hello world';
+        document.open()
+		document.write(msg);
+		document.close();
+    }
+	</script>
+</head>
+<body>
+
+<p>Imagine a form with five fields</p>
+</body>
+<body onload="hello()">
+</body>
+
+</html>
