@@ -96,7 +96,187 @@
     4-Web Worker
     该标准定义了客户端JS无法多线程的问题，其中定义的Worker是指执行代码的并行线程。
     其中定义的"Worker"是指指定代码的并行线程。
-    Web Workers处在一个自包含的
+    Web Workers处在一个自包含的执行环境中，无法访问Window对象和Document对象和主线程之间的通信
+    也只能通过一部消息传递机制来实现。
+    ---1 Worker对象
+        将制定在Woker运行的JS脚本的URL传递给构造函数
+        var loader = new Worker("utils/loader.js");
+        通过postMessage()方法来传递参数。
+        loader.postMessage("file.txt");
+        之后在Worker对象的message事件上接收来自Worker的消息
+        worker.onmessage = function(e) {
+            var message = e.data;
+        }
+        通过Worker对象定义的addEventListener()和removeEventListener()方法，可以帮助管理多个事件处理程序，
+        来管理onmessage和onerror属性
+        使用terminate() 来强制一个Worker线程终结。
+    ---2 Worker作用域
+        WorkerGlobalScope 全局对象表示了新的运行环境。该对象在某种程度上来说大于核心JavaScript全局对象，
+        但小于整个客户端的Window对象。
+        WorkerGlobalScope 是一个供Worker使用的全局对象，该对象的postMessage()和onmessage属性，在Worker代码中
+        使用的时候，看起来像全局函数和全局变量
+        close()函数允许Worker将自己终结。效果上来说和Worker对象上的terminate方法类似。但是。Worker对象上没有定义
+        任何API检测Worker是否已经关闭，如果在关闭之后调用对象的postMessage方法，将被丢弃。
+
+        WorkerGlobalScope 上定义了一个方法importScripts
+        //在工作之前，加载需要的类、工具函数
+        importScripts("collections/Set.js","collections/Map.js");
+        该方法不会跟踪那些脚本已经载入。
+        该方法是一个同步方法，知道所有脚本都载入之后并运行完成才会返回。
+        WorkerGlobalScope是Worker的全局对象。
+        该对方还有客户端Window对象拥有一些属性
+        --self是对全局对象自身的引用，与Window对象的self意义不同
+        --setTimeout()，clearTimeout(),setInterval()以及clearInterval()
+        --navigator，与Window的Navigator对象拥有相似的属性
+        --location， 与Window对象的location属性一样
+        --addEventListener和removeEventListener
+        --onerror属性，
+    */
+
+    /*
+    5-类型化数组和ArrayBuffer
+    类型化数组，数组中的元素总是默认初始化为0。
+    Int8Array() 有符号字节
+    Uint8Array() 无符号字节
+    Int16Array() 有符号16位短整数
+    Uint16Array() 有符号16位短整数
+    Int32Array() 有符号32位短整数
+    Uint32Array() 有符号32位短整数
+    Float32Array() 32位浮点数
+    Float64Array() 64位浮点数
+
+    创建类型化数组的时候，可以传递数组大小给构造函数，或者传递一个数组或者类型化数组来初始化
+    数组元素。
+    var bytes = new Unit8Array(1024);
+    set() 方法将一个常规或者类型化数组复制到目标中。
+
+    subarray() 方法，调用该方法用来返回部分数组内容，它只是直接返回原数组中的一部分
+
+    var array = new Int16Array([0,1,2,3,4,5,6,7,8,9]);
+    var array1= array.subarray(array.length-3,array.length);
+    每个类型化数组斗鱼基本缓冲区有三个相关的属性
+    array.buffer //返回一个ArrayBuffer对象
+    array.byteOffset //此视图从基本缓冲区的第14字节开始
+    array.bytelength //盖世兔是6字节长
+    array.buffer == array1.buffer //true
+    在低位优先（little-endian）系统中，ArrayBuffer中数字的字节是按照从低位到高位的顺序排列的。
+    例如整数0x00000001 表示为01 00 00 00
+    在高位优先（big-endian）系统中，字节是按照从高位到低位的顺序排列的。
+    例如整数0x00000001 表示为00 00 00 01
+    而CPU的架构都采用的地位优先，而网络协议以及有些二进制格式，采用的是高位优先。
+    因此从网络下载之后的这种格式的数据需要进过处理，我们可以使用DataView类。
+    该类定义了
+    8个get方法
+    getInt16(),getUnit32(),getFloat64()
+    这些方法的第一个参数指定了ArrayBuffer中的字节偏移量，表示从哪个值开始选取。
+    getInt8()和getUnit8方法之外的所有getter方法都接受第二个可选布尔类型的参数。
+    默认为false，表示采用高位优先顺序
+    true 代表采用低位优先顺序。
+    8个set方法
+    这些方法的第一个参数指定了ArrayBuffer中的字节偏移量，表示从哪个值开始写。
+    第二个参数指定写入的值
+    除了setInt8() 和setUint8(),其他方法都接受第三个可选布尔型参数
+    默认为false，表示采用高位优先顺序
+    true 代表采用低位优先顺序。
+    var data;
+    var view = DataView(data);
+    var int = view.getInt32(0);
+    int
+
+    */
+
+    /*
+    6-Blob
+    Blob是对大数据的不透明引用或句柄，表示二进制大数据（Binary Large Object），在JS中表示二进制数据
+    Blob是不透明的，能对他们进行直接操作只有获取他们的大小（以字节为单位）还有MIME类型以及将他们分割成
+    更小的Blob
+    var blob=;
+    blob.size;
+    blob.type;
+    var subBlob = blob.slice(0,1024,"text/plain");//Blob前1KB视为文本
+
+    Blob的作用是为用于二进制数据的大量JavaScript API提供重要的数据交换机制。
+    ---1 文件作为Blob
+    <input type = "file"> 钙元素用于支持在HTML表单中实现文件上传。
+    该元素上的fiels属性是一个FileList对象。该对象是一个类数组对象，其元素要么是0，要么是用户选择的多个File对象。
+
+    ---2 下载Blob
+    //可能支持的下载Blob代码
+    function getBlob(url, callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET",url);
+        xhr.responseType = "blob"; //创建"blob"类型
+        xhr.onload = function(){
+            callback(xhr.response);
+        }
+        xhr.send(null);
+    }
+
+    --3 构造Blob
+    Blob通常表示来自本地文件,URL以及数据外部资源的大数据块。
+    如果要从自己的数据来创建Blob，可以使用BlobBuilder
+    var bb = new BlobBuilder();
+    bb.append("some words");
+    bb.append("\0");//NULL结束符，表示字符串的结束
+    var ab = new ArrayBuffer(4*10);
+    var dv = new DataView(ab);
+    for(var i = 0;i < 10;i++) dv.sentInt32(i*4,i);
+    bb.append(ab);
+    var blob = bb.getBlob("x-optional/mime-type-here"); //从builder中获取，并指定MIME类型
+
+    ---4 BlobURL
+    实现跨浏览器创建BlobURL
+    var getBlobURL = (window.URL && URL.createObjectURL.bind(URL)) ||
+        (window.webkitURL && webkitURL.createObjectURL.(webkitURL)) ||
+        window.createObjectURL;
+    传递一个Blob给createObjectURL()会返回一个URL，该URL以blob://开始，它指代浏览器存储在内存中或者
+    磁盘中的Blob的一个简单应用。
+    Blob URL只有在同源的文档中才是有效地。如果通过postMessage传递给一个非同源窗口，对于接受窗口来说也毫无意义
+    Blob URL不是永久有效，一旦用户关闭或者离开了创建Blob URL脚本的文档，该URL就失效。
+    通过URL.revokeObjectURL()方法或者（webkitURL.revokeObjectURL()）都可以手动让Blob URL失效。
+    同样的访问Blob URL 只允许通过GET请求获取，一旦成功，会返回HTTP 200 OK的状态码，同时返回，一个Blob type属性的
+    Content-Type 头部信息。
+
+    ---5 读取Blob
+    FileReader对象允许访问Blob中的字符或者字节，可以将它视为是BlobBuilder对应的一个对象。
+    该API是异步的。
+    读取方法主要有
+    readAsText(); readAsArrayBuffer(),readAsDataURL(),readAsBinaryString();
+    这四个方法都接受Blob作为第一个参数
+    readAsText() 接受第二个可选的参数，该参数指定文本的编码方式。
+    FileRead读取指定的Blob的时候，会更新它的readyState属性，该属性开始是0表示为读取到任何信息，
+    当读取一些数据的时候，会变成1，当数据读取完毕的时候，会变成2,。
+    result属性包含部分或者完整的结果。
+
+    在Worker线程中可以使用FileReaderSync来替代FileReader，这个是同步版本的API提同样提供了
+     readAsText(); readAsArrayBuffer()方法，他们和异步版本的方法接收同样的参数。
+
+    */
+
+    /*
+    7-文件系统API
+
+    */
+
+    /*
+    8-客户端数据库
+    IndexedDB API 提供了原子性保证，对数据的查询和更新包含在一个transaction中。
+    get方法 查询对象
+    put方法 存储新的对象
+    add方法 避免覆盖已经创建对象
+    查询表示范围的对象，需要创建一个IDBRange对象，并将其传递给对象存储区的openCursor方法。
+    这些对象都会返回一个request对象，之后会对应对象的onsuccess事件。
+    通过调用request对象的setVersion()方法会指定相应版本号
+    socket.onopen=;
+    socket.onclose=;
+    socket.onerror=;
+    socket.onmessage=;
+    */
+
+    /*
+    9-Web套接字
+    var socket = new WebSocket("ws://ws.example.com:1234/resource");
+
     */
     function hello() {
         var msg = 'hello world';
