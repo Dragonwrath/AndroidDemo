@@ -52,11 +52,11 @@ public class IntentServiceActivity extends AppCompatActivity {
 
         TextView text = (TextView) mLayout.findViewById(R.id.text);
         text.setText("This is a custom toast");
-        WindowManager.LayoutParams params = generarteWindowParams();
+        WindowManager.LayoutParams params = generateWindowParams();
         mWM.addView(mLayout,params);
     }
 
-    private WindowManager.LayoutParams generarteWindowParams(){
+    private WindowManager.LayoutParams generateWindowParams(){
         WindowManager.LayoutParams params = new WindowManager.LayoutParams();
         params.height = WindowManager.LayoutParams.MATCH_PARENT;
         params.width = WindowManager.LayoutParams.MATCH_PARENT;
