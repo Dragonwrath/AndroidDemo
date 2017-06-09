@@ -1,4 +1,4 @@
-package com.joke.widget.android.widget.image;
+package com.joke.widget.image;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
