@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.PopupMenu;
 import android.widget.SeekBar;
+import android.widget.ViewFlipper;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

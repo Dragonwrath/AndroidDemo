@@ -23,7 +23,7 @@ public class Student implements java.io.Serializable {
     /** Used for active entity operations. */
     private transient StudentDao myDao;
 
-    private List<StudentRelation> setStudentRelationList;
+    private List<StudentRelation> studentRelationList;
 
     public Student() {
     }
@@ -69,25 +69,25 @@ public class Student implements java.io.Serializable {
     }
 
     /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */
-    public List<StudentRelation> getSetStudentRelationList() {
-        if (setStudentRelationList == null) {
+    public List<StudentRelation> getStudentRelationList() {
+        if (studentRelationList == null) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
             StudentRelationDao targetDao = daoSession.getStudentRelationDao();
-            List<StudentRelation> setStudentRelationListNew = targetDao._queryStudent_SetStudentRelationList(studentId);
+            List<StudentRelation> studentRelationListNew = targetDao._queryStudent_StudentRelationList(studentId);
             synchronized (this) {
-                if(setStudentRelationList == null) {
-                    setStudentRelationList = setStudentRelationListNew;
+                if(studentRelationList == null) {
+                    studentRelationList = studentRelationListNew;
                 }
             }
         }
-        return setStudentRelationList;
+        return studentRelationList;
     }
 
     /** Resets a to-many relationship, making the next get call to query for a fresh result. */
-    public synchronized void resetSetStudentRelationList() {
-        setStudentRelationList = null;
+    public synchronized void resetStudentRelationList() {
+        studentRelationList = null;
     }
 
     /** Convenient call for {@link AbstractDao#delete(Object)}. Entity must attached to an entity context. */

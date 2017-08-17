@@ -29,6 +29,9 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 
 //系统错误控制类，当发生异常时，重启系统程序
+//需要在主线程启动的时候，添加以下的内容
+//SystemErrorHandler  eh= new SystemErrorHandler(this);
+//Thread.setDefaultUncaughtExceptionHandler(eh);
 public class SystemErrorHandler  implements Thread.UncaughtExceptionHandler{
     private static Thread.UncaughtExceptionHandler mDefaultHandler;
     public static final String TAG = "SystemErrorHandler";
@@ -143,22 +146,22 @@ public class SystemErrorHandler  implements Thread.UncaughtExceptionHandler{
 
     private String getDeviceInfo() {
         StringBuilder builder = new StringBuilder();
-        builder.append("MODEL = " + Build.MODEL + "\n");
-        builder.append("PRODUCT = " + Build.PRODUCT + "\n");
-        builder.append("TAGS = " + Build.TAGS + "\n");
-        builder.append("CPU_ABI" + Build.CPU_ABI + "\n");
-        builder.append("BOARD = " + Build.BOARD + "\n");
-        builder.append("BRAND = " + Build.BRAND + "\n");
-        builder.append("DEVICE = " + Build.DEVICE + "\n");
-        builder.append("DISPLAY = " + Build.DISPLAY + "\n");
-        builder.append("ID = " + Build.ID + "\n");
-        builder.append("VERSION.RELEASE = " + Build.VERSION.RELEASE + "\n");
-        builder.append("Build.VERSION.SDK_INT = " + Build.VERSION.SDK_INT + "\n");
+        builder.append("MODEL = ").append(Build.MODEL).append("\n");
+        builder.append("PRODUCT = ").append(Build.PRODUCT).append("\n");
+        builder.append("TAGS = ").append(Build.TAGS).append("\n");
+        builder.append("CPU_ABI").append(Build.CPU_ABI).append("\n");
+        builder.append("BOARD = ").append(Build.BOARD).append("\n");
+        builder.append("BRAND = ").append(Build.BRAND).append("\n");
+        builder.append("DEVICE = ").append(Build.DEVICE).append("\n");
+        builder.append("DISPLAY = ").append(Build.DISPLAY).append("\n");
+        builder.append("ID = ").append(Build.ID).append("\n");
+        builder.append("VERSION.RELEASE = ").append(Build.VERSION.RELEASE).append("\n");
+        builder.append("Build.VERSION.SDK_INT = ").append(Build.VERSION.SDK_INT).append("\n");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            builder.append("VERSION.BASE_OS = " + Build.VERSION.BASE_OS + "\n");
+            builder.append("VERSION.BASE_OS = ").append(Build.VERSION.BASE_OS).append("\n");
         }
-        builder.append("Build.VERSION.SDK = " + Build.VERSION.SDK + "\n");
-        builder.append("APP.VERSION = " + getAPPVersionCode(application) + "\n");
+        builder.append("Build.VERSION.SDK = ").append(Build.VERSION.SDK).append("\n");
+        builder.append("APP.VERSION = ").append(getAPPVersionCode(application)).append("\n");
         builder.append("\n" + "log:" + "\n");
 
         return builder.toString();

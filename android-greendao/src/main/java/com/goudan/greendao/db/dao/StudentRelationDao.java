@@ -41,7 +41,7 @@ public class StudentRelationDao extends AbstractDao<StudentRelation, Long> {
 
     private DaoSession daoSession;
 
-    private Query<StudentRelation> student_SetStudentRelationListQuery;
+    private Query<StudentRelation> student_StudentRelationListQuery;
 
     public StudentRelationDao(DaoConfig config) {
         super(config);
@@ -158,16 +158,16 @@ public class StudentRelationDao extends AbstractDao<StudentRelation, Long> {
         return true;
     }
     
-    /** Internal query to resolve the "setStudentRelationList" to-many relationship of Student. */
-    public List<StudentRelation> _queryStudent_SetStudentRelationList(Long studentId) {
+    /** Internal query to resolve the "studentRelationList" to-many relationship of Student. */
+    public List<StudentRelation> _queryStudent_StudentRelationList(Long studentId) {
         synchronized (this) {
-            if (student_SetStudentRelationListQuery == null) {
+            if (student_StudentRelationListQuery == null) {
                 QueryBuilder<StudentRelation> queryBuilder = queryBuilder();
                 queryBuilder.where(Properties.StudentId.eq(null));
-                student_SetStudentRelationListQuery = queryBuilder.build();
+                student_StudentRelationListQuery = queryBuilder.build();
             }
         }
-        Query<StudentRelation> query = student_SetStudentRelationListQuery.forCurrentThread();
+        Query<StudentRelation> query = student_StudentRelationListQuery.forCurrentThread();
         query.setParameter(0, studentId);
         return query.list();
     }

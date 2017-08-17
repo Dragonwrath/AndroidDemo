@@ -33,7 +33,7 @@ public class NotificationService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-
+        super.onStartCommand(intent, flags, startId);
         return START_STICKY;
     }
 
@@ -48,7 +48,7 @@ public class NotificationService extends Service {
 
         private WeakReference<Service> service;
 
-        public IncomingHandler(NotificationService service) {
+        private IncomingHandler(NotificationService service) {
             this.service = new WeakReference<Service>(service);
         }
 

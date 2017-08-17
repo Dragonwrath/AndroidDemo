@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/android-app-tool/android-app-tool.iml" filepath="$PROJECT_DIR$/android-app-tool/android-app-tool.iml" />
       <module fileurl="file://$PROJECT_DIR$/android-bind-service/android-bind-service.iml" filepath="$PROJECT_DIR$/android-bind-service/android-bind-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/android-coordinate/android-coordinate.iml" filepath="$PROJECT_DIR$/android-coordinate/android-coordinate.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android-design/android-design.iml" filepath="$PROJECT_DIR$/android-design/android-design.iml" />
       <module fileurl="file://$PROJECT_DIR$/android-enctryptedfile/android-enctryptedfile.iml" filepath="$PROJECT_DIR$/android-enctryptedfile/android-enctryptedfile.iml" />
       <module fileurl="file://$PROJECT_DIR$/android-frescodemo/android-frescodemo.iml" filepath="$PROJECT_DIR$/android-frescodemo/android-frescodemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/android-ftpserverdemo/android-ftpserverdemo.iml" filepath="$PROJECT_DIR$/android-ftpserverdemo/android-ftpserverdemo.iml" />

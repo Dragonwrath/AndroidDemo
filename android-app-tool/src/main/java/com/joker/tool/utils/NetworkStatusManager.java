@@ -318,7 +318,7 @@ public class NetworkStatusManager {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
 
-            if (!action.equals(ConnectivityManager.CONNECTIVITY_ACTION) || mListening == false) {
+            if (!action.equals(ConnectivityManager.CONNECTIVITY_ACTION) || !mListening) {
                 Log.w(TAG, "onReceived() called with " + mState.toString() + " and " + intent);
                 return;
             }
