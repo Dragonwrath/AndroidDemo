@@ -1,5 +1,6 @@
 package com.example.designdemo;
 
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
