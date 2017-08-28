@@ -1,7 +1,11 @@
 package android.marshon.approotdemo;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
 

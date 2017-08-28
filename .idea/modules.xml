@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Rxjava.iml" filepath="$PROJECT_DIR$/Rxjava.iml" />
+      <module fileurl="file://$PROJECT_DIR$/algorithm/algorithm.iml" filepath="$PROJECT_DIR$/algorithm/algorithm.iml" />
       <module fileurl="file://$PROJECT_DIR$/android-app-root/android-app-root.iml" filepath="$PROJECT_DIR$/android-app-root/android-app-root.iml" />
       <module fileurl="file://$PROJECT_DIR$/android-app-tool/android-app-tool.iml" filepath="$PROJECT_DIR$/android-app-tool/android-app-tool.iml" />
       <module fileurl="file://$PROJECT_DIR$/android-bind-service/android-bind-service.iml" filepath="$PROJECT_DIR$/android-bind-service/android-bind-service.iml" />
