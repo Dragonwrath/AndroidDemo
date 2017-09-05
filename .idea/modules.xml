@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Rxjava.iml" filepath="$PROJECT_DIR$/Rxjava.iml" />
-      <module fileurl="file://$PROJECT_DIR$/algorithm/algorithm.iml" filepath="$PROJECT_DIR$/algorithm/algorithm.iml" />
       <module fileurl="file://$PROJECT_DIR$/android-app-root/android-app-root.iml" filepath="$PROJECT_DIR$/android-app-root/android-app-root.iml" />
       <module fileurl="file://$PROJECT_DIR$/android-app-tool/android-app-tool.iml" filepath="$PROJECT_DIR$/android-app-tool/android-app-tool.iml" />
       <module fileurl="file://$PROJECT_DIR$/android-bind-service/android-bind-service.iml" filepath="$PROJECT_DIR$/android-bind-service/android-bind-service.iml" />
@@ -36,16 +35,18 @@
       <module fileurl="file://$PROJECT_DIR$/android-wechat/android-wechat.iml" filepath="$PROJECT_DIR$/android-wechat/android-wechat.iml" />
       <module fileurl="file://$PROJECT_DIR$/android-widget/android-widget.iml" filepath="$PROJECT_DIR$/android-widget/android-widget.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/dagger2test/dagger2test.iml" filepath="$PROJECT_DIR$/dagger2test/dagger2test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/encryptedfilelib/encryptedfilelib.iml" filepath="$PROJECT_DIR$/encryptedfilelib/encryptedfilelib.iml" />
       <module fileurl="file://$PROJECT_DIR$/greendaogenerator/greendaogenerator.iml" filepath="$PROJECT_DIR$/greendaogenerator/greendaogenerator.iml" />
-      <module fileurl="file://$PROJECT_DIR$/gson/gson.iml" filepath="$PROJECT_DIR$/gson/gson.iml" />
-      <module fileurl="file://$PROJECT_DIR$/https/https.iml" filepath="$PROJECT_DIR$/https/https.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java-algorithm/java-algorithm.iml" filepath="$PROJECT_DIR$/java-algorithm/java-algorithm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java-concurrent/java-concurrent.iml" filepath="$PROJECT_DIR$/java-concurrent/java-concurrent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java-dagger2/java-dagger2.iml" filepath="$PROJECT_DIR$/java-dagger2/java-dagger2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java-encryptedfile/java-encryptedfile.iml" filepath="$PROJECT_DIR$/java-encryptedfile/java-encryptedfile.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java-gson/java-gson.iml" filepath="$PROJECT_DIR$/java-gson/java-gson.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java-https/java-https.iml" filepath="$PROJECT_DIR$/java-https/java-https.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java-okhttp/java-okhttp.iml" filepath="$PROJECT_DIR$/java-okhttp/java-okhttp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java-rxjava/java-rxjava.iml" filepath="$PROJECT_DIR$/java-rxjava/java-rxjava.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java-synchronized/java-synchronized.iml" filepath="$PROJECT_DIR$/java-synchronized/java-synchronized.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java-tftp/java-tftp.iml" filepath="$PROJECT_DIR$/java-tftp/java-tftp.iml" />
       <module fileurl="file://$PROJECT_DIR$/java8/java8.iml" filepath="$PROJECT_DIR$/java8/java8.iml" />
-      <module fileurl="file://$PROJECT_DIR$/okhttp/okhttp.iml" filepath="$PROJECT_DIR$/okhttp/okhttp.iml" />
-      <module fileurl="file://$PROJECT_DIR$/rxjavatest/rxjavatest.iml" filepath="$PROJECT_DIR$/rxjavatest/rxjavatest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/synchronized/synchronized.iml" filepath="$PROJECT_DIR$/synchronized/synchronized.iml" />
-      <module fileurl="file://$PROJECT_DIR$/tftp/tftp.iml" filepath="$PROJECT_DIR$/tftp/tftp.iml" />
     </modules>
   </component>
 </project>

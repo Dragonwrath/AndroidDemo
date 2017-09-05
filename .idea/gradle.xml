@@ -9,7 +9,6 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/algorithm" />
             <option value="$PROJECT_DIR$/android-app-root" />
             <option value="$PROJECT_DIR$/android-app-tool" />
             <option value="$PROJECT_DIR$/android-bind-service" />
@@ -42,16 +41,18 @@
             <option value="$PROJECT_DIR$/android-wechat" />
             <option value="$PROJECT_DIR$/android-widget" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/dagger2test" />
-            <option value="$PROJECT_DIR$/encryptedfilelib" />
             <option value="$PROJECT_DIR$/greendaogenerator" />
-            <option value="$PROJECT_DIR$/gson" />
-            <option value="$PROJECT_DIR$/https" />
+            <option value="$PROJECT_DIR$/java-algorithm" />
+            <option value="$PROJECT_DIR$/java-concurrent" />
+            <option value="$PROJECT_DIR$/java-dagger2" />
+            <option value="$PROJECT_DIR$/java-encryptedfile" />
+            <option value="$PROJECT_DIR$/java-gson" />
+            <option value="$PROJECT_DIR$/java-https" />
+            <option value="$PROJECT_DIR$/java-okhttp" />
+            <option value="$PROJECT_DIR$/java-rxjava" />
+            <option value="$PROJECT_DIR$/java-synchronized" />
+            <option value="$PROJECT_DIR$/java-tftp" />
             <option value="$PROJECT_DIR$/java8" />
-            <option value="$PROJECT_DIR$/okhttp" />
-            <option value="$PROJECT_DIR$/rxjavatest" />
-            <option value="$PROJECT_DIR$/synchronized" />
-            <option value="$PROJECT_DIR$/tftp" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
