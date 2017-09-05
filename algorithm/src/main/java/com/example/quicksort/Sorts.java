@@ -7,7 +7,10 @@ import java.util.TreeSet;
 public class Sorts {
     private static final int[] nums = {3, 12, 22, 34, 58,18, 21, 8, 1};
     public static void main(String[] args) {
-        System.out.println("position= " + BinarySearch.binarySearch1(nums, 60));
+        Fibonacci.fibonacci(10);
+        Fibonacci.setLength(10);
+        Fibonacci.recursiveFibonacci(0, 10);
+
     }
 
 
@@ -91,6 +94,38 @@ public class Sorts {
                 }
             }
             return position;
+        }
+    }
+
+    private static class Fibonacci {
+        private static int[] result;
+        static void fibonacci(int n) {
+            int[] nums = new int[n];
+            nums[0] = nums[1] = 1;
+
+            for (int i = 2; i < n; i++) {
+                nums[i] = nums[i-1] + nums[i-2];
+            }
+
+            String string = Arrays.toString(nums);
+            System.out.println("Arrays = " + string);
+        }
+
+        static void setLength(int length) {
+            result = new int[length];
+        }
+
+        static void recursiveFibonacci(int n, int length) {
+            if (n == 0) {
+                result[0] = result[1] = 1;
+                recursiveFibonacci(2,length);
+            }else if (n < length && n > 0) {
+                result[n] = result[n - 1] + result[n - 2];
+                recursiveFibonacci(n + 1,length);
+            } else if ( n > 0 ){
+                String string = Arrays.toString(result);
+                System.out.println("Arrays = " + string);
+            }
         }
     }
 }
