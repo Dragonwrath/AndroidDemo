@@ -7,5 +7,7 @@ public interface TimeClient {
     void setDate(int day, int month, int year);
     void setDateAndTime(int day, int month, int year,
                         int hour, int minute, int second);
-    LocalDateTime getLocalDateTime();
+    default void test() {
+        System.out.println("true = " + true);
+    }
 }
