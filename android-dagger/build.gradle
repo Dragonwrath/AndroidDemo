@@ -5,7 +5,7 @@ android {
     buildToolsVersion "25.0.2"
 
     defaultConfig {
-        applicationId "com.joker.daggerdemo"
+        applicationId "com.joker.dagger"
         minSdkVersion 14
         targetSdkVersion 25
         versionCode 1
@@ -24,11 +24,9 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
     compile 'com.android.support:appcompat-v7:25.3.1'
-    testCompile 'junit:junit:4.12'
+    //dagger
     compile 'com.google.dagger:dagger:2.11'
     compile 'com.google.dagger:dagger-android-support:2.11'
+    annotationProcessor  'com.google.dagger:dagger-compiler:2.11'
 }
