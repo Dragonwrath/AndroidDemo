@@ -1,12 +1,8 @@
-package com.example.dagger.step_2;
+package com.example.dagger.subcomponent.factory;
 
-
-import javax.inject.Provider;
-import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import dagger.Reusable;
 
 @Module
 class PersonModule {
@@ -18,7 +14,8 @@ class PersonModule {
         this.age = age;
     }
 
-    @Provides Person injectPerson() {
+    @Provides
+    Person injectPerson() {
         return new Person(name,age);
     }
 }

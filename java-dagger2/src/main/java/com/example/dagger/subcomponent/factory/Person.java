@@ -1,13 +1,8 @@
-package com.example.dagger.step_2;
-
+package com.example.dagger.subcomponent.factory;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
-import dagger.Reusable;
-
-@Reusable
-public class Person {
+class Person {
     @Inject String name;
     @Inject String age;
 
