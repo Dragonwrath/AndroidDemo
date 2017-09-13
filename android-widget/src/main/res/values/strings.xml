@@ -4,4 +4,5 @@
     <string name="reload_content">Reload Content</string>
     <string name="next">Next</string>
     <string name="last">Last</string>
+    <string name="title_activity_main2">Main2Activity</string>
 </resources>
