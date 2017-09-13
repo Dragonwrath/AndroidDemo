@@ -9,6 +9,11 @@ public class Example {
     String test;
     public static void main(String args[]) {
 
+//        test();
+        System.out.println((int)'<');
+    }
+
+    private static void test() {
         Example ex = new Example();
 
         ex.change(ex.str, ex.ch);
@@ -31,7 +36,6 @@ public class Example {
         int i = 1;
         change(i);
         System.out.println("i = " + i);
-
     }
 
     static  void change(int i){
