@@ -1,6 +1,10 @@
 package net.jcip.part_12.item_1;
 
+import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
+
 import junit.framework.TestCase;
+
+import java.lang.management.ManagementFactory;
 
 public class BoundedBufferTest extends TestCase {
 
@@ -42,5 +46,24 @@ public class BoundedBufferTest extends TestCase {
         } catch (Exception un) {
             fail();
         }
+    }
+
+    public void testPutAndTake() {
+        new PutTakeTest(10, 10, 100000).test(); // sample parameters
+    }
+
+    public void testLeak() throws InterruptedException{
+        final int CAPACITY = 10;
+        final BoundedBuffer<Big> bb = new BoundedBuffer<>(CAPACITY);
+        long heapSize1 =    ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getCommitted();
+        for (int i = 0; i < CAPACITY; i++) {
+            bb.put(new Big());
+        }
+        for (int i = 0; i < CAPACITY; i++) {
+            bb.take();
+        }
+        long heapSize2 =    ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getCommitted();
+
+        assertTrue(Math.abs(heapSize1- heapSize2) > 0);
     }
 }
