@@ -31,8 +31,8 @@ public class BoundedBuffer<E> {
     }
 
     /**
-     * 在availableSpaces 可以获取的时候，能够放入元素，否则则不能
-     * 同时释放相应的availableItems 资源，表示可以取出数据
+//     * 在availableSpaces 可以获取的时候，能够放入元素，否则则不能
+//     * 同时释放相应的availableItems 资源，表示可以取出数据
      * @param x 输入的元素
      * @throws InterruptedException
      */
@@ -43,7 +43,7 @@ public class BoundedBuffer<E> {
     }
 
     /**
-     * 与put功能相反，并且信号量流向也相反
+//     * 与put功能相反，并且信号量流向也相反
      * @return
      * @throws InterruptedException
      */
