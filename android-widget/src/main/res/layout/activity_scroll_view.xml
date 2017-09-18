@@ -12,6 +12,7 @@
     tools:context="com.joke.widget.scrollview.ScrollViewActivity">
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 </RelativeLayout>
