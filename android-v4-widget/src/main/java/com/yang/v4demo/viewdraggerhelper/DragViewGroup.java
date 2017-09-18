@@ -2,6 +2,7 @@ package com.yang.v4demo.viewdraggerhelper;
 
 
 import android.content.Context;
+import android.graphics.ColorMatrix;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.ViewDragHelper;
 import android.util.AttributeSet;
@@ -99,7 +100,7 @@ public class DragViewGroup extends ViewGroup {
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-
+        final ColorMatrix matrix = new ColorMatrix();
     }
 
 
