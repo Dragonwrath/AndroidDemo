@@ -15,7 +15,6 @@
         <activity android:name=".dialog.DialogActivity">
         </activity>
         <activity android:name=".notification.NotificationActivity">
-
         </activity>
 
         <service
@@ -27,6 +26,14 @@
         <activity android:name="android.graphics.colormatrix.ColorMatrixActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name="android.graphics.canvas.CanvasActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
