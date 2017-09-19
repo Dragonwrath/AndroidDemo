@@ -31,6 +31,15 @@
             </intent-filter>
         </activity>
         <activity android:name="android.graphics.canvas.CanvasActivity">
+        </activity>
+        <activity android:name="android.view.surfaceview.SurfaceViewActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name="android.graphics.drawable.DrawableActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
