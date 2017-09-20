@@ -54,16 +54,19 @@ public class TreeNode<T extends Comparable>{
     }
 
     public void printfTree(TreeNode<T> node) {
-        if (node.getLeft() != null) {
-            printfTree(node.getLeft());
-        } else {
-            System.out.println(node.value);
-        }
-        if (node.getRight() != null){
+        boolean printed = false;
+        if (node.getRight() != null) {
             printfTree(node.getRight());
         } else {
+            printed = true;
+            System.out.println(node.value);
+        }
+        if (!printed) {
             System.out.println(node.value);
         }
 
+        if (node.getLeft() != null){
+            printfTree(node.getLeft());
+        }
     }
 }

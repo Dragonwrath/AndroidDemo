@@ -8,6 +8,9 @@ public class TestClass {
         node.setTreeNode(new TreeNode<>(5));
         node.setTreeNode(new TreeNode<>(15));
         node.setTreeNode(new TreeNode<>(16));
+        for (int i = 0; i < 100; i++) {
+            node.setTreeNode(new TreeNode<>(i));
+        }
 
         node.printfTree(node);
 
