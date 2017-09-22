@@ -1,0 +1,38 @@
+import groovy.util.GroovyTestCase
+import groovy.util.GroovyTestSuite
+
+class Book {
+    def number
+    def title
+    def author
+
+    Book(number, title, author) {
+        this.number = number
+        this.title = title
+        this.author = author
+    }
+
+    @Override
+    String toString() {
+        return "Book : ${number}; ${title} by ${author}"
+    }
+}
+
+class BookTest extends GroovyTestCase {
+    def void testToString() {
+        def bk1 = new Book(111, 'Groovy', 'Ken')
+        def expected = "Book : 111; Groovy by Ken"
+        assertToString(bk1, expected)
+    }
+}
+
+class AllTests {
+    static Test suite() {
+        def allTests = new GroovyTestSuite()
+        allTests.addTestSuite ( BookTest.class )
+        return allTests
+    }
+}
+
+TestRunner.run(AllTests.suite())
+

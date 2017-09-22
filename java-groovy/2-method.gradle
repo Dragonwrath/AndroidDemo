@@ -1,0 +1,44 @@
+def methodName() {
+    //do something
+}
+
+def  greeting_1() {
+    print 'Hello '
+    print 'and '
+    println 'welcome'
+}
+greeting_1()
+
+//如果一行输出多个语句，必须用分号分割
+def  greeting_2() {
+    print 'Hello '; print 'and '
+    println 'welcome'
+}
+greeting_2()
+
+def methodName(para1, para2) {
+    //do something
+}
+
+def  greeting_3(name) {
+    println "Hello and  welcome, ${name}"
+}
+
+greeting_3('joker')
+
+def methodName_(para1, para2 = value2, para3 = value3) {
+    //do something
+}
+
+def greeting_4(aslutation, name = 'Ken'){
+    println "${aslutation} ${name}"
+}
+greeting_4('Hello ', 'John')
+greeting_4('Welcome ')
+
+def methodName_() {
+    //do something
+    //return 是可选的
+    something
+    //return something
+}

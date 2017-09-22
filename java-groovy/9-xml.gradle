@@ -1,0 +1,61 @@
+import groovy.xml.MarkupBuilder
+import java.io.*
+import groovy.util.*
+
+//item-2 MarkupBuilder
+//构建一个xml,并输入到指定的文件
+def provideBook() {
+    def mB = new MarkupBuilder(new File('book.xml').newPrintWriter())
+    mB.book {
+        author('Ken')
+        title('Groovy')
+        publisher('Elsevier')
+        isbn(number: '12345678')
+    }
+}
+//provideBook()
+
+def provideLibrary() {
+
+    def data = [
+            '1' : ['Groovy','Ken','Elsevier'],
+            '2' : ['Ojbect Oriented Design','John','Elsevier'],
+            '3' : ['C Programming','Ken','Prentice Hall']
+    ]
+
+    def mB = new MarkupBuilder(new File('library.xml').newPrintWriter())
+
+    mB.library {
+        data.each {
+            bk ->
+                mB.book {
+                    author(bk.value[0])
+                    title(bk.value[1])
+                    publisher(bk.value[2])
+                    isbn(number: bk.key)
+                }
+        }
+    }
+}
+//provideLibrary()
+
+//item-3 xml解析
+def parserLibrary() {
+    def parser = new XmlParser()
+    def doc = parser.parse('library.xml')
+    doc.book.each { //通过book对象打印
+        bk ->
+            println "${bk.title[0].text()}"
+    }
+
+    doc.book.title.each { //通过title集合打印
+        title ->
+            println("${title.text()}")
+    }
+
+    doc.book.each {
+        bk ->
+            println(bk.isbn['@number']) //指定获取isbn标签下的number 对应的属性值
+    }
+}
+parserLibrary()

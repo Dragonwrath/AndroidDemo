@@ -1,0 +1,20 @@
+class Console {
+
+    private static String inputLine = null
+    def static readLine() {
+        return getNextLine()
+    }
+
+    private static String getNextLine() {
+        inputLine = readInputLine()
+        return inputLine;
+    }
+
+    private static String readInputLine() {
+        def size = System.in.read()
+        println size
+        return String.valueOf(size);
+    }
+}
+
+Console.readLine()

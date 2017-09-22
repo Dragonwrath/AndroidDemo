@@ -1,0 +1,13 @@
+//def age = 25
+//print 'My Name is'
+//println age
+//def list = [1,2,3,4]
+//printf("My list is : %d add %d, and the result is %d" , [list.get(0),list.get(1), list.get(2)])
+//println()
+//
+//
+//print("enter your name")
+//def  name = System.in.readLines()
+def library = [['ken','Groovy']]
+library.add(['joke','android'])
+println "library: ${library}"

@@ -1,0 +1,84 @@
+//item 1
+def cos ={println 'hello world'}
+cos.call();
+
+def cos1 = {param -> println "hello world ${param}"}
+cos1.call("Joker")
+cos1('Joker') //可以省略call
+
+def cos2 = {println "hello world ${param}"} //可以隐藏参数
+cos1.call("Joker")
+cos1('Joker')
+
+//变量的作用域
+def greeting = 'hello'
+def cos3 = {param,param1 -> println "${greeting} ${param} and ${param1}"}
+cos3.call('joker' ,'bill') //输出 hello joker and bill
+greeting = 'welcome'
+cos3.call('joker','bill') //输出 welcome joker and bill
+
+//闭包在实参外部
+def  greet = 'hello'
+def clos = {param -> println "${greet} ${param}"}
+def demo(clo) {
+    def greet = 'Bonour' //无效赋值
+    clo.call('Ken')
+}
+demo(clos) //1、闭包引用 包含括号
+demo clos //2、闭包引用 不包含扩招
+demo(){param -> println "Welcome ${param}"} //3、闭包文字，包含括号
+demo {param -> println "Welcome ${param}"} // 4、闭包文字，忽略括号
+
+//item-2
+//void each {Closure closure}
+//主要的作用是用来遍历集合|隐射|字符串 it 代表的是相应的成员
+[1,2,3,4].each {print  it + "-"} // 输出1-2-3-4-
+println()
+"joker".each {print it + "-"} //输出j-o-k-e-r-
+println()
+//条件输出
+[1,2,3,4].each {num ->  if(num %2 == 0) println num + " %2 = 0" }
+println()
+//Object find(Closure closure)
+//返回集合中某一个符合标准的第一个值
+println "Find first more :" + [1,2,3,4].find(){ element -> element > 3}
+//List findAll(Closure closure)
+//返回结合中符合条件的集合
+println "Find first more :" + [1,2,3,4].findAll(){ element -> element > 2}
+//boolean any(Closure closure)有一个符合条件就返回真
+//boolean every(Closure closure) 每个都符合条件才返回真
+//List collect(Closure closure) 将集合中的元素进行转换，形成新的集合之后返回
+def isEven = {item -> (item % 2 == 0)}
+def map(clos, list) {
+    return list.collect(clos)
+}
+println "Evens: ${(map(isEven,[1,2,3,4]))}"
+//inject 方法用于遍历集合，首先将需要传递的值和集合项目传递给闭包，此时其传递的值作为处理结果
+//然后再和下一个集合项目传递给闭包，一次类推
+//Object inject(Object value, Closure closure)
+println "Factorial(5): is" + [1,2,3,4,5].inject {pre,element -> pre * element}
+println "Factorial(5): is" + [1,2,3,4,5].inject(1, {pre,element -> pre * element})
+
+//item-3
+//闭包可以看做一个对象，因此它也可以作为方法的参数
+//闭包作为另一个闭包的参数
+def takeWhile = {
+    pre, list ->
+        def result = []
+        for (element in list) {
+            if(pre(element)){
+                result << element
+            }
+        }
+        return result
+}
+def isSureEven = {x -> return (x % 2== 0)}
+def table = [11,12,13,14,15,16,17,18]
+def evens =takeWhile.call(isSureEven, table)
+println "evens is : ${evens}"
+//闭包作为返回值
+def multiply(x) {
+    return {y -> return x*y}
+}
+def twice = multiply(2)
+println "twice's result is : ${twice(4)}"

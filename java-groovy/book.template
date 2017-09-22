@@ -1,0 +1,6 @@
+<book>
+    <author>${author}</author>
+    <title>${title}</title>
+    <publisher>${publisher}</publisher>
+    <isbn number="${isbn}"/>
+</book>

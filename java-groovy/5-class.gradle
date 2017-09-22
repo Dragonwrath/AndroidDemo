@@ -1,0 +1,52 @@
+//定义一个类
+class Account {
+    def number
+    def balance
+
+    Account(number, balance) {
+        this.number = number
+        this.balance = balance
+    }
+
+    def credit(amount) {
+        balance += amount
+    }
+
+    def display() {
+        println "Account : ${number} with balance: ${balance}"
+    }
+}
+
+//调用隐式构造方法实例化对象
+def account1 = new Account(number : 100,  balance : 1000)
+println account1.number
+
+//隐式包含setter和getter
+account1.setNumber(123)
+println account1.getNumber()
+
+//定义相应的方法
+account1.credit(567)
+account1.display()
+
+//调用构造构造
+def account2 = new Account(123, 2000)
+
+//item-2 复合方法
+class Bank {
+    def name
+    def accounts= [:] //定义一个隐射关系
+
+    def openAccount(name, balance) {
+        accounts[name] = new Account(name, balance)
+    }
+
+    def checkAccount(name) {
+        def acc = accounts[name]
+        println "Account: ${acc.number} Balance: ${acc.balance}"
+    }
+}
+
+def bank = new Bank(name : "Country")
+bank.openAccount(123, 2000)
+bank.checkAccount(123)

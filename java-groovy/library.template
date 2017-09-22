@@ -1,0 +1,10 @@
+<library>
+    <%for(bk in books){%>
+    <book>
+        <author>${bk.value[0]}</author>
+        <title>${bk.value[1]}</title>
+        <publisher>${bk.value[2]}</publisher>
+        <isbn number="${bk.key}"/>
+    </book>
+    <%}%>
+</library>

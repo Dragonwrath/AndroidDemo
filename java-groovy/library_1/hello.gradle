@@ -1,0 +1,10 @@
+abstract class Publication {
+    def catalogNumber
+    def title
+
+    @Override
+    public String toString() {
+        return "${catalogNumber} ; ${title}"
+    }
+}
+

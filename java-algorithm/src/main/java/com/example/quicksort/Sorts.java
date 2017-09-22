@@ -43,6 +43,39 @@ public class Sorts {
             long t2 = System.nanoTime();
         }
 
+        static void quickSort4(int[] nums, int start, int end) {
+            int begin = nums[start];
+            int l,h;
+            for (int i = start + 1, j = end;;) {
+                if (nums[i] > begin && nums[j] < begin) {
+                    swap(nums[i],nums[j]);
+                    i++;
+                    j--;
+                }
+                if (nums[i] > begin){
+                    j--;
+                }
+                if (nums[j] <= begin ) {
+                    i++;
+                }
+
+                if (i >= j) {
+                    l = j;
+                    h = i;
+                    break;
+                }
+            }
+
+
+
+
+        }
+
+        private static void swap(int a, int b) {
+            int temp = b;
+            b = a;
+            a =temp;
+        }
     }
 
     private static class BubbleSort {

@@ -1,0 +1,50 @@
+import java.io.File;
+
+//eachFile方法，通常用来表示某个目录的文件对象，
+// 它接收闭包作为其参数，且对该目录中每个文件调用此闭包
+//输出指定的file 目录
+def listDir(dirFile,indent) {
+    dirFile.eachFile {
+        file ->
+            (0..<indent).each { print ""}
+            println "${file.getName()}"
+            if(file.isDirectory()) {
+                listDir(file, 2 + indent)
+            }
+    }
+}
+
+//listDir(new File("D:\\资料\\"), 0)
+
+//newPrintWriter方式输出
+def copyFile(sourceName, dstName) {
+    def source = new File(sourceName)
+    def dst = new File(dstName)
+    def printWriter = dst.newPrintWriter()
+    source.eachLine {
+        line ->
+            printWriter.write(line)
+            printWriter.write("\n")
+            println(line)
+    }
+    printWriter.flush()
+    printWriter.close()
+}
+//copyFile("D:\\trasmit.py", "D:\\testCopy.py")
+
+//withPrintWriter方式输出
+def copyFile_2(source , dst) {
+    dst.withPrintWriter {
+        writer ->
+           source.eachLine {
+               line ->
+                   writer.println(line)
+           }
+    }
+}
+copyFile_2(new File("D:\\trasmit.py"), new File("D:\\testCopy.py"))
+
+//日志输出
+def patternLog(sourc) {
+
+}

@@ -1,0 +1,29 @@
+import groovy.sql.*
+
+class Account {
+    def number
+    def balance
+
+    Account(number, balance) {
+        this.number = number
+        this.balance = balance
+    }
+
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "number=" + number +
+                ", balance=" + balance +
+                '}';
+    }
+}
+
+def DB = 'jdbc:derby:accountDB'
+def USER =''
+def PASSWORD = ''
+def DRIVER = "org.apache.derby.jdbc.EmbeddedDriver"
+def sql = Sql.newInstance(DB, USER, PASSWORD, DRIVER)
+sql.eachRow('select * from accounts') { acc ->
+    printf acc.number + "-" + acc.balance
+}

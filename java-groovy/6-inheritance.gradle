@@ -1,0 +1,37 @@
+//抽象类不能实例化
+abstract class Account {
+    String toString() {
+        return  "${name}; ${balance}"
+    }
+
+    def abstract isOverDrawn()
+
+    def name
+    def balance
+}
+
+class CurrentAccount extends  Account {
+    String toString() {
+        return "Current AccountL: " + super.toString() + " ;${overdraftLimit}"
+    }
+
+    @Override
+    def isOverDrawn() {
+        return balance <- overdraftLimit
+    }
+    def overdraftLimit
+}
+
+def current = new CurrentAccount(name : 1, balance: 2, overdraftLimit: 3)
+
+//接口
+interface AccountIf {
+    def isOverDrawn()
+}
+
+class AccountA implements AccountIf {
+    @Override
+    def isOverDrawn() {
+        return null
+    }
+}

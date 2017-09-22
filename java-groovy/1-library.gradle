@@ -1,0 +1,16 @@
+//def library = [['ken','Groovy']]
+//library.add(['joke','android'])
+//println "library: ${library}"
+
+def newLibrary = [
+        'ken': ['Groovy'],
+        'joke': ['android']
+]
+//修改原始数据
+newLibrary['joke'] = newLibrary.joke << 'UML'
+println "newLibrary: ${newLibrary}"
+//增加新值
+newLibrary.Sally = ['Basic']
+println "newLibrary: ${newLibrary}"
+
+println "newLibrary: ${newLibrary.size()}"
