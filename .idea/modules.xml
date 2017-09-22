@@ -40,10 +40,10 @@
       <module fileurl="file://$PROJECT_DIR$/java-concurrent/java-concurrent.iml" filepath="$PROJECT_DIR$/java-concurrent/java-concurrent.iml" />
       <module fileurl="file://$PROJECT_DIR$/java-dagger2/java-dagger2.iml" filepath="$PROJECT_DIR$/java-dagger2/java-dagger2.iml" />
       <module fileurl="file://$PROJECT_DIR$/java-encryptedfile/java-encryptedfile.iml" filepath="$PROJECT_DIR$/java-encryptedfile/java-encryptedfile.iml" />
-      <module fileurl="file://$PROJECT_DIR$/java-gson/java-gson.iml" filepath="$PROJECT_DIR$/java-gson/java-gson.iml" />
       <module fileurl="file://$PROJECT_DIR$/java-https/java-https.iml" filepath="$PROJECT_DIR$/java-https/java-https.iml" />
       <module fileurl="file://$PROJECT_DIR$/java-okhttp/java-okhttp.iml" filepath="$PROJECT_DIR$/java-okhttp/java-okhttp.iml" />
       <module fileurl="file://$PROJECT_DIR$/java-rxjava/java-rxjava.iml" filepath="$PROJECT_DIR$/java-rxjava/java-rxjava.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java-serialization/java-serialization.iml" filepath="$PROJECT_DIR$/java-serialization/java-serialization.iml" />
       <module fileurl="file://$PROJECT_DIR$/java-synchronized/java-synchronized.iml" filepath="$PROJECT_DIR$/java-synchronized/java-synchronized.iml" />
       <module fileurl="file://$PROJECT_DIR$/java-tftp/java-tftp.iml" filepath="$PROJECT_DIR$/java-tftp/java-tftp.iml" />
       <module fileurl="file://$PROJECT_DIR$/java8/java8.iml" filepath="$PROJECT_DIR$/java8/java8.iml" />

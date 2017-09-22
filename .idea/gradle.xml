@@ -46,10 +46,10 @@
             <option value="$PROJECT_DIR$/java-concurrent" />
             <option value="$PROJECT_DIR$/java-dagger2" />
             <option value="$PROJECT_DIR$/java-encryptedfile" />
-            <option value="$PROJECT_DIR$/java-gson" />
             <option value="$PROJECT_DIR$/java-https" />
             <option value="$PROJECT_DIR$/java-okhttp" />
             <option value="$PROJECT_DIR$/java-rxjava" />
+            <option value="$PROJECT_DIR$/java-serialization" />
             <option value="$PROJECT_DIR$/java-synchronized" />
             <option value="$PROJECT_DIR$/java-tftp" />
             <option value="$PROJECT_DIR$/java8" />
