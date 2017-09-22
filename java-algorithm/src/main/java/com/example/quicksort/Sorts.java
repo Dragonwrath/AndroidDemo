@@ -4,15 +4,14 @@ package com.example.quicksort;
 import java.util.Arrays;
 import java.util.TreeSet;
 
+
 public class Sorts {
     private static final int[] nums = {3, 12, 22, 34, 58,18, 21, 8, 1};
     public static void main(String[] args) {
-        Fibonacci.fibonacci(10);
-        Fibonacci.setLength(10);
-        Fibonacci.recursiveFibonacci(0, 10);
+        QuickSort.quickSortRecursively(nums,0, nums.length - 1);
+        System.out.println(Arrays.toString(nums));
 
     }
-
 
     private static class QuickSort {
         static void quickSort1(int[] nums) {
@@ -43,39 +42,35 @@ public class Sorts {
             long t2 = System.nanoTime();
         }
 
-        static void quickSort4(int[] nums, int start, int end) {
-            int begin = nums[start];
-            int l,h;
-            for (int i = start + 1, j = end;;) {
-                if (nums[i] > begin && nums[j] < begin) {
-                    swap(nums[i],nums[j]);
-                    i++;
-                    j--;
-                }
-                if (nums[i] > begin){
-                    j--;
-                }
-                if (nums[j] <= begin ) {
-                    i++;
-                }
-
-                if (i >= j) {
-                    l = j;
-                    h = i;
-                    break;
-                }
+        static void quickSortRecursively(int[] array, int left, int right) {
+            int pivotKey;
+            if (left < right) {
+                pivotKey = partitionByPivotValue(array, left, right);
+                quickSortRecursively(array, left, pivotKey - 1);
+                quickSortRecursively(array, pivotKey + 1, right);
             }
+        }
 
-
-
+        static void quickSortNonRecursively(int[] nums, int start, int end) {
 
         }
 
-        private static void swap(int a, int b) {
-            int temp = b;
-            b = a;
-            a =temp;
+        static int partitionByPivotValue(int[] array, int left, int right) {
+            int pivotValue = array[left];
+            while (left < right) {
+                while (left < right && array[right] >= pivotValue) {
+                    --right;
+                }
+                array[left] = array[right];
+                while (left < right && array[left] <= pivotValue) {
+                    ++left;
+                }
+                array[right] = array[left];
+            }
+            array[left] = pivotValue;
+            return left;
         }
+
     }
 
     private static class BubbleSort {
@@ -158,6 +153,43 @@ public class Sorts {
             } else if ( n > 0 ){
                 String string = Arrays.toString(result);
                 System.out.println("Arrays = " + string);
+            }
+        }
+    }
+
+    private static class SelectSort {
+        static void selectSortRecursively(int[] source, int length) {
+            int max = source[0], index = 0;
+            for (int i = 0; i < length; i++) {
+                if (max < source[i]) {
+                    max = source[i];
+                    index = i;
+                }
+
+            }
+            if (index != length - 1) {
+                int temp = source[index];
+                source[index] = source[length - 1];
+                source[length - 1] = temp;
+            }
+            if (length > 2)
+                selectSortRecursively(source, length - 1);
+        }
+
+        static void selectSortNonRecursively(int[] source) {
+            int length = source.length, index, min;
+            for (int i = 0; i < length - 1; i++) {
+                min = source[i];
+                index = i;
+                for (int j = i + 1; j < length; j++) {
+                    if (source[j] < min) {
+                        min = source[j];
+                        index = j;
+                    }
+                }
+                int temp = source[index];
+                source[index] = source[i];
+                source[i] = temp;
             }
         }
     }
