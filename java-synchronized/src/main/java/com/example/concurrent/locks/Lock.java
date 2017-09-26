@@ -1,6 +1,5 @@
 package com.example.concurrent.locks;
 
-import java.util.concurrent.locks.*;
 
 public class Lock {
     public static void main(String[] args) {

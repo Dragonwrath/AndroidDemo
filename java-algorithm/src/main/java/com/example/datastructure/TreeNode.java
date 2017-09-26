@@ -60,6 +60,7 @@ public class TreeNode<T extends Comparable>{
         } else {
             printed = true;
             System.out.println(node.value);
+            System.out.println("printed = " + printed);
         }
         if (!printed) {
             System.out.println(node.value);
