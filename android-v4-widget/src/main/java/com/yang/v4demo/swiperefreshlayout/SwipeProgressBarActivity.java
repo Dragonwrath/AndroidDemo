@@ -38,7 +38,6 @@ public class SwipeProgressBarActivity extends AppCompatActivity implements  AbsL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_swipe_progeress_bar);
-        RecyclerView
         ButterKnife.bind(this);
         datas = new ArrayList<>();
         for (int i = 0; i < 15; i++) {
@@ -70,7 +69,6 @@ public class SwipeProgressBarActivity extends AppCompatActivity implements  AbsL
             case SCROLL_STATE_TOUCH_SCROLL: string = "SCROLL_STATE_TOUCH_SCROLL"; break;
             case SCROLL_STATE_FLING:        string = "SCROLL_STATE_FLING"; break;
         }
-        Log.e(TAG,"scrollState---->" + string);
         if (view instanceof ListView) {
             ListView list = (ListView) view;
             int lastPosition = list.getLastVisiblePosition();

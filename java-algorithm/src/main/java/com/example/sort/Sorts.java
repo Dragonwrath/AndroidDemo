@@ -1,15 +1,16 @@
-package com.example.quicksort;
+package com.example.sort;
 
 
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.TreeSet;
 
 
+@SuppressWarnings("unused")
 public class Sorts {
-    private static final int[] nums = {3, 12, 22, 34, 58,18, 21, 8, 1};
+    private static final int[] nums = {15,3, 12, 22, 34, 50,18, 21, 8, 1,87, 76, 45, 29, 38, 42};
     public static void main(String[] args) {
-        QuickSort.quickSortRecursively(nums,0, nums.length - 1);
-        System.out.println(Arrays.toString(nums));
+        InsertionSort.shellSort(nums);
 
     }
 
@@ -191,6 +192,38 @@ public class Sorts {
                 source[index] = source[i];
                 source[i] = temp;
             }
+        }
+    }
+
+    private static class InsertionSort {
+        static void straightInsertionSort(int[] nums) {
+            int temp = 0;
+            for (int i = 1; i < nums.length; i++) {
+                for (int j = 0; j < i ; j++) {
+                    if (nums[j] > nums[i]){
+                        temp = nums[i];
+                        System.arraycopy(nums, j, nums, j + 1, i - j);
+                        nums[j] = temp;
+                    }
+                }
+            }
+            System.out.println("Arrays.toString(integers) = " + Arrays.toString(nums));
+        }
+
+        static void shellSort(int[] arr) {
+            int gap = 1, i, j, len = arr.length;
+            int temp;
+            while (gap < len / 3) //calculate the best gap
+                gap = gap * 3 + 1; // <O(n^(3/2)) by Knuth,1973>: 1, 4, 13, 40, 121, ...
+            for (; gap > 0; gap /= 3)
+                for (i = gap; i < len; i++) {
+                    temp = arr[i];
+                    for (j = i - gap; j >= 0 && arr[j] > temp; j -= gap) {
+                        arr[j + gap] = arr[j];
+                    }
+                    arr[j + gap] = temp;
+                }
+            System.out.println("Arrays.toString(integers) = " + Arrays.toString(nums));
         }
     }
 }
