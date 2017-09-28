@@ -38,6 +38,7 @@ public class SwipeProgressBarActivity extends AppCompatActivity implements  AbsL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_swipe_progeress_bar);
+        RecyclerView
         ButterKnife.bind(this);
         datas = new ArrayList<>();
         for (int i = 0; i < 15; i++) {
