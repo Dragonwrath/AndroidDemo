@@ -31,7 +31,7 @@ public class DesUtils {
 
 	private DesUtils(Context context) {
 		super();
-		PASSWORD_CRYPT_KEY = PhoneUtils.getDeviceUuid(context);
+		PASSWORD_CRYPT_KEY = UUIDUtils.getDeviceUuid(context);
 	}
 
 	/**

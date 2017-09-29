@@ -285,10 +285,11 @@ public class Sorts {
             int length = nums.length,temp;
             for (int i = 0; i < gap; i++) { //shell core 核心算法
                 for (int j = i + gap; j < length; j += gap) { //插入排序
-                    for (int k = i; k + gap <= j ; k++) {
+                    for (int k = i; k + gap <= j ; k += gap) {
                         if (nums[j] < nums[k]) {
                             temp = nums[j];
                             for (int l = j; l - gap>= k ; l -= gap) {
+
                                 nums[l] = nums[l - gap];
                             }
                             nums[k] = temp;

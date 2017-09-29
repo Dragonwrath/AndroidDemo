@@ -3,12 +3,11 @@ package com.joker.tool.utils;
 import android.content.Context;
 import android.telephony.TelephonyManager;
 
-import java.security.SecureRandom;
 import java.util.UUID;
 
-public class PhoneUtils {
+public class UUIDUtils {
 
-	private PhoneUtils(){
+	private UUIDUtils(){
 		throw new AssertionError();
 	}
 

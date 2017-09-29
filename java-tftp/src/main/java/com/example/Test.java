@@ -1,6 +1,7 @@
 package com.example;
 
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.text.DecimalFormat;
@@ -41,7 +42,7 @@ public class Test {
 //        }.start();
 
 
-        displayChar();
+        getActuralMemory();
     }
 
     private static void displayChar() {
@@ -89,5 +90,17 @@ public class Test {
         public String toString() {
             return name;
         }
+    }
+
+    static void getActuralMemory() {
+        final File file = new File("D:\\");
+        final long space = file.getTotalSpace();
+        System.out.println("space = " + (space >> 30));
+        final long usableSpace = file.getUsableSpace();
+        System.out.println("usableSpace = " + usableSpace);
+        final long freeSpace = file.getFreeSpace();
+        System.out.println("freeSpace = " + (freeSpace >> 30));
+        final long usedSpace = space - freeSpace;
+        System.out.println("usedSpace = " + (usedSpace >> 30));
     }
 }
