@@ -10,7 +10,10 @@ import java.util.TreeSet;
 public class Sorts {
     private static final int[] nums = {15,3, 12, 22, 34, 50,18, 21, 8, 1,87, 76, 45, 29, 38, 42};
     public static void main(String[] args) {
-        InsertionSort.shellSort(nums);
+//        BubbleSort.bubbleSort1(nums);
+//        BubbleSort.cocktailSort(nums);
+        InsertionSort.shellInsertionSort(nums);
+//        InsertionSort.shellSort(nums);
 
     }
 
@@ -83,9 +86,7 @@ public class Sorts {
             for (int i = ints.length - 1; i > 0 ; i--) {
                 for (int j = 0; j < i ; j++) {
                     if (ints[j] > ints[j+1]){
-                        temp = ints[j];
-                        ints[j] = ints[j+1];
-                        ints[j+1] = temp;
+                        swap(ints, j, j+1);
                     }
                 }
             }
@@ -93,6 +94,45 @@ public class Sorts {
             System.out.println("(t2-t1) = " + (t2-t1));
             System.out.println("ints = " + Arrays.toString(ints));
             return ints;
+        }
+
+        /**
+         * 鸡尾酒排序- 冒泡排序的优化
+         * 该算法分为两部分，
+         * 第一部分，从左到右进行最大值冒泡，之后减少右边界值
+         * 第二部分，从右到左进行最小值冒泡，之后增加左边界值
+         * 之后再循环操作，直到right < left 为止         *
+         * @param nums 数组
+         */
+        static void cocktailSort(int[] nums) {
+            int left = 0, right = nums.length - 1;
+            long t1 = System.nanoTime();
+
+            while (left < right) {
+                for (int i = left; i < right; i++) {
+                    if (nums[i] > nums[i + 1]) {
+                        swap(nums, i, i + 1);
+                    }
+                }
+                right--;
+                
+                for (int i = right; i > left; i--) {
+                    if (nums[i] < nums[i - 1]) {
+                        swap(nums, i, i - 1);
+                    }
+                }
+                left++;
+            }
+
+            long t2 = System.nanoTime();
+            System.out.println("(t2-t1) = " + (t2-t1));
+            System.out.println("Arrays.toString(nums) = " + Arrays.toString(nums));
+        }
+
+        static void swap(int[] nums, int i , int j) {
+            int temp = nums[i];
+            nums[i] = nums[j];
+            nums[j] = temp;
         }
     }
 
@@ -208,6 +248,54 @@ public class Sorts {
                 }
             }
             System.out.println("Arrays.toString(integers) = " + Arrays.toString(nums));
+        }
+
+        /**
+         * shell 插入排序就是根据相应的gap值，将数组进行分组，可以分组为
+         * 0， 0 + gap， 0+ gap *2, 0 + gap *3..
+         * 1， 1 + gap， 1+ gap *2, 1 + gap *3..
+         * ...
+         * gap - 1， gap - 1 + gap， gap - 1+ gap *2, gap - 1 + gap *3..
+         * 之后，每个分组再进行插入排序
+         *
+         * 之后将gap在缩小， 再次进行操作，最后gap 为1 时，也就是直接执行最后的插入排序操作
+         *
+         * 这样理论上，减少了排序的复杂度，减少了插入次数
+         * 该排序
+         * 时间复杂度为O(NleN)
+         * 空间负载度为O(n)
+         * @param nums 相应的数组
+         */
+        static void shellInsertionSort(int[] nums) {
+            int gap = 0;
+            while (gap < nums.length / 3)
+                gap = gap * 3 + 1;
+            do {
+                try {
+                    shellInsertionSortInternal(nums ,gap);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } while ((gap = gap / 3) > 0);
+            System.out.println("Arrays.toString(integers) = " + Arrays.toString(nums));
+        }
+
+
+        private static void shellInsertionSortInternal(int[] nums , int gap) throws Exception{
+            int length = nums.length,temp;
+            for (int i = 0; i < gap; i++) { //shell core 核心算法
+                for (int j = i + gap; j < length; j += gap) { //插入排序
+                    for (int k = i; k + gap <= j ; k++) {
+                        if (nums[j] < nums[k]) {
+                            temp = nums[j];
+                            for (int l = j; l - gap>= k ; l -= gap) {
+                                nums[l] = nums[l - gap];
+                            }
+                            nums[k] = temp;
+                        }
+                    }
+                }
+            }
         }
 
         static void shellSort(int[] arr) {
