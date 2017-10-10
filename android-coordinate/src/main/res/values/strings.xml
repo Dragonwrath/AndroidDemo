@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">CordinateDemo</string>
+
+    <string name="fver">FVER?</string>
+    <string name="rtfq">RTFQ?</string>
+    <string name="rbnd">RBND?</string>
+    <string name="rpas">RPAS?</string>
+    <string name="rgan">RGAN?</string>
+    <string name="rvgn">RVGN?</string>
+    <string name="rxmt">RXMT?</string>
+    <string name="srsi">SRSI?</string>
+    <string name="stfq">STFQ?</string>
 </resources>
