@@ -9,11 +9,37 @@ public class ThreadLocalTest {
     private static final int HASH_INCREMENT = 0x61c88647;
 
     public static void main(String[] args) {
-//        auto();
+        step_2();
+
+    }
+
+    private static void step_2() {
+        for (int i = 0; i < 5; i++) {
+            final Thread thread = new Thread(ThreadName.getName());
+            System.out.println("thread.getName() = " + thread.getName());
+        }
+    }
+
+    private static class ThreadName {
+        private final static AtomicInteger mAtomic = new AtomicInteger(0);
+        private final static ThreadLocal<Integer> mThreadLocal = new ThreadLocal<Integer>() {
+            @Override
+            protected Integer initialValue() {
+                return mAtomic.getAndIncrement();
+            }
+        };
+
+        private static String getName() {
+            return String.valueOf(mThreadLocal.get());
+        }
+    }
+
+    private static void step_1() {
+        //        auto();
         Runnable run = new Runnable() {
             @Override
             public void run() {
-                int i = ThreadLocalTest.ThreadId.get();
+                int i = ThreadId.get();
                 System.out.println(Thread.currentThread().getName() + "----->" + i);
             }
         };

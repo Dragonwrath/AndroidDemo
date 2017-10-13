@@ -1,22 +1,27 @@
 package com.example.java.lang.ref;
 
 import java.lang.ref.WeakReference;
-import java.util.HashMap;
 
 public class WeakReferenceTest {
     static Object o = new Object();
 
     public static void main(String[] args) throws InterruptedException {
 
-//        step_2();
+        step_3();
 
-        Object o = new Object();
-        final HashMap<Integer, Object> map = new HashMap<>();
-        map.put(0, o);
-        o = null;
-        System.out.println(map.get(0));
     }
 
+    private static void step_3() {
+        String s = "25.13442";
+        final String[] split = s.split("\\.");
+        final String s1 = split[1];
+        if (s1.length() < 8) {
+            for (int i = 0; i < 8 - s1.length(); i++) {
+                s += "0";
+            }
+        }
+        System.out.println("s1 = " + s);
+    }
     private static void step_2() {
         Car car = new Car(22000,"silver");
         WeakReference<Car> weakCar = new WeakReference<Car>(car);
@@ -112,5 +117,4 @@ class Car {
     public String toString(){
         return colour +"car costs $"+price;
     }
-
 }
