@@ -18,11 +18,8 @@
       <module fileurl="file://$PROJECT_DIR$/android-meida&amp;camera/android-meida&amp;camera.iml" filepath="$PROJECT_DIR$/android-meida&amp;camera/android-meida&amp;camera.iml" />
       <module fileurl="file://$PROJECT_DIR$/android-mock/android-mock.iml" filepath="$PROJECT_DIR$/android-mock/android-mock.iml" />
       <module fileurl="file://$PROJECT_DIR$/android-mvp/android-mvp.iml" filepath="$PROJECT_DIR$/android-mvp/android-mvp.iml" />
-      <module fileurl="file://$PROJECT_DIR$/android-mvp-nucleus/android-mvp-nucleus.iml" filepath="$PROJECT_DIR$/android-mvp-nucleus/android-mvp-nucleus.iml" />
       <module fileurl="file://$PROJECT_DIR$/android-picasso/android-picasso.iml" filepath="$PROJECT_DIR$/android-picasso/android-picasso.iml" />
-      <module fileurl="file://$PROJECT_DIR$/android-progressdemo/android-progressdemo.iml" filepath="$PROJECT_DIR$/android-progressdemo/android-progressdemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/android-receiver/android-receiver.iml" filepath="$PROJECT_DIR$/android-receiver/android-receiver.iml" />
-      <module fileurl="file://$PROJECT_DIR$/android-retrofit/android-retrofit.iml" filepath="$PROJECT_DIR$/android-retrofit/android-retrofit.iml" />
       <module fileurl="file://$PROJECT_DIR$/android-rxjava/android-rxjava.iml" filepath="$PROJECT_DIR$/android-rxjava/android-rxjava.iml" />
       <module fileurl="file://$PROJECT_DIR$/android-share_sdk/android-share_sdk.iml" filepath="$PROJECT_DIR$/android-share_sdk/android-share_sdk.iml" />
       <module fileurl="file://$PROJECT_DIR$/android-sina/android-sina.iml" filepath="$PROJECT_DIR$/android-sina/android-sina.iml" />

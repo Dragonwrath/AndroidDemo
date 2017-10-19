@@ -28,7 +28,7 @@ public class HandlerFactory {
     private final static ConcurrentHashMap<String, HandlerThread> MAP = new ConcurrentHashMap<>();
 
     @WorkerThread
-    public static Handler newHandler(final Messenger messenger, String key) {
+    public static Handler newHandler(final MessageConsumer messageConsumer, String key) {
         HandlerThread thread = MAP.get(key);
 
         if (thread == null) {
@@ -45,15 +45,15 @@ public class HandlerFactory {
         return new Handler(thread.getLooper()) {
             @Override
             public void handleMessage(Message msg) {
-                if ( messenger != null)
-                    messenger.handleMessage(msg);
+                if ( messageConsumer != null)
+                    messageConsumer.handleMessage(msg);
             }
         };
     }
 
     @UiThread
-    public static Handler newInstance(Activity activity, Messenger messenger) {
-        return new WeakReferenceHandler(activity, messenger);
+    public static Handler newInstance(Activity activity, MessageConsumer messageConsumer) {
+        return new WeakReferenceHandler(activity, messageConsumer);
     }
 
     public static void terminateHandler(String key) {
@@ -65,7 +65,7 @@ public class HandlerFactory {
         }
         //Notice： we MUST interrupt this thread， otherwise, when we use this method in
         //Activity.onStop() and then make a new instance by HandlerFactory.newHandler()
-        //thread maybe have wrong state (because the thread still running, and the looper of
+        //thread maybe have wrong state (the thread still running, and the looper of
         // thread has stopped, and then an IllegalThreadStateException will be thrown)
         thread.interrupt();
 
@@ -74,20 +74,20 @@ public class HandlerFactory {
 
     private static class WeakReferenceHandler extends Handler {
         private WeakReference<Activity> reference ;
-        private Messenger messenger;
-        private WeakReferenceHandler(Activity act,Messenger messenger) {
+        private MessageConsumer mMessageConsumer;
+        private WeakReferenceHandler(Activity act,MessageConsumer messageConsumer) {
             reference = new WeakReference<>(act);
-            this.messenger = messenger;
+            this.mMessageConsumer = messageConsumer;
         }
 
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            if (messenger != null) messenger.handleMessage(msg);
+            if (mMessageConsumer != null) mMessageConsumer.handleMessage(msg);
         }
     }
 
-    static abstract class Messenger {
+    static abstract class MessageConsumer {
         abstract void handleMessage(Message msg);
     }
 

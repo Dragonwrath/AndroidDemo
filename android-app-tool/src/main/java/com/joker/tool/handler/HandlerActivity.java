@@ -1,21 +1,16 @@
 package com.joker.tool.handler;
 
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Message;
-import android.os.MessageQueue;
-import android.os.Messenger;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.joker.tool.R;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +40,7 @@ public class HandlerActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         sendHandler = HandlerFactory.newHandler(
-                new HandlerFactory.Messenger() {
+                new HandlerFactory.MessageConsumer() {
                     @Override
                     void handleMessage(Message msg) {
                         Log.d("sendHandler", "handleMessage() called with: msg = [" + msg.what + "]");
@@ -66,7 +61,7 @@ public class HandlerActivity extends AppCompatActivity {
         ,TAG);
 
         receiveHandler = HandlerFactory.newHandler(
-                new HandlerFactory.Messenger() {
+                new HandlerFactory.MessageConsumer() {
                     @Override
                     void handleMessage(Message msg) {
                         Log.d("receiveHandler", "handleMessage() called with: msg = [" + msg.what + "]");
@@ -89,10 +84,5 @@ public class HandlerActivity extends AppCompatActivity {
     public void send(View view) {
         sendHandler.sendEmptyMessage(1);
 
-
-//        Looper.class;
-//        Handler.class; new Handler();
-//        Messenger.class;
-//        MessageQueue;
     }
 }
