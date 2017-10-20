@@ -100,7 +100,8 @@ public class HurlStack implements HttpStack {
         entity.setContentType(connection.getContentType());
         return entity;
     }
-        protected HttpURLConnection createConnection(URL url) throws IOException {
+
+		protected HttpURLConnection createConnection(URL url) throws IOException {
         return (HttpURLConnection) url.openConnection();
     }
 

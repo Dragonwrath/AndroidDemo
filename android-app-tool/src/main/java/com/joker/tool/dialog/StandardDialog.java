@@ -58,8 +58,13 @@ public class StandardDialog extends AlertDialog {
         return builder.create();
     }
 
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
 
-    @Unfinished(description = {"缺少特定功能"})
+	}
+
+	@Unfinished(description = {"缺少特定功能"})
     public static class Builder {
         private AlertDialog dialog;
         private View rootView;
@@ -74,15 +79,17 @@ public class StandardDialog extends AlertDialog {
             builder.setView(rootView);
             dialog = builder.create();
 
-            //Fellow step should be deprecated. We use inflate this view first, so that we could hold
-            //this view of this layout
+            /*
+            Fellow step should be deprecated. We use inflate this view first, so that we could hold
+            this view of this layout
+            if we don't use show() method that a NullPointerException will be thrown when
+            we use dialog.findViewById().And we also could not use Activity.findViewById()
+            because dialog and activity each have different window .
+            dialog.show();
+            dialog.hide();
+            */
 
-            //if we don't use show() method that a NullPointerException will be thrown when
-            // we use dialog.findViewById().And we also could not use Activity.findViewById()
-            //because dialog and activity each have different window .
-//            dialog.show();
-//            dialog.hide();
-        }
+				}
 
         public Builder setCancelable(boolean cancelable) {
             dialog.setCancelable(cancelable);

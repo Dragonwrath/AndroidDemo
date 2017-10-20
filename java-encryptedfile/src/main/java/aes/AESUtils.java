@@ -95,7 +95,6 @@ public final class AESUtils {
 			byte[] encrypted = cipher.doFinal(decrypt);
 			return new String(encrypted);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return "";

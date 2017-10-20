@@ -99,7 +99,6 @@ public class CustomView extends View{
                         sleep(30);
                         postInvalidate();
                     } catch (InterruptedException e) {
-                        // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
                 }
