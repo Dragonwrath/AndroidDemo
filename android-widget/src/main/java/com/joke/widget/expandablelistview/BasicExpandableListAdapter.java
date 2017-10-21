@@ -103,7 +103,7 @@ public class BasicExpandableListAdapter<T> extends BaseExpandableListAdapter{
 		TextView text;
 		boolean isExpanded;
 		GroupViewHolder(View view, boolean isExpanded) {
-			text = (TextView)view.findViewById(R.id.expand_txt);
+			text = (TextView)view.findViewById(R.id.txt_folder);
 			this.isExpanded = isExpanded;
 		}
 	}

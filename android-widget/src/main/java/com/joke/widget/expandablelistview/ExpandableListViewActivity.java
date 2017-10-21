@@ -15,6 +15,7 @@ import com.joke.widget.R;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 public class ExpandableListViewActivity extends AppCompatActivity{
@@ -29,7 +30,7 @@ public class ExpandableListViewActivity extends AppCompatActivity{
 
 	private void getOutFile() {
 		List<List<File>> list = new ArrayList<>();
-		final File[] dirs;
+		File[] dirs = null;
 		if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
 			dirs = Environment.getExternalStorageDirectory().listFiles();
 			for(final File file : dirs) {
@@ -38,15 +39,17 @@ public class ExpandableListViewActivity extends AppCompatActivity{
 				}
 			}
 		}
-		final BasicExpandableListAdapter<File> adapter = new BasicExpandableListAdapter<>(list, this);
-		final ExpandableListView listView = (ExpandableListView)findViewById(R.id.list);
-		listView.setAdapter(adapter);
+		if(dirs != null) {
+			final FileExpandAdapter adapter = new FileExpandAdapter(this,Arrays.asList(dirs));
+			final ExpandableListView listView = (ExpandableListView)findViewById(R.id.list);
+			listView.setAdapter(adapter);
+		}
 	}
 
 	private void checkPermission() {
 		if(Build.VERSION.SDK_INT >= 23) {
 			if(checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-				requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 101);
+				requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},101);
 			}
 		}
 	}
@@ -62,6 +65,19 @@ public class ExpandableListViewActivity extends AppCompatActivity{
 						finish();
 					}
 				}
+			}
+		}
+	}
+
+	class FileComparator implements Comparator<File>{
+		@Override
+		public int compare(File o1,File o2) {
+			int i = o1.isDirectory() ? 1 : 0;
+			int j = o2.isDirectory() ? 1 : 0;
+			if(i != j) {
+				return j - i;
+			} else {
+				return o1.getName().compareTo(o2.getName());
 			}
 		}
 	}

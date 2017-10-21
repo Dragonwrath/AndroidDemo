@@ -1,6 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                tools:ignore="ContentDescription"
+                android:layout_margin="5dp"
+    >
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimary"
+        android:layout_alignParentTop="true"
+        />
+
+    <ImageView
+        android:id="@+id/iv_folder"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:scaleType="centerInside"
+        android:gravity="center_vertical"
+
+        />
+    <TextView
+        android:id="@+id/txt_folder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:maxLines="1"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/iv_folder"
+        tools:text="hahahahhhhhhhhhhhhhhhhhhhh"
+        android:gravity="center_vertical"
+        android:drawableRight="@android:drawable/arrow_down_float"
+        />
 
 </RelativeLayout>

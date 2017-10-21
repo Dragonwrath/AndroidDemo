@@ -5,6 +5,7 @@ import com.sun.jmx.remote.internal.ArrayQueue;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -67,8 +68,16 @@ public class FileTest{
 	public static void main(String[] args) throws Exception{
 		final String pathname = "D:\\";
 		File file = new File(pathname);
-		step_3(file);
+//		step_3(file);
+		sortFile(file);
+	}
 
+	private static void sortFile(File parent) {
+		final List<File> list = Arrays.asList(parent.listFiles());
+		list.sort(new FileComparator());
+		for(File file : list) {
+			System.out.println("directory : " + file.isDirectory() + " file = " + file.getName());
+		}
 	}
 
 	//print directory

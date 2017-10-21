@@ -3,11 +3,11 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:orientation="vertical"
+              android:layout_marginLeft="10dp"
     >
-    <TextView
-        android:id="@+id/expand_txt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+    <include layout="@layout/group_expand_file"
+             android:layout_height="wrap_content"
+             android:layout_width="match_parent"/>
     <ExpandableListView
         android:id="@+id/expand_list"
         android:layout_width="match_parent"
