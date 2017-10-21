@@ -35,7 +35,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 @RemoteView
-public class CustomeImageView extends View {
+public class CustomImageView extends View {
 
     // settable by the client
     private Uri mUri;
@@ -48,15 +48,15 @@ public class CustomeImageView extends View {
     private int mMaxHeight = Integer.MAX_VALUE;
 
 
-    public CustomeImageView(Context context) {
+    public CustomImageView(Context context) {
         super(context);
     }
 
-    public CustomeImageView(Context context, AttributeSet attrs) {
+    public CustomImageView(Context context,AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public CustomeImageView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public CustomImageView(Context context,AttributeSet attrs,int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 }
