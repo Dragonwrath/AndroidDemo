@@ -4,13 +4,10 @@ import android.app.*;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.res.Resources;
-import android.graphics.drawable.AnimatedStateListDrawable;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -19,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.joker.tool.R;
+import com.joker.tool.backpress.BackPressObservable;
 import com.joker.tool.popupwindow.ProgressPopupWindow;
 
 import android.tools.Unfinished;
@@ -28,7 +26,7 @@ import java.util.List;
 
 @Unfinished(description = {
 		"dialog disappear problem","interface for result"})
-public class ProgressDialogFragment extends DialogFragment{
+public class ProgressDialogFragment extends DialogFragment implements BackPressObservable{
 
 	public final static String DEFAULT = "default";
 	public final static String TITLE = "title";
@@ -40,7 +38,6 @@ public class ProgressDialogFragment extends DialogFragment{
 	private List<OnClickListener> mPosListeners;
 	private List<OnClickListener> mNegListeners;
 	private View mRootView;
-	private ContentLoadingProgressBar mProgress;
 	private ProgressPopupWindow mWindow;
 
 	public ProgressDialogFragment() {
@@ -68,48 +65,6 @@ public class ProgressDialogFragment extends DialogFragment{
 				}
 				getDialog().hide();
 				displayProgressWindow(getActivity().getWindow().getDecorView(), "正在进行");
-//				ViewGroup group = (ViewGroup)mRootView;
-//				for(int i = 0, size = group.getChildCount();i < size;i++) {
-//					if(group.getChildAt(i) instanceof ProgressBar) {
-//						mProgress = (ContentLoadingProgressBar)group.getChildAt(i);
-//					} else {
-//						group.getChildAt(i).setVisibility(View.GONE);
-//					}
-//				}
-//				//                final Window window = getDialog().getWindow();
-//				//                if (window != null) {
-//				//                    window.setBackgroundDrawableResource(android.R.color.transparent);
-//				//                }
-//				final ColorDrawable drawable = new ColorDrawable();
-//				drawable.setColor(getResources().getColor(android.R.color.transparent));
-//				//                mProgress.setBackground(drawable);
-//				mRootView.setBackgroundDrawable(drawable);
-//				mProgress.setAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.progress));
-//				mProgress.show();
-
-				//                mRootView.setVisibility(View.GONE);
-				//                mProgress = (ContentLoadingProgressBar) getActivity().getLayoutInflater().inflate(R.layout.progress, (ViewGroup) mRootView.getParent(), false);
-				//                final Dialog dialog = getDialog();
-				//
-				//                final LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-				//                layoutParams.gravity = Gravity.CENTER;
-				//                dialog.setContentView(mProgress, layoutParams);
-				//                final Window window = dialog.getWindow();
-				//                if (window != null) {
-				//                    final WindowManager.LayoutParams params = window.getAttributes();
-				//                    mProgress.setX(params.x);
-				//                    mProgress.setY(params.y);
-				//
-				//                }
-				//
-				//                int left = mProgress.getLeft();
-				//                int top = mProgress.getTop();
-				//
-				//                Log.e(TAG, String.format(Locale.getDefault(),"Progress View's left is %s, top is %s", left, top));
-				//                mProgress.show();
-				//                left = mProgress.getLeft();
-				//                top = mProgress.getTop();
-				//                Log.e(TAG, String.format(Locale.getDefault(),"Progress View's left is %s, top is %s", left, top));
 			}
 		});
 
@@ -122,6 +77,7 @@ public class ProgressDialogFragment extends DialogFragment{
 				dismiss();
 			}
 		});
+
 		return mRootView;
 	}
 
@@ -133,6 +89,10 @@ public class ProgressDialogFragment extends DialogFragment{
 		return super.onCreateDialog(savedInstanceState);
 	}
 
+	@Override
+	public Dialog getDialog() {
+		return super.getDialog();
+	}
 
 	private Dialog generateDialog() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -200,9 +160,6 @@ public class ProgressDialogFragment extends DialogFragment{
 	@Override
 	public void onDismiss(DialogInterface dialog) {
 		super.onDismiss(dialog);
-		if(mProgress != null && mProgress.isShown()) {
-			mProgress.hide();
-		}
 		if(mWindow !=null && mWindow.isShowing()) {
 			mWindow.dismiss();
 		}
@@ -214,5 +171,15 @@ public class ProgressDialogFragment extends DialogFragment{
 			mWindow = builder.create();
 		}
 		mWindow.showAtLocation(anchor, des);
+	}
+
+	@Override
+	public boolean onBackPressed() {
+		final Dialog dialog = getDialog();
+		if(dialog != null && dialog.isShowing()) {
+			dismiss();
+			return true;
+		}
+		return false;
 	}
 }

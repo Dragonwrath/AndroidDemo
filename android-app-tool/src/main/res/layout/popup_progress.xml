@@ -7,7 +7,7 @@
     android:paddingTop="20dp"
     android:paddingBottom="20dp"
     android:gravity="center"
-    android:background="#33ffffff"
+    android:background="#0eeeeeee"
     >
     <android.support.v4.widget.ContentLoadingProgressBar
         android:id="@+id/progress"
