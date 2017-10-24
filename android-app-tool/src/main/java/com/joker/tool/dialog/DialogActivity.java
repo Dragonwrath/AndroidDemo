@@ -6,7 +6,6 @@ import android.graphics.Canvas;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +13,6 @@ import android.widget.FrameLayout;
 
 import com.joker.tool.BaseActivity;
 import com.joker.tool.R;
-import com.joker.tool.backpress.BackPressObservable;
-
-import java.util.LinkedList;
 
 
 public class DialogActivity extends BaseActivity{

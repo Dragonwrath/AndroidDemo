@@ -14,75 +14,124 @@ import com.joker.tool.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HandlerActivity extends AppCompatActivity {
-    private static final String TAG = "HandlerActivity";
+public class HandlerActivity extends AppCompatActivity{
+	private static final String TAG = "HandlerActivity";
 
-    private Handler sendHandler ;
-    private Handler receiveHandler;
-    private List<String> strings = new ArrayList<>();
-    private final String message = "Message --> ";
-    private int i ;
-    private ListView mList;
-    private ArrayAdapter<String> mAdapter;
+	private Handler sendHandler = HandlerFactory.newInstance(this,new HandlerFactory.MessageConsumer(){
+		@Override
+		protected void handleMessage(Message msg) {
+			switch(msg.what) {
+				case 1:
+					mAdapter.add((String)msg.obj);
+					break;
+			}
+		}
+	});
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_handler);
+	private Handler secondHandler = HandlerFactory.newHandler(new HandlerFactory.MessageConsumer(){
+		@Override
+		protected void handleMessage(Message msg) {
+			switch(msg.what) {
+				case 2:
+					final String s = (String)msg.obj;
+					runOnUiThread(new Runnable(){
+						@Override
+						public void run() {
+							mAdapter.add(s);
+							mAdapter.notifyDataSetChanged();
+						}
+					});
+					break;
+			}
+		}
+	},TAG);
+	private final String message = "Message --> ";
+	private int i;
+	private ArrayAdapter<String> mAdapter;
 
-        mList = (ListView) findViewById(R.id.list);
-        mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, strings);
-        mList.setAdapter(mAdapter);
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_handler);
 
-    }
+		ListView list = (ListView)findViewById(R.id.list);
+		List<String> strings = new ArrayList<>();
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        sendHandler = HandlerFactory.newHandler(
-                new HandlerFactory.MessageConsumer() {
-                    @Override
-                    void handleMessage(Message msg) {
-                        Log.d("sendHandler", "handleMessage() called with: msg = [" + msg.what + "]");
-                        switch (msg.what) {
-                            case 1: {
-                                HandlerActivity.this.runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        strings.add(message + (i++));
-                                        mAdapter.notifyDataSetChanged();
-                                    }
-                                });
-                                break;
-                            }
-                        }
-                    }
-                }
-        ,TAG);
+		mAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,strings);
+		mAdapter.setNotifyOnChange(true);
+		list.setAdapter(mAdapter);
 
-        receiveHandler = HandlerFactory.newHandler(
-                new HandlerFactory.MessageConsumer() {
-                    @Override
-                    void handleMessage(Message msg) {
-                        Log.d("receiveHandler", "handleMessage() called with: msg = [" + msg.what + "]");
-                    }
-                }
-        ,TAG);
-    }
+	}
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        HandlerFactory.terminateHandler(TAG);
-    }
+	@Override
+	protected void onStart() {
+		super.onStart();
+	}
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
+	private void initHandler() {
+		sendHandler = HandlerFactory.newHandler(new HandlerFactory.MessageConsumer(){
+			@Override
+			protected void handleMessage(Message msg) {
 
-    public void send(View view) {
-        sendHandler.sendEmptyMessage(1);
+				Log.d("sendHandler","handleMessage() called with: msg = [" + msg.what + "]");
+				switch(msg.what) {
+					case 1: {
+						HandlerActivity.this.runOnUiThread(new Runnable(){
+							@Override
+							public void run() {
+								mAdapter.add(message + (i++));
+								mAdapter.notifyDataSetChanged();
+							}
+						});
+						break;
+					}
+				}
+			}
+		},TAG);
 
-    }
+		secondHandler = HandlerFactory.newHandler(new HandlerFactory.MessageConsumer(){
+			@Override
+			protected void handleMessage(Message msg) {
+				Log.d("receiveHandler","handleMessage() called with: msg = [" + msg.what + "]");
+			}
+		},TAG);
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+		HandlerFactory.terminateHandler(TAG);
+		secondHandler.removeCallbacksAndMessages(null);
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+	}
+
+	public void send(View view) {
+		final Message message = Message.obtain(sendHandler);
+		message.obj = "new Message --> " + i;
+		message.what = 1;
+		sendHandler.sendMessage(message);
+	}
+
+	public void clear(View view) {
+		mAdapter.clear();
+	}
+
+	public void secondSend(View view) {
+		if(sendHandler != null) {
+			final Message message = Message.obtain(secondHandler);
+			message.what = 2;
+			message.obj = "second Message -->" + i;
+			secondHandler.sendMessage(message);
+		} else {
+			mAdapter.add("Second Handler had been registered");
+		}
+	}
+
+	public void unregister(View view) {
+		HandlerFactory.terminateHandler(TAG);
+	}
 }

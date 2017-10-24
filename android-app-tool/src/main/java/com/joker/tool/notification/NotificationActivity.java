@@ -27,7 +27,6 @@ public class NotificationActivity extends AppCompatActivity{
 	}
 
 	public void bigText(View view) {
-		NotificationFactory.defaultBigTextNotice(this,"This Progress ",null);
-
+//		NotificationFactory.defaultBigTextNotice(this,"This Progress ",null);
 	}
 }

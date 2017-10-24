@@ -1,8 +1,5 @@
 package com.joker.tool;
 
-import android.app.job.JobInfo;
-import android.app.job.JobScheduler;
-import android.app.job.JobService;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -14,7 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-import java.util.List;
 
 public class ImageActivity extends AppCompatActivity {
 
@@ -29,11 +25,11 @@ public class ImageActivity extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Thumbnails.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent,10);
 
-//        IntentFilter filter = new IntentFilter();
-//        filter.addAction(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-//        filter.addAction(Camera.ACTION_NEW_PICTURE);
-//        mReceiver = new ImageReceiver();
-//        registerReceiver(mReceiver,filter);
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        filter.addAction(Camera.ACTION_NEW_PICTURE);
+        mReceiver = new ImageReceiver();
+        registerReceiver(mReceiver,filter);
 
     }
 

@@ -1,6 +1,7 @@
 package com.joker.tool;
 
 
+import android.support.annotation.Keep;
 import android.support.annotation.UiThread;
 import android.support.v7.app.AppCompatActivity;
 
@@ -10,10 +11,14 @@ import java.util.ArrayList;
 
 public class BaseActivity extends AppCompatActivity{
 
-	private final ArrayList<BackPressObservable> backPressObservers = new ArrayList<>();
+	private ArrayList<BackPressObservable> backPressObservers;
 
 	@UiThread
+	@Keep
 	public void addBackPressObservable(BackPressObservable observable){
+		if(backPressObservers == null) {
+			backPressObservers = new ArrayList<>();
+		}
 		backPressObservers.add(0,observable);
 	}
 
@@ -28,6 +33,4 @@ public class BaseActivity extends AppCompatActivity{
 			super.onBackPressed();
 		}
 	}
-
-
 }
