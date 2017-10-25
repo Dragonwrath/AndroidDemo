@@ -40,9 +40,10 @@
             </intent-filter>
         </activity>
         <activity android:name="android.graphics.drawable.DrawableActivity">
+        </activity>
+        <activity android:name="android.os.statfs.StatFsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
