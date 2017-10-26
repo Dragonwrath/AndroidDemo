@@ -6,10 +6,16 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 import static com.example.java.io.FileTest.Year._2015;
 import static com.example.java.io.FileTest.Year._2016;
@@ -66,224 +72,265 @@ public class FileTest{
 
 
 	public static void main(String[] args) throws Exception{
-		final String pathname = "D:\\";
-		File file = new File(pathname);
-//		step_3(file);
-		sortFile(file);
+		final long sizeOfFilesInDir = CollectionSize.ConcurrentPoolCallable.getTotalSizeOfFilesInDir(new File("D:\\MiPush"));
+		System.out.println("sizeOfFilesInDir = " + sizeOfFilesInDir);
 	}
+	static class NormalStep {
 
-	private static void sortFile(File parent) {
-		final List<File> list = Arrays.asList(parent.listFiles());
-		list.sort(new FileComparator());
-		for(File file : list) {
-			System.out.println("directory : " + file.isDirectory() + " file = " + file.getName());
+		private static void sortFile(File parent) {
+			final List<File> list = Arrays.asList(parent.listFiles());
+			list.sort(new FileComparator());
+			for(File file : list) {
+				System.out.println("directory : " + file.isDirectory() + " file = " + file.getName());
+			}
 		}
-	}
 
-	//print directory
-	private static void step_1(File parent, String prefix) {
-		if(parent.isDirectory()) {
-			final File[] files = parent.listFiles();
-			if(files != null && files.length > 0) {
-				for(File file : files) {
-					step_1(file,"   " + prefix);
+		//print directory
+		private static void step_1(File parent, String prefix) {
+			if(parent.isDirectory()) {
+				final File[] files = parent.listFiles();
+				if(files != null && files.length > 0) {
+					for(File file : files) {
+						step_1(file,"   " + prefix);
+					}
+				} else {
+					System.out.println(prefix + parent.getName());
 				}
 			} else {
 				System.out.println(prefix + parent.getName());
 			}
-		} else {
-			System.out.println(prefix + parent.getName());
 		}
-	}
 
-	//sort directory by file's name
-	private static void step_2(File  file) {
-		Map<String, LinkedList<File>> map = new HashMap<>();
-		for(Year year : Year.values()) {
-			map.put(year.getYear(), new LinkedList<>());
-		}
-		final ArrayList<File> doubtList = new ArrayList<>();
-		sortInternal(file, map, doubtList);
-		for(String key : map.keySet()) {
-			System.out.println(key+ "  size() = " + map.get(key).size());
-		}
-		for(String key : map.keySet()) {
-			final LinkedList<File> list = map.get(key);
-
-		}
-		System.out.println("doubtList = " + doubtList.size());
-	}
-
-	private static void sortInternal(File file,Map<String, LinkedList<File>> map,ArrayList<File> doubtList) {
-		if(file.isDirectory()) {
-			final File[] files = file.listFiles();
-			if(files != null && files.length >0) {
-				for(File child : files) {
-					sortInternal(child, map,doubtList);
-				}
+		//sort directory by file's name
+		private static void step_2(File  file) {
+			Map<String, LinkedList<File>> map = new HashMap<>();
+			for(Year year : Year.values()) {
+				map.put(year.getYear(), new LinkedList<>());
 			}
-		}
-		else {
-			for(Year y : Year.values()) {
-				if(file.getName().contains(y.getYear())) {
-					map.get(y.getYear()).push(file);
-					return;
-				}
+			final ArrayList<File> doubtList = new ArrayList<>();
+			sortInternal(file, map, doubtList);
+			for(String key : map.keySet()) {
+				System.out.println(key+ "  size() = " + map.get(key).size());
 			}
-			doubtList.add(file);
-		}
-	}
+			for(String key : map.keySet()) {
+				final LinkedList<File> list = map.get(key);
 
-	private static void step_3(File parent) {
-		if(parent.isDirectory()) {
-			HashMap<String, ArrayList<File>> map = new HashMap<>();
-			final ArrayList<File> list = new ArrayList<>();
-			sortInternalV3(parent, map, list);
-			if(map.size() > 0) {
-				for(String s : map.keySet()) {
-					final ArrayList<File> files = map.get(s);
-					System.out.println("key = " + s + " directory =  " + files.size());
-//
-//					if(files.size() > 0) {
-//						for(File file : files) {
-//							System.out.println("key = " + s + " directory =  " + file.getName());
-//						}
-//					}
-				}
 			}
-			if(list.size() > 0) {
-				for(File file : list) {
-					System.out.println("doubt list directory =  " + file.getName());
-
-				}
-			}
-		} else {
-			throw new IllegalArgumentException("Target file is not directory,and the path of file is:" +
-					parent.getAbsolutePath());
+			System.out.println("doubtList = " + doubtList.size());
 		}
 
-	}
-
-	private static void sortInternalV3(File parent,HashMap<String, ArrayList<File>> map, ArrayList<File> doubtList) {
-		if(parent.isDirectory()) {
-			final File[] files = parent.listFiles();
-			if(files != null && files.length > 0){
-				for(File file : files) {
-					sortInternalV3(file, map, doubtList);
-				}
-			}
-		} else {
-			String name = parent.getName();
-			String yearPre = null, monPre = null;
-			if(name.contains(_2015.getYear())) { //parse year of file's name
-				yearPre = _2015.getYear();
-			} else if(name.contains(_2016.getYear())) {
-				yearPre = _2016.getYear();
-			} else if(name.contains(_2017.getYear())) {
-				yearPre = _2017.getYear();
-			}
-			if(!FileTest.isEmpty(yearPre)) {
-				monPre = parseFileName(yearPre, parent.getName());
-				if(!FileTest.isEmpty(monPre)) {
-					String key = yearPre + monPre;
-					ArrayList<File> list = map.get(key);
-					if(list == null) {
-						list = new ArrayList<>();
+		private static void sortInternal(File file,Map<String, LinkedList<File>> map,ArrayList<File> doubtList) {
+			if(file.isDirectory()) {
+				final File[] files = file.listFiles();
+				if(files != null && files.length >0) {
+					for(File child : files) {
+						sortInternal(child, map,doubtList);
 					}
-					synchronized(list) {
-						if(list.indexOf(parent) < 0) {
-							list.add(parent);
-							map.put(key, list);
-							return;
+				}
+			}
+			else {
+				for(Year y : Year.values()) {
+					if(file.getName().contains(y.getYear())) {
+						map.get(y.getYear()).push(file);
+						return;
+					}
+				}
+				doubtList.add(file);
+			}
+		}
+
+		private static void step_3(File parent) {
+			if(parent.isDirectory()) {
+				HashMap<String, ArrayList<File>> map = new HashMap<>();
+				final ArrayList<File> list = new ArrayList<>();
+				sortInternalV3(parent, map, list);
+				if(map.size() > 0) {
+					for(String s : map.keySet()) {
+						final ArrayList<File> files = map.get(s);
+						System.out.println("key = " + s + " directory =  " + files.size());
+						//
+						//					if(files.size() > 0) {
+						//						for(File file : files) {
+						//							System.out.println("key = " + s + " directory =  " + file.getName());
+						//						}
+						//					}
+					}
+				}
+				if(list.size() > 0) {
+					for(File file : list) {
+						System.out.println("doubt list directory =  " + file.getName());
+
+					}
+				}
+			} else {
+				throw new IllegalArgumentException("Target file is not directory,and the path of file is:" +
+						parent.getAbsolutePath());
+			}
+		}
+
+		private static void step_4() {
+			//collection the size of file
+			final File file = new File("D:\\MiPush");
+			long beforeSize = getFileSize(file);
+			final ArrayList<String> builder = new ArrayList<>();
+			int step = 0;
+
+			for(long i = beforeSize;i > 0 ;i /= 1024, step++) {
+				String s = String.valueOf(i % 1024);
+				String size =s + translateStepToString(step);
+				builder.add(0,size);
+			}
+			System.out.println("builder = " + Arrays.toString(builder.toArray()));
+		}
+
+		private static long getFileSize(File file) {
+			int totalSize = 0;
+			if(file.exists()) {
+				if(file.isDirectory()) {
+					final File[] files = file.listFiles();
+					if(files != null && files.length > 0) {
+						for(File childFile : files) {
+							totalSize += getFileSize(childFile);
+						}
+					}
+				} else {
+					return file.length();
+				}
+			}
+			return totalSize;
+		}
+
+		private static String translateStepToString(int step) {
+			switch(step) {
+				case 0 : return "b";
+				case 1 : return "kb";
+				case 2 : return "mb";
+				case 3 : return "gb";
+				case 4 : return "tb";
+			}
+			return null;
+		}
+		private static void sortInternalV3(File parent,HashMap<String, ArrayList<File>> map, ArrayList<File> doubtList) {
+			if(parent.isDirectory()) {
+				final File[] files = parent.listFiles();
+				if(files != null && files.length > 0){
+					for(File file : files) {
+						sortInternalV3(file, map, doubtList);
+					}
+				}
+			} else {
+				String name = parent.getName();
+				String yearPre = null, monPre = null;
+				if(name.contains(_2015.getYear())) { //parse year of file's name
+					yearPre = _2015.getYear();
+				} else if(name.contains(_2016.getYear())) {
+					yearPre = _2016.getYear();
+				} else if(name.contains(_2017.getYear())) {
+					yearPre = _2017.getYear();
+				}
+				if(!FileTest.isEmpty(yearPre)) {
+					monPre = parseFileName(yearPre, parent.getName());
+					if(!FileTest.isEmpty(monPre)) {
+						String key = yearPre + monPre;
+						ArrayList<File> list = map.get(key);
+						if(list == null) {
+							list = new ArrayList<>();
+						}
+						synchronized(list) {
+							if(list.indexOf(parent) < 0) {
+								list.add(parent);
+								map.put(key, list);
+								return;
+							}
 						}
 					}
 				}
-			}
-			synchronized(doubtList) {
-				if(doubtList.indexOf(parent) < 0) {
-					doubtList.add(parent);
+				synchronized(doubtList) {
+					if(doubtList.indexOf(parent) < 0) {
+						doubtList.add(parent);
+					}
 				}
 			}
 		}
-	}
 
-	private static String parseFileName(String year, String  fileName) {
-		final int i = fileName.indexOf(year);
-		int startIndex = i + 4, endIndex = i + 6;
-		if(startIndex < fileName.length() && endIndex < fileName.length()) {
-			String month = fileName.subSequence(startIndex, endIndex).toString();
-			switch(month) {
-				case "00" : return month;
-				case "01" : return month;
-				case "02" : return month;
-				case "03" : return month;
-				case "04" : return month;
-				case "05" : return month;
-				case "06" : return month;
-				case "07" : return month;
-				case "08" : return month;
-				case "09" : return month;
-				case "10" : return month;
-				case "11" : return month;
+		private static String parseFileName(String year, String  fileName) {
+			final int i = fileName.indexOf(year);
+			int startIndex = i + 4, endIndex = i + 6;
+			if(startIndex < fileName.length() && endIndex < fileName.length()) {
+				String month = fileName.subSequence(startIndex, endIndex).toString();
+				switch(month) {
+					case "00" : return month;
+					case "01" : return month;
+					case "02" : return month;
+					case "03" : return month;
+					case "04" : return month;
+					case "05" : return month;
+					case "06" : return month;
+					case "07" : return month;
+					case "08" : return month;
+					case "09" : return month;
+					case "10" : return month;
+					case "11" : return month;
+				}
 			}
+			return null;
 		}
-		return null;
-	}
 
-	private static void sortInternalByMonth(File file, Map<Month,ArrayList<File>> map,
-																					ArrayList<File> doubtList){
+		private static void sortInternalByMonth(File file, Map<Month,ArrayList<File>> map,
+																						ArrayList<File> doubtList){
 
-	}
-	private static void generateFile(File dstFile) throws IOException {
-		File newFile;
-		for(int i = 0;i < 3;i++) {
-			for(int j = 0;j < 13;j++) {
-				switch(i) {
-					case 0 :
-						newFile = new File(dstFile.getAbsolutePath() + File.separator + "2015"+ (j > 10 ? String.valueOf(j) : "0" + j) +"93010");
-						newFile.createNewFile();
-						break;
-					case 1:
-						newFile = new File(dstFile.getAbsolutePath() + File.separator + "2016"+ (j > 10 ? String.valueOf(j) : "0" + j) +"93010");
-						newFile.createNewFile();
-						break;
-					case 2:
-						newFile = new File(dstFile.getAbsolutePath() + File.separator + "2017"+ (j > 10 ? String.valueOf(j) : "0" + j) +"93010");
-						newFile.createNewFile();
-						break;
+		}
+		private static void generateFile(File dstFile) throws IOException {
+			File newFile;
+			for(int i = 0;i < 3;i++) {
+				for(int j = 0;j < 13;j++) {
+					switch(i) {
+						case 0 :
+							newFile = new File(dstFile.getAbsolutePath() + File.separator + "2015"+ (j > 10 ? String.valueOf(j) : "0" + j) +"93010");
+							newFile.createNewFile();
+							break;
+						case 1:
+							newFile = new File(dstFile.getAbsolutePath() + File.separator + "2016"+ (j > 10 ? String.valueOf(j) : "0" + j) +"93010");
+							newFile.createNewFile();
+							break;
+						case 2:
+							newFile = new File(dstFile.getAbsolutePath() + File.separator + "2017"+ (j > 10 ? String.valueOf(j) : "0" + j) +"93010");
+							newFile.createNewFile();
+							break;
+					}
 				}
 			}
 		}
-	}
 
-	private static void listFile(File file,File dstFile) {
-		final TreeNode parent = new TreeNode(dstFile,"Baby");
-		final File[] listFiles = parent.getFile().listFiles();
-		for(File listFile : listFiles) {
-			final String name = listFile.getName();
-			if(name.contains(_2015.getYear())) {
-				parent.addPicture(listFile,_2015.getYear());
-			} else if(name.contains(_2016.getYear())) {
-				parent.addPicture(listFile,_2016.getYear());
-			} else if(name.contains(_2017.getYear())) {
-				parent.addPicture(listFile,_2017.getYear());
+		private static void listFile(File file,File dstFile) {
+			final TreeNode parent = new TreeNode(dstFile,"Baby");
+			final File[] listFiles = parent.getFile().listFiles();
+			for(File listFile : listFiles) {
+				final String name = listFile.getName();
+				if(name.contains(_2015.getYear())) {
+					parent.addPicture(listFile,_2015.getYear());
+				} else if(name.contains(_2016.getYear())) {
+					parent.addPicture(listFile,_2016.getYear());
+				} else if(name.contains(_2017.getYear())) {
+					parent.addPicture(listFile,_2017.getYear());
+				}
 			}
+			parent.listNode("");
 		}
-		parent.listNode("");
+
 	}
 
 	public static boolean isEmpty(String s) {
 		return s == null || s.equals("");
 	}
-}
 
 @SuppressWarnings("ALL")
-class TreeNode {
+static class TreeNode{
 	private String name;
 	private File file;
 	private List<TreeNode> childs;
 
-	public TreeNode(File file, String name) {
+	public TreeNode(File file,String name) {
 		this.file = file;
 		this.name = name;
 	}
@@ -300,7 +347,7 @@ class TreeNode {
 		return childs;
 	}
 
-	public void addPicture(File child,String  tags) {
+	public void addPicture(File child,String tags) {
 		synchronized(this) {
 			if(childs == null) {
 				childs = new ArrayQueue<>(1000);
@@ -308,7 +355,7 @@ class TreeNode {
 		}
 		int i = -1;
 		for(int j = 0;j < childs.size();j++) {
-			if(childs.get(j).getName().equals(tags )) {
+			if(childs.get(j).getName().equals(tags)) {
 				i = j;
 			}
 		}
@@ -318,13 +365,13 @@ class TreeNode {
 		for(TreeNode treeNode : childs) { //year
 			final File file = treeNode.getFile();
 			final String name = file.getName();
-			if(name.contains(tags ) && tags .length() > 3) {
-				final String sux = name.split(tags )[1].substring(0,2);
-				treeNode.addPicture(child, sux);
+			if(name.contains(tags) && tags.length() > 3) {
+				final String sux = name.split(tags)[1].substring(0,2);
+				treeNode.addPicture(child,sux);
 			} else if(FileTest.isEmpty(tags)) {
 
 			} else { //month
-				childs.add(new TreeNode(child,tags ));
+				childs.add(new TreeNode(child,tags));
 			}
 		}
 	}
@@ -344,11 +391,68 @@ class TreeNode {
 	public void listNode(String pre) {
 		if(childs != null) {
 			for(TreeNode child : childs) {
-				child.listNode(pre +"---" + child.getName()+"--");
+				child.listNode(pre + "---" + child.getName() + "--");
 			}
 		} else {
 			System.out.println(pre + file.getName());
 		}
 	}
+}
+}
+
+class CollectionSize {
+	static class ConcurrentPoolCallable{
+		final long size;
+		final List<File> subDirectories;
+
+		ConcurrentPoolCallable(final long totalSize,final List<File> theSubDirs) {
+			size = totalSize;
+			subDirectories = Collections.unmodifiableList(theSubDirs);
+		}
+
+		static ConcurrentPoolCallable getTotalAndSubDirs(final File file) {
+			long total = 0;
+			final List<File> subDirectories = new ArrayList<>();
+			if(file.isDirectory()) {
+				final File[] children = file.listFiles();
+				if(children != null) for(final File child : children) {
+					if(child.isFile()) total += child.length();
+					else subDirectories.add(child);
+				}
+			}
+			return new ConcurrentPoolCallable(total, subDirectories);
+		}
+
+		static long getTotalSizeOfFilesInDir(final File file) throws Exception {
+			final ExecutorService service = Executors.newFixedThreadPool(100);
+			try {
+				long total = 0;
+				final List<File> directories = new ArrayList<File>();
+				directories.add(file);
+				while(!directories.isEmpty()) {
+					List<Future<ConcurrentPoolCallable>> partialResults = new ArrayList<>();
+					for(File directory : directories) {
+						partialResults.add(service.submit(new Callable<ConcurrentPoolCallable>(){
+							@Override
+							public ConcurrentPoolCallable call() throws Exception {
+								return getTotalAndSubDirs(directory);
+							}
+						}));
+					}
+					directories.clear();
+					for(Future<ConcurrentPoolCallable> future : partialResults) {
+						final ConcurrentPoolCallable callable = future.get(100,TimeUnit.SECONDS);
+						directories.addAll(callable.subDirectories);
+						total += callable.size;
+					}
+				}
+				return total;
+			} finally {
+				service.shutdown();
+			}
+		}
+
+	}
+
 }
 

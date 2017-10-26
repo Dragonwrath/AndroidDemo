@@ -4,10 +4,10 @@ package com.example;
 public class BMI {
     public static void main(String[] args) {
 
-        double value = getValue(105, 1.80, 32, true);
+        double value = getValue(111, 1.80, 32, true);
         System.out.println("value = " + value);
 
-        double wifeValue = getValue(33, 1.63, 32, false);
+        double wifeValue = getValue(52, 1.63, 32, false);
         System.out.println("wifeValue = " + wifeValue);
     }
 
