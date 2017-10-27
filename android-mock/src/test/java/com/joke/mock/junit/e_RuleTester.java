@@ -1,13 +1,13 @@
 package com.joke.mock.junit;
 
-import static org.junit.Assert.assertTrue;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 
 import java.io.File;
 import java.io.IOException;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
+import static org.junit.Assert.assertTrue;
 
 /*
  * TemporaryFolder 使用这个规则可以帮助我们在测试运行的时候自动创建文件夹或者文件

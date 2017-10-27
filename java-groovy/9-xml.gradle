@@ -1,6 +1,4 @@
 import groovy.xml.MarkupBuilder
-import java.io.*
-import groovy.util.*
 
 //item-2 MarkupBuilder
 //构建一个xml,并输入到指定的文件

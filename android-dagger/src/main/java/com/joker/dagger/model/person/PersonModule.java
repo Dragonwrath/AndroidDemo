@@ -1,8 +1,6 @@
 package com.joker.dagger.model.person;
 
 
-import javax.inject.Inject;
-
 import dagger.Module;
 import dagger.Provides;
 

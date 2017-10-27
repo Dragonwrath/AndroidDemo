@@ -1,8 +1,8 @@
 package com.example.defaultMethods;
 
-import java.time.*;
-import java.lang.*;
-import java.util.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class SimpleTimeClient implements TimeClient {
 

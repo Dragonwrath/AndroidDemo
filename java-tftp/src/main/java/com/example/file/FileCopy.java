@@ -3,7 +3,6 @@ package com.example.file;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Hashtable;
 import java.util.Properties;
 import java.util.Set;
 

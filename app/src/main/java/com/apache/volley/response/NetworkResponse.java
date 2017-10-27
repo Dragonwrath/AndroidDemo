@@ -1,9 +1,9 @@
 package com.apache.volley.response;
 
+import org.apache.http.HttpStatus;
+
 import java.util.Collections;
 import java.util.Map;
-
-import org.apache.http.HttpStatus;
 
 public class NetworkResponse {
 

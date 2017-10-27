@@ -5,7 +5,6 @@ import java.util.List;
 
 import rx.Observable;
 import rx.functions.Action1;
-import rx.schedulers.Schedulers;
 
 /**
  * Serialize 

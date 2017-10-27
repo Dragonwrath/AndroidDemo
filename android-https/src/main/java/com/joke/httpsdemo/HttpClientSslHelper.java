@@ -5,8 +5,8 @@ import android.content.Context;
 
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.ssl.SSLSocketFactory;
-import org.apache.http.conn.scheme.*;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.FileNotFoundException;

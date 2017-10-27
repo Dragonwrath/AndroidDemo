@@ -1,23 +1,10 @@
 package com.example.tutorials.step_1;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.InstanceCreator;
 
 import java.lang.reflect.Type;
-import java.util.Comparator;
-import java.util.Hashtable;
-import java.util.TreeSet;
 
-import javax.naming.Binding;
 import jdk.nashorn.internal.runtime.Context;
-import jdk.nashorn.internal.runtime.options.Options;
-
-import javax.naming.Name;
-import javax.naming.NameClassPair;
-import javax.naming.NameParser;
-import javax.naming.NamingEnumeration;
-import javax.naming.NamingException;
 
 //Gson Instance Creator
 public class course_10 {

@@ -2,7 +2,6 @@ package com.joke.rxjavademo.module.token_advanced_5;
 
 
 import android.graphics.Color;
-import android.graphics.ImageFormat;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,7 +17,6 @@ import com.joke.rxjavademo.R;
 import com.joke.rxjavademo.model.FakeThing;
 import com.joke.rxjavademo.model.FakeToken;
 import com.joke.rxjavademo.network.FakeApi;
-
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

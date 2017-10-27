@@ -1,7 +1,6 @@
 package com.example.tutorials.step_1;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 
 public class course_1 {

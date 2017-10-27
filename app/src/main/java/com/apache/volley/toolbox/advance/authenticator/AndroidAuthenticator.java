@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.apache.volley.error.AuthFailureError;
-import com.apache.volley.toolbox.advance.request.RequestFuture;
 
 public class AndroidAuthenticator implements Authenticator {
     private final Context mContext;

@@ -1,20 +1,13 @@
 package com.joke.mock.junit;
 
 
-import com.joke.mock.junit.Calculator;
-
-
 import org.junit.After;
 import org.junit.AfterClass;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 
 /*
  * @BeforeClass 在跑一个测试类的所有测试方法之前，会执行一次被@BeforeClass修饰的方法

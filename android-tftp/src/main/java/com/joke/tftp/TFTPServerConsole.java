@@ -1,6 +1,6 @@
 package com.joke.tftp;
 
-import java.io.*;
+import java.io.File;
 
 import static com.joke.tftp.Constants.DEFAULT_TFTP_PORT;
 import static com.joke.tftp.Constants.SERVER_READ_DIR;

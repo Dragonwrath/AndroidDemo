@@ -2,12 +2,12 @@ package com.joke.mock.offical_mock;
 
 import org.junit.Test;
 
-import org.mockito.InOrder;
-import org.mockito.Mockito;
-
 import java.util.ArrayList;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.description;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 public class OfficalTest_Part_4 {
 

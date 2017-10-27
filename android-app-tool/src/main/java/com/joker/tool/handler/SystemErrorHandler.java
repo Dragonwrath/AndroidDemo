@@ -10,9 +10,10 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Looper;
+import android.os.Process;
 import android.util.Log;
 import android.widget.Toast;
-import android.os.Process;
+
 import com.joker.tool.MainActivity;
 import com.sun.mail.smtp.SMTPMessage;
 

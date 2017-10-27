@@ -1,38 +1,9 @@
 package com.joke.ftpserverdemo;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.Enumeration;
-import java.util.Properties;
-
-import org.apache.ftpserver.FtpServer;
-import org.apache.ftpserver.FtpServerFactory;
-import org.apache.ftpserver.ftplet.FtpException;
-import org.apache.ftpserver.listener.ListenerFactory;
-import org.apache.ftpserver.ssl.SslConfigurationFactory;
-import org.apache.ftpserver.usermanager.PasswordEncryptor;
-import org.apache.ftpserver.usermanager.PropertiesUserManagerFactory;
-
 import android.Manifest;
-import android.annotation.SuppressLint;
-
 import android.app.Activity;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -40,6 +11,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
+import org.apache.ftpserver.FtpServer;
+import org.apache.ftpserver.FtpServerFactory;
+import org.apache.ftpserver.ftplet.FtpException;
+import org.apache.ftpserver.listener.ListenerFactory;
+import org.apache.ftpserver.ssl.SslConfigurationFactory;
+import org.apache.ftpserver.usermanager.PropertiesUserManagerFactory;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.Enumeration;
+import java.util.Properties;
 
 
 public class MainActivity extends AppCompatActivity {

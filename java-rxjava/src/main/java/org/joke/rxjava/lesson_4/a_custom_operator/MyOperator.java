@@ -1,9 +1,7 @@
 package org.joke.rxjava.lesson_4.a_custom_operator;
 
 
-import rx.Completable.Operator;
 import rx.Observable;
-import rx.Single;
 import rx.Subscriber;
 
 

@@ -3,7 +3,6 @@ package org.joke.rxjava.lesson_3.f_observable_utility;
 import java.util.ArrayList;
 import java.util.List;
 
-import rx.Emitter;
 import rx.Notification;
 import rx.Observable;
 import rx.Subscriber;

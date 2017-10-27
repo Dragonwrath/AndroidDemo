@@ -5,8 +5,6 @@ import java.io.FileInputStream;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 
-import static rsa.RSAUtils.generateRSAKeyPair;
-
 
 public class Test {
     public static void main(String[] args) throws Exception{

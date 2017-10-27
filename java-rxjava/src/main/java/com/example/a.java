@@ -1,7 +1,8 @@
 package com.example;
 
 
-import java.util.*;
+import java.util.Enumeration;
+import java.util.HashMap;
 class PrintData {
     static void print(Enumeration e) {
         while(e.hasMoreElements())

@@ -1,7 +1,6 @@
 package net.jcip.part_10.item_1;
 
 import java.awt.Point;
-import java.security.cert.PolicyNode;
 import java.util.HashSet;
 import java.util.Set;
 

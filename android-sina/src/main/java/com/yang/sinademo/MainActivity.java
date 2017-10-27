@@ -1,8 +1,8 @@
 package com.yang.sinademo;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,7 +17,6 @@ import com.yang.sinademo.login.SinaError;
 import com.yang.sinademo.login.SinaUser;
 
 import java.util.HashMap;
-
 
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;

@@ -1,17 +1,12 @@
 package org.joke.rxjava.lesson_3.f_observable_utility;
 
 
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import rx.Notification;
 import rx.Observable;
-import rx.Subscriber;
 import rx.functions.Action1;
-import rx.functions.Func1;
 
 
 /**

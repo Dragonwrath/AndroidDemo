@@ -1,10 +1,5 @@
 package com.example;
 
-import rx.Observable;
-import rx.Subscriber;
-import rx.functions.Func1;
-
-
 public class ShortCircuit {
     public static void main(String[] args) {
         for (int i = 0; i < 1024; i++) {

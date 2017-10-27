@@ -1,13 +1,12 @@
 package com.apache.volley.toolbox.advance.request;
 
+import android.os.Handler;
+import android.os.Looper;
+
 import com.apache.volley.cache.Cache;
 import com.apache.volley.request.Request;
 import com.apache.volley.response.NetworkResponse;
 import com.apache.volley.response.Response;
-
-
-import android.os.Handler;
-import android.os.Looper;
 
 public class ClearCacheRequest extends Request<Object> {
     private final Cache mCache;

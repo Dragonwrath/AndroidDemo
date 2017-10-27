@@ -18,6 +18,8 @@
 
 package org.apache.commons.net.util;
 
+import org.apache.commons.net.io.Util;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -33,8 +35,6 @@ import java.util.Enumeration;
 
 import javax.net.ssl.KeyManager;
 import javax.net.ssl.X509ExtendedKeyManager;
-
-import org.apache.commons.net.io.Util;
 
 /**
  * General KeyManager utilities

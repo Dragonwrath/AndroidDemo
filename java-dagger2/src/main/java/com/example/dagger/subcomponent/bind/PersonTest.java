@@ -1,7 +1,6 @@
 package com.example.dagger.subcomponent.bind;
 
 import com.example.dagger.subcomponent.bind.car.Car;
-import com.example.dagger.subcomponent.bind.person.Person;
 import com.example.dagger.subcomponent.bind.person.PersonModule;
 
 public class PersonTest {

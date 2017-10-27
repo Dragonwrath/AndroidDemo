@@ -1,7 +1,5 @@
 package net.jcip.part_12.item_1;
 
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
-
 import junit.framework.TestCase;
 
 import java.lang.management.ManagementFactory;

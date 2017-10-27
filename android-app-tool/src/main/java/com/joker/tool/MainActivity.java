@@ -2,23 +2,16 @@ package com.joker.tool;
 
 import android.app.Activity;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.RequiresApi;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.TextView;
 
-import com.joker.tool.utils.AppUtil;
 import com.joker.tool.utils.ScreenUtils;
-import com.joker.tool.utils.StatusBarUtil;
 import com.joker.tool.utils.SystemBarTintManager;
 
 import java.lang.ref.WeakReference;
@@ -28,8 +21,6 @@ import java.util.concurrent.TimeUnit;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import rx.Observable;
-import rx.Scheduler;
-import rx.Single;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;

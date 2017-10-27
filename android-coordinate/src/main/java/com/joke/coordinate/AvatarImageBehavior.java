@@ -7,8 +7,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.joke.cordinate.R;
 import com.joke.coordinate.widget.CircleImageView;
+import com.joke.cordinate.R;
 
 
 @SuppressWarnings("unused")

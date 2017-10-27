@@ -1,33 +1,13 @@
 package com.joke.glidedemo;
 
 import android.app.Notification;
-import android.graphics.Bitmap;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
-import android.support.v7.graphics.Palette;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.widget.ImageView;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.RemoteViews;
 
-import com.bumptech.glide.DrawableRequestBuilder;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.model.stream.BaseGlideUrlLoader;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.bumptech.glide.request.target.NotificationTarget;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.target.Target;
-import com.bumptech.glide.signature.MediaStoreSignature;
-import com.joke.glidedemo.palette.PaletteAdapter;
-
-import java.util.Arrays;
-
-import static android.R.attr.bitmap;
 
 public class MainActivity extends AppCompatActivity {
       String yourUrl ;

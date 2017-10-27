@@ -1,9 +1,8 @@
 package com.joke.v7demo.cardview;
 
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
+import android.support.v7.app.AppCompatActivity;
 
 import com.joke.v7demo.R;
 

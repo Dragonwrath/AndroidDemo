@@ -1,7 +1,7 @@
 package com.yang.v4demo.viewdraggerhelper;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.yang.v4demo.R;
 

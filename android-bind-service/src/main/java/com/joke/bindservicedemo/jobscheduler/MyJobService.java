@@ -1,7 +1,6 @@
 package com.joke.bindservicedemo.jobscheduler;
 
 
-import android.annotation.TargetApi;
 import android.app.job.JobParameters;
 import android.app.job.JobService;
 import android.content.Intent;

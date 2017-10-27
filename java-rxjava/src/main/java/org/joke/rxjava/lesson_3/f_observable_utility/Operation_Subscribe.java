@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rx.Observable;
-import rx.Observer;
 import rx.Subscriber;
-import rx.functions.Action1;
 
 /**
  * Subscribe

@@ -1,6 +1,6 @@
 package com.joker.tool.dialog;
 
-import android.app.*;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.res.Resources;
@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
+import android.tools.Unfinished;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +19,6 @@ import android.widget.TextView;
 import com.joker.tool.R;
 import com.joker.tool.backpress.BackPressObservable;
 import com.joker.tool.popupwindow.ProgressPopupWindow;
-
-import android.tools.Unfinished;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,38 +1,26 @@
 package com.joke.bindservicedemo.jobscheduler;
 
 import android.app.Activity;
-import android.app.Service;
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
 import android.app.job.JobService;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
-import android.hardware.Camera;
-import android.os.Binder;
-import android.os.Build;
+import android.os.Bundle;
 import android.os.Handler;
-import android.os.IBinder;
-import android.os.IInterface;
 import android.os.Message;
 import android.os.Messenger;
-import android.os.Parcel;
 import android.os.PersistableBundle;
-import android.os.RemoteException;
 import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
 import com.joke.bindservicedemo.BuildConfig;
 import com.joke.bindservicedemo.R;
-import com.joke.bindservicedemo.remote_messenger.MessengerActivity;
-import com.joke.bindservicedemo.remote_messenger.MessengerService;
 
-import java.io.FileDescriptor;
 import java.lang.ref.WeakReference;
 
 @RequiresApi(21)

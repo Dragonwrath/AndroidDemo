@@ -1,8 +1,8 @@
 package android.graphics.canvas;
 
 import android.marshon.approotdemo.R;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 public class CanvasActivity extends AppCompatActivity {
 

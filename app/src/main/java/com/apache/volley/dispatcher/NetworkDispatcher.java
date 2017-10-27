@@ -4,13 +4,13 @@ import android.net.TrafficStats;
 import android.os.Build;
 import android.os.Process;
 
-import com.apache.volley.response.NetworkResponse;
 import com.apache.volley.cache.Cache;
 import com.apache.volley.delivery.ResponseDelivery;
 import com.apache.volley.error.VolleyError;
 import com.apache.volley.log.VolleyLog;
 import com.apache.volley.network.Network;
 import com.apache.volley.request.Request;
+import com.apache.volley.response.NetworkResponse;
 import com.apache.volley.response.Response;
 
 import java.util.concurrent.BlockingQueue;

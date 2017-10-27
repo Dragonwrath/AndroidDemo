@@ -1,10 +1,5 @@
 package com.example;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.text.html.HTML;
-
 public class MyClass {
     private static final Object lock = new Object();
     public static void main(String[] args) {

@@ -4,8 +4,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import static org.junit.Assert.*;
-
 
 /*
  * @Rule 给测试的内容增加一些规则，或者一些相应的条件，

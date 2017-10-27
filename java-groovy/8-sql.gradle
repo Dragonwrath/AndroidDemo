@@ -1,4 +1,4 @@
-import groovy.sql.*
+import groovy.sql.Sql
 
 class Account {
     def number

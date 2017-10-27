@@ -1,6 +1,5 @@
 package com.joke.rxjavademo;
 
-import android.animation.IntEvaluator;
 import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -16,10 +15,6 @@ import com.joke.rxjavademo.module.elementary_1.ElementaryFragment;
 import com.joke.rxjavademo.module.map_2.MapFragment;
 import com.joke.rxjavademo.module.token_4.TokenFragment;
 import com.joke.rxjavademo.module.zip_3.ZipFragment;
-
-import java.util.Vector;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

@@ -1,8 +1,6 @@
 package com.joke.mvpdemo.welcome;
 
 
-import com.joke.mvpdemo.BaseView;
-
 import static com.google.common.base.Preconditions.checkNotNull;
 
 public class WelcomePresenter implements WelcomeContract.Presenter {

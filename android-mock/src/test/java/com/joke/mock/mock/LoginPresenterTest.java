@@ -1,10 +1,5 @@
 package com.joke.mock.mock;
 
-import com.joke.mock.mock.LoginPresenter;
-import com.joke.mock.mock.NetworkCallback;
-import com.joke.mock.mock.PasswordValidator;
-import com.joke.mock.mock.UserManager;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;

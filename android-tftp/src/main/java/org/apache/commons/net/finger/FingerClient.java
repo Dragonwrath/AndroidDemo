@@ -16,15 +16,15 @@
  */
 package org.apache.commons.net.finger;
 
+import org.apache.commons.net.SocketClient;
+import org.apache.commons.net.util.Charsets;
+
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.BufferedOutputStream;
-import java.io.DataOutputStream;
-
-import org.apache.commons.net.SocketClient;
-import org.apache.commons.net.util.Charsets;
 
 /***
  * The FingerClient class implements the client side of the Internet Finger

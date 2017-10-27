@@ -2,9 +2,7 @@ package com.joker.tool.utils;
 
 
 import android.app.Activity;
-import android.content.Context;
 import android.support.annotation.RequiresApi;
-import android.support.v4.view.ViewPager;
 import android.view.View;
 
 //可以通过代码设置

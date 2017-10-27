@@ -1,13 +1,9 @@
 package com.joke.coordinate.tutorial.lesson_2;
 
+import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
 import android.widget.TextView;
 
 import com.joke.cordinate.R;

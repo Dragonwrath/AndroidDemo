@@ -3,7 +3,8 @@ package com.apache.volley.toolbox.advance.request;
 import com.apache.volley.error.ParseError;
 import com.apache.volley.response.NetworkResponse;
 import com.apache.volley.response.Response;
-import com.apache.volley.response.Response.*;
+import com.apache.volley.response.Response.ErrorListener;
+import com.apache.volley.response.Response.Listener;
 import com.apache.volley.toolbox.advance.HttpHeaderParser;
 
 import org.json.JSONArray;

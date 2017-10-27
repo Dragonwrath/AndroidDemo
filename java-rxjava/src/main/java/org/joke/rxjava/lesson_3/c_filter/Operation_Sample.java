@@ -5,10 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import javax.security.auth.Subject;
-
 import rx.Observable;
-import rx.Subscriber;
 import rx.functions.Action1;
 
 /**

@@ -3,9 +3,7 @@ package org.joke.rxjava.lesson_3.b_transform;
 import java.util.ArrayList;
 import java.util.List;
 
-import rx.Emitter;
 import rx.Observable;
-import rx.Subscriber;
 import rx.functions.Action1;
 import rx.functions.Func0;
 import rx.functions.Func1;

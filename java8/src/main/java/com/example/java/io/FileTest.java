@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -427,17 +426,12 @@ class CollectionSize {
 			final ExecutorService service = Executors.newFixedThreadPool(100);
 			try {
 				long total = 0;
-				final List<File> directories = new ArrayList<File>();
+				final List<File> directories = new ArrayList<>();
 				directories.add(file);
 				while(!directories.isEmpty()) {
 					List<Future<ConcurrentPoolCallable>> partialResults = new ArrayList<>();
 					for(File directory : directories) {
-						partialResults.add(service.submit(new Callable<ConcurrentPoolCallable>(){
-							@Override
-							public ConcurrentPoolCallable call() throws Exception {
-								return getTotalAndSubDirs(directory);
-							}
-						}));
+						partialResults.add(service.submit(() -> getTotalAndSubDirs(directory)));
 					}
 					directories.clear();
 					for(Future<ConcurrentPoolCallable> future : partialResults) {

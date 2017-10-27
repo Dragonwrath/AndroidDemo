@@ -16,7 +16,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 import com.joke.media_camera.R;
 
 import java.io.File;

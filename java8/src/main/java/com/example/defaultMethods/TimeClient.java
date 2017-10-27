@@ -1,7 +1,5 @@
 package com.example.defaultMethods;
 
-import java.time.*;
-
 public interface TimeClient {
     void setTime(int hour, int minute, int second);
     void setDate(int day, int month, int year);

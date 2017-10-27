@@ -5,14 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import rx.Emitter;
 import rx.Observable;
-import rx.Subscriber;
 import rx.functions.Action1;
-import rx.functions.Func0;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
-import rx.subjects.Subject;
 
 /**
  * Window

@@ -1,7 +1,6 @@
 package net.jcip.part_13.item_1;
 
 
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class LockTest {

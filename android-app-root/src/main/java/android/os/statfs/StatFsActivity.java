@@ -1,11 +1,10 @@
 package android.os.statfs;
 
-import android.graphics.drawable.AnimationDrawable;
 import android.marshon.approotdemo.R;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.StatFs;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 
 import java.io.File;

@@ -12,8 +12,6 @@ import java.util.concurrent.Future;
 import rx.Observable;
 import rx.functions.Action1;
 import rx.functions.Func1;
-import rx.functions.Func2;
-import rx.observables.BlockingObservable;
 
 /**
  * To

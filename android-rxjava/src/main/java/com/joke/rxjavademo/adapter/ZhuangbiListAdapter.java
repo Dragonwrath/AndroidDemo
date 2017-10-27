@@ -13,8 +13,6 @@ import com.joke.rxjavademo.model.ZhuangbiImage;
 
 import java.util.List;
 
-import butterknife.BindView;
-
 public class ZhuangbiListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     List<ZhuangbiImage> images;
 

@@ -1,8 +1,6 @@
 package com.example;
 
 
-import java.util.Arrays;
-
 public class BinarySearch {
     private static int[]  source = {1,2,3,4,5,6,7,8,9,10};
     private static int[] reserSource = {10,19,81,71,16,15,41,13,12,11};

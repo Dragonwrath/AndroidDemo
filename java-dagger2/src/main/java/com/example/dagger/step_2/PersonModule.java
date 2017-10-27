@@ -1,12 +1,8 @@
 package com.example.dagger.step_2;
 
 
-import javax.inject.Provider;
-import javax.inject.Singleton;
-
 import dagger.Module;
 import dagger.Provides;
-import dagger.Reusable;
 
 @Module
 class PersonModule {

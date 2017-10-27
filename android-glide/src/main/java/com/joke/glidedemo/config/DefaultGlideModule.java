@@ -1,14 +1,10 @@
 package com.joke.glidedemo.config;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.GlideBuilder;
-import com.bumptech.glide.MemoryCategory;
 import com.bumptech.glide.load.engine.cache.InternalCacheDiskCacheFactory;
-import com.bumptech.glide.load.engine.cache.LruResourceCache;
-import com.bumptech.glide.load.engine.cache.MemorySizeCalculator;
 import com.bumptech.glide.module.GlideModule;
 
 

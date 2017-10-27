@@ -12,8 +12,6 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 
 public class NestedScrollParent extends ViewGroup implements NestedScrollingParent,NestedScrollingChild {
 

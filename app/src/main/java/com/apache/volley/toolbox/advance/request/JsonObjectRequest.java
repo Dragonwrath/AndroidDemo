@@ -1,19 +1,15 @@
 package com.apache.volley.toolbox.advance.request;
 
 
-import android.graphics.BitmapFactory;
-
 import com.apache.volley.response.NetworkResponse;
-import com.apache.volley.response.Response.*;
 import com.apache.volley.response.Response;
+import com.apache.volley.response.Response.ErrorListener;
+import com.apache.volley.response.Response.Listener;
 import com.apache.volley.toolbox.advance.HttpHeaderParser;
 
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.io.UnsupportedEncodingException;
 
 public class JsonObjectRequest extends JsonRequest<JSONObject> {

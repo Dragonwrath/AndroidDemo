@@ -18,9 +18,9 @@ import com.sina.weibo.sdk.auth.sso.SsoHandler;
 import com.sina.weibo.sdk.exception.WeiboException;
 import com.sina.weibo.sdk.net.RequestListener;
 import com.yang.sinademo.Constants;
-import com.yang.sinademo.share.MainTabActivity;
 import com.yang.sinademo.R;
 import com.yang.sinademo.UserApi;
+import com.yang.sinademo.share.MainTabActivity;
 
 import java.util.HashMap;
 

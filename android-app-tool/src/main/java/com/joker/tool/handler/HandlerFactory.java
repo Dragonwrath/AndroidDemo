@@ -9,9 +9,7 @@ import android.support.annotation.UiThread;
 import android.support.annotation.WorkerThread;
 
 import java.lang.ref.WeakReference;
-import java.util.LinkedList;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * handler factory that is used to produce the special feature the subclass of Handler {@link Handler}

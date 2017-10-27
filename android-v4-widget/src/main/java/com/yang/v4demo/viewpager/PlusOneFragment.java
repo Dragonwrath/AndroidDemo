@@ -8,8 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.yang.v4demo.R;
 import com.google.android.gms.plus.PlusOneButton;
+import com.yang.v4demo.R;
 
 /**
  * A fragment with a Google +1 button.

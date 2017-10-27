@@ -1,5 +1,4 @@
-import groovy.text.*
-import java.io.*
+import groovy.text.SimpleTemplateEngine
 
 def template_1() {
     def file = new File('book.template')

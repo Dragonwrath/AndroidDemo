@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rx.Observable;
-import rx.Scheduler;
 import rx.schedulers.Schedulers;
 
 

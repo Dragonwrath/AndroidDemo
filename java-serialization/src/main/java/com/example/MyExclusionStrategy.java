@@ -1,6 +1,5 @@
 package com.example;
 
-import com.example.Foo;
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 

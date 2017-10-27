@@ -4,9 +4,8 @@ package com.apache.volley;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.os.Build;
 import android.net.http.AndroidHttpClient;
-
+import android.os.Build;
 
 import com.apache.volley.network.Network;
 import com.apache.volley.queue.RequestQueue;

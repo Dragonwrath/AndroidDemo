@@ -1,10 +1,8 @@
 package com.joke.httpsdemo;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.ImageFormat;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
 import android.view.Gravity;

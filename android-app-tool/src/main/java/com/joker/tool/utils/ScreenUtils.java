@@ -2,15 +2,11 @@ package com.joker.tool.utils;
 
 
 import android.content.Context;
-import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
-
-import java.lang.reflect.Method;
 
 public class ScreenUtils {
 

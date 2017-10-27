@@ -1,11 +1,8 @@
 package com.joke.widget.textview;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.SpannableString;
+import android.support.v7.app.AppCompatActivity;
 import android.text.SpannableStringBuilder;
-import android.text.Spanned;
-import android.text.style.RelativeSizeSpan;
 import android.widget.TextView;
 
 import com.joke.widget.R;

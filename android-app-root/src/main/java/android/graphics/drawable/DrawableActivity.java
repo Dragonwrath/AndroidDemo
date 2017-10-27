@@ -1,17 +1,12 @@
 package android.graphics.drawable;
 
 import android.animation.Animator;
-import android.animation.AnimatorSet;
 import android.annotation.SuppressLint;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.marshon.approotdemo.R;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewAnimationUtils;
-import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.AccelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 

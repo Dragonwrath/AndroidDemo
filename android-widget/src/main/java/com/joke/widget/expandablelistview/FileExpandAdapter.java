@@ -16,7 +16,6 @@ import com.joke.widget.R;
 import com.joke.widget.Unfinished;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

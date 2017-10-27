@@ -1,10 +1,8 @@
 package com.joke.v7demo.appcompatcheckedtextView;
 
-import android.graphics.PorterDuff;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatCheckedTextView;
-import android.support.v7.widget.AppCompatMultiAutoCompleteTextView;
 import android.view.View;
 
 import com.joke.v7demo.R;

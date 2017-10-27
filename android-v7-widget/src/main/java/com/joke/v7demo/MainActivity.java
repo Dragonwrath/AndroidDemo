@@ -1,8 +1,8 @@
 package com.joke.v7demo;
 
+import android.os.Bundle;
 import android.support.v4.util.SimpleArrayMap;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.widget.SeekBar;
 
 public class MainActivity extends AppCompatActivity {

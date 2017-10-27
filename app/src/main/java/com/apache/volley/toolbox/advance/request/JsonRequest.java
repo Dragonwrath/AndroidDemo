@@ -5,7 +5,8 @@ import com.apache.volley.log.VolleyLog;
 import com.apache.volley.request.Request;
 import com.apache.volley.response.NetworkResponse;
 import com.apache.volley.response.Response;
-import com.apache.volley.response.Response.*;
+import com.apache.volley.response.Response.ErrorListener;
+import com.apache.volley.response.Response.Listener;
 
 import java.io.UnsupportedEncodingException;
 

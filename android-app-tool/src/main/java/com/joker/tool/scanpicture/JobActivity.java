@@ -1,11 +1,11 @@
 package com.joker.tool.scanpicture;
 
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
 import com.joker.tool.R;
 import com.joker.tool.handler.HandlerFactory;

@@ -3,13 +3,8 @@ package org.joke.rxjava.lesson_3.f_observable_utility;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
-import rx.Scheduler;
-import rx.functions.Action1;
-import rx.functions.Func1;
-import rx.schedulers.TimeInterval;
 
 
 /**

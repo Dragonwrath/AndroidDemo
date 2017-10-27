@@ -1,17 +1,6 @@
 package org.joke.rxjava.lesson_2;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
-import rx.Observable;
-import rx.Single;
-import rx.SingleSubscriber;
-import rx.Subscription;
-import rx.functions.Action1;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
-
 /*
 订阅Single只需要两个方法：
 onSuccess - Single发射单个的值到这个方法

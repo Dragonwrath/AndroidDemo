@@ -4,9 +4,6 @@ package org.joke.rxjava.lesson_3.d_combine;
 import java.util.ArrayList;
 import java.util.List;
 
-import rx.Observable;
-import rx.functions.Action1;
-
 
 //它们属于 rxjava-joins 模块，不是核心RxJava包的一部分。
 

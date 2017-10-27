@@ -5,8 +5,6 @@ package org.joke.rxjava.lesson_3.h_mathematical_aggregate;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import rx.Observable;
 /**
  * Average
  * 计算原始Observable发射数字的平均值并发射它

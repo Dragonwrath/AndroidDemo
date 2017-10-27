@@ -1,7 +1,6 @@
 package com.joke.mock.offical_mock;
 
 
-
 import org.junit.Test;
 import org.mockito.ArgumentMatcher;
 import org.mockito.InOrder;
@@ -9,7 +8,21 @@ import org.mockito.InOrder;
 import java.util.LinkedList;
 import java.util.List;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.anyInt;
+import static org.mockito.Mockito.anyObject;
+import static org.mockito.Mockito.argThat;
+import static org.mockito.Mockito.atLeast;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.atMost;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.inOrder;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.when;
 public class OfficalTest_Part_1 {
 
     /*

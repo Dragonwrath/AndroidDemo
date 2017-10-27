@@ -1,6 +1,3 @@
-import groovy.util.GroovyTestCase
-import groovy.util.GroovyTestSuite
-
 class Book {
     def number
     def title

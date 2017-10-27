@@ -1,8 +1,6 @@
 package com.joke.mock.junit;
 
 
-import android.util.Log;
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestRule;

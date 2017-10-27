@@ -1,12 +1,8 @@
 package com.yang.rxjava;
 
 import android.app.Application;
-import android.util.ArrayMap;
 
 import com.yang.rxjava.db.DBManager;
-
-import java.util.Arrays;
-import java.util.Vector;
 
 /**
  * Created by JunWei on 2017/1/4.

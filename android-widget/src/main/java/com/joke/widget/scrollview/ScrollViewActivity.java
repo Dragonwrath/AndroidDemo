@@ -1,11 +1,7 @@
 package com.joke.widget.scrollview;
 
 import android.os.Bundle;
-import android.support.v4.widget.ViewDragHelper;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 

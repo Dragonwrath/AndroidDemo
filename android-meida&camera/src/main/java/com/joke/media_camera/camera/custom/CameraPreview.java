@@ -3,7 +3,6 @@ package com.joke.media_camera.camera.custom;
 
 import android.content.Context;
 import android.hardware.Camera;
-import android.os.Build;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;

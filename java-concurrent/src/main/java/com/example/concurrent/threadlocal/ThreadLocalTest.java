@@ -3,8 +3,6 @@ package com.example.concurrent.threadlocal;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import sun.misc.Unsafe;
-
 public class ThreadLocalTest {
     private static final int HASH_INCREMENT = 0x61c88647;
 

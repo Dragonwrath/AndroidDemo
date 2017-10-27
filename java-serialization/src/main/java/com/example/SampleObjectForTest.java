@@ -1,8 +1,5 @@
 package com.example;
 
-import com.example.Foo;
-
-
 public class SampleObjectForTest {
     @Foo
     private final int annotatedField;

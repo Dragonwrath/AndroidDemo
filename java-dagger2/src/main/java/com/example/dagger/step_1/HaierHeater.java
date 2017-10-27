@@ -2,7 +2,6 @@ package com.example.dagger.step_1;
 
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
 public class HaierHeater implements Heater {
     boolean hot;

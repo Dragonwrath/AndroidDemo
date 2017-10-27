@@ -1,7 +1,5 @@
 package com.example.inner;
 
-import sun.security.krb5.internal.crypto.Des;
-
 public class Parcel8 {
     // Argument must be final to use inside
 // anonymous inner class:

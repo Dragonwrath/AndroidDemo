@@ -1,5 +1,16 @@
 package com.joke.tftp;
 
+import org.apache.commons.net.io.FromNetASCIIOutputStream;
+import org.apache.commons.net.io.ToNetASCIIInputStream;
+import org.apache.commons.net.tftp.TFTP;
+import org.apache.commons.net.tftp.TFTPAckPacket;
+import org.apache.commons.net.tftp.TFTPDataPacket;
+import org.apache.commons.net.tftp.TFTPErrorPacket;
+import org.apache.commons.net.tftp.TFTPPacket;
+import org.apache.commons.net.tftp.TFTPPacketException;
+import org.apache.commons.net.tftp.TFTPReadRequestPacket;
+import org.apache.commons.net.tftp.TFTPWriteRequestPacket;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -14,10 +25,6 @@ import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.util.HashSet;
 import java.util.Iterator;
-
-import org.apache.commons.net.io.FromNetASCIIOutputStream;
-import org.apache.commons.net.io.ToNetASCIIInputStream;
-import org.apache.commons.net.tftp.*;
 
 public class TFTPServer implements Runnable {
 

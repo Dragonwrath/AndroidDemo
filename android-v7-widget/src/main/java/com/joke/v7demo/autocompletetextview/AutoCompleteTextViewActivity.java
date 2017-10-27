@@ -1,12 +1,9 @@
 package com.joke.v7demo.autocompletetextview;
 
-import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatAutoCompleteTextView;
-import android.text.InputType;
-import android.text.method.DigitsKeyListener;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,9 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.joke.v7demo.R;
-
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
 public class AutoCompleteTextViewActivity extends AppCompatActivity implements View.OnTouchListener, TextView.OnEditorActionListener {
 

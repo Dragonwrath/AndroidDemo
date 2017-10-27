@@ -7,7 +7,6 @@ import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
 import rx.functions.Action1;
-import rx.observables.ConnectableObservable;
 
 /**
  * RefCount

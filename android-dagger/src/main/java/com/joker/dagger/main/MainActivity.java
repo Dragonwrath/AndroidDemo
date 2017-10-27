@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -15,8 +15,6 @@ import com.joker.dagger.model.person.DaggerPersonComponent;
 import com.joker.dagger.model.person.Person;
 import com.joker.dagger.model.person.PersonModule;
 import com.joker.daggerdemo.R;
-
-import javax.inject.Inject;
 
 import dagger.Binds;
 import dagger.android.ActivityKey;

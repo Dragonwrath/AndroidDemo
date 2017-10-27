@@ -1,7 +1,8 @@
 package net.jcip.part_14.item_4;
 
-import java.util.concurrent.*;
-import java.util.concurrent.locks.*;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class SemaphoreOnLock {
     private final Lock lock = new ReentrantLock();

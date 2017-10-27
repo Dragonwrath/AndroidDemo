@@ -4,10 +4,6 @@ import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.v7.graphics.Palette;
 
-import com.bumptech.glide.load.engine.Resource;
-import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
-import com.bumptech.glide.util.Util;
-
 
 public class PaletteBitmap {
     public final Palette palette;

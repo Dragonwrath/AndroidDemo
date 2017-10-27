@@ -36,4 +36,6 @@ ext {
     junit = '4.12'
     dagger = '2.11'
     greenDao = "3.2.2"
+    okhttp = "3.9.0"
+    jsoup = "1.10.3"
 }

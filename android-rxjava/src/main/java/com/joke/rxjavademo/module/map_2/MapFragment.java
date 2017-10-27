@@ -15,25 +15,17 @@ import android.widget.TextView;
 import com.joke.rxjavademo.BaseFragment;
 import com.joke.rxjavademo.R;
 import com.joke.rxjavademo.adapter.ItemGridAdapter;
-import com.joke.rxjavademo.model.GankBeauty;
-import com.joke.rxjavademo.model.GankBeautyResult;
 import com.joke.rxjavademo.model.Item;
 import com.joke.rxjavademo.network.Network;
 import com.joke.rxjavademo.util.GankBeautyResultToItemsMapper;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 public class MapFragment extends BaseFragment {

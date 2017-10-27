@@ -1,7 +1,5 @@
 package com.joke.mock.mock;
 
-import javax.security.auth.callback.Callback;
-
 public class LoginPresenter {
     public UserManager mUserManager ;
     public PasswordValidator mPasswordValidator ;

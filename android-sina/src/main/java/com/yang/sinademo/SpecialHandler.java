@@ -1,6 +1,5 @@
 package com.yang.sinademo;
 
-import android.content.Context;
 import android.os.Handler;
 
 import java.lang.ref.WeakReference;

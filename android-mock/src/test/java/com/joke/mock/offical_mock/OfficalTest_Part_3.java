@@ -2,13 +2,16 @@ package com.joke.mock.offical_mock;
 
 
 import org.junit.Test;
-
 import org.mockito.InOrder;
-import org.mockito.Mockito;
 
 import java.util.ArrayList;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.ignoreStubs;
+import static org.mockito.Mockito.inOrder;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.when;
 
 public class OfficalTest_Part_3 {
 

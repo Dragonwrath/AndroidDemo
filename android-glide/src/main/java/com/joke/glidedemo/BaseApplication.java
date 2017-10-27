@@ -1,11 +1,9 @@
 package com.joke.glidedemo;
 
 import android.app.Application;
-import android.util.Log;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.MemoryCategory;
-import com.bumptech.glide.load.engine.cache.MemorySizeCalculator;
 
 
 public class BaseApplication extends Application {

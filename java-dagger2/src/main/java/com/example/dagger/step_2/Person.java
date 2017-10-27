@@ -2,7 +2,6 @@ package com.example.dagger.step_2;
 
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
 import dagger.Reusable;
 

@@ -7,15 +7,15 @@ import android.os.Looper;
 import android.os.SystemClock;
 import android.text.TextUtils;
 
-import com.apache.volley.response.NetworkResponse;
 import com.apache.volley.cache.Cache;
 import com.apache.volley.error.AuthFailureError;
 import com.apache.volley.error.VolleyError;
 import com.apache.volley.log.VolleyLog;
-import com.apache.volley.log.VolleyLog.*;
+import com.apache.volley.log.VolleyLog.MarkerLog;
 import com.apache.volley.policy.DefaultRetryPolicy;
 import com.apache.volley.policy.RetryPolicy;
 import com.apache.volley.queue.RequestQueue;
+import com.apache.volley.response.NetworkResponse;
 import com.apache.volley.response.Response;
 
 import java.io.UnsupportedEncodingException;

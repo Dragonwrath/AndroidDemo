@@ -1,19 +1,11 @@
 package org.joke.rxjava.lesson_3.b_transform;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import rx.Emitter;
 import rx.Observable;
 import rx.Subscriber;
-import rx.Subscription;
-import rx.functions.Action0;
-import rx.functions.Action1;
-import rx.functions.Func0;
-import rx.functions.Func1;
-import rx.subjects.Subject;
 
 /**
  * 定期收集Observable的数据放进一个数据包裹，然后发射这些数据包裹，而不是一次发射一

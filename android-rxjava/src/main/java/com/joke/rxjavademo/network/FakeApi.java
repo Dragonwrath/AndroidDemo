@@ -8,9 +8,7 @@ import com.joke.rxjavademo.model.FakeToken;
 import java.util.Random;
 
 import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
-import rx.schedulers.Schedulers;
 
 public class FakeApi {
     private static FakeApi api ;

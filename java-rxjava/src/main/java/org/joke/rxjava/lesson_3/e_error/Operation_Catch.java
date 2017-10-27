@@ -4,9 +4,6 @@ package org.joke.rxjava.lesson_3.e_error;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.security.auth.Subject;
-
-import rx.Emitter;
 import rx.Observable;
 import rx.Subscriber;
 import rx.functions.Action1;

@@ -1,19 +1,10 @@
 package com.yang.v4demo.nestedscrollview;
 
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import com.yang.v4demo.R;
 
-import java.util.ArrayList;
-
-import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class NestedScrollViewActivity extends AppCompatActivity {

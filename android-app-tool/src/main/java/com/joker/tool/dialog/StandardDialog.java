@@ -10,15 +10,13 @@ import android.support.annotation.StringRes;
 import android.support.annotation.StyleRes;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
+import android.tools.Unfinished;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.joker.tool.R;
-import com.joker.tool.backpress.BackPressObservable;
-
-import android.tools.Unfinished;
 
 /**
  * The wrapper class of system dialog {@link AlertDialog}.

@@ -5,7 +5,6 @@ import java.util.List;
 
 import rx.Observable;
 import rx.Scheduler;
-import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.observables.BlockingObservable;
 import rx.plugins.RxJavaSchedulersHook;

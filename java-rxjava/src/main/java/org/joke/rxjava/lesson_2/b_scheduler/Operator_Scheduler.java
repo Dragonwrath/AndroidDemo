@@ -1,15 +1,8 @@
 package org.joke.rxjava.lesson_2.b_scheduler;
 
 
-import rx.Emitter;
-import rx.Observable;
-import rx.Observer;
 import rx.Scheduler;
-import rx.Subscriber;
 import rx.functions.Action0;
-import rx.functions.Action1;
-import rx.functions.Func0;
-import rx.observables.AsyncOnSubscribe;
 import rx.schedulers.Schedulers;
 
 public class Operator_Scheduler {
