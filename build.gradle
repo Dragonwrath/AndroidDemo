@@ -30,6 +30,7 @@ ext {
     buildToolsVersion = '25.0.2'
 
     espressoVersion = '2.2.2'
+    gson = '2.8.2'
     rxjava = '1.2.10'
     rxandroid = '1.2.1'
     supportVersion = '25.3.1'
