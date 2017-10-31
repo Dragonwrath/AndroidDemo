@@ -24,24 +24,17 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile "com.android.support:appcompat-v7:${android_support_library_version}"
-    compile "com.android.support:support-v4:${android_support_library_version}"
-    compile "com.android.support:recyclerview-v7:${android_support_library_version}"
-    compile "com.android.support:design:${android_support_library_version}"
-
+    compile "com.android.support:appcompat-v7:${rootProject.ext.supportVersion}"
+    compile "com.android.support:support-v4:${rootProject.ext.supportVersion}"
+    compile "com.android.support:recyclerview-v7:${rootProject.ext.supportVersion}"
+    compile "com.android.support:design:${rootProject.ext.supportVersion}"
     //butter_knife
-    compile "com.jakewharton:butterknife:${butterknife_library_version}"
-    annotationProcessor "com.jakewharton:butterknife-compiler:${butterknife_library_version}"
-
+    compile "com.jakewharton:butterknife:$rootProject.ext.butterknife"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterknife"
     //rxjava
     compile "io.reactivex:rxjava:$rootProject.ext.rxjava"
     //rxandroid
     compile("io.reactivex:rxandroid:$rootProject.ext.rxandroid", {
         exclude group: 'io.reactivex:rxjava'
     })
-
-    testCompile 'junit:junit:4.12'
 }

@@ -1,15 +1,17 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "com.joke.mvpdemo"
-        minSdkVersion 14
-        targetSdkVersion 25
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        flavorDimensions "versionCode"
+
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -59,33 +61,30 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile "io.reactivex:rxjava:${rxjava_library_version}"
-    compile "io.reactivex:rxandroid:${rxandroid_library_version}"
+    compile "io.reactivex:rxjava:${rootProject.ext.rxjava}"
+    compile "io.reactivex:rxandroid:${rootProject.ext.rxandroid}"
 
     //官方兼容库
-    compile "com.android.support:appcompat-v7:${android_support_library_version}"
-    compile "com.android.support:recyclerview-v7:${android_support_library_version}"
-    compile "com.android.support:support-v4:${android_support_library_version}"
-    compile "com.android.support:design:${android_support_library_version}"
+    compile "com.android.support:appcompat-v7:${rootProject.ext.supportVersion}"
+    compile "com.android.support:recyclerview-v7:${rootProject.ext.supportVersion}"
+    compile "com.android.support:recyclerview-v7:${rootProject.ext.supportVersion}"
+    compile "com.android.support:design:${rootProject.ext.supportVersion}"
 
+    compile "com.google.guava:guava:${rootProject.ext.guava}"
     //butter knife
-    compile "com.jakewharton:butterknife:${butterknife_library_version}"
-    annotationProcessor "com.jakewharton:butterknife-compiler:${butterknife_library_version}"
-
-    compile("com.android.support.test.espresso:espresso-idling-resource:${espresso_library_version}"
-            , { exclude group: 'com.android.support', module: 'support-annotations' })
-
-
-    androidTestCompile("com.android.support.test.espresso:espresso-core:${espresso_library_version}"
-            , { exclude group: "com.android.support", module: "support-annotations" })
-//    androidTestCompile ("com.android.support.test.espresso:espresso-contrib:${espresso_library_version}"
+    compile "com.jakewharton:butterknife:$rootProject.ext.butterknife"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterknife"
+//
+//    androidTestCompile("com.android.support.test.espresso:espresso-idling-resource:${rootProject.ext.espresso}"
+//            , { exclude group: 'com.android.support', module: 'support-annotations' })
+//    androidTestCompile("com.android.support.test.espresso:espresso-core:${rootProject.ext.espresso}"
+//            , { exclude group: "com.android.support", module: "support-annotations" })
+//    androidTestCompile ("com.android.support.test.espresso:espresso-contrib:${rootProject.ext.espresso}"
 //            , {exclude group: "com.android.support', module: 'support-annotations" })
-    androidTestCompile("com.android.support.test.espresso:espresso-intents:${espresso_library_version}"
-            , { exclude group: "com.android.support', module: 'support-annotations" })
-
-
-    testCompile "org.mockito:mockito-all:${mockito_all_version}"
-    compile 'com.google.guava:guava:20.0'
-    compile 'com.android.support:support-v4:25.3.1'
-    testCompile 'junit:junit:4.12'
+//    androidTestCompile("com.android.support.test.espresso:espresso-intents:${rootProject.ext.espresso}"
+//            , { exclude group: "com.android.support', module: 'support-annotations" })
+//
+//
+//    testCompile ("junit:junit:${rootProject.ext.junit}", { exclude group: "com.android.support", module: "support-annotations" })
+//    testCompile ("org.mockito:mockito-all:2.0.2-beta" , { exclude group: "com.android.support", module: "support-annotations" })
 }

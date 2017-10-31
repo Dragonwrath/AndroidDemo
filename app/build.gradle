@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '25.0.2'
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
     defaultConfig {
         applicationId "com.yang.rxjava"
-        minSdkVersion 15
-        targetSdkVersion 25
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -25,19 +25,19 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
     testCompile 'junit:junit:4.12'
-    compile "com.android.support:appcompat-v7:${android_support_library_version}"
-    compile "com.android.support:support-v4:${android_support_library_version}"
-    compile "io.reactivex:rxjava:${rxjava_library_version}"
-    compile "com.android.support:recyclerview-v7:${android_support_library_version}"
-    compile "de.greenrobot:greendao:${greendao_library_version}"
-    compile "io.reactivex:rxandroid:${rxandroid_library_version}"
-    compile "com.facebook.fresco:fresco:${fresco_library_version}"
+    compile "com.android.support:appcompat-v7:${rootProject.ext.supportVersion}"
+    compile "com.android.support:support-v4:${rootProject.ext.supportVersion}"
+    compile "com.android.support:recyclerview-v7:${rootProject.ext.supportVersion}"
 
-    compile "com.jakewharton.rxbinding:rxbinding:${rxbinding_library_version}"
-    compile "com.google.dagger:dagger:${dagger_library_version}"
-    compile "com.google.dagger:dagger-compiler:${dagger_library_version}"
+    compile "io.reactivex:rxjava:${rootProject.ext.rxjava}"
+    compile "de.greenrobot:greendao:${rootProject.ext.greendao2}"
+    compile "io.reactivex:rxandroid:${rootProject.ext.rxandroid}"
+    compile "com.facebook.fresco:fresco:${rootProject.ext.fresco}"
+
+    compile "com.jakewharton.rxbinding:rxbinding:${rootProject.ext.rxbinding}"
+
+    compile "com.google.dagger:dagger:${rootProject.ext.dagger}"
+    compile "com.google.dagger:dagger-android-support:${rootProject.ext.dagger}"
+    annotationProcessor  "com.google.dagger:dagger-compiler:${rootProject.ext.dagger}"
 }

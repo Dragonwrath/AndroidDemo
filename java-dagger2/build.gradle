@@ -2,8 +2,8 @@ apply plugin: 'java'
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile "com.google.dagger:dagger:${dagger_library_version}"
-    compile "com.google.dagger:dagger-compiler:${dagger_library_version}"
+    compile "com.google.dagger:dagger:${rootProject.ext.dagger}"
+    compile "com.google.dagger:dagger-compiler:${rootProject.ext.dagger}"
 }
 
 sourceCompatibility = "1.7"

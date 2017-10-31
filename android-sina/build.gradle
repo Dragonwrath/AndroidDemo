@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "com.yang.sinademo"
-        minSdkVersion 14
-        targetSdkVersion 25
+        minSdkVersion  rootProject.ext.minSdkVersion
+        targetSdkVersion  rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
 
@@ -30,21 +30,26 @@ repositories{
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile "com.android.support:appcompat-v7:${android_support_library_version}"
-    testCompile 'junit:junit:4.12'
+    compile "com.android.support:appcompat-v7:${rootProject.ext.supportVersion}"
+
     compile(name: 'openDefault-2.0.3', ext: 'aar')
 
-    compile "io.reactivex:rxjava:${rxjava_library_version}"
-    compile "com.squareup.retrofit2:retrofit:${rxjava2_library_version}"
-    compile "com.squareup.retrofit2:retrofit-converters:${rxjava2_library_version}"
-    compile "com.squareup.retrofit2:converter-gson:${rxjava2_library_version}"
-    compile "com.squareup.retrofit2:adapter-rxjava:${rxjava2_library_version}"
-    compile "io.reactivex:rxandroid:${rxandroid_library_version}"
-    compile "com.github.bumptech.glide:glide:${glide_library_version}"
+    compile "io.reactivex:rxjava:$rootProject.ext.rxjava"
+    compile("io.reactivex:rxandroid:$rootProject.ext.rxandroid", {
+        exclude group: 'io.reactivex:rxjava'
+    })
 
-    compile "com.jakewharton:butterknife:${butterknife_library_version}"
-    annotationProcessor  "com.jakewharton:butterknife-compiler:${butterknife_library_version}"
+    compile "com.squareup.retrofit2:retrofit:${rootProject.ext.retrofit2}"
+    compile "com.squareup.retrofit2:retrofit-converters:${rootProject.ext.retrofit2}"
+    compile "com.squareup.retrofit2:converter-gson:${rootProject.ext.retrofit2}"
+    compile "com.squareup.retrofit2:adapter-rxjava:${rootProject.ext.retrofit2}"
+
+    compile "com.github.bumptech.glide:glide:${rootProject.ext.glide4}"
+    compile "com.github.bumptech.glide:okhttp3-integration:${rootProject.ext.glide4}"
+
+
+    compile "com.jakewharton:butterknife:$rootProject.ext.butterknife"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterknife"
+
+
 }

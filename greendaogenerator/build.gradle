@@ -2,8 +2,8 @@ apply plugin: 'java'
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile "de.greenrobot:greendao:${greendao_library_version}"
-    compile "de.greenrobot:greendao-generator:${greendao_library_version}"
+    compile "de.greenrobot:greendao:${rootProject.ext.greendao2}"
+    compile "de.greenrobot:greendao-generator:${rootProject.ext.greendao2}"
 }
 
 sourceCompatibility = "1.7"
