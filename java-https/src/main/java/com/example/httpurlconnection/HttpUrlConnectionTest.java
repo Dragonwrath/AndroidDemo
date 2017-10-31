@@ -8,6 +8,7 @@ import com.google.gson.TypeAdapter;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -34,10 +35,43 @@ public class HttpUrlConnectionTest{
 	private static final String ZHIDAO_1 = "http://www.baidu.com//link?url=lSk2d3ZS978NBWsbY30svn9rQPYT1TiBnU_YMebfF-plkmGLJoMfbog9mrq9escYL3h5y-";
 	private static final String ZHIDAO_2 = "https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&rsv_idx=1&tn=baidu&wd=%2F%2Fnoinspections&oq=%252F%252Fnoinspections%2520ResultOf&rsv_pq=88d7b7e40005e405&rsv_t=a1acJRv7hVb7wJAeCHP38RPaNvDsa9dJjHDu%2Fp52xUj23eZIglCcnJrMaTg&rqlang=cn&rsv_enter=0&inputT=2377&rsv_sug3=11&rsv_sug1=3&rsv_sug7=000&rsv_sug2=0&rsv_sug4=4481&rsv_sug=1";
 	private static final String TRANSLATE_MARKDOWN = "https://api.github.com/markdown/raw";
-
+	private static final String POST_FILE = "https://api.github.com/markdown/raw";
+	private static final String SERACH_LJR = "https://en.wikipedia.org/w/index.php";
 	public static void main(String[] args) throws Exception {
 		//		System.out.println(translateMarkDown());
-		authenticate();
+		postForm();
+	}
+
+	private static void postForm() throws Exception {
+		final HttpURLConnection connection = buildConnection(SERACH_LJR);
+		connection.setDoOutput(true);
+		connection.setDoInput(true);
+		final OutputStream outputStream = connection.getOutputStream();
+		outputStream.write("search=Fish Leong".getBytes());
+		connection.connect();
+		final String message = connection.getResponseMessage();
+		System.out.println(message);
+		printInputStream(connection);
+	}
+
+	private static void postFile() throws Exception{
+		File file = new File("README.md");
+		final HttpURLConnection connection = buildConnection(POST_FILE);
+		connection.setDoInput(true);
+		connection.setDoOutput(true);
+		connection.setRequestProperty("Content-Type", "text/x-markdown; charset=utf-8");
+		final OutputStream out = connection.getOutputStream();
+		final FileInputStream in = new FileInputStream(file);
+		int len;
+		byte[] cache = new byte[1024];
+		while((len = in.read(cache))  > 0) {
+			out.write(cache, 0, len);
+		}
+		connection.connect();
+		final int code = connection.getResponseCode();
+		if(code == 200) {
+			printInputStream(connection);
+		}
 	}
 
 	private static void authenticate() throws Exception {

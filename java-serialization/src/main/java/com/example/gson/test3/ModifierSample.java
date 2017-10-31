@@ -1,4 +1,4 @@
-package com.example.test3;
+package com.example.gson.test3;
 
 
 class ModifierSample {

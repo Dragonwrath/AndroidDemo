@@ -1,4 +1,4 @@
-package com.example.tutorials.step_1;
+package com.example.gson.tutorials.step_1;
 
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;

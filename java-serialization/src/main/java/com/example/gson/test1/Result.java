@@ -1,4 +1,4 @@
-package com.example.test1;
+package com.example.gson.test1;
 
 public class Result<T> {
     public int code;
