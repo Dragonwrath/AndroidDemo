@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -104,7 +105,7 @@ public class FileTest{
 		private static void step_2(File  file) {
 			Map<String, LinkedList<File>> map = new HashMap<>();
 			for(Year year : Year.values()) {
-				map.put(year.getYear(), new LinkedList<>());
+				map.put(year.getYear(), new LinkedList<File>());
 			}
 			final ArrayList<File> doubtList = new ArrayList<>();
 			sortInternal(file, map, doubtList);
@@ -430,8 +431,13 @@ class CollectionSize {
 				directories.add(file);
 				while(!directories.isEmpty()) {
 					List<Future<ConcurrentPoolCallable>> partialResults = new ArrayList<>();
-					for(File directory : directories) {
-						partialResults.add(service.submit(() -> getTotalAndSubDirs(directory)));
+					for(final File directory : directories) {
+						partialResults.add(service.submit(new Callable<ConcurrentPoolCallable>() {
+							@Override
+							public ConcurrentPoolCallable call() throws Exception {
+								return getTotalAndSubDirs(directory);
+							}
+						}));
 					}
 					directories.clear();
 					for(Future<ConcurrentPoolCallable> future : partialResults) {

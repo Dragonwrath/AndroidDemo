@@ -31,8 +31,8 @@ dependencies {
     compile "com.android.support:palette-v7:${rootProject.ext.supportVersion}"
     compile "com.android.support:recyclerview-v7:${rootProject.ext.supportVersion}"
 
-    compile "com.github.bumptech.glide:glide:${rootProject.ext.glide4}"
-    compile "com.github.bumptech.glide:okhttp3-integration:${rootProject.ext.glide4}"
+    compile "com.github.bumptech.glide:glide:${rootProject.ext.glide}"
+//    compile "com.github.bumptech.glide:okhttp3-integration:${rootProject.ext.glide}"
 
     compile "com.squareup.okhttp3:okhttp:${rootProject.ext.okhttp3}"
 }

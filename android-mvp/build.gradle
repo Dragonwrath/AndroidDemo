@@ -10,7 +10,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
-        flavorDimensions "versionCode"
+//        flavorDimensions "versionCode"
 
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -34,22 +34,22 @@ android {
     }
 
     // If you need to add more flavors, consider using flavor dimensions.
-    productFlavors {
-        mock {
-            applicationIdSuffix = ".mock"
-        }
-        prod {
-
-        }
-    }
+//    productFlavors {
+//        mock {
+//            applicationIdSuffix = ".mock"
+//        }
+//        prod {
+//
+//        }
+//    }
 
     // Remove mockRelease as it's not needed.
-    android.variantFilter { variant ->
-        if (variant.buildType.name.equals('release')
-                && variant.getFlavors().get(0).name.equals('mock')) {
-            variant.setIgnore(true);
-        }
-    }
+//    android.variantFilter { variant ->
+//        if (variant.buildType.name.equals('release')
+//                && variant.getFlavors().get(0).name.equals('mock')) {
+//            variant.setIgnore(true);
+//        }
+//    }
 
     // Always show the result of every unit test, even if it passes.
     testOptions.unitTests.all {
