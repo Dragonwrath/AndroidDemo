@@ -109,7 +109,9 @@ public class ZipTest {
       out = new ZipOutputStream(new FileOutputStream(dst));
       int len;
       byte[] cache = new byte[1024];
-      for (File file : src.listFiles()) {
+      File[] files = src.listFiles();
+      assert files != null;
+      for (File file : files) {
         in = new BufferedInputStream(new CipherInputStream(new FileInputStream(file), cipher));
         out.putNextEntry(new ZipEntry(file.getName()));
         while ((len = in.read(cache)) > 0) {

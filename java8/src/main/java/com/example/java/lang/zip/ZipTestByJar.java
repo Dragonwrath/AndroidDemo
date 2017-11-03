@@ -1,11 +1,13 @@
 package com.example.java.lang.zip;
 
+import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
 import net.lingala.zip4j.model.ZipParameters;
 import net.lingala.zip4j.util.Zip4jConstants;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 //ZIP4J
@@ -19,7 +21,7 @@ public class ZipTestByJar {
 
   private static void cipherZipByJar() throws ZipException {
     File file = new File("D:\\Samples\\Rxjava\\java-https\\cache\\dst");
-    net.lingala.zip4j.core.ZipFile zipFile = new net.lingala.zip4j.core.ZipFile("D:\\Samples\\Rxjava\\java-https\\cache\\cipher.zip");
+    ZipFile zipFile = new ZipFile("D:\\Samples\\Rxjava\\java-https\\cache\\cipher.zip");
     ZipParameters parameters = new ZipParameters();
     parameters.setCompressionMethod(Zip4jConstants.COMP_DEFLATE);
     parameters.setCompressionLevel(Zip4jConstants.DEFLATE_LEVEL_NORMAL);
@@ -28,9 +30,9 @@ public class ZipTestByJar {
     parameters.setEncryptFiles(true);
     parameters.setPassword("hahaha");
     ArrayList<File> files = new ArrayList<>();
-    for (File src : file.listFiles()) {
-      files.add(src);
-    }
+    File[] listFiles = file.listFiles();
+    assert listFiles != null;
+    Collections.addAll(files, listFiles);
     zipFile.addFiles(files, parameters);
   }
 
