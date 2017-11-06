@@ -1,4 +1,4 @@
-package com.example.java.lang.zip;
+package com.example.java.util.zip;
 
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;

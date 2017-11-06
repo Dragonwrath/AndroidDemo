@@ -1,4 +1,4 @@
-package com.example.java.lang.zip.net.lingala.zip4j.examples.extract;
+package com.example.java.util.zip.net.lingala.zip4j.examples.extract;
 
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.io.ZipInputStream;

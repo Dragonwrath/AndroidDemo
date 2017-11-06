@@ -14,7 +14,7 @@
  * limitations under the License. 
  */
 
-package com.example.java.lang.zip.net.lingala.zip4j.examples.misc;
+package com.example.java.util.zip.net.lingala.zip4j.examples.misc;
 
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;

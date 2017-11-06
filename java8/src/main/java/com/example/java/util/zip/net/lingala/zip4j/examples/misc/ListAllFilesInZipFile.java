@@ -14,7 +14,7 @@
 * limitations under the License. 
 */
 
-package com.example.java.lang.zip.net.lingala.zip4j.examples.extract;
+package com.example.java.util.zip.net.lingala.zip4j.examples.misc;
 
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
@@ -23,26 +23,17 @@ import net.lingala.zip4j.model.FileHeader;
 import java.util.List;
 
 /**
- * Demonstrates extraction of files from a zip file by looping through
- * all the files in the zip file
- * 
+ * Lists all the files in a zip file including the properties of the file
  * @author Srikanth Reddy Lingala
  *
  */
+public class ListAllFilesInZipFile {
 
-public class ExtractByLoopAllFiles {
-
-	public ExtractByLoopAllFiles() {
+	public ListAllFilesInZipFile() {
 		
 		try {
 			// Initiate ZipFile object with the path/name of the zip file.
-			ZipFile zipFile = new ZipFile("c:\\ZipTest\\ExtractByLoopAllFiles.zip");
-			
-			// Check to see if the zip file is password protected 
-			if (zipFile.isEncrypted()) {
-				// if yes, then set the password for the zip file
-				zipFile.setPassword("test123!");
-			}
+			ZipFile zipFile = new ZipFile("c:\\ZipTest\\ListAllFilesInZipFile.zip");
 			
 			// Get the list of file headers from the zip file
 			List fileHeaderList = zipFile.getFileHeaders();
@@ -50,8 +41,16 @@ public class ExtractByLoopAllFiles {
 			// Loop through the file headers
 			for (int i = 0; i < fileHeaderList.size(); i++) {
 				FileHeader fileHeader = (FileHeader)fileHeaderList.get(i);
-				// Extract the file to the specified destination
-				zipFile.extractFile(fileHeader, "c:\\ZipTest\\");
+				// FileHeader contains all the properties of the file
+				System.out.println("****File Details for: " + fileHeader.getFileName() + "*****");
+				System.out.println("Name: " + fileHeader.getFileName());
+				System.out.println("Compressed Size: " + fileHeader.getCompressedSize());
+				System.out.println("Uncompressed Size: " + fileHeader.getUncompressedSize());
+				System.out.println("CRC: " + fileHeader.getCrc32());
+				System.out.println("************************************************************");
+				
+				// Various other properties are available in FileHeader. Please have a look at FileHeader
+				// class to see all the properties
 			}
 			
 		} catch (ZipException e) {
@@ -64,8 +63,7 @@ public class ExtractByLoopAllFiles {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		new ExtractByLoopAllFiles();
-
+		new ListAllFilesInZipFile();
 	}
 
 }

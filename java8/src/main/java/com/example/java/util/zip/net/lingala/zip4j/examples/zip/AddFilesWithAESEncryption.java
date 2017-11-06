@@ -14,7 +14,7 @@
  * limitations under the License. 
  */
 
-package com.example.java.lang.zip.net.lingala.zip4j.examples.zip;
+package com.example.java.util.zip.net.lingala.zip4j.examples.zip;
 
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
@@ -25,24 +25,21 @@ import java.io.File;
 import java.util.ArrayList;
 
 /**
- * Example showing addition of files to Zip File using deflate compression
- * 
- * @author Srikanth Reddy Lingala
+ * Demonstrates adding files to zip file with AES Encryption
  *
+ * @author Srikanth Reddy Lingala
  */
-public class AddFilesDeflateComp {
+public class AddFilesWithAESEncryption {
 	
-	public AddFilesDeflateComp() {
+	public AddFilesWithAESEncryption() {
+		
 		try {
 			// Initiate ZipFile object with the path/name of the zip file.
-			// Zip file may not necessarily exist. If zip file exists, then 
-			// all these files are added to the zip file. If zip file does not
-			// exist, then a new zip file is created with the files mentioned
-			ZipFile zipFile = new ZipFile("c:\\ZipTest\\AddFilesDeflateComp.zip");
+			ZipFile zipFile = new ZipFile("c:\\ZipTest\\AddFilesWithAESZipEncryption.zip");
 			
 			// Build the list of files to be added in the array list
 			// Objects of type File have to be added to the ArrayList
-			ArrayList filesToAdd = new ArrayList();
+			ArrayList<File> filesToAdd = new ArrayList<>();
 			filesToAdd.add(new File("c:\\ZipTest\\sample.txt"));
 			filesToAdd.add(new File("c:\\ZipTest\\myvideo.avi"));
 			filesToAdd.add(new File("c:\\ZipTest\\mysong.mp3"));
@@ -62,6 +59,24 @@ public class AddFilesDeflateComp {
 			// DEFLATE_LEVEL_ULTRA - Highest compression level but low speed
 			parameters.setCompressionLevel(Zip4jConstants.DEFLATE_LEVEL_NORMAL); 
 			
+			// Set the encryption flag to true
+			// If this is set to false, then the rest of encryption properties are ignored
+			parameters.setEncryptFiles(true);
+			
+			// Set the encryption method to AES Zip Encryption
+			parameters.setEncryptionMethod(Zip4jConstants.ENC_METHOD_AES);
+			
+			// Set AES Key strength. Key strengths available for AES encryption are:
+			// AES_STRENGTH_128 - For both encryption and decryption
+			// AES_STRENGTH_192 - For decryption only
+			// AES_STRENGTH_256 - For both encryption and decryption
+			// Key strength 192 cannot be used for encryption. But if a zip file already has a
+			// file encrypted with key strength of 192, then Zip4j can decrypt this file
+			parameters.setAesKeyStrength(Zip4jConstants.AES_STRENGTH_256);
+			
+			// Set password
+			parameters.setPassword("test123!");
+			
 			// Now add files to the zip file
 			// Note: To add a single file, the method addFile can be used
 			// Note: If the zip file already exists and if this zip file is a split file
@@ -70,16 +85,11 @@ public class AddFilesDeflateComp {
 			zipFile.addFiles(filesToAdd, parameters);
 		} catch (ZipException e) {
 			e.printStackTrace();
-		} 
-		
-		
+		}
 	}
 	
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
-		new AddFilesDeflateComp();
+		new AddFilesWithAESEncryption();
 	}
-
+	
 }

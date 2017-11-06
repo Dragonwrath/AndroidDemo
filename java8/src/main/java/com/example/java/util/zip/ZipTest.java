@@ -1,7 +1,7 @@
-package com.example.java.lang.zip;
+package com.example.java.util.zip;
 
 
-import com.example.java.lang.zip.net.lingala.zip4j.examples.CipherHelper;
+import com.example.java.util.zip.net.lingala.zip4j.examples.CipherHelper;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -23,8 +23,8 @@ import javax.crypto.CipherOutputStream;
 
 public class ZipTest {
   public static void main(String[] args) throws  Exception {
-    encryptZip();
-    decryptZip();
+//    encryptZip();
+//    decryptZip();
   }
 
   private static void unzip() {

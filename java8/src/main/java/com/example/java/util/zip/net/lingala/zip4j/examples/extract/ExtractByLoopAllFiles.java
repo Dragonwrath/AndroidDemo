@@ -14,24 +14,29 @@
 * limitations under the License. 
 */
 
-package com.example.java.lang.zip.net.lingala.zip4j.examples.extract;
+package com.example.java.util.zip.net.lingala.zip4j.examples.extract;
 
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
+import net.lingala.zip4j.model.FileHeader;
+
+import java.util.List;
 
 /**
- * Demonstrates extraction of a single file from the zip file
+ * Demonstrates extraction of files from a zip file by looping through
+ * all the files in the zip file
  * 
  * @author Srikanth Reddy Lingala
+ *
  */
 
-public class ExtractSingleFile {
-	
-	public ExtractSingleFile() {
+public class ExtractByLoopAllFiles {
+
+	public ExtractByLoopAllFiles() {
 		
 		try {
 			// Initiate ZipFile object with the path/name of the zip file.
-			ZipFile zipFile = new ZipFile("c:\\ZipTest\\ExtractSingleFile.zip");
+			ZipFile zipFile = new ZipFile("c:\\ZipTest\\ExtractByLoopAllFiles.zip");
 			
 			// Check to see if the zip file is password protected 
 			if (zipFile.isEncrypted()) {
@@ -39,14 +44,15 @@ public class ExtractSingleFile {
 				zipFile.setPassword("test123!");
 			}
 			
-			// Specify the file name which has to be extracted and the path to which
-			// this file has to be extracted
-			zipFile.extractFile("Ronan_Keating_-_In_This_Life.mp3", "c:\\ZipTest\\");
+			// Get the list of file headers from the zip file
+			List fileHeaderList = zipFile.getFileHeaders();
 			
-			// Note that the file name is the relative file name in the zip file.
-			// For example if the zip file contains a file "mysong.mp3" in a folder 
-			// "FolderToAdd", then extraction of this file can be done as below:
-			zipFile.extractFile("FolderToAdd\\myvideo.avi", "c:\\ZipTest\\");
+			// Loop through the file headers
+			for (int i = 0; i < fileHeaderList.size(); i++) {
+				FileHeader fileHeader = (FileHeader)fileHeaderList.get(i);
+				// Extract the file to the specified destination
+				zipFile.extractFile(fileHeader, "c:\\ZipTest\\");
+			}
 			
 		} catch (ZipException e) {
 			e.printStackTrace();
@@ -58,7 +64,8 @@ public class ExtractSingleFile {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		new ExtractSingleFile();
+		new ExtractByLoopAllFiles();
+
 	}
 
 }

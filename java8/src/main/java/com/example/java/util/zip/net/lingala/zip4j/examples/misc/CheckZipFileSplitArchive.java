@@ -14,49 +14,39 @@
 * limitations under the License. 
 */
 
-package com.example.java.lang.zip.net.lingala.zip4j.examples.zip;
+package com.example.java.util.zip.net.lingala.zip4j.examples.misc;
 
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
-import net.lingala.zip4j.model.ZipParameters;
-import net.lingala.zip4j.util.Zip4jConstants;
 
 /**
- * Demonstrated adding a folder to zip file
+ * Example to check if the zip file is a split archive
  * 
  * @author Srikanth Reddy Lingala
+ *
  */
-public class AddFolder {
+public class CheckZipFileSplitArchive {
 	
-	public AddFolder() {
+	public CheckZipFileSplitArchive() {
 		
 		try {
 			// Initiate ZipFile object with the path/name of the zip file.
-			ZipFile zipFile = new ZipFile("c:\\ZipTest\\AddFolder.zip");
+			ZipFile zipFile = new ZipFile("c:\\ZipTest\\CheckZipFileSplitArchive.zip");
 			
-			// Folder to add
-			String folderToAdd = "c:\\FolderToAdd";
-			
-			// Initiate Zip Parameters which define various properties such
-			// as compression method, etc.
-			ZipParameters parameters = new ZipParameters();
-			
-			// set compression method to store compression
-			parameters.setCompressionMethod(Zip4jConstants.COMP_DEFLATE);
-			
-			// Set the compression level
-			parameters.setCompressionLevel(Zip4jConstants.DEFLATE_LEVEL_NORMAL);
-			
-			// Add folder to the zip file
-			zipFile.addFolder(folderToAdd, parameters);
-			
+			// Check if the zip file is a split archive
+			System.out.println("Is this zip file a split archive? " + zipFile.isSplitArchive());
 		} catch (ZipException e) {
 			e.printStackTrace();
 		}
+		
 	}
 	
+	/**
+	 * @param args
+	 */
 	public static void main(String[] args) {
-		new AddFolder();
+		new CheckZipFileSplitArchive();
+
 	}
-	
+
 }

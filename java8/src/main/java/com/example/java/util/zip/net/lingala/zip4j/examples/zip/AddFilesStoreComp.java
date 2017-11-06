@@ -14,7 +14,7 @@
  * limitations under the License. 
  */
 
-package com.example.java.lang.zip.net.lingala.zip4j.examples.zip;
+package com.example.java.util.zip.net.lingala.zip4j.examples.zip;
 
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
@@ -25,49 +25,52 @@ import java.io.File;
 import java.util.ArrayList;
 
 /**
- * Example demonstrates adding files to a folder in a zip file
+ * Class demonstrating creation of a zip file by adding files with store 
+ * compression (No Compression)
+ * 
  * @author Srikanth Reddy Lingala
- *
+ * 
  */
-public class AddFilesToFolderInZip {
+public class AddFilesStoreComp {
 
-	public AddFilesToFolderInZip() {
+	public AddFilesStoreComp() {
+		
 		try {
-			ZipFile zipFile = new ZipFile("c:\\ZipTest\\AddFilesDeflateComp.zip");
+			// Initiate ZipFile object with the path/name of the zip file
+			// Zip file may not necessarily exist. If zip file exists, then 
+			// all these files are added to the zip file. If zip file does not
+			// exist, then a new zip file is created with the files mentioned
+			ZipFile zipFile = new ZipFile("c:\\ZipTest\\AddFilesStoreComp.zip"); 
 			
 			// Build the list of files to be added in the array list
+			// Objects of type File have to be added to the ArrayList
 			ArrayList filesToAdd = new ArrayList();
 			filesToAdd.add(new File("c:\\ZipTest\\sample.txt"));
 			filesToAdd.add(new File("c:\\ZipTest\\myvideo.avi"));
 			filesToAdd.add(new File("c:\\ZipTest\\mysong.mp3"));
 			
-			// Initiate Zip Parameters 
+			// Initiate Zip Parameters which define various properties such
+			// as compression method, etc. More parameters are explained in other
+			// examples
 			ZipParameters parameters = new ZipParameters();
-			parameters.setCompressionMethod(Zip4jConstants.COMP_DEFLATE); // set compression method to deflate compression
-			
-			// Set the compression level.
-			parameters.setCompressionLevel(Zip4jConstants.DEFLATE_LEVEL_NORMAL);
-			
-			// Sets the folder in the zip file to which these new files will be added.
-			// In this example, test2 is the folder to which these files will be added.
-			// Another example: if files were to be added to a directory test2/test3, then
-			// below statement should be parameters.setRootFolderInZip("test2/test3/");
-			parameters.setRootFolderInZip("test2/");
+			parameters.setCompressionMethod(Zip4jConstants.COMP_STORE); // set compression method to store compression
 			
 			// Now add files to the zip file
+			// Note: To add a single file, the method addFile can be used
+			// Note: If the zip file already exists and if this zip file is a split file
+			// then this method throws an exception as Zip Format Specification does not 
+			// allow updating split zip files
 			zipFile.addFiles(filesToAdd, parameters);
 		} catch (ZipException e) {
 			e.printStackTrace();
-		} 
-		
-		
+		}
 	}
 	
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		new AddFilesToFolderInZip();
+		new AddFilesStoreComp();
 	}
 
 }

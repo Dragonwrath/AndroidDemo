@@ -1,4 +1,4 @@
-package com.example.java.lang.zip.net.lingala.zip4j.examples;
+package com.example.java.util.zip.net.lingala.zip4j.examples;
 
 import java.security.SecureRandom;
 

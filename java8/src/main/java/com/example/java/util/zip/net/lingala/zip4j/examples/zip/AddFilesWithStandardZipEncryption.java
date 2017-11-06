@@ -14,7 +14,7 @@
  * limitations under the License. 
  */
 
-package com.example.java.lang.zip.net.lingala.zip4j.examples.zip;
+package com.example.java.util.zip.net.lingala.zip4j.examples.zip;
 
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
@@ -25,22 +25,15 @@ import java.io.File;
 import java.util.ArrayList;
 
 /**
- * Class demonstrating creation of a zip file by adding files with store 
- * compression (No Compression)
- * 
- * @author Srikanth Reddy Lingala
- * 
+ * Demonstrates adding files to zip file with standard Zip Encryption
  */
-public class AddFilesStoreComp {
+public class AddFilesWithStandardZipEncryption {
+	
+	public AddFilesWithStandardZipEncryption() {
 
-	public AddFilesStoreComp() {
-		
 		try {
-			// Initiate ZipFile object with the path/name of the zip file
-			// Zip file may not necessarily exist. If zip file exists, then 
-			// all these files are added to the zip file. If zip file does not
-			// exist, then a new zip file is created with the files mentioned
-			ZipFile zipFile = new ZipFile("c:\\ZipTest\\AddFilesStoreComp.zip"); 
+			// Initiate ZipFile object with the path/name of the zip file.
+			ZipFile zipFile = new ZipFile("c:\\ZipTest\\AddFilesWithStandardZipEncryption.zip");
 			
 			// Build the list of files to be added in the array list
 			// Objects of type File have to be added to the ArrayList
@@ -50,10 +43,22 @@ public class AddFilesStoreComp {
 			filesToAdd.add(new File("c:\\ZipTest\\mysong.mp3"));
 			
 			// Initiate Zip Parameters which define various properties such
-			// as compression method, etc. More parameters are explained in other
-			// examples
+			// as compression method, etc.
 			ZipParameters parameters = new ZipParameters();
-			parameters.setCompressionMethod(Zip4jConstants.COMP_STORE); // set compression method to store compression
+			parameters.setCompressionMethod(Zip4jConstants.COMP_DEFLATE); // set compression method to store compression
+			
+			// Set the compression level
+			parameters.setCompressionLevel(Zip4jConstants.DEFLATE_LEVEL_NORMAL); 
+			
+			// Set the encryption flag to true
+			// If this is set to false, then the rest of encryption properties are ignored
+			parameters.setEncryptFiles(true);
+			
+			// Set the encryption method to Standard Zip Encryption
+			parameters.setEncryptionMethod(Zip4jConstants.ENC_METHOD_STANDARD);
+			
+			// Set password
+			parameters.setPassword("test123!");
 			
 			// Now add files to the zip file
 			// Note: To add a single file, the method addFile can be used
@@ -66,11 +71,8 @@ public class AddFilesStoreComp {
 		}
 	}
 	
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
-		new AddFilesStoreComp();
+		new AddFilesWithStandardZipEncryption();
 	}
-
+	
 }

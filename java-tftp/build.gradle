@@ -1,9 +1,23 @@
 apply plugin: 'java'
 
+def jarVersion = '1.1.1';
+def jarCode = 13;
+def jarName = "TFTP"
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }
 
-
+jar {
+//    ${baseName}-${appendix}-${version}-${classifier}.${extension}
+    baseName = 'java-tftp'
+    appendix = 'hehe'
+    version = '1.1.1'
+    manifest {
+        attributes('Bundle-Version': jarVersion,
+                'Bundle-Name': jarName,
+                'Test' : 'test'
+        )
+    }
+}
 sourceCompatibility = "1.7"
 targetCompatibility = "1.7"
