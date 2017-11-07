@@ -11,13 +11,17 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-public class SurfaceViewTemplate extends SurfaceView implements SurfaceHolder.Callback, Runnable {
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class SurfaceViewTemplate extends SurfaceView implements SurfaceHolder.Callback{
 
   private SurfaceHolder mHolder;
-  private Canvas mCanvas;
   private volatile boolean mIsDrawing;
   public Path mPath;
   public Paint mPaint;
+  private ExecutorService mSingle = Executors.newSingleThreadScheduledExecutor();
+
 
 
   public SurfaceViewTemplate(Context context) {
@@ -45,22 +49,28 @@ public class SurfaceViewTemplate extends SurfaceView implements SurfaceHolder.Ca
 
     mHolder = getHolder();
     mHolder.addCallback(callback);
-    setFocusable(true);
-    setFocusableInTouchMode(true);
-    setKeepScreenOn(true);
-    setSecure(true);
+  }
+
+  @Override
+  protected void onDraw(Canvas canvas) {
+    super.onDraw(canvas);
   }
 
   @Override
   public void surfaceCreated(SurfaceHolder holder) {
     mIsDrawing = true;
-    new Thread(this).start();
+//    postInvalidate();
+//    thread = new Thread(this);
+//    thread.start();
+
+
   }
 
   @Override
   public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-    holder.setFormat(format);
-    holder.setFixedSize(width, height);
+//    holder.setFormat(format);
+//    holder.setFixedSize(width, height);
+
   }
 
   @Override
@@ -68,13 +78,6 @@ public class SurfaceViewTemplate extends SurfaceView implements SurfaceHolder.Ca
     mIsDrawing = false;
   }
 
-  @Override
-  public void run() {
-    while (mIsDrawing) {
-//            drawSin();
-      drawLine();
-    }
-  }
 
   @Override
   public boolean onTouchEvent(MotionEvent event) {
@@ -85,21 +88,46 @@ public class SurfaceViewTemplate extends SurfaceView implements SurfaceHolder.Ca
         mPath.moveTo(x, y);
         break;
       case MotionEvent.ACTION_MOVE:
+      case MotionEvent.ACTION_UP:
         mPath.lineTo(x, y);
+        postDraw();
         break;
     }
     return true;
   }
 
+  private void postDraw() {
+    mSingle.submit(new Runnable() {
+      @Override
+      public void run() {
+        drawLine();
+      }
+    });
+  }
+
   private void drawLine() {
+    Canvas canvas = null;
     try {
-      mCanvas = mHolder.lockCanvas();
+      canvas = mHolder.lockCanvas();
       //draw something
-      mCanvas.drawColor(Color.WHITE);
-      mCanvas.drawPath(mPath, mPaint);
+      canvas.drawColor(Color.WHITE);
+      canvas.drawPath(mPath, mPaint);
     } finally {
-      if (mCanvas != null) {
-        mHolder.unlockCanvasAndPost(mCanvas);
+      if (canvas != null) {
+        mHolder.unlockCanvasAndPost(canvas);
+      }
+    }
+  }
+
+  private void drawBack() {
+    Canvas canvas = null;
+    try {
+      canvas = mHolder.lockCanvas();
+      //draw something
+      canvas.drawColor(Color.WHITE);
+    } finally {
+      if (canvas != null) {
+        mHolder.unlockCanvasAndPost(canvas);
       }
     }
   }
@@ -108,14 +136,15 @@ public class SurfaceViewTemplate extends SurfaceView implements SurfaceHolder.Ca
   private int x, y;
 
   private void drawSin() {
+    Canvas canvas = null;
     try {
-      mCanvas = mHolder.lockCanvas();
+      canvas = mHolder.lockCanvas();
       //draw something
-      mCanvas.drawColor(Color.WHITE);
-      mCanvas.drawPath(mPath, mPaint);
+      canvas.drawColor(Color.WHITE);
+      canvas.drawPath(mPath, mPaint);
     } finally {
-      if (mCanvas != null) {
-        mHolder.unlockCanvasAndPost(mCanvas);
+      if (canvas != null) {
+        mHolder.unlockCanvasAndPost(canvas);
       }
     }
     x += 1;
@@ -123,6 +152,4 @@ public class SurfaceViewTemplate extends SurfaceView implements SurfaceHolder.Ca
     mPath.lineTo(x, y);
   }
 
-    private void optimizeDraw() {
-    }
 }
