@@ -1,4 +1,4 @@
-package com.example.concurrent.basic;
+package com.example.concurrent.basic.tutorial;
 
 public class DeadLock2 {
   static class Friend {
