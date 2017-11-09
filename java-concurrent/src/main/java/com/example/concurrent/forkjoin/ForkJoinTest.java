@@ -47,7 +47,7 @@ class Solver extends RecursiveAction {
   private int start, end, result;
   private Integer[] array;
 
-  private Solver(Integer[] array, int start, int end) {
+  Solver(Integer[] array, int start, int end) {
     this.start = start;
     this.end = end;
     this.array = array;
@@ -66,7 +66,7 @@ class Solver extends RecursiveAction {
     }
   }
 
-  private int getResult() {
+  int getResult() {
     return result;
   }
 }

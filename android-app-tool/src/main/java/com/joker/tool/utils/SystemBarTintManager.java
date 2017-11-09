@@ -24,8 +24,7 @@ import java.lang.reflect.Method;
 //兼容到API10
 //由于API19以上的版本可以通过setTransluta
 /**
- * Class to manage status and navigation bar tint effects when using KitKat
- * translucent system UI modes.
+ * Class to manage status and navigation bar tint effects when using KitKattranslucent system UI modes.
  *
  */
 public class SystemBarTintManager {
