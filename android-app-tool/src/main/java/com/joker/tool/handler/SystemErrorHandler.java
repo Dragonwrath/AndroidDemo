@@ -57,6 +57,7 @@ public class SystemErrorHandler  implements Thread.UncaughtExceptionHandler{
             }
             File file = new File(application.getCacheDir().getAbsolutePath() + "playlist");
             if (file.exists()) {
+                //noinspection all
                 file.delete();
             }
             //设置主启动页面

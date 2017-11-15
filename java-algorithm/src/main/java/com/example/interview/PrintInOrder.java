@@ -12,11 +12,10 @@ import java.util.concurrent.locks.ReentrantLock;
  * 2、线程ABC, 循环输出线程名A,B,C,C,B,A
  *
  */
-@SuppressWarnings("unused")
 public class PrintInOrder {
 
   public static void main(String[] args) throws InterruptedException {
-    doWithReentrantLock();
+    doWithReversionByLock();
   }
 
   private static void doWithSemaphore() throws InterruptedException {
@@ -183,9 +182,11 @@ public class PrintInOrder {
         while (running) {
           System.out.println(Thread.currentThread().getName());
           try {
-            nextThread.start();
+            if (!nextThread.isAlive()) {
+              nextThread.start();
+            }
+            Thread.sleep(1100);
             nextThread.join(1000);
-            Thread.sleep(2000);
           } catch (InterruptedException e) {
             e.printStackTrace();
           }
@@ -201,6 +202,7 @@ public class PrintInOrder {
     c.setNextThread(a);
 
     a.start();
+    a.join(1000);
 
   }
 
@@ -350,25 +352,24 @@ public class PrintInOrder {
         while (running) {
           final Thread thread = Thread.currentThread();
           //noinspection ALL
-          while (!calculateFactor()) {
-            synchronized (observer) {
+          synchronized (observer) {
+            while (!calculateFactor()) {
+//              System.out.println(Thread.currentThread().getName() + "wait");
               try {
                 observer.wait(1000);
               } catch (InterruptedException e) {
                 e.printStackTrace();
               }
             }
-          }
-          System.out.print(Thread.currentThread().getName());
-          synchronized (observer) {
+            System.out.println(Thread.currentThread().getName());
             try {
-              Thread.sleep(100);
+              Thread.sleep(500);
             } catch (InterruptedException e) {
               e.printStackTrace();
             }
             final int num = observer.getNum() + 1;
             observer.setNum(num);
-            observer.notify();
+            observer.notifyAll();
           }
         }
       }
