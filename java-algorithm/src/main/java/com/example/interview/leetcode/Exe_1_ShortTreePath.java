@@ -1,10 +1,15 @@
-package com.example.interview;
+package com.example.interview.leetcode;
 
 import java.util.Objects;
 import java.util.Random;
 import java.util.TreeSet;
 
-public class ShortTreePath{
+/**
+ * Given a binary tree, find its minimum depth.
+ * The minimum depth is the number of nodes along the shortest path
+ * from the root node down to the nearest leaf node.
+ */
+public class Exe_1_ShortTreePath{
   public static void main(String[] args){
     Random random=new Random();
     TreeSet<TreeNode> set=new TreeSet<>();
