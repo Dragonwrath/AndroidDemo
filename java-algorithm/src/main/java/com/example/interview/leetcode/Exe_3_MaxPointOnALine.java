@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.TreeMap;
 
+/**
+ * Given n points on a 2D plane, find the maximum number of points that lie on the same straight line.
+ */
 public class Exe_3_MaxPointOnALine{
 
   private static class BestSolution{

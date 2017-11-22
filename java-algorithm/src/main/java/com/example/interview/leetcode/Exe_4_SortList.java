@@ -1,9 +1,9 @@
 package com.example.interview.leetcode;
 
+/**
+ * Sort a linked list in O(n log n) time using constant space complexity.
+ */
 public class Exe_4_SortList{
-
-  public static void main(String[] args){
-  }
 
   static class Solution {
     public ListNode sortList(ListNode head) {
