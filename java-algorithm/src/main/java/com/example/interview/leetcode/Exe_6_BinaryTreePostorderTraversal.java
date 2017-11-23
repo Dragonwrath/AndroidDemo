@@ -13,11 +13,4 @@ public class Exe_6_BinaryTreePostorderTraversal{
       return list;
     }
   }
-
-  private static class TreeNode {
-       int val;
-       TreeNode left;
-       TreeNode right;
-       TreeNode(int x) { val = x; }
-  }
 }

@@ -11,9 +11,9 @@ public class Exe_7_BinaryTreePreorderTraversal{
     System.out.println("list = "+list);
   }
 
-  public static class Solution {
+  private static class Solution {
     private final ArrayList<Integer> list = new ArrayList<>();
-    public ArrayList<Integer> recursiveTraversal(TreeNode root) {
+    private ArrayList<Integer> recursiveTraversal(TreeNode root) {
       if(root == null) return list;
       list.add(root.val);
       if(root.left != null) recursiveTraversal(root.left);
@@ -22,7 +22,7 @@ public class Exe_7_BinaryTreePreorderTraversal{
     }
 
     private final Stack<TreeNode> cache = new Stack<>();
-    public ArrayList<Integer> preorderTraversal(TreeNode root) {
+    private ArrayList<Integer> preorderTraversal(TreeNode root) {
       if(root == null) return list;
       while(root != null) {
         list.add(root.val);
@@ -40,12 +40,5 @@ public class Exe_7_BinaryTreePreorderTraversal{
       }
       return list;
     }
-  }
-
-  private static class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-    TreeNode(int x) { val = x; }
   }
 }

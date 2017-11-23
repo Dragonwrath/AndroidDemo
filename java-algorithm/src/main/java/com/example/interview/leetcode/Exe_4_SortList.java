@@ -38,14 +38,5 @@ public class Exe_4_SortList{
       return newHead.next;
     }
 
-    class ListNode {
-      int val;
-      ListNode next;
-
-      ListNode(int x){
-        val=x;
-        next=null;
-      }
-    }
   }
 }
