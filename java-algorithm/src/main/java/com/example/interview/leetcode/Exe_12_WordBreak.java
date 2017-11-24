@@ -23,18 +23,17 @@ public class Exe_12_WordBreak{
           boxes[i][j] = dict.contains(s.substring(i,j + 1));
         }
       }
-      boolean result = false;
-      return loopSearch(boxes, s.length(), result);
+      return loopSearch(boxes, s.length());
     }
 
-
-    private boolean loopSearch(boolean[][] boxes,int right,boolean result){
+    private boolean loopSearch(boolean[][] boxes,int right ){
+      boolean result = false;
       for(int i=0;i<right;i++) {
         if(i==0 && boxes[i][right-1]) {
           return true;
         }
         if(boxes[i][right-1]){
-          result = loopSearch(boxes,i,result);
+          result = loopSearch(boxes,i );
         }
       }
       return result;
