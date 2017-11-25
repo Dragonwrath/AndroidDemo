@@ -1,6 +1,7 @@
-package com.example.interview.leetcode;
+package com.example.interview.leetcode.twenty;
 
 import com.example.NotPassed;
+import com.example.interview.leetcode.ListNode;
 
 @NotPassed
 public class Exe_8_ReorderList{

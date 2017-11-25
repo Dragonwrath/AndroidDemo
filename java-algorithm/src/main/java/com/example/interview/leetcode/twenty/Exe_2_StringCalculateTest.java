@@ -1,4 +1,4 @@
-package com.example.interview.leetcode;
+package com.example.interview.leetcode.twenty;
 
 import java.util.ArrayList;
 import java.util.Collections;

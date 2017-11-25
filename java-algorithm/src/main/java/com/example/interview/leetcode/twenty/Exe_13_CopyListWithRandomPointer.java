@@ -1,4 +1,6 @@
-package com.example.interview.leetcode;
+package com.example.interview.leetcode.twenty;
+
+import com.example.interview.leetcode.RandomListNode;
 
 public class Exe_13_CopyListWithRandomPointer{
   public static void main(String[] args){

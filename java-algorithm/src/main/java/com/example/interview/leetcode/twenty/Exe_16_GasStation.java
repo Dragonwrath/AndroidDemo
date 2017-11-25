@@ -1,4 +1,4 @@
-package com.example.interview.leetcode;
+package com.example.interview.leetcode.twenty;
 
 /**
  * There are N gas stations along a circular route, where the amount of gas at station i isgas[i].

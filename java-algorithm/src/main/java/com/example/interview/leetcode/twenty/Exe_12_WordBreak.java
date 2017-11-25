@@ -1,4 +1,4 @@
-package com.example.interview.leetcode;
+package com.example.interview.leetcode.twenty;
 
 import java.util.HashSet;
 import java.util.Set;

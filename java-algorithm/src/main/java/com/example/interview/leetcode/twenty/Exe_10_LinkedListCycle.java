@@ -1,4 +1,6 @@
-package com.example.interview.leetcode;
+package com.example.interview.leetcode.twenty;
+
+import com.example.interview.leetcode.ListNode;
 
 public class Exe_10_LinkedListCycle{
   public class Solution {

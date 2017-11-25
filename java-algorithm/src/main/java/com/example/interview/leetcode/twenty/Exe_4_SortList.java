@@ -1,4 +1,6 @@
-package com.example.interview.leetcode;
+package com.example.interview.leetcode.twenty;
+
+import com.example.interview.leetcode.ListNode;
 
 /**
  * Sort a linked list in O(n log n) time using constant space complexity.

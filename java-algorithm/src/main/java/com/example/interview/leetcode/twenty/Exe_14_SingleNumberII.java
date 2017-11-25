@@ -1,4 +1,4 @@
-package com.example.interview.leetcode;
+package com.example.interview.leetcode.twenty;
 
 public class Exe_14_SingleNumberII{
   public static void main(String[] args){

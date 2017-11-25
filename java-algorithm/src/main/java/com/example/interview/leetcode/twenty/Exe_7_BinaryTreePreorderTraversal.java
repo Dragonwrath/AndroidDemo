@@ -1,4 +1,6 @@
-package com.example.interview.leetcode;
+package com.example.interview.leetcode.twenty;
+
+import com.example.interview.leetcode.TreeNode;
 
 import java.util.ArrayList;
 import java.util.Stack;
